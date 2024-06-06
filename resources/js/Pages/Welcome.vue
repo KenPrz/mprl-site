@@ -58,7 +58,7 @@ onUnmounted(() => {
                         </button>
                     </div>
                 </div>
-                <div class="px-4 md:w-1/2 text-center md:text-left">
+                <div class="px-4 w-full md:w-1/2 text-center md:text-left">
                     <Accordion :items="accordionItems" :initialActiveIndex="0" />
                 </div>
             </div>

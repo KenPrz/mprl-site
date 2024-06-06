@@ -2,7 +2,7 @@
     <footer>
         <div class="flex flex-col pt-4 space-y-2">
             <section class="text-center px-8 md:px-16 ">
-                <h1 class="text-xl font-semibold text-primary-500">MPRL Solar Panel Trading</h1>
+                <h1 class="text-xl font-semibold text-primary-500 text-pretty">MPRL Solar Panel Trading</h1>
                 <p class="font-light text-sm">MPRL Solar Panel Trading specializes in supplying efficient and eco-friendly solar-powered LED
                     lights. Our lights offer easy installation and come in a variety of types, styles, sizes, and
                     colors. Say goodbye to electrical wiring - our lights run on solar power, making them both

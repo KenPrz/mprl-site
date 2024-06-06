@@ -1,6 +1,8 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue'
+import Accordion from '@/Components/Accordion.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
+import Footer from '@/Components/Footer.vue';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -57,16 +59,29 @@ onUnmounted(() => {
                     </div>
                 </div>
                 <div class="px-4 md:w-1/2 text-center md:text-left">
-                    
+                    <Accordion :items="accordionItems" :initialActiveIndex="0" />
                 </div>
             </div>
-
+            
         </section>
     </main>
+    <Footer />
 </template>
 <script>
 export default {
-}
+  components: {
+    Accordion
+  },
+  data() {
+    return {
+      accordionItems: [
+        { title: 'Mission', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis alias ipsa beatae officiis sunt, veniam totam numquam. Nesciunt, nobis exercitationem soluta, error, veritatis iure ab quod tempore sint reprehenderit nam quos laboriosam!' },
+        { title: 'Vision', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam deleniti, pariatur autem nihil iusto dicta vel consectetur. Sint ab tempora blanditiis aperiam earum eum.' },
+        { title: 'Core Values', content: 'Content for Accordion Item 3' }
+      ]
+    };
+  }
+};
 </script>
 
 <style scoped>

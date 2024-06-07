@@ -1,5 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import NavLink from '@/Components/NavLink.vue';
 </script>
 <template>
     <!-- Hide this section when scrolling -->
@@ -36,24 +37,34 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
         <div>
             <ul class="flex space-x-5 sm:text-sm md:text-md lg:text-lg">
                 <li>
-                    <a class="hidden md:block" href="#">Home</a>
-                    <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='home' ></box-icon>
+                    <NavLink class="hidden:block" :href="route('welcome')" :active="route().current('welcome')" :is_black="is_black">
+                        Home
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='home' ></box-icon>
+                    </NavLink>
                 </li>
                 <li>
-                    <a class="hidden md:block" href="#">About Us</a>
-                    <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='buildings' ></box-icon>
+                    <NavLink class="hidden:block" :href="route('about')" :active="route().current('about')" :is_black="is_black">
+                        About Us
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='buildings' ></box-icon>
+                    </NavLink>
                 </li>
                 <li>
-                    <a class="hidden md:block" href="#">Services</a>
-                    <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
+                    <NavLink class="hidden:block" :href="route('services')" :active="route().current('services')" :is_black="is_black">
+                        Services
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
+                    </NavLink>
                 </li>
                 <li>
-                    <a class="hidden md:block" href="#">Blog</a>
-                    <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='book-open' ></box-icon>
+                    <NavLink class="hidden:block" :href="route('blog')" :active="route().current('blog')" :is_black="is_black">
+                        Blog
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='grid-alt' ></box-icon>
+                    </NavLink>
                 </li>
                 <li>
-                    <a class="hidden md:block" href="#">Contact Us</a>
-                    <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='message' ></box-icon>
+                    <NavLink class="hidden:block" :href="route('contact')" :active="route().current('contact')" :is_black="is_black">
+                        Contact Us
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='message' ></box-icon>
+                    </NavLink>
                 </li>
             </ul>
         </div>

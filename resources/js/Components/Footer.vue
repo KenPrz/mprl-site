@@ -1,5 +1,5 @@
 <template>
-    <footer class="fixed bottom-0">
+    <footer>
         <div class="flex flex-col pt-4 space-y-2">
             <section class="text-center px-8 md:px-16 ">
                 <h1 class="text-xl font-semibold text-primary-500 text-pretty">MPRL Solar Panel Trading</h1>

@@ -25,7 +25,7 @@ onUnmounted(() => {
         <NavBar :is_black="scroll > 0" />
     </nav>
     <main>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste voluptas expedita doloribus, delectus, est odit provident possimus facilis consequuntur eligendi, nostrum quasi! Dolore, maxime ex aut nobis fuga itaque!
+        <!-- Place Stuff Here -->
     </main>
     <Footer />
 </template>

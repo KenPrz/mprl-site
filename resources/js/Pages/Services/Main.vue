@@ -3,6 +3,7 @@ import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
+import { Head } from '@inertiajs/vue3';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -18,6 +19,7 @@ onUnmounted(() => {
 });
 </script>
 <template>
+    <Head title="Services" />
     <nav :class="{
         'bg-white shadow-md fixed': scroll > 0,
         'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0

@@ -46,6 +46,7 @@ onUnmounted(() => {
     </section>
     <main class="px-5 md:px-28">
         <SearchBar
+            class="relative top-[-30px]"
             :categories="$page.props.categories"
             :years="$page.props.years"
             :selected-category="$page.props.selectedCategory"

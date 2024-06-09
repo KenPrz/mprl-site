@@ -14,7 +14,6 @@ class BlogController extends Controller
         $selectedYear = $request->query('year', 'all');
         $selectedMonth = $request->query('month', 'all');
         $searchQuery = $request->query('query', '');
-    
         $blogs = BlogPost::with('images')
             ->when($selectedCategory !== 'all', function($query) use ($selectedCategory) {
                 $query->where('category_id', $selectedCategory);
@@ -30,10 +29,9 @@ class BlogController extends Controller
                       ->orWhere('body', 'like', "%$searchQuery%");
             })
             ->get();
-    
-        $categories = Category::pluck('name', 'id');
+            
+        $categories = Category::select('id', 'name')->get();
         $years = BlogPost::selectRaw('DISTINCT YEAR(created_at) as year')->orderBy('year')->get();
-    
         return Inertia::render('Blog/Main', [
             'categories' => $categories,
             'blogs' => $blogs,

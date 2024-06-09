@@ -55,7 +55,7 @@ const months = ref([
 
 function debounce(fn, delay) {
     let timeoutID;
-    return function(...args) {
+    return function (...args) {
         clearTimeout(timeoutID);
         timeoutID = setTimeout(() => {
             fn.apply(this, args);
@@ -85,29 +85,38 @@ watch(searchQuery, (newQuery) => {
 </script>
 
 <template>
-    <div class="flex justify-between px-5 py-2 shadow-md rounded-3xl bg-white">
-        <div class="flex space-x-4">
-            <select v-model="selectedCategory" class="border-2 w-auto border-gray-300 rounded-full text-sm p-2">
+    <div class="flex flex-col lg:flex-row md:justify-between w-full p-3 shadow-md rounded-3xl bg-white space-y-3 md:space-y-0">
+        <div class="flex flex-col md:justify-between md:flex-row md:space-x-4 space-y-3 md:space-y-0 md:pb-2 lg:pb-0">
+            <select v-model="selectedCategory" class="border-2  md:w-1/3 lg:w-48 border-gray-300 rounded-full text-sm p-2">
                 <option disabled default value="all">Category</option>
-                <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+                <option v-for="category in categories" :key="category" :value="category.id">{{ category.name }}</option>
             </select>
 
-            <select v-model="selectedYear" class="border-2 w-32 border-gray-300 rounded-full text-sm p-2">
+            <select v-model="selectedYear" class="border-2 w-full md:w-1/3 lg:w-48 border-gray-300 rounded-full text-sm p-2">
                 <option default value="all">Year</option>
                 <option v-for="year in years" :key="year.year" :value="year.year">{{ year.year }}</option>
             </select>
 
-            <select v-model="selectedMonth" class="border-2 w-32 border-gray-300 rounded-full text-sm p-2">
+            <select v-model="selectedMonth" class="border-2 w-full md:w-1/3 lg:w-48 border-gray-300 rounded-full text-sm p-2">
                 <option default value="all">Month</option>
                 <option v-for="month in months" :key="month.id" :value="month.id">{{ month.name }}</option>
             </select>
         </div>
-        <div class="flex space-x-4">
-            <input v-model="searchQuery" type="text" placeholder="Search for a blog" class="border-2 border-gray-300 rounded-lg p-2">
-            <button class="bg-blue-500 text-white py-2 px-4 rounded-xl hover:bg-blue-600">Search</button>
+        <div class="relative flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 w-full md:w-auto">
+            <input id="input-field" v-model="searchQuery" type="text" placeholder="Search blog..."
+                class="border-2 border-gray-300 rounded-full p-2 w-full md:w-full focus:ring-0 pr-16 md:pr-10">
+            <button class="absolute right-0 md:top-0 bottom-[1px] flex items-center justify-center space-x-2 bg-primary-500 text-white py-2 px-4 rounded-full hover:bg-primary-600 w-16 md:w-20 lg:w-24">
+                <box-icon size="sm" name='search-alt' color="white"></box-icon>
+            </button>
         </div>
     </div>
 </template>
 
 <style scoped>
+@media screen and (min-width: 768px){
+    #input-feild::placeholder {
+        font-size: small;
+    }
+}
+
 </style>

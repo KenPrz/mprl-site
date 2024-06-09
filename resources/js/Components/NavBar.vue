@@ -43,25 +43,25 @@ import NavLink from '@/Components/NavLink.vue';
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink class="hidden:block" :href="route('about')" :active="route().current('about')" :is_black="is_black">
+                    <NavLink class="hidden:block" :href="route('about.index')" :active="route().current('about.index')" :is_black="is_black">
                         <span class="hidden md:block">About Us</span>
                         <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='buildings' ></box-icon>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink class="hidden:block" :href="route('services')" :active="route().current('services')" :is_black="is_black">
+                    <NavLink class="hidden:block" :href="route('services.index')" :active="route().current('services.index')" :is_black="is_black">
                         <span class="hidden md:block">Services</span>
                         <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink class="hidden:block" :href="route('blog')" :active="route().current('blog')" :is_black="is_black">
+                    <NavLink class="hidden:block" :href="route('blog.index')" :active="route().current('blog.index')" :is_black="is_black">
                         <span class="hidden md:block">Blog</span>
                         <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='grid-alt' ></box-icon>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink class="hidden:block" :href="route('contact')" :active="route().current('contact')" :is_black="is_black">
+                    <NavLink class="hidden:block" :href="route('contact.index')" :active="route().current('contact.index')" :is_black="is_black">
                         <span class="hidden md:block">Contact Us</span>
                         <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='message' ></box-icon>
                     </NavLink>

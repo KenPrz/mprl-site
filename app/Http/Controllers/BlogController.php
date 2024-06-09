@@ -3,15 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = BlogPost::with('images')->get();
+        $selectedCategory = $request->query('category', 'all');
+        $selectedYear = $request->query('year', 'all');
+        $selectedMonth = $request->query('month', 'all');
+        $searchQuery = $request->query('query', '');
+    
+        $blogs = BlogPost::with('images')
+            ->when($selectedCategory !== 'all', function($query) use ($selectedCategory) {
+                $query->where('category_id', $selectedCategory);
+            })
+            ->when($selectedYear !== 'all', function($query) use ($selectedYear) {
+                $query->whereYear('created_at', $selectedYear);
+            })
+            ->when($selectedMonth !== 'all', function($query) use ($selectedMonth) {
+                $query->whereMonth('created_at', $selectedMonth);
+            })
+            ->when($searchQuery !== '', function($query) use ($searchQuery) {
+                $query->where('title', 'like', "%$searchQuery%")
+                      ->orWhere('body', 'like', "%$searchQuery%");
+            })
+            ->get();
+    
+        $categories = Category::pluck('name', 'id');
+        $years = BlogPost::selectRaw('DISTINCT YEAR(created_at) as year')->orderBy('year')->get();
+    
         return Inertia::render('Blog/Main', [
-            'blogs' => $blogs
+            'categories' => $categories,
+            'blogs' => $blogs,
+            'years' => $years,
+            'selectedCategory' => $selectedCategory,
+            'selectedYear' => $selectedYear,
+            'selectedMonth' => $selectedMonth,
+            'searchQuery' => $searchQuery,
         ]);
     }
     

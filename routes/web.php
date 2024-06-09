@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
@@ -16,6 +17,7 @@ Route::get('/contact', [ContactController::class,'index'])->name('contact');
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/product', [ProductController::class, 'index'])->name('product');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

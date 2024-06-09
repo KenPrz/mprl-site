@@ -14,9 +14,14 @@ class BlogController extends Controller
         $selectedYear = $request->query('year', 'all');
         $selectedMonth = $request->query('month', 'all');
         $searchQuery = $request->query('query', '');
-        $blogs = BlogPost::with('images')
+        $blogs = BlogPost::select('id', 'title', 'created_at', 'category_id')
+            ->with('images')
             ->when($selectedCategory !== 'all', function($query) use ($selectedCategory) {
                 $query->where('category_id', $selectedCategory);
+            })
+            ->when($searchQuery !== '', function($query) use ($searchQuery) {
+                $query->where('title', 'like', "%$searchQuery%")
+                    ->orWhere('body', 'like', "%$searchQuery%");
             })
             ->when($selectedYear !== 'all', function($query) use ($selectedYear) {
                 $query->whereYear('created_at', $selectedYear);
@@ -24,12 +29,8 @@ class BlogController extends Controller
             ->when($selectedMonth !== 'all', function($query) use ($selectedMonth) {
                 $query->whereMonth('created_at', $selectedMonth);
             })
-            ->when($searchQuery !== '', function($query) use ($searchQuery) {
-                $query->where('title', 'like', "%$searchQuery%")
-                      ->orWhere('body', 'like', "%$searchQuery%");
-            })
             ->get();
-            
+
         $categories = Category::select('id', 'name')->get();
         $years = BlogPost::selectRaw('DISTINCT YEAR(created_at) as year')->orderBy('year')->get();
         return Inertia::render('Blog/Main', [
@@ -42,7 +43,7 @@ class BlogController extends Controller
             'searchQuery' => $searchQuery,
         ]);
     }
-    
+
     public function show($id)
     {
         $blog = BlogPost::where('id', $id)->first();

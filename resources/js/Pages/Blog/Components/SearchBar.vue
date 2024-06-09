@@ -102,12 +102,14 @@ watch(searchQuery, (newQuery) => {
                 <option v-for="month in months" :key="month.id" :value="month.id">{{ month.name }}</option>
             </select>
         </div>
-        <div class="relative flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 w-full md:w-auto">
-            <input id="input-field" v-model="searchQuery" type="text" placeholder="Search blog..."
-                class="border-2 border-gray-300 rounded-full p-2 w-full md:w-full focus:ring-0 pr-16 md:pr-10">
-            <button class="absolute right-0 md:top-0 bottom-[1px] flex items-center justify-center space-x-2 bg-primary-500 text-white py-2 px-4 rounded-full hover:bg-primary-600 w-16 md:w-20 lg:w-24">
-                <box-icon size="sm" name='search-alt' color="white"></box-icon>
-            </button>
+        <div class="relative lg:w-1/2 flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 w-full md:w-auto justify-end">
+            <div class="flex rounded-full border border-gray-300 overflow-hidden lg:w-7/12 ps-3">
+                <input id="input-field" v-model="searchQuery" type="text" placeholder="Search blog..."
+                    class="border-none focus:ring-0 p-2 w-full md:w-full rounded-full">
+                <button class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white w-1/4 md:w-2/5">
+                    <i class="pi pi-search"></i>
+                </button>
+            </div>
         </div>
     </div>
 </template>

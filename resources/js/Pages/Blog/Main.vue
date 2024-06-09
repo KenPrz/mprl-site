@@ -30,7 +30,7 @@ onUnmounted(() => {
         <NavBar :is_black="scroll > 0" />
     </nav>
     <section>
-        <div class="relative py-40 bg-cover bg-center h-auto"
+        <div class="relative py-44 bg-cover bg-center h-auto"
             style="background-image: url('/images/blog-header-bg.png');">
             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
                 <div class="flex flex-col items-center justify-center space-y-6">

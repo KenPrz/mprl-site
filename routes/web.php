@@ -15,6 +15,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class,'index'])->name('contact');
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

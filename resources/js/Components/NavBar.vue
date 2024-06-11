@@ -49,6 +49,12 @@ import NavLink from '@/Components/NavLink.vue';
                     </NavLink>
                 </li>
                 <li>
+                    <NavLink class="hidden:block" :href="route('products')" :active="route().current('products')" :is_black="is_black">
+                        <span class="hidden md:block">Products</span>
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
+                    </NavLink>
+                </li>
+                <li>
                     <NavLink class="hidden:block" :href="route('services')" :active="route().current('services')" :is_black="is_black">
                         <span class="hidden md:block">Services</span>
                         <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>

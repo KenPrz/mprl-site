@@ -38,9 +38,28 @@ onUnmounted(() => {
         </div>
     </section>
     <main>
-        <div class="flex flex-col items-center justify-center">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                This is the product section!
+        <div class="flex flex-col ml-40 mt-10">
+            
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mr-20">
+                <div class="">
+                    <div class=" border-lime-600 border-l-4">
+                        <div class="ml-20 text-xl font-medium text-lime-600	">CATEGORIES</div>
+                        
+                    </div>
+                    <div class="mt-5">
+                        <select id="countries" class="bg-gray-50 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choose a country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                        </select>
+                    </div>
+                </div>
+               
+                <div class="col-span-2 border">
+                    kflsdf
+                </div>
             </div>
         </div>
     </main>

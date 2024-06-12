@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
-import 'boxicons'
-import 'aos/dist/aos.css'; 
+import 'aos/dist/aos.css';
+import 'primeicons/primeicons.css'
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -18,9 +18,8 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .mount(el);
-
     },
     progress: {
-        color: '#4B5563',
+        color: '#49ab3c',
     },
 });

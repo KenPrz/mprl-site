@@ -7,7 +7,6 @@ const isHovered = ref(false);
 const handleMouseOver = () => {
     isHovered.value = true;
 };
-
 const handleMouseLeave = () => {
     isHovered.value = false;
 };

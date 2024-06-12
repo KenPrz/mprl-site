@@ -14,20 +14,24 @@ const handleMouseLeave = () => {
 </script>
 
 <template>
-    <div class="mb-2 border card-height rounded-b-sm shadow-md">
+    <div :id="isHovered ? 'my-hover' : ''" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" class="mb-2 border card-height rounded-b-sm shadow-md">
         <Link :href="`/blog/${blog.id}`">
             <BlogImage class="card-image-height" v-for="image in blog.images" :key="image.id" :imageUrl="`storage/${image.image}`" />
         </Link>
-        <div class="relative card-descr-h flex flex-col p-2 px-4">
+        <div class="relative card-descr-h flex flex-col p-2 px-4 justify-around">
             <div class="flex flex-wrap font-light text-xs space-x-2 mb-1 text-gray-600">
                 <span v-for="tag in tags">
                     <Link :href="`/blog/${blog.id}`"><span class="underline">{{tag}}</span>{{' |'}}</Link>
                 </span>
             </div>
-            <h1 class="text-xl font-semibold">{{ blog.title }}</h1>
-            <div class="flex absolute bottom-4 space-x-2 items-center">
-                <i style="font-size: 1.1rem" class="pi pi-calendar"></i>
-                <span class="font-serif">{{formatDate(blog.created_at)}}</span>
+            <h1 class="text-xl font-semibold">
+                <Link class="hover:text-primary-500 duration-300 transition-colors" :href="`/blog/${blog.id}`">
+                    {{ blog.title }}
+                </Link>
+            </h1>
+            <div class="flex space-x-2 items-center font-light text-sm text-gray-700">
+                <span>{{'By '+blog.user_name}} • </span>
+                <span>{{formatDate(blog.created_at)}}</span>
             </div>
         </div>
     </div>
@@ -59,13 +63,13 @@ const tags = [
 
 <style scoped>
 
-#my-hover:hover {
+#my-hover {
     transform: scale(1.02);
     filter: blur(.02em);
 }
 
 .card-height {
-    max-height: 45vh;
+    max-height: auto;
 }
 .card-image-height {
     height: 60%;

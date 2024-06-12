@@ -1,7 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
+import BlogImage from './BlogImage.vue';
 const isHovered = ref(false);
 
 const handleMouseOver = () => {
@@ -14,30 +14,23 @@ const handleMouseLeave = () => {
 </script>
 
 <template>
-    <div id="my-hover" class="flex flex-col border rounded-b-lg shadow-md bg-white min-h-96 hover:bg-black hover:bg-opacity-25 transition-all duration-200 relative">
-        <Link @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" class="h-3/4" :href="`/blog/${blog.id}`">
-            <div v-if="blog.images" class="mb-4">
-                <div class="flex flex-wrap -mx-2">
-                    <div v-for="image in blog.images" :key="image.id" class="w-1/3 px-2 mb-4 overflow-hidden">
-                        <img :src="'storage/' + image.image" :alt="image.image" class="inset-0 w-full h-full object-cover object-center">
-                    </div>
-                </div>
-            </div>
+    <div class="mb-2 border card-height rounded-b-sm shadow-md">
+        <Link :href="`/blog/${blog.id}`">
+            <BlogImage class="card-image-height" v-for="image in blog.images" :key="image.id" :imageUrl="`storage/${image.image}`" />
         </Link>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" v-if="isHovered">
-            <span class="underline text-white">Read Article</span>
-        </div>
-        <div class="h-1/4 w-full px-5 flex flex-col">
-            <div class="h-1/2">
-                <h2 class="text-2xl font-semibold mb-2">{{ blog.title }}</h2>
+        <div class="relative card-descr-h flex flex-col p-2 px-4">
+            <div class="flex flex-wrap font-light text-xs space-x-2 mb-1 text-gray-600">
+                <span v-for="tag in tags">
+                    <Link :href="`/blog/${blog.id}`"><span class="underline">{{tag}}</span>{{' |'}}</Link>
+                </span>
             </div>
-            <div class="h-1/2 flex space-x-3 font-light text-sm items-center">
-                <i class="pi pi-calendar"></i>
-                <p class="text-gray-500 text-sm">{{ formatDate(blog.created_at) }}</p>
+            <h1 class="text-xl font-semibold">{{ blog.title }}</h1>
+            <div class="flex absolute bottom-4 space-x-2 items-center">
+                <i style="font-size: 1.1rem" class="pi pi-calendar"></i>
+                <span class="font-serif">{{formatDate(blog.created_at)}}</span>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -54,13 +47,32 @@ export default {
             const options = {year: 'numeric', month: 'long', day: 'numeric'};
             return new Date(date).toLocaleDateString(undefined, options);
         },
-    }
+    },
 }
+
+const tags = [
+    'Solar Panel',
+    'Solar Energy',
+    'Renewable Energy',
+]
 </script>
 
 <style scoped>
+
 #my-hover:hover {
     transform: scale(1.02);
     filter: blur(.02em);
+}
+
+.card-height {
+    max-height: 45vh;
+}
+.card-image-height {
+    height: 60%;
+    object-fit: cover;
+    object-position: 80% 100%;
+  }
+.card-descr-h{
+    height: 40%;
 }
 </style>

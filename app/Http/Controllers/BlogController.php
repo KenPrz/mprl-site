@@ -29,6 +29,7 @@ class BlogController extends Controller
             ->when($selectedMonth !== 'all', function($query) use ($selectedMonth) {
                 $query->whereMonth('created_at', $selectedMonth);
             })
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $categories = Category::select('id', 'name')->get();

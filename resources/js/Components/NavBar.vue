@@ -40,7 +40,7 @@ import NavLink from '@/Components/NavLink.vue';
                     <NavLink class="hidden:block" :href="route('welcome')" :active="route().current('welcome')" :is_black="is_black">
                         <span class="hidden md:block">Home</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1.3rem" :style="is_black? 'color:black':'color:white'" class="pi pi-home"></i>
+                            <i style="font-size: 1.2rem" :style="is_black? 'color:black':'color:white'" class="pi pi-home"></i>
                         </span>
                     </NavLink>
                 </li>
@@ -48,7 +48,7 @@ import NavLink from '@/Components/NavLink.vue';
                     <NavLink class="hidden:block" :href="route('about.index')" :active="route().current('about.index')" :is_black="is_black">
                         <span class="hidden md:block">About Us</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1.3rem" :style="is_black? 'color:black':'color:white'" class="pi pi-building"></i>
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-building"></i>
                         </span>
                     </NavLink>
                 </li>
@@ -56,7 +56,7 @@ import NavLink from '@/Components/NavLink.vue';
                     <NavLink class="hidden:block" :href="route('services.index')" :active="route().current('services.index')" :is_black="is_black">
                         <span class="hidden md:block">Services</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1.3rem" :style="is_black? 'color:black':'color:white'" class="pi pi-wrench"></i>
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-wrench"></i>
                         </span>
                     </NavLink>
                 </li>
@@ -64,7 +64,7 @@ import NavLink from '@/Components/NavLink.vue';
                     <NavLink class="hidden:block" :href="route('blog.index')" :active="route().current('blog.index')" :is_black="is_black">
                         <span class="hidden md:block">Blog</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1.3rem" :style="is_black? 'color:black':'color:white'" class="pi pi-pencil"></i>
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-pencil"></i>
                         </span>
                     </NavLink>
                 </li>
@@ -72,18 +72,34 @@ import NavLink from '@/Components/NavLink.vue';
                     <NavLink class="hidden:block" :href="route('contact.index')" :active="route().current('contact.index')" :is_black="is_black">
                         <span class="hidden md:block">Contact Us</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1.3rem" :style="is_black? 'color:black':'color:white'" class="pi pi-phone"></i>
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-phone"></i>
                         </span>
                     </NavLink>
                 </li>
             </ul>
         </div>
-        <div>
-            <button
-                class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
-                Get a Quote
-            </button>
+        <div class="flex space-x-2 px-2">
+            <NavLink :href="route('login')" :is_black="is_black">
+                <span class="hidden md:block">Login</span>
+                <span class="md:hidden" >
+                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-sign-in"></i>
+                </span>
+            </NavLink>
+            <span>/</span>
+            <NavLink :href="route('register')" :is_black="is_black">
+                <span class="hidden md:block">Register</span>
+                <span class="md:hidden" >
+                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-user-plus"></i>
+                </span>
+            </NavLink>
         </div>
+    </div>
+    <div class="flex justify-end relative">
+        <button
+            id="get-quote"
+            class="absolute -bottom-12 right-5 bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
+            Get a Quote
+        </button>
     </div>
 </template>
 <script>
@@ -93,3 +109,36 @@ import NavLink from '@/Components/NavLink.vue';
         }
     }
 </script>
+<style scoped>
+    #get-quote {
+        z-index: 100;
+        transition: transform 0.5s;
+        animation: ripple 1s infinite;
+    }
+
+    #get-quote:hover {
+        animation: pulsate 1s infinite;
+    }
+    @keyframes ripple {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes pulsate {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>

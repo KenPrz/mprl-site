@@ -14,7 +14,8 @@ class BlogController extends Controller
         $selectedYear = $request->query('year', 'all');
         $selectedMonth = $request->query('month', 'all');
         $searchQuery = $request->query('query', '');
-        $blogs = BlogPost::select('id', 'title', 'created_at', 'category_id')
+        $blogs = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+            ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('images')
             ->when($selectedCategory !== 'all', function($query) use ($selectedCategory) {
                 $query->where('category_id', $selectedCategory);
@@ -29,6 +30,7 @@ class BlogController extends Controller
             ->when($selectedMonth !== 'all', function($query) use ($selectedMonth) {
                 $query->whereMonth('created_at', $selectedMonth);
             })
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $categories = Category::select('id', 'name')->get();

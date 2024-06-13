@@ -57,7 +57,7 @@ onUnmounted(() => {
         />
         <div class="flex flex-col items-center justify-center">
             <div v-if="$page.props.blogs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                <BlogCard v-for="blog in $page.props.blogs" :blog="blog" />
+                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs" :blog="blog" />
             </div>
             <div v-else class="flex items-center justify-center h-96">
                 <p class="text-lg">No blogs found.</p>
@@ -67,6 +67,7 @@ onUnmounted(() => {
     <Footer />
 </template>
 <script>
+let currentScrollPosition = document.documentElement.scrollTop
 export default {
     methods: {
         fetchBlogs({ category, year, month, query }) {

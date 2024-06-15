@@ -8,13 +8,17 @@
                     colors. Say goodbye to electrical wiring - our lights run on solar power, making them both
                     convenient and environmentally friendly.</p>
             </section>
-            <section class="flex items-center justify-center">
+            <section class="flex items-center justify-center space-x-4">
                 <a href="#" class="flex items-center">
-                    <box-icon name='facebook-circle' type='logo' color="black" size="sm"></box-icon>
+                    <i style="font-size: 1.2rem"  class="pi pi-facebook"></i>
                 </a>
-                |
+                <span>|</span>
                 <a href="#" class="flex items-center">
-                    <box-icon name='instagram' type='logo' color="black" size="sm"></box-icon>
+                    <i style="font-size: 1.2rem"  class="pi pi-comment"></i>
+                </a>
+                <span>|</span>
+                <a href="#" class="flex items-center">
+                    <i style="font-size: 1.2rem"  class="pi pi-instagram"></i>
                 </a>
             </section>
             <section class="border py-4">
@@ -43,18 +47,20 @@
             </section>
             <section class="flex justify-center text-sm h-full">
                 <div class="flex flex-col justify-center items-center pe-4">
-                    <box-icon name='envelope' color="black" size="sm"></box-icon>
+                    <i style="font-size: 1.2rem"  class="pi pi-envelope"></i>
                     <span class="hidden md:block">mprlsolar@gmail.com</span>
                 </div>
                 <div class="flex flex-col justify-center items-center px-6 border-x">
-                    <box-icon name='map' color="black" size="sm"></box-icon>
+                    <i style="font-size: 1.2rem"  class="pi pi-map-marker"></i>
                     <span class="hidden md:block">6620 Purok 1, San Antonio, Los Baños, Laguna</span>
                 </div>
-                <div class="flex flex-col justify-center items-center ps-4">
-                    <box-icon name='phone' color="black" size="sm" type='solid' ></box-icon>
-                    <span>Globe: 0956-769-3494</span>
-                    <span>TM: 0953-039-8460</span>
-                    <span>Smart: 0932-921-1767</span>
+                <div class="flex flex-col justify-around items-center ps-4 space-y-2">
+                    <i style="font-size: 1.2rem"  class="pi pi-phone"></i>
+                    <div class="flex flex-col">
+                        <span>Globe: 0956-769-3494</span>
+                        <span>TM: 0953-039-8460</span>
+                        <span>Smart: 0932-921-1767</span>
+                    </div>
                 </div>
             </section>
            <section class="text-center bg-primary-500 text-white text-sm py-1">
@@ -63,7 +69,7 @@
         </div>
     </footer>
 </template>
-
+<!-- add BG to footer -->
 <script>
 export default {
 

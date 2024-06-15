@@ -12,10 +12,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/contact', [ContactController::class,'index'])->name('contact');
-Route::get('/services', [ServicesController::class, 'index'])->name('services');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/contact', [ContactController::class,'index'])->name('contact.index');
+Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products');
 

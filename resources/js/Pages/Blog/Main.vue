@@ -1,10 +1,12 @@
 <script setup>
-import NavBar from '@/Components/NavBar.vue'
-import Accordion from '@/Components/Accordion.vue'
+import NavBar from '@/Components/NavBar.vue';
+
+import SearchBar from './Components/SearchBar.vue'
 import BlogCard from './Components/BlogCard.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -28,28 +30,50 @@ onUnmounted(() => {
         <NavBar :is_black="scroll > 0" />
     </nav>
     <section>
-        <div class="relative py-48 bg-cover bg-center h-auto"
+        <div class="relative py-44 bg-cover bg-center h-auto"
             style="background-image: url('/images/blog-header-bg.png');">
             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
-                <div class="flex flex-col items-center justify-center space-y-4">
-                    <h1 class="text-4xl text-offset-500">Renewable Energy</h1>
-                    <h2 class="text-5xl font-semibold text-white">Shine brighter, Live lighter</h2>
+                <div class="flex flex-col items-center justify-center space-y-6">
+                    <h2 class="text-4xl md:text-5xl font-semibold text-white">Blog</h2>
+                    <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">
+                        <Link class="hover:underline" :href="route('welcome')">HOME</Link>
+                        <span class="mx-2">/</span>
+                        <Link class="hover:underline" :href="route('blog.index')">BLOG</Link>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <main>
+    <main class="px-5 md:px-28">
+        <SearchBar
+            class="relative top-[-30px]"
+            :categories="$page.props.categories"
+            :years="$page.props.years"
+            :selected-category="$page.props.selectedCategory"
+            :selected-year="$page.props.selectedYear"
+            :selected-month="$page.props.selectedMonth"
+            :search-query="$page.props.searchQuery"
+            @fetch-blogs="fetchBlogs"
+        />
         <div class="flex flex-col items-center justify-center">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                <BlogCard v-for="blog in $page.props.blogs" :blog="blog" />
+            <div v-if="$page.props.blogs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs" :blog="blog" />
+            </div>
+            <div v-else class="flex items-center justify-center h-96">
+                <p class="text-lg">No blogs found.</p>
             </div>
         </div>
     </main>
     <Footer />
 </template>
 <script>
+let currentScrollPosition = document.documentElement.scrollTop
 export default {
-  
+    methods: {
+        fetchBlogs({ category, year, month, query }) {
+            this.$inertia.get(route('blog.index', { category, year, month, query }));
+        },
+    },
 };
 </script>
 

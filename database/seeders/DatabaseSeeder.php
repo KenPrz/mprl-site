@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => '123123123'
         ]);
+
+        $this->call([
+            ContactFormSeeder::class,
+        ]);
     }
 }

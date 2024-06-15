@@ -22,6 +22,8 @@ class BlogPostFactory extends Factory
             'category_id' => rand(1, 10),
             'is_published' => $this->faker->boolean(70),
             'created_by' => 1,
+            'created_at' => $this->faker->dateTimeBetween('-3 years'),
+            'updated_at' => $this->faker->dateTimeBetween('-3 years'),
         ];
     }
 }

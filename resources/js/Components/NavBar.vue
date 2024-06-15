@@ -28,7 +28,9 @@ import NavLink from '@/Components/NavLink.vue';
     <!-- Make this section sticky when scrolling -->
     <div class="flex justify-between md:justify-around py-1 items-center h-30">
         <div class="flex flex-col px-4 md:px-2">
-            <ApplicationLogo />
+            <NavLink :href="route('welcome')" :is_black="is_black">
+                <ApplicationLogo />
+            </NavLink>
             <button
                 class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3  md:hidden">
                 Get a Quote

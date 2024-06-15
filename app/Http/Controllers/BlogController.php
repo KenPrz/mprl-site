@@ -51,14 +51,52 @@ class BlogController extends Controller
         ]);
     }
 
-
     public function show($id)
     {
-        $blog = BlogPost::where('id', $id)->first();
+        $blog = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.body', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+            ->with('images')
+            ->where('blog_posts.id', $id)
+            ->join('users', 'blog_posts.created_by', '=', 'users.id')
+            ->first();
         $blog_image = $blog->image;
+        $featured = $this->getFeatured($id);
+        $more = $this->getMorePosts($id);
         return Inertia::render('Blog/Show', [
+            'featured' => $featured,
+            'more' => $more,
             'blog' => $blog,
             'blog_image' => $blog_image
         ]);
+    }
+
+    private function getMorePosts($id)
+    {
+        $more = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+            ->join('users', 'blog_posts.created_by', '=', 'users.id')
+            ->with('images')
+            ->where('blog_posts.id', '!=', $id)
+            ->orderBy('blog_posts.created_at', 'desc')
+            ->limit(5)
+            ->get();
+        return $more;
+    }
+
+    public function getFeatured($id)
+    {
+        $featured = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        ->join('users', 'blog_posts.created_by', '=', 'users.id')
+        ->with('images')
+        ->where('blog_posts.is_featured', true)
+        ->where('blog_posts.id', '!=', $id)
+        ->orderBy('blog_posts.created_at', 'desc')
+        ->get();
+        
+        $randomFeatured = $featured->random();
+        if ($featured->isNotEmpty()) {
+            $randomFeatured = $featured->random();
+        } else {
+            $randomFeatured = null;
+        }
+        return $randomFeatured;
     }
 }

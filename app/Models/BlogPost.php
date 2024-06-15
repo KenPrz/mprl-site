@@ -14,7 +14,8 @@ class BlogPost extends Model
         'body',
         'category_id',
         'is_published',
-        'created_by'
+        'created_by',
+        'is_featured'
     ];
 
     public function category()

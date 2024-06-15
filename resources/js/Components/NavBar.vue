@@ -1,6 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavLink from '@/Components/NavLink.vue';
+import Modal from '@/Components/Modal.vue';
 </script>
 <template>
     <!-- Hide this section when scrolling -->
@@ -115,13 +116,17 @@ import NavLink from '@/Components/NavLink.vue';
     </div>
     <div class="flex justify-end relative">
         <button
+            @click="showModal"
             id="get-quote"
             class="absolute -bottom-12 right-5 bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
             Get a Quote
         </button>
     </div>
+    <Modal >
+    </Modal>
 </template>
 <script>
+
     export default {
         props: {
             is_black: Boolean
@@ -129,7 +134,8 @@ import NavLink from '@/Components/NavLink.vue';
         methods: {
             logout() {
                 this.$inertia.post(route('logout'));
-            }
+            },
+
         },
         computed: {
             isAuthenticated() {

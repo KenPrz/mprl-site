@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
+            $table->boolean('is_featured')
+                ->default(false);
             $table->boolean('is_published')
                 ->default(false);
             $table->foreignId('category_id')

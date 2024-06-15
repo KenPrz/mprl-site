@@ -13,20 +13,22 @@ class BlogImageSeeder extends Seeder
      */
     public function run(): void
     {
-        $blogPosts = BlogPost::all();
-        $file_names = [
-            'solar-1.png',
-            'solar-2.png',
-            'solar-3.png',
-            'solar-4.png',
-            'solar-5.png',
-        ];
+        // $blogPosts = BlogPost::all();
+        // $file_names = [
+        //     'solar-1.png',
+        //     'solar-2.png',
+        //     'solar-3.png',
+        //     'solar-4.png',
+        //     'solar-5.png',
+        // ];
 
-        foreach($blogPosts as $blogPost) {
-            BlogImage::create([
-                'image' => $file_names[rand(0, 4)],
-                'blog_post_id' => $blogPost->id
-            ]);
-        }
+        // foreach($blogPosts as $blogPost) {
+        //     BlogImage::create([
+        //         'image' => $file_names[rand(0, 4)],
+        //         'blog_post_id' => $blogPost->id
+        //     ]);
+        // }
+
+        BlogImage::factory()->count(50)->create();
     }
 }

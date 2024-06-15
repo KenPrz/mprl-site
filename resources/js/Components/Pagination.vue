@@ -1,15 +1,23 @@
 <template>
     <div class="flex items-center justify-center space-x-4 mt-10">
-        <template v-for="link in pagination.links" :key="link.url ?? ''" >
-            <Link
-                preserve-scroll
-                :href="link.url" 
-                v-html="link.label"
-                class="px-4 py-2 rounded-md text-black border-gray-200 border-2 hover:bg-gray-200 transition-colors duration-200"
-                :class="{ '!bg-primary-500 text-white': link.active, 'text-gray-300 hover:bg-none' : !link.url }"
-            />
+        <template v-for="link in pagination.links" :key="link.url ?? ''">
+            <template v-if="link.url">
+                <Link
+                    preserve-scroll
+                    :href="link.url"
+                    v-html="link.label"
+                    class="px-4 py-2 rounded-md text-black border-gray-200 border-2 hover:bg-gray-200 transition-colors duration-200"
+                    :class="{ '!bg-primary-500 text-white': link.active }"
+                />
+            </template>
+            <template v-else>
+                <span
+                    v-html="link.label"
+                    class="px-4 py-2 rounded-md text-gray-300 border-gray-200 border-2"
+                />
+            </template>
         </template>
-    </div>
+    </div>    
 </template>
 
 <script setup>

@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" :style="`background-image: url('${props.bgLink}');`">
+    <div id="layout" class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" :style="`background-image: url('${props.bgLink}');`">
         <div>
             <Link href="/">
                 <ApplicationLogo class="w-auto h-24 fill-current text-gray-500" />
@@ -26,4 +26,9 @@ const props = defineProps({
     </div>
 </template>
 <style scoped>
+#layout {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
 </style>

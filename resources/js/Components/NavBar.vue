@@ -31,10 +31,10 @@ import NavLink from '@/Components/NavLink.vue';
             <NavLink :href="route('welcome')" :is_black="is_black">
                 <ApplicationLogo />
             </NavLink>
-            <button
+            <!-- <button
                 class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3  md:hidden">
                 Get a Quote
-            </button>
+            </button> -->
         </div>
         <div>
             <ul class="flex space-x-5 sm:text-sm md:text-md lg:text-lg">

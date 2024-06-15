@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps, defineEmits, ref, watch } from 'vue';
-import axios from 'axios';
 
 const emit = defineEmits(['fetch-blogs']);
 
@@ -87,7 +86,7 @@ watch(searchQuery, (newQuery) => {
 <template>
     <div class="flex flex-col lg:flex-row md:justify-between w-full p-3 shadow-md rounded-3xl bg-white space-y-3 md:space-y-0">
         <div class="flex flex-col md:justify-between md:flex-row md:space-x-4 space-y-3 md:space-y-0 md:pb-2 lg:pb-0">
-            <select v-model="selectedCategory" class="border-2  md:w-1/3 lg:w-48 border-gray-300 rounded-full text-sm p-2">
+            <select v-model="selectedCategory" class="border-2 w-full md:w-2/3 border-gray-300 rounded-full text-sm p-2">
                 <option default value="all">Category</option>
                 <option v-for="category in categories" :key="category" :value="category.id">{{ category.name }}</option>
             </select>

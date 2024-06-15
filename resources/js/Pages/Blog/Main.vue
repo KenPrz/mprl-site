@@ -1,6 +1,6 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-
+import Pagination from '@/Components/Pagination.vue';
 import SearchBar from './Components/SearchBar.vue'
 import BlogCard from './Components/BlogCard.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
@@ -56,13 +56,20 @@ onUnmounted(() => {
             @fetch-blogs="fetchBlogs"
         />
         <div class="flex flex-col items-center justify-center">
-            <div v-if="$page.props.blogs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs" :blog="blog" />
+            <div v-if="$page.props.blogs.data" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs.data" :blog="blog" />
             </div>
             <div v-else class="flex items-center justify-center h-96">
                 <p class="text-lg">No blogs found.</p>
             </div>
         </div>
+        <Pagination 
+            :first_page_url="$page.props.blogs.first_page_url"
+            :from="$page.props.blogs.from"
+            :last_page="$page.props.blogs.last_page"
+            :last_page_url="$page.props.blogs.last_page_url"
+            :links="$page.props.blogs.links"
+        />
     </main>
     <Footer />
 </template>

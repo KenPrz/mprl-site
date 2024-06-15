@@ -1,3 +1,6 @@
+<script setup>
+import { Link } from '@inertiajs/vue3';
+</script>
 <template>
     <footer>
         <div class="flex flex-col pt-4 space-y-2">
@@ -24,24 +27,34 @@
             <section class="border py-4">
                 <ul class="flex items-center justify-center space-x-10 sm:text-sm md:text-nm lg:text-md">
                     <li>
-                        <a class="hidden md:block" href="#">Home</a>
-                        <box-icon class="md:hidden" color="black" name='home' ></box-icon>
+                        <Link :href="route('welcome')">
+                            <span class="hidden md:block">Home</span>
+                            <box-icon class="md:hidden" color="black" name='home' ></box-icon>
+                        </Link>
                     </li>
                     <li>
-                        <a class="hidden md:block" href="#">About Us</a>
-                        <box-icon class="md:hidden" color="black" name='buildings' ></box-icon>
+                        <Link :href="route('about.index')">
+                            <span class="hidden md:block">About Us</span>
+                            <box-icon class="md:hidden" color="black" name='buildings' ></box-icon>
+                        </Link>
                     </li>
                     <li>
-                        <a class="hidden md:block" href="#">Services</a>
-                        <box-icon class="md:hidden" color="black" name='wrench' ></box-icon>
+                        <Link :href="route('services.index')">
+                            <span class="hidden md:block">Services</span>
+                            <box-icon class="md:hidden" color="black" name='wrench' ></box-icon>
+                        </Link>
                     </li>
                     <li>
-                        <a class="hidden md:block" href="#">Blog</a>
-                        <box-icon class="md:hidden" color="black" name='book-open' ></box-icon>
+                        <Link :href="route('blog.index')">
+                            <span class="hidden md:block">Blog</span>
+                            <box-icon class="md:hidden" color="black" name='book-open' ></box-icon>
+                        </Link>
                     </li>
                     <li>
-                        <a class="hidden md:block" href="#">Contact Us</a>
-                        <box-icon class="md:hidden" color="black" name='message' ></box-icon>
+                        <Link :href="route('contact.index')">
+                            <span class="hidden md:block">Contact Us</span>
+                            <box-icon class="md:hidden" color="black" name='message' ></box-icon>
+                        </Link>
                     </li>
                 </ul>
             </section>

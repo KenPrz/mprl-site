@@ -9,8 +9,8 @@ class Product extends Model
 {
     use HasFactory;
     public $fillable =[
-       'name',
-        'category',
+        'name',
+        'category_id',
         'power_out',
         'efficiency',
         'dimension',
@@ -30,4 +30,8 @@ class Product extends Model
         'datasheet',
         'is_displayed',
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

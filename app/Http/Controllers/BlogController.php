@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use App\Models\Category;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -38,7 +38,7 @@ class BlogController extends Controller
             ->orderBy('blog_posts.clicks', 'desc')
             ->paginate(9);
 
-        $categories = Category::select('id', 'name')->get();
+        $categories = BlogCategory::select('id', 'name')->get();
         $years = BlogPost::selectRaw('DISTINCT YEAR(created_at) as year')->orderBy('year')->get();
 
         return Inertia::render('Blog/Main', [

@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\BlogCategory;
 use Illuminate\Support\Str;
-class CategorySeeder extends Seeder
+class BlogCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,7 +27,7 @@ class CategorySeeder extends Seeder
         ];
 
         foreach($categories as $category) {
-            Category::create([
+            BlogCategory::create([
                 'name' => $category,
                 'slug' => Str::slug($category)
             ]);

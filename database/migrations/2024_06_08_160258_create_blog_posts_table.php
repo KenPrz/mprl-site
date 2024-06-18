@@ -23,7 +23,7 @@ return new class extends Migration
                 ->unsigned()
                 ->default(0);
             $table->foreignId('category_id')
-                ->constrained('categories')
+                ->constrained('blog_categories')
                 ->onDelete('cascade');
             $table->foreignId('created_by')
                 ->constrained('users')

@@ -12,73 +12,73 @@ const props = defineProps({
 </script>
 
 <style scoped>
-    ::v-deep h1 {
+    :deep(h1) {
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep h2 {
+    :deep(h2) {
         font-size: 2rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep h3 {
+    :deep(h3) {
         font-size: 1.75rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep h4 {
+    :deep(h4) {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep h5 {
+    :deep(h5) {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep h6 {
+    :deep(h6) {
         font-size: 1rem;
         margin-bottom: 1.5rem;
         text-wrap: balance;
     }
-    ::v-deep p {
+    :deep(p) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep ul {
+    :deep(ul) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep ol {
+    :deep(ol) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep blockquote {
+    :deep(blockquote) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep pre {
+    :deep(pre) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep code {
+    :deep(code) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep table {
+    :deep(table) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep img {
+    :deep(img) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep a {
+    :deep(a) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }
-    ::v-deep hr {
+    :deep(hr) {
         margin-bottom: 1.5rem;
         text-wrap: pretty;
     }

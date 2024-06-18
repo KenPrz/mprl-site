@@ -11,6 +11,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\BlogAdminController;
+use App\Http\Controllers\ProductsAdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
@@ -24,12 +26,11 @@ Route::get('/product', [ProductController::class, 'index'])->name('products');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin/Dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
-    
-    Route::get('/admin', function () {
-        return Inertia::render('Admin');
-    })->name('admin');
+
+    Route::resource('admin/blog', BlogAdminController::class);
+    Route::resource('admin/products', ProductsAdminController::class);
 });
 
 Route::middleware('auth')->group(function () {

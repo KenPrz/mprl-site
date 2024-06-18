@@ -74,7 +74,6 @@ onUnmounted(() => {
     <Footer />
 </template>
 <script>
-let currentScrollPosition = document.documentElement.scrollTop
 export default {
     methods: {
         fetchBlogs({ category, year, month, query }) {

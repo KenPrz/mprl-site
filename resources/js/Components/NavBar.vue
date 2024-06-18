@@ -56,6 +56,12 @@ import Modal from '@/Components/Modal.vue';
                     </NavLink>
                 </li>
                 <li>
+                    <NavLink class="hidden:block" :href="route('products')" :active="route().current('products')" :is_black="is_black">
+                        <span class="hidden md:block">Products</span>
+                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
+                    </NavLink>
+                </li>
+                <li>
                     <NavLink class="hidden:block" :href="route('services.index')" :active="route().current('services.index')" :is_black="is_black">
                         <span class="hidden md:block">Services</span>
                         <span class="md:hidden" >

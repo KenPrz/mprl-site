@@ -33,7 +33,7 @@ import Modal from '@/Components/Modal.vue';
                 <ApplicationLogo />
             </NavLink>
             <!-- <button
-                class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3  md:hidden">
+                class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3  md:hidden">
                 Get a Quote
             </button> -->
         </div>
@@ -118,7 +118,7 @@ import Modal from '@/Components/Modal.vue';
         <button
             @click="showModal"
             id="get-quote"
-            class="absolute -bottom-12 right-5 bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
+            class="absolute -bottom-12 right-5 bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
             Get a Quote
         </button>
     </div>

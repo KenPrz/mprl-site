@@ -103,6 +103,7 @@ class BlogPostFactory extends Factory
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),
             'created_by' => 1,
+            'clicks' => rand(0, 200),
             'created_at' => $this->faker->dateTimeBetween('-3 years'),
             'updated_at' => $this->faker->dateTimeBetween('-3 years'),
         ];

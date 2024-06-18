@@ -14,7 +14,7 @@ const handleMouseLeave = () => {
 
 <template>
     <div :id="isHovered ? 'my-hover' : ''" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" class="mb-2 border card-height rounded-b-sm shadow-md">
-        <Link :href="`/blog/${blog.id}`">
+        <Link :href="route('blog.show',blog.id)">
             <BlogImage class="card-image-height" v-for="image in blog.images" :key="image.id" :imageUrl="`storage/${image.image}`" />
         </Link>
         <div class="relative card-descr-h flex flex-col p-2 px-4 justify-around">
@@ -24,7 +24,7 @@ const handleMouseLeave = () => {
                 </span>
             </div>
             <h1 class="text-xl font-semibold">
-                <Link class="hover:text-primary-500 duration-300 transition-colors" :href="`/blog/${blog.id}`">
+                <Link class="hover:text-main-500 duration-300 transition-colors" :href="`/blog/${blog.id}`">
                     {{ blog.title }}
                 </Link>
             </h1>
@@ -66,14 +66,13 @@ const tags = [
     transform: scale(1.02);
     filter: blur(.02em);
 }
-
 .card-height {
-    max-height: auto;
+    height: 32em;
 }
 .card-image-height {
-    height: 60%;
-    object-fit: cover;
-    object-position: 80% 100%;
+    width: 100%;
+    height: 20em;
+    object-fit: contain;
   }
 .card-descr-h{
     height: 40%;

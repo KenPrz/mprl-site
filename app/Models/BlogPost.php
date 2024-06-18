@@ -15,7 +15,14 @@ class BlogPost extends Model
         'category_id',
         'is_published',
         'created_by',
-        'is_featured'
+        'is_featured',
+        'clicks',
+    ];
+
+    protected $casts = [
+        'is_published' => 'boolean',
+        'is_featured' => 'boolean',
+        'clicks' => 'integer',
     ];
 
     public function category()
@@ -32,4 +39,9 @@ class BlogPost extends Model
     {
         return $this->hasMany(BlogImage::class);
     }
+
+    public function firstImage()
+    {
+        return $this->hasOne(BlogImage::class)->orderBy('id');
+    }    
 }

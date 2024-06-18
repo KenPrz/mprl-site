@@ -1,10 +1,10 @@
 <script setup>
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shadcn/ui/carousel'
+import { Card, CardContent } from '@/shadcn/ui/card'
 import BlogContent from './Components/BlogContent.vue';
+import BlogCard from './Components/BlogCard.vue';
 import NavBar from '@/Components/NavBar.vue';
 import BlogImage from './Components/BlogImage.vue';
-import Pagination from '@/Components/Pagination.vue';
-import SearchBar from './Components/SearchBar.vue'
-import BlogCard from './Components/BlogCard.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
@@ -74,11 +74,32 @@ const props = defineProps({
           </div>
         </div>
         <div class="hidden md:flex md:w-1/4 flex-col">
-          <section>
-            {{ featured }}
+          <section class="mb-6">
+              <Card>
+                <div class="px-5">
+                  <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-2">Featured</h1> 
+                </div>
+                <Carousel class="py-2 shadow-md">
+                  <CarouselContent>
+                    <CarouselItem v-for="f in featured" :key="f.id">
+                      <div>
+                        <Link :href="route('blog.show',f.id)">
+                          <img class="side-card-image-height" :src="`/storage/${f.first_image.image}`" :alt="f.title">
+                          <div class="p-2">
+                            <h1 class="text-lg font-semibold">{{f.title}}</h1>
+                            <p class="text-gray-600 text-xs mt-1">{{ formatDate(f.created_at) }}</p>
+                          </div>
+                        </Link>
+                      </div>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </Card>
           </section>
           <section>
-            <div class="bg-white shadow-md rounded-md p-4">
+            <Card class="p-2 shadow-md">
               <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-4">More News</h1>
               <Link :href="route('blog.show',blog.id)" v-for="blog in more" :key="id">
                 <div class="py-2 space-y-1 border-b-2 px-2 hover:bg-slate-200 transition-colors duration-300 min-h-20">
@@ -90,7 +111,7 @@ const props = defineProps({
                 </div>
               </Link>
               <Link :href="route('blog.index')" class="text-start block mt-2 px-2 text-blue-500 transition-colors duration-300 hover:text-blue-800">View More</Link>
-            </div>
+            </Card>
           </section>
         </div>
       </div>
@@ -113,14 +134,17 @@ export default {
 <style scoped>
 .card-image-height {
   width: 100%;
-  height: 29em;
+  height: 30em;
   object-fit: contain;
 }
-
+.side-card-image-height {
+  width: 100%;
+  height: 15em;
+  object-fit: cover;
+}
 @media screen and (max-width: 768px) {
   .card-image-height {
     height: 20em;
   }
-  
 }
 </style>

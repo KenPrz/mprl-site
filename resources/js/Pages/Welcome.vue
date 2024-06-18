@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
 import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
@@ -54,10 +55,10 @@ onUnmounted(() => {
                         install and operate independently from the main electrical supply.
                     </p>
                     <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500" class="mt-4">
-                        <button
+                        <Link :href="route('about.index')"                                
                             class="border py-1 px-2 rounded-xl hover:bg-white hover:text-black transition-all duration-200">
-                            Read More
-                        </button>
+                                Read More
+                        </Link>
                     </div>
                 </div>
                 <div class="px-4 w-full md:w-1/2 text-center md:text-left">

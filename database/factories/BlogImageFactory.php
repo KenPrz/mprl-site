@@ -17,8 +17,8 @@ class BlogImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => $this->faker->image('public/storage/', 640, 480, null, false, true, $this->faker->word, false),
-            // 'image' => 'sample.png',
+            // 'image' => $this->faker->image('public/storage/', rand(480,1080), rand(480,1080), null, false, true, $this->faker->word, false),
+            'image' => 'def.png',
             'blog_post_id' => $this->faker->unique()->numberBetween(1, 50),
         ];
     }

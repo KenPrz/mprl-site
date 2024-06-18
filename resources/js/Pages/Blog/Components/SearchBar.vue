@@ -105,7 +105,7 @@ watch(searchQuery, (newQuery) => {
             <div class="flex rounded-full border border-gray-300 overflow-hidden lg:w-7/12 ps-3">
                 <input id="input-field" v-model="searchQuery" type="text" placeholder="Search blog..."
                     class="border-none focus:ring-0 p-2 w-full md:w-full rounded-full">
-                <button class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white w-1/4 md:w-2/5">
+                <button class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white w-1/4 md:w-2/5">
                     <i class="pi pi-search"></i>
                 </button>
             </div>

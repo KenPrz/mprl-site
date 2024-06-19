@@ -27,14 +27,19 @@ const showingNavigationDropdown = ref(false);
                                 </Link>
                             </div>
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center">
-                                <AdminNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </AdminNavLink>
-                                <AdminNavLink :href="route('admin.blog.index')" :active="route().current('admin.blog.index')">
-                                    Blogs
-                                </AdminNavLink>
-                            </div>
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-if="$page.props.auth.user.role_id==1">
+                                    <AdminNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                        Dashboard
+                                    </AdminNavLink>
+                                    <AdminNavLink :href="route('admin.blog.index')" :active="route().current('admin.blog.index')">
+                                        Blogs
+                                    </AdminNavLink>
+                                </div>
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-else>
+                                    <AdminNavLink :href="route('welcome')" :active="route().current('dashboard')">
+                                        Home
+                                    </AdminNavLink>
+                                </div>
                         </div>
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <!-- Settings Dropdown -->

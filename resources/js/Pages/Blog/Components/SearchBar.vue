@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, ref, watch } from 'vue';
+import { defineEmits, ref, watch } from 'vue';
 
 const emit = defineEmits(['fetch-blogs']);
 

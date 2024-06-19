@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center space-x-4 mt-10">
+    <div class="flex items-center justify-center space-x-4">
         <template v-for="link in pagination.links" :key="link.url ?? ''">
             <template v-if="link.url">
                 <Link

@@ -6,7 +6,7 @@ const props = defineProps({
   categories: {
     type: Array,
     required: true,
-    default: () => [{ id: 'all', name: 'All' }],
+    default: () => ['all']
   },
   initialProducts: {
     type: Array,

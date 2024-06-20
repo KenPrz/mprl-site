@@ -63,7 +63,7 @@ onUnmounted(() => {
                 <p class="text-lg">No blogs found.</p>
             </div>
         </div>
-        <Pagination 
+        <Pagination class="my-2"
             :first_page_url="$page.props.blogs.first_page_url"
             :from="$page.props.blogs.from"
             :last_page="$page.props.blogs.last_page"

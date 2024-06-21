@@ -19,6 +19,14 @@ const submit = () => {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
+const images = [
+  ['images/guest-slideshow/bg-1.jpg', 'Slide 1'],
+  ['images/guest-slideshow/bg-2.jpg', 'Slide 2'],
+  ['images/guest-slideshow/bg-3.jpg', 'Slide 3'],
+  ['images/guest-slideshow/bg-4.jpg', 'Slide 4'],
+]
+const randomImage = images[Math.floor(Math.random() * images.length)][0];
 </script>
 
 <template>
@@ -27,13 +35,14 @@ const submit = () => {
         <Head title="Register" />
         <div id="card-container" class="flex">
             <div class="w-3/5 hidden sm:block relative">
-                <img class="w-full shadow-md" src="/images/guest-slideshow/bg-2.jpg" alt="Login Image">
-                <div class="flex items-start mb-8 absolute -bottom-6 ps-2">
-                    <Link href="/">
-                    <ApplicationLogo class="w-auto h-24 fill-current text-gray-500 mx-auto" />
-                    </Link>
+                <img class="w-full shadow-md" :src="randomImage" alt="Login Image">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent opacity-75"></div>
+                <div class="flex items-start mb-8 absolute -bottom-6 ps-2 z-10">
+                  <Link :href="route('welcome')">
+                  <ApplicationLogo class="w-auto h-24 fill-current text-gray-500 mx-auto" />
+                  </Link>
                 </div>
-            </div>
+              </div>
             <div>
             </div>
             <div class="w-full sm:w-3/5 flex flex-col justify-center">

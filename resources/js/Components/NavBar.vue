@@ -2,6 +2,29 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavLink from '@/Components/NavLink.vue';
 import Modal from '@/Components/Modal.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import Login from '@/Pages/Auth/Login.vue';
+import Register from '@/Pages/Auth/Register.vue';
+import { Link } from '@inertiajs/vue3';
+import {ref, onMounted, onUnmounted} from 'vue';
+
+const autoAlign = ref('right');
+const updateAutoAlign = () => {
+  if (window.innerWidth < 1200) {
+    autoAlign.value = 'right';
+  } else {
+    autoAlign.value = 'left';
+  }
+};
+
+onMounted(() => {
+  updateAutoAlign();
+  window.addEventListener('resize', updateAutoAlign);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateAutoAlign);
+});
 </script>
 <template>
     <!-- Hide this section when scrolling -->
@@ -32,10 +55,6 @@ import Modal from '@/Components/Modal.vue';
             <NavLink :href="route('welcome')" :is_black="is_black">
                 <ApplicationLogo />
             </NavLink>
-            <!-- <button
-                class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3  md:hidden">
-                Get a Quote
-            </button> -->
         </div>
         <div>
             <ul class="flex space-x-5 sm:text-sm md:text-md lg:text-lg">
@@ -87,59 +106,94 @@ import Modal from '@/Components/Modal.vue';
                 </li>
             </ul>
         </div>
-        <div v-if="isAuthenticated" class="flex space-x-2 px-2">
-            <NavLink :href="route('profile.edit')" :is_black="is_black">
-                <span class="hidden md:block">Account</span>
-                <span class="md:hidden" >
-                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-user"></i>
-                </span>
-            </NavLink>
-            <span>/</span>
-            <Button
-                @click="logout"
-            >
-                <span class="hidden md:block">Logout</span>
-                <span class="md:hidden" >
-                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-sign-out"></i>
-                </span>
-            </Button>
-        </div>
-        <div v-else class="flex space-x-2 px-2">
-            <NavLink :href="route('login')" :is_black="is_black">
-                <span class="hidden md:block">Login</span>
-                <span class="md:hidden" >
-                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-sign-in"></i>
-                </span>
-            </NavLink>
-            <span>/</span>
-            <NavLink :href="route('register')" :is_black="is_black">
-                <span class="hidden md:block">Register</span>
-                <span class="md:hidden" >
-                    <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-user-plus"></i>
-                </span>
-            </NavLink>
+        <div class="flex items-center space-x-5 px-2">
+            <button
+                @click="showModal"
+                id="get-quote"
+                class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
+                Get a Quote
+            </button>
+            <Dropdown :align="autoAlign" width="32">
+                <template #trigger>
+                    <span class="inline-flex rounded-md">
+                        <button class="rounded-full"
+                        >
+                            <i class="pi pi-user"
+                            style="font-size:1.2em" :style="is_black? 'color:black':'color:white'"></i>
+                        </button>
+                    </span>
+                </template>
+                <template #content>
+                    <div v-if="isAuthenticated" class="flex flex-col text-sm font-semibold">
+                        <Link :href="route('profile.edit')" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                            <i style="font-size: 1rem" class="pi pi-user"></i>
+                            <span>Account</span>
+                        </Link>
+                        <Button
+                            @click="logout"
+                            class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1"
+                        >
+                            <i style="font-size: 1rem" class="pi pi-sign-out"></i>
+                            <span>Logout</span>
+                        </Button>
+                    </div>
+                    <div v-else class="flex flex-col text-sm font-semibold">
+                        <button @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                            <i class="pi pi-sign-in"></i>
+                            <span>
+                                Login
+                            </span>
+                        </button>
+                        <button @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                            <i class="pi pi-user-plus"></i>
+                            <span>
+                                Sign Up
+                            </span>
+                        </button>
+                    </div>
+                </template>
+            </Dropdown>
         </div>
     </div>
-    <div class="flex justify-end relative">
-        <button
-            @click="showModal"
-            id="get-quote"
-            class="absolute -bottom-12 right-5 bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
-            Get a Quote
-        </button>
-    </div>
-    <Modal >
+    <Modal maxWidth="md" v-model:show="showLoginModal" @close="showLoginModal=false">
+        <Login 
+            @openRegister="handleRegisterSwitch"
+            @closeLogin="showLoginModal=false"
+        />
+    </Modal>
+    <Modal maxWidth="md" v-model:show="showRegisterModal" @close="showRegisterModal=false">
+        <Register 
+            @openLogin="handleLoginSwitch"
+            @closeRegister="showRegisterModal=false"
+        />
+    </Modal>
+    <Modal maxWidth="md" v-model:show="showQuoteModal" @close="showQuoteModal=false">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit id necessitatibus quos architecto repellendus deleniti, cum obcaecati aperiam facere sunt mollitia qui eaque quo earum doloribus similique sed minus reprehenderit.
     </Modal>
 </template>
 <script>
-
     export default {
         props: {
             is_black: Boolean
         },
+        data() {
+            return {
+                showLoginModal: false,
+                showRegisterModal: false,
+                showQuoteModal: false,
+            }
+        },
         methods: {
             logout() {
                 this.$inertia.post(route('logout'));
+            },
+            handleRegisterSwitch() {
+                this.showLoginModal = false;
+                this.showRegisterModal = true;
+            },
+            handleLoginSwitch() {
+                this.showRegisterModal = false;
+                this.showLoginModal = true;
             },
 
         },
@@ -154,7 +208,6 @@ import Modal from '@/Components/Modal.vue';
     #get-quote {
         z-index: 100;
         transition: transform 0.5s;
-        animation: ripple 1s infinite;
     }
 
     #get-quote:hover {
@@ -165,7 +218,7 @@ import Modal from '@/Components/Modal.vue';
             transform: scale(1);
         }
         50% {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
         100% {
             transform: scale(1);

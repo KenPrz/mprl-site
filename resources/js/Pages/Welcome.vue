@@ -1,10 +1,9 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link,Head } from '@inertiajs/vue3';
+import { onMounted, onUnmounted, ref } from 'vue';
 import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
-import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
-import { Head } from '@inertiajs/vue3';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -25,7 +24,8 @@ onUnmounted(() => {
         'bg-white shadow-md fixed': scroll > 0,
         'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
     }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
-        <NavBar :is_black="scroll > 0" />
+        <NavBar :is_black="scroll > 0"
+        />
     </nav>
     <main>
         <section data-aos="fade-in" data-aos-duration="500" class="relative py-48 bg-cover bg-center h-auto"
@@ -65,7 +65,6 @@ onUnmounted(() => {
                     <Accordion :items="accordionItems" :initialActiveIndex="0" />
                 </div>
             </div>
-            
         </section>
     </main>
     <Footer />
@@ -81,9 +80,9 @@ export default {
         { title: 'Mission', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis alias ipsa beatae officiis sunt, veniam totam numquam. Nesciunt, nobis exercitationem soluta, error, veritatis iure ab quod tempore sint reprehenderit nam quos laboriosam!' },
         { title: 'Vision', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam deleniti, pariatur autem nihil iusto dicta vel consectetur. Sint ab tempora blanditiis aperiam earum eum.' },
         { title: 'Core Values', content: 'Content for Accordion Item 3' }
-      ]
+      ],
     };
-  }
+  },
 };
 </script>
 

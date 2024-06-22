@@ -54,7 +54,7 @@ class BlogAdminController extends Controller
      */
     public function store(Request $request)
     {
-        dd('what');
+        dd($request->all());
     }
 
     /**

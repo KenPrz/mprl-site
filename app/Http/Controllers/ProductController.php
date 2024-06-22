@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class ProductController extends Controller
@@ -21,7 +22,7 @@ class ProductController extends Controller
                           
                            
 
-        $categories = Category::select('id', 'name')->get();
+        $categories = ProductCategory::select('id', 'name')->get();
 
         if ($request->expectsJson()) {
             return response()->json([

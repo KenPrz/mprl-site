@@ -61,7 +61,7 @@ const props = defineProps({
                         <div class="p-5">
                             <h3 class="font-bold">Product Name: {{ products.name }}</h3>
                             <h3>Product Category: {{ products.category_id }}</h3>
-                            <p>Description: {{ }}</p>
+                            <p>Description: {{ products.desciption}}</p>
                             <h3>Date Uploaded: {{ products.created_at }}</h3>
                         </div>
                     </div>

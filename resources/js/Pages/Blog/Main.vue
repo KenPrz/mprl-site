@@ -45,16 +45,7 @@ onUnmounted(() => {
         </div>
     </section>
     <main class="px-5 md:px-28">
-        <SearchBar
-            class="relative top-[-30px]"
-            :categories="$page.props.categories"
-            :years="$page.props.years"
-            :selected-category="$page.props.selectedCategory"
-            :selected-year="$page.props.selectedYear"
-            :selected-month="$page.props.selectedMonth"
-            :search-query="$page.props.searchQuery"
-            @fetch-blogs="fetchBlogs"
-        />
+        
         <div class="flex flex-col items-center justify-center">
             <div v-if="$page.props.blogs.data" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                 <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs.data" :blog="blog" />

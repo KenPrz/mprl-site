@@ -35,7 +35,7 @@ watch(selectedCategory, (newCategory) => {
 <template>
   <div class="mt-10 ml-3">
     <select v-model="selectedCategory" class="rounded-lg shadow-md hover:bg-lime-500 hover:text-white">
-      <option value="all">All Categories</option>
+      <option selected value="all">All Categories</option>
       <option  :value="category.id" v-for="category in categories" :key="category.id">{{ category.name }}</option>
     </select>
   </div>

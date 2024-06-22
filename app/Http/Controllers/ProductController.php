@@ -18,6 +18,8 @@ class ProductController extends Controller
                            })
                            ->orderBy('created_at', 'desc')
                            ->get();
+                          
+                           
 
         $categories = Category::select('id', 'name')->get();
 
@@ -31,6 +33,12 @@ class ProductController extends Controller
         return Inertia::render('Product/Main', [
             'products' => $products,
             'categories' => $categories,
+        ]);
+    }
+    public function show($id){
+        $products = Product::find($id);
+        return Inertia::render('Product/Show', [
+            'products' => $products
         ]);
     }
 }

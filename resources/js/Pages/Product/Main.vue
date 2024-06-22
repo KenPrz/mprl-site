@@ -32,7 +32,9 @@
               <div v-for="product in products" :key="product.id">
                   <ProductCard data-aos="fade-left" data-aos-delay="20" :product="product" />
               </div>
+             
          </div>
+         
       </div>
     </div>
   </main>
@@ -42,8 +44,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import NavBar from '@/Components/NavBar.vue';
 import ProductCard from '@/Pages/Product/Components/ProductCard.vue';
+import Pagination from '@/Components/Pagination.vue';
 import ProductFilter from '@/Pages/Product/Components/ProductFilter.vue';
 import Footer from '@/Components/Footer.vue';
 
@@ -70,6 +74,7 @@ function updateProducts(newProducts) {
 
 
 const props = defineProps({
+  products: Array,
   initialProducts: Array,
   categories: Array,
 });

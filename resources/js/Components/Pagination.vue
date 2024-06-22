@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center space-x-4 mt-10">
+    <div class="flex items-center justify-center space-x-4">
         <template v-for="link in pagination.links" :key="link.url ?? ''">
             <template v-if="link.url">
                 <Link
@@ -7,7 +7,7 @@
                     :href="link.url"
                     v-html="link.label"
                     class="px-4 py-2 rounded-md text-black border-gray-200 border-2 hover:bg-gray-200 transition-colors duration-200"
-                    :class="{ '!bg-primary-500 text-white': link.active }"
+                    :class="{ '!bg-main-500 text-white': link.active }"
                 />
             </template>
             <template v-else>

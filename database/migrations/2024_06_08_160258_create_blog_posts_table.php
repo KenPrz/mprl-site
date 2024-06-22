@@ -19,8 +19,11 @@ return new class extends Migration
                 ->default(false);
             $table->boolean('is_published')
                 ->default(false);
+            $table->integer('clicks')
+                ->unsigned()
+                ->default(0);
             $table->foreignId('category_id')
-                ->constrained('categories')
+                ->constrained('blog_categories')
                 ->onDelete('cascade');
             $table->foreignId('created_by')
                 ->constrained('users')

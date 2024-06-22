@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use App\Models\Category;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,7 +16,7 @@ class BlogController extends Controller
         $selectedMonth = $request->query('month', 'all');
         $searchQuery = $request->query('query', '');
 
-        $blogs = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $blogs = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at','blog_posts.clicks', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('images')
             ->when($selectedCategory !== 'all', function ($query) use ($selectedCategory) {
@@ -35,9 +35,10 @@ class BlogController extends Controller
                 $query->whereMonth('blog_posts.created_at', $selectedMonth);
             })
             ->orderBy('blog_posts.created_at', 'desc')
+            ->orderBy('blog_posts.clicks', 'desc')
             ->paginate(9);
 
-        $categories = Category::select('id', 'name')->get();
+        $categories = BlogCategory::select('id', 'name')->get();
         $years = BlogPost::selectRaw('DISTINCT YEAR(created_at) as year')->orderBy('year')->get();
 
         return Inertia::render('Blog/Main', [
@@ -58,6 +59,10 @@ class BlogController extends Controller
             ->where('blog_posts.id', $id)
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->first();
+        if (!$blog) {
+            abort(404);
+        }
+        $this->addClick($id);
         $blog_image = $blog->image;
         $featured = $this->getFeatured($id);
         $more = $this->getMorePosts($id);
@@ -71,11 +76,11 @@ class BlogController extends Controller
 
     private function getMorePosts($id)
     {
-        $more = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $more = BlogPost::select('blog_posts.id','blog_posts.clicks', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('images')
             ->where('blog_posts.id', '!=', $id)
-            ->orderBy('blog_posts.created_at', 'desc')
+            ->orderBy('blog_posts.clicks', 'desc')
             ->limit(5)
             ->get();
         return $more;
@@ -84,19 +89,20 @@ class BlogController extends Controller
     public function getFeatured($id)
     {
         $featured = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
-        ->join('users', 'blog_posts.created_by', '=', 'users.id')
-        ->with('images')
-        ->where('blog_posts.is_featured', true)
-        ->where('blog_posts.id', '!=', $id)
-        ->orderBy('blog_posts.created_at', 'desc')
-        ->get();
-        
-        $randomFeatured = $featured->random();
-        if ($featured->isNotEmpty()) {
-            $randomFeatured = $featured->random();
-        } else {
-            $randomFeatured = null;
-        }
-        return $randomFeatured;
+            ->join('users', 'blog_posts.created_by', '=', 'users.id')
+            ->with('firstImage') // Use relationship to get only one image
+            ->where('blog_posts.is_featured', true)
+            ->where('blog_posts.id', '!=', $id)
+            ->orderBy('blog_posts.created_at', 'desc')
+            ->get();
+    
+        return $featured;
+    }
+
+    private function addClick($id)
+    {
+        $blog = BlogPost::find($id);
+        $blog->clicks++;
+        $blog->save();
     }
 }

@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2
         ]);
         $this->call([
-            CategorySeeder::class,
+            BlogCategorySeeder::class,
             BlogPostSeeder::class,
             BlogImageSeeder::class,
             ContactFormSeeder::class,

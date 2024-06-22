@@ -17,7 +17,14 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         $body_data = [
-            '<p>
+            '
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+            <h5>Heading 5</h5>
+            <h6>Heading 6</h6>
+            <p>
                 Kane alfred alcor ali lucius doom. Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face. Damian killer metallo martha prey todd collector lynx huntress outsider spoiler chase. Raatko batman arkham jason grey knight oracle outsider. Green tally maxie abbott deathstroke ventriloquist gordon atomic batmobile, smoke cypher ragdoll? Firefly bruce oracle pit prey elongated calendar batcave lantern temblor. Ragman nyssa jim fox croc? Superman carmine moth killer carmine harvey anarky batarang pennyworth. Toymaker edward a ra cypher scorn justice spectre raatko atom calendar face. Elongated barrow blake todd clench society jason. Fairchild charlatan temblor lynx prey! Chill oracle bat manor chill clench thomas shade? Swamp diamond joker.
                 </p>
                 <p>
@@ -32,7 +39,14 @@ class BlogPostFactory extends Factory
                 <p>
                 Ali manor tumbler grayson young lynx boomerang hood tally nocturna hangman toymaker. Fright abbott, shiva scorn chase joe owl hatter. Katana dick jason supergirl sinestro blue faith, metallo hangman hatter calendar harlequin. Faith gordon copperhead birds. Lucius cluemaster czonk atomic maxie master mister. Katana nocturna charlatan blake blink rupert anarky young shade oracle. Copperhead grey arkham shadow black hangman azrael cypher. Hammer thomas young checkmate firefly face hatter huntress batman zatanna harley chimera clock. Freeze hammer shade grey shrike abattoir snake aiko nyssa. Croc, kane america gordon joker tumbler bartok martha harley maroni zeus! Ragman penguin prey elongated clench alcor hugo. Wing helena knight scorn. Fright ra rose chill rumor. Luthor young mask bat, batman bane pennyworth. Lazarus thomas; shrike thomas blink. League!
             </p>',
-            '<p>
+            '
+                        <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+            <h5>Heading 5</h5>
+            <h6>Heading 6</h6>
+            <p>
                 Angel silvermane magneto, ricochet lilandra titania invaders janefoster. Nighthawk bucky, satana moleculeman scarletspider dust. Rand spectrum skaar morbius hydra snowbird gorillaman deathlok. Arcade natasha riptide spider-woman greengoblin prism pryde harrier stature titania johnnyblaze constrictor. Bucky elektra amora ilyana janefoster vulture yellowjacket crossbones omega proudstar zola piledriver caretaker. Tombstone blink dazzler constrictor quentinquire? Morlun galactus doop ghostrider ironpatriot hobgoblin sage howard kang maverick. Armadillo shield medusa skreet kaine crystal groot warpath callisto hammer. Nefaria jocasta rogue surge annihilus redhulk betaray ricochet? Crystal bluemarvel nickfury nova quasar mrfantastic centurions northstar! Arachne surge bob kraven emmafrost caliban braddock? Sabretooth faustus giantman zodiak. Eternals piledriver lukecage wong bullseye felicia countess cerebro mockingbird ironman. Warmachine marrow agentx eternals moonstar mephisto marrow wonderman. Nuke crossbones ronan defenders skrulls pandemic gladiator. Caretaker yellowjacket firebrand.
                 </p>
                 <p>
@@ -62,7 +76,14 @@ class BlogPostFactory extends Factory
                 <p>
                 Blade lionheart lightspeed moondragon foggy ghostrider magneto kingcobra mayparker celestials moonknight? Runaways, pandemic diablo jigsaw blackcat jimmywoo purpleman gamora inhumans crusher octopus cannonball. Polaris penance araña hellcat. Moleculeman excalibur sauron jigsaw norrinradd. Kingpin avalanche hankpym banner stryker stature blink klaw barnes doom excalibur msmarvel ares! Whitetiger fisk quasar unus squirrel-girl moonstar redhulk spot caretaker patriot husk. Sasquatch quasimodo maverick patch sprite zemo wasp cypher pixie. Janefoster elixir steverogers, kronos whiplash grimreaper cyclops. Gargoyle runaways; empath magus hawkeye moonknight captainamerica miracleman gwen asgardian sif. Urich moondragon humantorch johnnyblaze nuke modok. Rocketraccoon gargoyle captainbritain husk magneto shiva. Valkyrie ilyana mauler hobgoblin modok. Patriot toxin.
                 </p>',
-                '<p>
+                '
+                            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+            <h5>Heading 5</h5>
+            <h6>Heading 6</h6>
+                <p>
                     Posuere enim litora varius natoque ac primis donec at praesent imperdiet. Sed quam elementum accumsan maecenas proin posuere cum nisi etiam cursus montes placerat. Nec phasellus volutpat elit, viverra rhoncus vestibulum ante dui ullamcorper diam eleifend. Sociosqu turpis ad quis semper luctus praesent. At semper dictum odio hendrerit primis placerat parturient. Ridiculus cursus cras condimentum blandit curabitur, dictumst mollis quisque. Posuere suspendisse adipiscing pellentesque mauris. Nisl?
                     </p>
                     <p>
@@ -103,6 +124,7 @@ class BlogPostFactory extends Factory
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),
             'created_by' => 1,
+            'clicks' => rand(0, 200),
             'created_at' => $this->faker->dateTimeBetween('-3 years'),
             'updated_at' => $this->faker->dateTimeBetween('-3 years'),
         ];

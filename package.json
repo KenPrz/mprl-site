@@ -7,6 +7,7 @@
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
+        "@material-tailwind/html": "^2.2.2",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^5.0.0",
         "@vue/server-renderer": "^3.4.0",
@@ -19,8 +20,21 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
-        "@material-tailwind/html": "^2.2.2",
+        "@unovis/ts": "^1.4.1",
+        "@unovis/vue": "^1.4.1",
+        "@vueup/vue-quill": "^1.2.0",
+        "@vueuse/core": "^10.11.0",
         "aos": "^3.0.0-beta.6",
-        "primeicons": "^7.0.0"
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "embla-carousel": "^8.1.5",
+        "embla-carousel-autoplay": "^8.1.5",
+        "embla-carousel-vue": "^8.1.5",
+        "lucide-vue-next": "^0.395.0",
+        "primeicons": "^7.0.0",
+        "quill-delta-to-html": "^0.12.1",
+        "radix-vue": "^1.8.3",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7"
     }
 }

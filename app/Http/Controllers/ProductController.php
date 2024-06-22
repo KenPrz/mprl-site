@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class ProductController extends Controller
@@ -18,8 +19,10 @@ class ProductController extends Controller
                            })
                            ->orderBy('created_at', 'desc')
                            ->get();
+                          
+                           
 
-        $categories = Category::select('id', 'name')->get();
+        $categories = ProductCategory::select('id', 'name')->get();
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -31,6 +34,12 @@ class ProductController extends Controller
         return Inertia::render('Product/Main', [
             'products' => $products,
             'categories' => $categories,
+        ]);
+    }
+    public function show($id){
+        $products = Product::find($id);
+        return Inertia::render('Product/Show', [
+            'products' => $products
         ]);
     }
 }

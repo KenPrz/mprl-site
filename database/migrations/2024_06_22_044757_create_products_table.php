@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('category_id')
-                ->constrained('categories')
+                ->constrained('product_categories')
                 ->onDelete('cascade');
             $table->string('power_out')->nullable();
             $table->string('efficiency')->nullable();

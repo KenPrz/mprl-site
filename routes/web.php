@@ -22,6 +22,7 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services.in
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');

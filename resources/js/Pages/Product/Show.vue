@@ -1,12 +1,10 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import Pagination from '@/Components/Pagination.vue';
-import SearchBar from './Components/SearchBar.vue'
-import BlogCard from './Components/BlogCard.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
+
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -20,9 +18,16 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
+
+const props = defineProps({
+  products: {
+    type: Object,
+    required: true,
+  }
+});
 </script>
 <template>
-    <Head title="Blog" />
+    <Head :title="products.name" />
     <nav :class="{
         'bg-white shadow-md fixed': scroll > 0,
         'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
@@ -34,45 +39,38 @@ onUnmounted(() => {
             style="background-image: url('/images/blog-header-bg.png');">
             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
                 <div class="flex flex-col items-center justify-center space-y-6">
-                    <h2 class="text-4xl md:text-5xl font-semibold text-white">Blog</h2>
+                    <h2 class="text-4xl md:text-5xl font-semibold text-white">Products</h2>
                     <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">
                         <Link class="hover:underline" :href="route('welcome')">HOME</Link>
                         <span class="mx-2">/</span>
-                        <Link class="hover:underline" :href="route('blog.index')">BLOG</Link>
+                        <Link class="hover:underline" :href="route('products')">Product</Link>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <main class="px-5 md:px-28">
-        
-        <div class="flex flex-col items-center justify-center">
-            <div v-if="$page.props.blogs.data" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs.data" :blog="blog" />
-            </div>
-            <div v-else class="flex items-center justify-center h-96">
-                <p class="text-lg">No blogs found.</p>
+    <section class="w-full mt-5">
+        <div class="flex justify-center md:px-32">
+            <div class="container mx-auto w-full px-5 md:w-3/4 md:px-16 bg-white shadow-lg rounded border p-2">
+                <div class="flex flex-row justify-between mt-5 py-3">
+                    <div class="w-56 border text-center h-56">
+                        <img src="" alt="">
+                        img here
+                    </div>
+                    <div class="w-4/5 border ml-3">
+                        <div class="p-5">
+                            <h3 class="font-bold">Product Name: {{ products.name }}</h3>
+                            <h3>Product Category: {{ products.category_id }}</h3>
+                            <p>Description: {{ products.desciption}}</p>
+                            <h3>Date Uploaded: {{ products.created_at }}</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <Pagination class="my-2"
-            :first_page_url="$page.props.blogs.first_page_url"
-            :from="$page.props.blogs.from"
-            :last_page="$page.props.blogs.last_page"
-            :last_page_url="$page.props.blogs.last_page_url"
-            :links="$page.props.blogs.links"
-        />
-    </main>
+</section>
     <Footer />
 </template>
 <script>
-export default {
-    methods: {
-        fetchBlogs({ category, year, month, query }) {
-            this.$inertia.get(route('blog.index', { category, year, month, query }));
-        },
-    },
-};
+   
 </script>
-
-<style scoped>
-</style>

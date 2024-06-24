@@ -1,14 +1,15 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { defineEmits } from 'vue';
 
+const emit = defineEmits(['openLogin']);
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -20,91 +21,91 @@ const submit = () => {
     });
 };
 
-const images = [
-  ['images/guest-slideshow/bg-1.jpg', 'Slide 1'],
-  ['images/guest-slideshow/bg-2.jpg', 'Slide 2'],
-  ['images/guest-slideshow/bg-3.jpg', 'Slide 3'],
-  ['images/guest-slideshow/bg-4.jpg', 'Slide 4'],
-]
-const randomImage = images[Math.floor(Math.random() * images.length)][0];
+const openLogin = () => {
+    emit('openLogin');
+};
 </script>
 
 <template>
-    <GuestLayout>
-
         <Head title="Register" />
         <div id="card-container" class="flex">
-            <div class="w-3/5 hidden sm:block relative">
-                <img class="w-full shadow-md" :src="randomImage" alt="Login Image">
-                <div class="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent opacity-75"></div>
-                <div class="flex items-start mb-8 absolute -bottom-6 ps-2 z-10">
-                  <Link :href="route('welcome')">
-                  <ApplicationLogo class="w-auto h-24 fill-current text-gray-500 mx-auto" />
-                  </Link>
-                </div>
-              </div>
-            <div>
-            </div>
-            <div class="w-full sm:w-3/5 flex flex-col justify-center">
+            <div class="w-full flex flex-col justify-center sm:px-10">
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold text-center mb-5">
-                        Register
+                    <h1 class="text-black text-center text-3xl sm:text-2xl font-bold sm:text-start mb-5">
+                        Sign Up
                     </h1>
                 </div>
-                <div class="sm:px-16">
+                <div>
                     <form @submit.prevent="submit">
-                        <div>
-                            <InputLabel for="name" value="Name" />
+                        <div class="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-2">
+                            <div>
+                                <InputLabel class="block sm:hidden" for="first_name" value="First Name" />
+                                <TextInput :placeHolder="'First Name'" id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" required
+                                    autofocus autocomplete="first_name" />
 
-                            <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required
-                                autofocus autocomplete="name" />
+                                <InputError class="mt-2" :message="form.errors.first_name" />
+                            </div>
+                            <div>
+                                <InputLabel class="block sm:hidden" for="last_name" value="Last Name" />
+                                <TextInput :placeHolder="'Last Name'" id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required
+                                    autocomplete="last_name" />
 
-                            <InputError class="mt-2" :message="form.errors.name" />
+                                <InputError class="mt-2" :message="form.errors.last_name" />
+                            </div>
                         </div>
-
                         <div class="mt-4">
-                            <InputLabel for="email" value="Email" />
+                            <InputLabel class="block sm:hidden" for="email" value="Email" />
 
-                            <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                            <TextInput :placeHolder="'Email'" id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
                                 autocomplete="username" />
 
                             <InputError class="mt-2" :message="form.errors.email" />
                         </div>
 
                         <div class="mt-4">
-                            <InputLabel for="password" value="Password" />
+                            <InputLabel class="block sm:hidden" for="password" value="Password" />
 
-                            <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password"
+                            <TextInput :placeHolder="'Password'" id="password" type="password" class="mt-1 block w-full" v-model="form.password"
                                 required autocomplete="new-password" />
 
                             <InputError class="mt-2" :message="form.errors.password" />
                         </div>
 
                         <div class="mt-4">
-                            <InputLabel for="password_confirmation" value="Confirm Password" />
-                            <TextInput id="password_confirmation" type="password" class="mt-1 block w-full"
+                            <InputLabel class="block sm:hidden" for="password_confirmation" value="Confirm Password" />
+                            <TextInput :placeHolder="'Confirm Password'" id="password_confirmation" type="password" class="mt-1 block w-full"
                                 v-model="form.password_confirmation" required autocomplete="new-password" />
 
                             <InputError class="mt-2" :message="form.errors.password_confirmation" />
                         </div>
                         <div class="flex items-center justify-between mt-5">
-                            <PrimaryButton class="w-full flex justify-center mt-2 py-2" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            <PrimaryButton class="bg-red-500 hover:bg-red-600 py-3 w-full flex justify-center mt-2" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                 Register
                             </PrimaryButton>
                         </div>
                     </form>
                 </div>
                 <div>
-                    <div class="text-center mt-5 space-x-2">
-                        <span class="text-sm text-gray-600">Already have an account?</span>
-                        <Link :href="route('login')" class="font-medium text-blue-600 hover:text-blue-500">
+                    <div class="text-center mt-5 space-x-2 text-sm">
+                        <span class="text-gray-600">Already have an account?</span>
+                        <button @click="openLogin" class="font-semibold text-main-600 hover:text-main-500">
                             Log in
-                        </Link>
+                        </button>
                     </div>
                 </div>
+                <div class="flex w-full items-center justify-center py-4">
+                    <div class="border-b border-gray-300 w-full mt-4 mb-4"></div>
+                    <div class="text-gray-500 mx-4">or</div>
+                    <div class="border-b border-gray-300 w-full mt-4 mb-4"></div>
+                  </div>
+                  <div class="flex w-full">
+                    <button class="relative flex  item-center  justify-center w-full border p-3 border-black hover:bg-gray-100 rounded-lg space-x-2 text-xs sm:text-sm">
+                      <i class="absolute left-5 pi pi-google ps-2" style="font-size:1.2rem"></i>
+                      <span class="text-black ps-2">Connect with Google</span>
+                    </button>
+                  </div>
             </div>
         </div>
-    </GuestLayout>
 </template>
 <style scoped>
 img {

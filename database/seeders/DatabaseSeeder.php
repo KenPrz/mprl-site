@@ -18,18 +18,19 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
         ]);
-        User::factory()->create([
-            'name' => 'admin',
+        User::create([
+            'first_name' => 'admin',
+            'last_name' => 'admin',
             'email' => 'admin@mprl.com',
-            'password' => '123123123',
-            'role_id' => 1
+            'password' =>bcrypt('123123123'),
+            'role_id' => 1,
         ]);
-
-        User::factory()->create([
-            'name' => 'customer',
+        User::create([
+            'first_name' => 'user',
+            'last_name' => 'user',
             'email' => 'customer@mprl.com',
-            'password' => '123123123',
-            'role_id' => 2
+            'password' =>bcrypt('123123123'),
+            'role_id' => 2,
         ]);
         $this->call([
             BlogCategorySeeder::class,

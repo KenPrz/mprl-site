@@ -13,7 +13,7 @@ class BlogAdminController extends Controller
     public function index(Request $request)
     {
         $search_query = $request->searchQuery;
-        $blogs = BlogPost::select('blog_posts.id', 'title', 'blog_categories.name as category_name', 'is_published', 'users.name', 'is_featured', 'clicks')
+        $blogs = BlogPost::select('blog_posts.id', 'title', 'blog_categories.name as category_name', 'is_published', 'users.first_name', 'is_featured', 'clicks')
         ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
         ->join('users', 'users.id', '=', 'blog_posts.created_by')
         ->with('category:id,name')
@@ -21,7 +21,7 @@ class BlogAdminController extends Controller
         ->where(function($query) use ($search_query) {
             $query->where('title', 'like', '%' . $search_query . '%')
                 ->orWhere('blog_categories.name', 'like', '%' . $search_query . '%')
-                ->orWhere('users.name', 'like', '%' . $search_query . '%')
+                ->orWhere('users.first_name', 'like', '%' . $search_query . '%')
                 ->orWhere('clicks', 'like', '%' . $search_query . '%');
             if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
                 $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
@@ -54,7 +54,7 @@ class BlogAdminController extends Controller
      */
     public function store(Request $request)
     {
-        dd('what');
+        dd($request->all());
     }
 
     /**

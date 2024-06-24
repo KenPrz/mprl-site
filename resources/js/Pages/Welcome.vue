@@ -1,10 +1,9 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
+import { onMounted, onUnmounted, ref } from 'vue';
 import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
-import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
-import { Head } from '@inertiajs/vue3';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -20,6 +19,7 @@ onUnmounted(() => {
 });
 </script>
 <template>
+
     <Head title="Home" />
     <nav :class="{
         'bg-white shadow-md fixed': scroll > 0,
@@ -43,7 +43,7 @@ onUnmounted(() => {
             style="background-image: url('/images/mission-vision-bg.jpg');">
             <div
                 class="absolute inset-0 bg-black bg-opacity-40 flex flex-col md:flex-row justify-center items-center md:px-48 text-white space-y-3 md:space-y-0 md:space-x-3">
-                <div data-aos="fade-left"  data-aos-duration="500" class="px-4 md:w-1/2 flex flex-col items-start">
+                <div data-aos="fade-left" data-aos-duration="500" class="px-4 md:w-1/2 flex flex-col items-start">
                     <h1 class="font-semibold text-left text-3xl py-3">
                         About MPRL Solar Trading
                     </h1>
@@ -55,9 +55,9 @@ onUnmounted(() => {
                         install and operate independently from the main electrical supply.
                     </p>
                     <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500" class="mt-4">
-                        <Link :href="route('about.index')"                                
+                        <Link :href="route('about.index')"
                             class="border py-1 px-2 rounded-xl hover:bg-white hover:text-black transition-all duration-200">
-                                Read More
+                        Read More
                         </Link>
                     </div>
                 </div>
@@ -65,25 +65,24 @@ onUnmounted(() => {
                     <Accordion :items="accordionItems" :initialActiveIndex="0" />
                 </div>
             </div>
-            
         </section>
     </main>
     <Footer />
 </template>
 <script>
 export default {
-  components: {
-    Accordion
-  },
-  data() {
-    return {
-      accordionItems: [
-        { title: 'Mission', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis alias ipsa beatae officiis sunt, veniam totam numquam. Nesciunt, nobis exercitationem soluta, error, veritatis iure ab quod tempore sint reprehenderit nam quos laboriosam!' },
-        { title: 'Vision', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam deleniti, pariatur autem nihil iusto dicta vel consectetur. Sint ab tempora blanditiis aperiam earum eum.' },
-        { title: 'Core Values', content: 'Content for Accordion Item 3' }
-      ]
-    };
-  }
+    components: {
+        Accordion
+    },
+    data() {
+        return {
+            accordionItems: [
+                { title: 'Mission', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis alias ipsa beatae officiis sunt, veniam totam numquam. Nesciunt, nobis exercitationem soluta, error, veritatis iure ab quod tempore sint reprehenderit nam quos laboriosam!' },
+                { title: 'Vision', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam deleniti, pariatur autem nihil iusto dicta vel consectetur. Sint ab tempora blanditiis aperiam earum eum.' },
+                { title: 'Core Values', content: 'Content for Accordion Item 3' }
+            ],
+        };
+    },
 };
 </script>
 

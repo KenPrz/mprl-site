@@ -21,7 +21,7 @@ const form = useForm({
   remember: false,
 });
 const submit = () => {
-  form.post(route('login'), {
+  form.post(route('login.create'), {
     onSuccess: () => {
       form.reset();
       closeLogin();

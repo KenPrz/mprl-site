@@ -16,7 +16,7 @@ class BlogController extends Controller
         $selectedMonth = $request->query('month', 'all');
         $searchQuery = $request->query('query', '');
 
-        $blogs = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at','blog_posts.clicks', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $blogs = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at','blog_posts.clicks', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('images')
             ->when($selectedCategory !== 'all', function ($query) use ($selectedCategory) {
@@ -54,7 +54,7 @@ class BlogController extends Controller
 
     public function show($id)
     {
-        $blog = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.body', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $blog = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.body', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
             ->with('images')
             ->where('blog_posts.id', $id)
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
@@ -76,7 +76,7 @@ class BlogController extends Controller
 
     private function getMorePosts($id)
     {
-        $more = BlogPost::select('blog_posts.id','blog_posts.clicks', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $more = BlogPost::select('blog_posts.id','blog_posts.clicks', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('images')
             ->where('blog_posts.id', '!=', $id)
@@ -88,7 +88,7 @@ class BlogController extends Controller
 
     public function getFeatured($id)
     {
-        $featured = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.name as user_name')
+        $featured = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
             ->with('firstImage') // Use relationship to get only one image
             ->where('blog_posts.is_featured', true)

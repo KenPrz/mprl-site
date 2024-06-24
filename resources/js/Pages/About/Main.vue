@@ -27,7 +27,11 @@ onUnmounted(() => {
         <NavBar :is_black="scroll > 0" />
     </nav>
     <main>
-        <!-- Place Stuff Here -->
+        <div class="flex flex-col ml-40 mt-50">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mr-20 mt-10">
+                fsdg
+            </div>
+        </div>
     </main>
     <Footer />
 </template>

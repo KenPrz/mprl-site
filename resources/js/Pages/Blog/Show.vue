@@ -101,7 +101,7 @@ const props = defineProps({
           <section>
             <Card class="p-2 shadow-md">
               <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-4">More News</h1>
-              <Link :href="route('blog.show',blog.id)" v-for="blog in more" :key="id">
+              <Link :href="route('blog.show', blog.id)" v-for="blog in more" :key="blog.id">
                 <div class="py-2 space-y-1 border-b-2 px-2 hover:bg-slate-200 transition-colors duration-300 min-h-20">
                   <h2>{{blog.title}}</h2>
                   <div class="flex space-x-1 items-center mb-4">

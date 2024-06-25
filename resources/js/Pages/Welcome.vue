@@ -37,6 +37,14 @@ onUnmounted(() => {
                     <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600"
                         class="text-5xl font-semibold text-white">Shine brighter, Live lighter</h2>
                 </div>
+                <div class="w-full flex items-center justify-center space-x-5 p-10 sm:p-14">
+                    <span  class="w-48 px-4 py-2 rounded-lg text-sm border-none bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 cursor-pointer">
+                        <span>Request a Quote</span>
+                    </span>
+                    <span  class="w-48 border border-white px-4 py-1 text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer">
+                        Download Brochure
+                    </span>
+                </div>
             </div>
         </section>
         <section class="relative py-48 bg-cover bg-center h-auto"

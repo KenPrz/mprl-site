@@ -77,14 +77,16 @@ onUnmounted(() => {
                 <li>
                     <NavLink class="hidden:block" :href="route('products')" :active="route().current('products')" :is_black="is_black">
                         <span class="hidden md:block">Products</span>
-                        <box-icon class="md:hidden" :color="is_black? 'black':'white'" name='wrench' ></box-icon>
+                        <span class="md:hidden" >
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-shopping-cart"></i>
+                        </span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink class="hidden:block" :href="route('services.index')" :active="route().current('services.index')" :is_black="is_black">
                         <span class="hidden md:block">Services</span>
                         <span class="md:hidden" >
-                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-wrench"></i>
+                            <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-briefcase"></i>
                         </span>
                     </NavLink>
                 </li>
@@ -107,20 +109,20 @@ onUnmounted(() => {
             </ul>
         </div>
         <div class="flex items-center space-x-5 px-2">
-            <button
+            <span
                 @click="showModal"
                 id="get-quote"
                 class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
                 Get a Quote
-            </button>
+            </span>
             <Dropdown :align="autoAlign" width="32">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
-                        <button class="rounded-full"
+                        <span class="rounded-full"
                         >
                             <i class="pi pi-user"
                             style="font-size:1.2em" :style="is_black? 'color:black':'color:white'"></i>
-                        </button>
+                        </span>
                     </span>
                 </template>
                 <template #content>
@@ -129,27 +131,27 @@ onUnmounted(() => {
                             <i style="font-size: 1rem" class="pi pi-user"></i>
                             <span>Account</span>
                         </Link>
-                        <Button
+                        <span
                             @click="logout"
                             class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1"
                         >
                             <i style="font-size: 1rem" class="pi pi-sign-out"></i>
                             <span>Logout</span>
-                        </Button>
+                        </span>
                     </div>
                     <div v-else class="flex flex-col text-sm font-semibold">
-                        <button @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        <span @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-sign-in"></i>
                             <span>
                                 Login
                             </span>
-                        </button>
-                        <button @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        </span>
+                        <span @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-user-plus"></i>
                             <span>
                                 Sign Up
                             </span>
-                        </button>
+                        </span>
                     </div>
                 </template>
             </Dropdown>

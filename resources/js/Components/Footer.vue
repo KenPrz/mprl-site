@@ -29,31 +29,41 @@ import { Link } from '@inertiajs/vue3';
                     <li>
                         <Link :href="route('welcome')">
                             <span class="hidden md:block">Home</span>
-                            <box-icon class="md:hidden" color="black" name='home' ></box-icon>
+                            <span class="md:hidden">
+                                <i style="font-size: 1.2rem" class="pi pi-home"></i>
+                            </span>
                         </Link>
                     </li>
                     <li>
                         <Link :href="route('about.index')">
                             <span class="hidden md:block">About Us</span>
-                            <box-icon class="md:hidden" color="black" name='buildings' ></box-icon>
+                            <span class="md:hidden">
+                                <i style="font-size: 1.2rem" class="pi pi-building"></i>
+                            </span>
                         </Link>
                     </li>
                     <li>
                         <Link :href="route('services.index')">
                             <span class="hidden md:block">Services</span>
-                            <box-icon class="md:hidden" color="black" name='wrench' ></box-icon>
+                            <span class="md:hidden">
+                                <i style="font-size: 1.2rem" class="pi pi-briefcase"></i>
+                            </span>
                         </Link>
                     </li>
                     <li>
                         <Link :href="route('blog.index')">
                             <span class="hidden md:block">Blog</span>
-                            <box-icon class="md:hidden" color="black" name='book-open' ></box-icon>
+                            <span class="md:hidden">
+                                <i style="font-size: 1.2rem" class="pi pi-pencil"></i>
+                            </span>
                         </Link>
                     </li>
                     <li>
                         <Link :href="route('contact.index')">
                             <span class="hidden md:block">Contact Us</span>
-                            <box-icon class="md:hidden" color="black" name='message' ></box-icon>
+                            <span class="md:hidden">
+                                <i style="font-size: 1.2rem" class="pi pi-phone"></i>
+                            </span>
                         </Link>
                     </li>
                 </ul>

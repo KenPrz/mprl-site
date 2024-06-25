@@ -7,6 +7,7 @@ import Login from '@/Pages/Auth/Login.vue';
 import Register from '@/Pages/Auth/Register.vue';
 import { Link } from '@inertiajs/vue3';
 import {ref, onMounted, onUnmounted} from 'vue';
+import { show } from '@unovis/ts/components/tooltip/style';
 
 const autoAlign = ref('right');
 const updateAutoAlign = () => {
@@ -21,7 +22,6 @@ onMounted(() => {
   updateAutoAlign();
   window.addEventListener('resize', updateAutoAlign);
 });
-
 onUnmounted(() => {
   window.removeEventListener('resize', updateAutoAlign);
 });
@@ -29,18 +29,18 @@ onUnmounted(() => {
 <template>
     <!-- Hide this section when scrolling -->
     <div
-        class="flex pe-2 md:pe-0 justify-end md:justify-around bg-black text-white w-full text-sm font-light py-1 space-x-2">
+        class="ps-2 md:ps-0 flex pe-2 md:pe-0 justify-start md:justify-around bg-black text-white w-full text-sm font-light py-1 space-x-2">
         <div class="flex md:justify-center items-center space-x-1 md:space-x-4">
             <a href="https://internet.com/" class="flex items-center space-x-2">
                 <i class="pi pi-map-marker"></i>
-                <span class="hidden md:block">6620 Purok 1, San Antonio, Los Baños, Laguna</span>
+                <span>6620 Purok 1, San Antonio, Los Baños, Laguna</span>
             </a>
-            <a href="mailto:mprlsolar@gmail.com" class="flex items-center space-x-2">
+            <a href="mailto:mprlsolar@gmail.com" class="hidden md:flex items-center space-x-2">
                 <i class="pi pi-envelope"></i>
                 <span class="hidden md:block">mprlsolar@gmail.com</span>
             </a>
         </div>
-        <div class="flex items-center space-x-1 md:space-x-4">
+        <div class="hidden md:flex items-center space-x-1 md:space-x-4">
             <a href="https://www.facebook.com/profile.php?id=100066355175014" target="_blank"class="flex items-center">
                 <i class="pi pi-facebook"></i>
             </a>
@@ -157,6 +157,16 @@ onUnmounted(() => {
             </Dropdown>
         </div>
     </div>
+    <Modal maxWidth="md" v-model:show="showContact" @close="showContact=false">
+        <div class="flex flex-col items-center space-y-4 p-8 bg-gray-100 rounded-lg shadow-md">
+            <span class="text-2xl font-bold text-gray-800">Contact Us</span>
+            <div class="text-center">
+                <span class="block text-sm text-gray-600">Globe: <span class="font-medium text-gray-800">0956-769-3494</span></span>
+                <span class="block text-sm text-gray-600">TM: <span class="font-medium text-gray-800">0953-039-8460</span></span>
+                <span class="block text-sm text-gray-600">Smart: <span class="font-medium text-gray-800">0932-921-1767</span></span>
+            </div>
+        </div>        
+    </Modal>
     <Modal maxWidth="md" v-model:show="showLoginModal" @close="showLoginModal=false">
         <Login 
             @openRegister="handleRegisterSwitch"
@@ -172,6 +182,22 @@ onUnmounted(() => {
     <Modal maxWidth="md" v-model:show="showQuoteModal" @close="showQuoteModal=false">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit id necessitatibus quos architecto repellendus deleniti, cum obcaecati aperiam facere sunt mollitia qui eaque quo earum doloribus similique sed minus reprehenderit.
     </Modal>
+    <div class="absolute -right-7 hover:right-0 sm:right-0 h-screen transition-all duration-200">
+        <section id="icon-handler" class="flex flex-col h-full justify-center space-y-3">
+            <span class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+                <i id="icon-size" style="" class="pi pi-facebook"></i>
+            </span>
+            <span  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+                <i id="icon-size" style="" class="pi pi-instagram"></i>
+            </span>
+            <span @click="showContact=true"  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+                <i id="icon-size" style="" class="pi pi-phone"></i>
+            </span>
+            <span  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+                <i id="icon-size" style="" class="pi pi-envelope"></i>
+            </span>
+        </section>
+    </div>
 </template>
 <script>
     export default {
@@ -183,6 +209,7 @@ onUnmounted(() => {
                 showLoginModal: false,
                 showRegisterModal: false,
                 showQuoteModal: false,
+                showContact: false,
             }
         },
         methods: {
@@ -235,6 +262,17 @@ onUnmounted(() => {
         }
         100% {
             transform: scale(1);
+        }
+    }
+
+    #icon-size{
+        font-size:1.2rem;
+        color:white !important;
+    }
+
+    @media screen and (min-width: 768px) {
+        #icon-size{
+            font-size:1.5rem;
         }
     }
 </style>

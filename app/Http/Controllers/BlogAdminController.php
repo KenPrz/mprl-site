@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -46,7 +47,10 @@ class BlogAdminController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Blog/Create');
+        $categories = BlogCategory::select('id', 'name')->get();
+        return Inertia::render('Admin/Blog/Create',[
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -68,9 +72,16 @@ class BlogAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $blog = BlogPost::select('id', 'title', 'category_id', 'body', 'is_published', 'is_featured')
+            ->with('images')
+            ->with('category:id,name')
+            ->where('id', $id)
+            ->first();
+            return Inertia::render('Admin/Blog/Edit', [
+                'blog' => $blog
+            ]);
     }
 
     /**
@@ -84,8 +95,8 @@ class BlogAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        BlogPost::destroy($id);
     }
 }

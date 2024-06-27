@@ -28,6 +28,9 @@ const showingNavigationDropdown = ref(false);
                             </div>
                             <!-- Navigation Links -->
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-if="$page.props.auth.user.role_id==1">
+                                    <AdminNavLink :href="route('welcome')" :active="route().current('welcome')">
+                                        Site
+                                    </AdminNavLink>
                                     <AdminNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                         Dashboard
                                     </AdminNavLink>
@@ -119,6 +122,9 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.blog.index')" :active="route().current('admin.blog.index')">
+                            Blogs
                         </ResponsiveNavLink>
                     </div>
 

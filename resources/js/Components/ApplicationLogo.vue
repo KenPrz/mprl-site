@@ -5,9 +5,11 @@
             <div class="hidden sm:block md:text-md sm:text-sm mt-[5px] font-semibold text-main-600 dark:text-gray-200">{{ appName }}</div>
             <div :class="isDark ? 'text-yellow-500' : 'text-red-500'" class="hidden sm:block sm:text-2xs text-red-500 dark:text-gray-400">{{ subAppName }}</div>
         </div>
-    </div> -->
+    </div> 
+    
+        this is the original code -->
     <div>
-        <img class="h-20" :src="'/SUNPOWER2.svg'" alt="" srcset="">
+        <img class="h-20" :src="'/logo.svg'" alt="" srcset="">
     </div>
 </template>
 <script setup>

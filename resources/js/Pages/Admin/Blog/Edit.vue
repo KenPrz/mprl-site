@@ -18,9 +18,10 @@ const props = defineProps({
         required: true
     }
 });
-
+const newUploads = ref([]);
 const form = useForm({
-    images: [],
+    new_images: [],
+    deleted_images: [],
     category: props.blog.category_id,
     title: props.blog.title,
     content: props.blog.body,
@@ -29,20 +30,36 @@ const form = useForm({
 });
 
 const blogContent = ref(props.blog.body);
-const imagePreviews = ref(props.blog.images.map(image => image.image));
+/**
+ * Represents the reactive reference to the image previews.
+ * @type {ref}
+ */
+const imagePreviews = ref(
+    props.blog.images.map(image => ({
+        id: image.id,
+        url: `/storage/${image.image}`
+    }))
+);
 
+/**
+ * Handles the change event when selecting images.
+ * @param {Event} event - The change event.
+ */
 function handleImageChange(event) {
     const files = event.target.files;
     const newImages = [];
     const newPreviews = [];
-
+    
     Array.from(files).forEach(file => {
         newImages.push(file);
         const reader = new FileReader();
         reader.onload = (e) => {
-            newPreviews.push(e.target.result);
+            newPreviews.push({
+                id: null,
+                url: e.target.result
+            });
             if (newPreviews.length === files.length) {
-                form.images.push(...newImages);
+                newUploads.value.push(...newImages);
                 imagePreviews.value.push(...newPreviews);
             }
         };
@@ -50,17 +67,33 @@ function handleImageChange(event) {
     });
 }
 
+/**
+ * Handles the deletion of an image.
+ * @param {number} id - The ID of the image to delete.
+ */
+function handleDeleteImage(id) {
+    const imageIndex = imagePreviews.value.findIndex(image => image.id === id);
+    const image = imagePreviews.value[imageIndex];
+    if (image.id) {
+        form.deleted_images.push(image.id);
+    }
+    imagePreviews.value.splice(imageIndex, 1);
+}
+
+/**
+ * Updates the blog with the new content and images.
+ */
 function updateBlog() {
     const deltaContent = blogContent.value;
     const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
+
+    if(newUploads.value.length > 0) {
+        form.new_images = newUploads.value;
+    }else {
+        form.new_images = null;
+    }
     form.content = converter.convert();
-    form.put(route('admin.blog.update', props.blog.id),
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                imagePreviews.value = props.blog.images.map(image => image.url);
-            }
-        });
+    form.post(route('admin.blog.update', props.blog.id));
 }
 
 onMounted(() => {
@@ -105,17 +138,13 @@ onMounted(() => {
                             <Toggle v-model="form.is_featured" />
                         </div>
                     </div>
-                    <div>
-                        <label for="images" class="block text-lg font-medium text-gray-700">Images</label>
-                        <input id="images" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" type="file" multiple @change="handleImageChange">
-                    </div>
                     <div class="flex flex-wrap mt-4">
                         <VueDraggableNext v-model="imagePreviews" tag="div" class="flex flex-wrap">
-                            <div v-for="(src, index) in imagePreviews" :key="index" class="w-1/4 p-2">
-                                <button @click="imagePreviews.splice(index, 1)" class="relative top-0 right-0">
+                            <div v-for="img in imagePreviews" :key="img.id" class="w-1/4 p-2">
+                                <button @click="handleDeleteImage(img.id)" class="relative top-0 right-0">
                                     <i style="color:red" class="pi pi-times-circle"></i>
                                 </button>
-                                <img :src="`/storage/${src}`" class="w-full h-auto rounded-md shadow-md cursor-move"/>
+                                <img :src="img.url" class="w-full h-auto rounded-md shadow-md cursor-move"/>
                             </div>
                         </VueDraggableNext>
                         <InputError class="mt-2" :message="form.errors.images" />

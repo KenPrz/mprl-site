@@ -1,9 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputError from '@/Components/InputError.vue';
+import Toggle from '@/Components/Toggle.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import { VueDraggableNext } from 'vue-draggable-next';
 
 const props = defineProps({
     categories: {
@@ -14,21 +17,30 @@ const props = defineProps({
 
 const form = useForm({
     images: [],
+    category: '',
     title: '',
-    content: ''
+    content: '',
+    is_published: true,
+    is_featured: false
 });
 
 const blogContent = ref('');
 const imagePreviews = ref([]);
 
 function handleImageChange(event) {
-    form.images = event.target.files;
-    imagePreviews.value = [];
+    const files = event.target.files;
+    const newImages = [];
+    const newPreviews = [];
 
-    Array.from(form.images).forEach(file => {
+    Array.from(files).forEach(file => {
+        newImages.push(file);
         const reader = new FileReader();
         reader.onload = (e) => {
-            imagePreviews.value.push(e.target.result);
+            newPreviews.push(e.target.result);
+            if (newPreviews.length === files.length) {
+                form.images.push(...newImages);
+                imagePreviews.value.push(...newPreviews);
+            }
         };
         reader.readAsDataURL(file);
     });
@@ -38,7 +50,14 @@ function submitBlog() {
     const deltaContent = blogContent.value;
     const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
     form.content = converter.convert();
-    form.post(route('admin.blog.store'));
+    form.post(route('admin.blog.store'),
+        {
+            preserveScroll: true,
+            onSuccess: () => {
+                form.reset();
+                imagePreviews.value = [];
+            }
+        });
 }
 
 onMounted(() => {
@@ -65,6 +84,7 @@ onMounted(() => {
                         <div class="sm:w-3/4">
                             <label for="form-title" class="block text-lg font-medium text-gray-700">Title</label>
                             <input id="form-title" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.title" type="text">
+                            <InputError class="mt-2" :message="form.errors.title" />
                         </div>
                         <div class="sm:w-1/4">
                             <label for="category" class="block text-lg font-medium text-gray-700">Category</label>
@@ -72,6 +92,15 @@ onMounted(() => {
                                 <option disabled default>Category</option>
                                 <option v-for="category in props.categories" :key="category.id" :value="category.id">{{category.name}}</option>
                             </select>
+                            <InputError class="mt-2" :message="form.errors.category" />
+                        </div>
+                        <div>
+                            <label for="is_published" class="block text-lg font-medium text-gray-700">Published</label>
+                            <Toggle v-model="form.is_published" />
+                        </div>
+                        <div>
+                            <label for="is_featured" class="block text-lg font-medium text-gray-700">Featured</label>
+                            <Toggle v-model="form.is_featured" />
                         </div>
                     </div>
                     <div>
@@ -79,12 +108,23 @@ onMounted(() => {
                         <input id="images" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" type="file" multiple @change="handleImageChange">
                     </div>
                     <div class="flex flex-wrap mt-4">
-                        <div v-for="(src, index) in imagePreviews" :key="index" class="w-1/4 p-2">
-                            <img :src="src" class="w-full h-auto rounded-md shadow-md"/>
-                        </div>
+                        <VueDraggableNext v-model="imagePreviews" tag="div" class="flex flex-wrap">
+                            <div v-for="(src, index) in imagePreviews" :key="index" class="w-1/4 p-2">
+                                <button @click="imagePreviews.splice(index, 1)" class="relative top-0 right-0">
+                                    <i style="color:red" class="pi pi-times-circle"></i>
+                                </button>
+                                <img :src="src" class="w-full h-auto rounded-md shadow-md cursor-move"/>
+                            </div>
+                        </VueDraggableNext>
+                        <InputError class="mt-2" :message="form.errors.images" />
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500" @click="$refs.moreImages.click()">Add More Images</button>
+                        <input id="more-images" ref="moreImages" class="hidden" type="file" multiple @change="handleImageChange">
                     </div>
                 </div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <InputError class="mt-2" :message="form.errors.content" />
                     <div>
                         <QuillEditor toolbar="essential" v-model:content="blogContent" theme="snow"/>
                     </div>
@@ -100,7 +140,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-    #form-title{
+    #form-title {
         border: 1px solid #d1d5db;
         border-radius: 0.375rem;
         padding: 0.5rem;

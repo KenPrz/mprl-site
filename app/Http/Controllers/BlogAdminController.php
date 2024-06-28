@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 class BlogAdminController extends Controller
 {
@@ -58,8 +60,40 @@ class BlogAdminController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required',
+            'is_published' => 'required|boolean',
+            'is_featured' => 'required|boolean',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $blog = BlogPost::create([
+            'title' => $request->title,
+            'category_id' => $request->category,
+            'body' => $request->content,
+            'is_published' => $request->is_published,
+            'is_featured' => $request->is_featured,
+            'created_by' => auth()->id(),
+        ]);
+    
+        if($request->has('images')) {
+            foreach($request->file('images') as $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('images', $filename, 'public');
+    
+                $blog->images()->create([
+                    'image' => $path,
+                    'blog_post_id' => $blog->id
+                ]);
+            }
+        }
+    
+        return Inertia::location(route('blog.show', $blog->id));
     }
+    
+    
 
     /**
      * Display the specified resource.
@@ -79,18 +113,51 @@ class BlogAdminController extends Controller
             ->with('category:id,name')
             ->where('id', $id)
             ->first();
+        $categories = BlogCategory::select('id', 'name')->get();
             return Inertia::render('Admin/Blog/Edit', [
-                'blog' => $blog
+                'blog' => $blog,
+                'categories' => $categories
             ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required',
+            'is_published' => 'required|boolean',
+            'is_featured' => 'required|boolean',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $blog = BlogPost::findOrFail($id);
+        $blog->update([
+            'title' => $request->title,
+            'category_id' => $request->category,
+            'body' => $request->content,
+            'is_published' => $request->is_published,
+            'is_featured' => $request->is_featured,
+        ]);
+    
+        if($request->has('images')) {
+            foreach($request->file('images') as $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('images', $filename, 'public');
+    
+                $blog->images()->create([
+                    'image' => $path,
+                    'blog_post_id' => $blog->id
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.blog.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.

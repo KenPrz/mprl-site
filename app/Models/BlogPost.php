@@ -42,6 +42,7 @@ class BlogPost extends Model
 
     public function firstImage()
     {
-        return $this->hasOne(BlogImage::class)->orderBy('id');
-    }    
+        return $this->hasOne(BlogImage::class)->oldest();
+    }
+     
 }

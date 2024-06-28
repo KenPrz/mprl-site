@@ -1,5 +1,6 @@
 <script setup>
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shadcn/ui/carousel'
+import Autoplay from 'embla-carousel-autoplay'
 import { Card, CardContent } from '@/shadcn/ui/card'
 import BlogContent from './Components/BlogContent.vue';
 import BlogCard from './Components/BlogCard.vue';
@@ -65,9 +66,33 @@ const props = defineProps({
       <div class="flex justify-center md:px-32">
         <div class="container mx-auto w-full px-5 md:w-3/4 md:px-16">
           <div class="w-full pe-5">
-            <BlogImage class="card-image-height mb-5" v-for="image in blog.images" :key="image.id" :imageUrl="`/storage/${image.image}`" />
+            <div v-if="blog.images.length > 1">
+              <Carousel
+                :plugins="[Autoplay({
+                  delay: 10000,
+                })]"
+              >
+                  <CarouselContent>
+                      <CarouselItem v-for="image in blog.images" :key="image.id">
+                          <div>
+                              <BlogImage class="card-image-height mb-5" :imageUrl="`/storage/${image.image}`" />
+                          </div>
+                      </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious class="absolute -left-4" />
+                  <CarouselNext class="absolute -right-4" />
+              </Carousel>
           </div>
-          <h1 class="text-3xl font-bold mb-4">{{ blog.title }}</h1>
+          <div v-else>
+              <BlogImage class="card-image-height" :imageUrl="`/storage/${blog.images[0].image}`" v-if="blog.images.length > 0" />
+          </div>
+          </div>
+          <div class="flex space-x-2">
+            <Link v-if="$page.props.auth.user.role_id == 1" :href="route('admin.blog.edit',props.blog.id)">
+              <i class="pi pi-pen-to-square"></i>
+            </Link>
+            <h1 class="text-3xl font-bold mb-4">{{ blog.title }}</h1>
+          </div>
           <p class="text-gray-600 mb-4">By {{ blog.user_name }} on {{ formatDate(blog.created_at) }}</p>
           <div id="blog-body">
             <BlogContent :body="blog.body" />
@@ -79,7 +104,11 @@ const props = defineProps({
                 <div class="px-5">
                   <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-2">Featured</h1> 
                 </div>
-                <Carousel class="py-2 shadow-md">
+                <Carousel class="pt-1 shadow-md"
+                  :plugins="[Autoplay({
+                    delay: 4000,
+                  })]"
+                >
                   <CarouselContent>
                     <CarouselItem v-for="f in featured" :key="f.id">
                       <div>
@@ -93,8 +122,8 @@ const props = defineProps({
                       </div>
                     </CarouselItem>
                   </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+                  <CarouselPrevious  class="absolute -left-4"/>
+                  <CarouselNext  class="absolute -right-4"/>
                 </Carousel>
               </Card>
           </section>

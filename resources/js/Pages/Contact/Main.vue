@@ -44,43 +44,132 @@ onUnmounted(() => {
     <main class="px-5 md:px-28">
         <div class="flex flex-col items-center justify-center">
             <div class="self-center mt-24 mb-24 w-full max-w-[1346px] max-md:mt-10 max-md:max-w-full">
-                <div class="flex gap-5 max-md:flex-col max-md:gap-0">
+                <div class="flex gap-24 max-md:flex-col max-md:gap-0">
                     <div class="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                         <div class="flex flex-col px-5 mt-5 text-neutral-700 max-md:mt-10 max-md:max-w-full">
                             <div class="text-5xl font-semibold tracking-tighter max-md:max-w-full max-md:text-4xl">
                                 We Would Love to Connect with You!
                             </div>
-                            <div class="mt-14 text-xl tracking-tight text-justify max-md:mt-10 max-md:max-w-full">
+                            <div data-aos="fade-left"  data-aos-duration="500" class="mt-14 text-xl tracking-tight text-justify max-md:mt-10 max-md:max-w-full">
                                 Interested in getting solar? Start a conversation with us through
                                 email or messenger, or get in touch with our team using the form
                                 below.
                             </div>
-                            <div class="row py-5 flex"> <!-- Added flex and justify-center classes to center the buttons -->
-                                <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
-                                    <button class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white rounded-full w-8 h-8 flex justify-center items-center">
-                                        <i class="pi pi-facebook"></i>
-                                    </button>
-                                </a>
-                                <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
-                                    <button class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white rounded-full w-8 h-8 flex justify-center items-center">
-                                        <i class="fa-brands fa-facebook-messenger"></i>
-                                    </button>
-                                </a>
-                                <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
-                                    <button class="bg-primary-500 hover:bg-primary-600 transition-colors duration-200 text-white rounded-full w-8 h-8 flex justify-center items-center">
-                                        <i class="pi pi-instagram"></i>
-                                    </button>
-                                </a>
+                            <div data-aos="fade-left" data-aos-duration="500" class="row mt-12">
+                                <div class="text-3xl font-semibold tracking-tighter max-md:max-w-full max-md:text-4xl">
+                                    Follow Us
+                                </div>
+                            </div>
+                            <div class="row mt-3 flex">
+                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500">
+                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                        <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
+                                            <i class="pi pi-facebook" style="font-size: 20px"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500">
+                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                        <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
+                                            <i class="fa-brands fa-facebook-messenger" style="font-size: 20px"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500">
+                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                        <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
+                                            <i class="pi pi-instagram" style="font-size: 20px"></i>
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
                                                                                
                         </div>
                     </div>
-                    <iframe class="ml-24 my-5 w-6/12 max-md:ml-0 max-md:w-full border-2 border-inherit" style="border-radius: 25px;" loading="lazy" 
+                    <iframe class="my-5 w-6/12 max-md:ml-0 max-md:w-full border-2 border-inherit" style="border-radius: 25px;" loading="lazy" 
                     allowfullscreen src="https://www.google.com/maps/embed/v1/view?zoom=15&center=14.1757%2C121.2482&key=AIzaSyCoYUwKxuWHK_QlAe2vJuApe_SbGirZ-fM"></iframe>
                 </div>
+                <div class="flex flex-row justify-center gap-6 mt-28 h-full">
+                    <div data-aos="fade-right" data-aos-delay="50" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
+                        <div class="row my-3">
+                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                                <i class="fa-solid fa-envelope" style="font-size: 25px"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-l font-semibold mb-2 text-center">SEND US AN EMAIL</h5>
+                        <p class="text-neutral-600 text-center text-sm">mprsunpower104@gmail.com</p>
+                    </div>                        
+                    <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
+                        <div class="row my-3">
+                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                                <i class="fa-solid fa-location-dot" style="font-size: 25px"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-l font-semibold mb-2 text-center">VISIT US AT OUR OFFICE</h5>
+                        <p class="text-neutral-600 text-center text-sm">6620 Purok 1, San Antonio, Los Baños, Laguna</p>
+                    </div>
+                    <div data-aos="fade-right" data-aos-delay="150" data-aos-duration="700" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
+                        <div class="row my-3">
+                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                                <i class="fa-solid fa-phone" style="font-size: 25px"></i>
+                            </span>
+                        </div>
+                        <h5 class="text-l font-semibold mb-2 text-center text-main-500">GET IN TOUCH</h5>
+                        <p class="text-neutral-600 text-center text-sm">Globe: 0956-769-3494</p>
+                        <p class="text-neutral-600 text-center text-sm">TM: 0953-039-8460</p>
+                        <p class="text-neutral-600 text-center text-sm">Smart: 0932-921-1767</p>
+                    </div>
+                </div>                            
             </div>
         </div>
     </main>
+    <section>
+        <div class="relative py-80 bg-cover bg-center h-auto" style="background-image: url('/images/contact-us-bg.png');">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-start">
+                <form class="max-w-2xl mx-auto w-full px-4">
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="relative flex-1">
+                            <input type="text" id="first_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="first_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">First Name</label>
+                        </div>
+                        <div class="relative flex-1">
+                            <input type="text" id="last_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="last_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="relative flex-1">
+                            <input type="text" id="email" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="email" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Email</label>
+                        </div>
+                        <div class="relative flex-1">
+                            <input type="text" id="contact_num" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="contact_num" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Contact Number</label>
+                        </div>
+                    </div>
+                    <div class="relative mb-8">
+                        <textarea id="address" rows="2" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
+                        <label for="address" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Address</label>
+                    </div>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="relative flex-1">
+                            <input type="text" id="monthly_elecBill" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="monthly_elecBill" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Monthly Electric Bill</label>
+                        </div>
+                        <div class="relative flex-1">
+                            <input type="date" id="site_visit" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="site_visit" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Book a site visit</label>
+                        </div>
+                    </div>
+                    <div class="relative mb-8">
+                        <textarea id="message" rows="5" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
+                        <label for="message" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2.5 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Message</label>
+                    </div>
+                    <button type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>                      
     <Footer />
 </template>
 <script>

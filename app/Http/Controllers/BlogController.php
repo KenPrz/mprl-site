@@ -89,7 +89,7 @@ class BlogController extends Controller
     {
         $featured = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
             ->join('users', 'blog_posts.created_by', '=', 'users.id')
-            ->with('firstImage') // Use relationship to get only one image
+            ->with('firstImage')
             ->where('blog_posts.is_featured', true)
             ->where('blog_posts.id', '!=', $id)
             ->orderBy('blog_posts.created_at', 'desc')

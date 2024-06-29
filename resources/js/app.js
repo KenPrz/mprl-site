@@ -3,6 +3,8 @@ import '../css/app.css';
 import 'aos/dist/aos.css';
 import 'primeicons/primeicons.css'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 import { QuillEditor } from '@vueup/vue-quill'
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -10,6 +12,12 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import AOS from 'aos';
 
+
+const options = {
+    transition: "Vue-Toastification__bounce",
+    maxToasts: 20,
+    newestOnTop: true
+};
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 AOS.init()
 createInertiaApp({
@@ -20,6 +28,7 @@ createInertiaApp({
             .use(plugin)
             .component('QuillEditor', QuillEditor)
             .use(ZiggyVue)
+            .use(Toast, options)
             .mount(el);
     },
     progress: {

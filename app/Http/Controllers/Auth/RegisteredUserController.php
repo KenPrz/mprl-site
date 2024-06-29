@@ -16,11 +16,11 @@ use Inertia\Response;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * redirect to the registration page / welcome page.
      */
-    public function create(): Response
+    public function create(): RedirectResponse
     {
-        abort(404);
+        return redirect(route('register'));
     }
     /**
      * Handle an incoming registration request.

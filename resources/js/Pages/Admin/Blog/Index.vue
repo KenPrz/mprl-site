@@ -58,14 +58,16 @@ onMounted(() => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col">
                     <section class="p-2 flex justify-between px-5 items-center py-5">
-                        <input v-model="form.searchQuery" ref="searchBarRef" type="text" placeholder="search..." id="searchbar" class="w-1/4 p-2">
-                        <Link class="flex  space-x-1  items-center bg-main-400 px-3 py-2 rounded-md text-white hover:bg-main-500" :href="route('admin.blog.create')">
-                            <span>Create</span>
+                        <input v-model="form.searchQuery" ref="searchBarRef" type="text" placeholder="search..." id="searchbar" class="w-3/4 sm:w-1/4 p-2">
+                        <Link class="flex p-3  sm:space-x-1  items-center bg-main-400 sm:px-3 sm:py-2 rounded-md text-white hover:bg-main-500" :href="route('admin.blog.create')">
+                            <span class="hidden sm:block">Create</span>
                             <i class="pi pi-plus-circle"></i>
                         </Link>
                     </section>
-                    <section>
-                        <BlogTable :blogs="blogs.data" />
+                    <section class="overflow-x-auto">
+                        <BlogTable
+                            :blogs="blogs.data" 
+                        />
                     </section>
                     <section class="py-3">
                         <Pagination

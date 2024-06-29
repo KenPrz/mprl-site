@@ -12,33 +12,54 @@ const props = defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    blog: {
+        type: Object,
+        required: true
     }
 });
-
+const newUploads = ref([]);
 const form = useForm({
-    images: [],
-    category: '',
-    title: '',
-    content: '',
-    is_published: true,
-    is_featured: false
+    new_images: [],
+    deleted_images: [],
+    category: props.blog.category_id,
+    title: props.blog.title,
+    content: props.blog.body,
+    is_published: props.blog.is_published,
+    is_featured: props.blog.is_featured
 });
 
-const blogContent = ref('');
-const imagePreviews = ref([]);
+const blogContent = ref(props.blog.body);
+/**
+ * Represents the reactive reference to the image previews.
+ * @type {ref}
+ */
+const imagePreviews = ref(
+    props.blog.images.map(image => ({
+        id: image.id,
+        url: `/storage/${image.image}`
+    }))
+);
 
+/**
+ * Handles the change event when selecting images.
+ * @param {Event} event - The change event.
+ */
 function handleImageChange(event) {
     const files = event.target.files;
     const newImages = [];
     const newPreviews = [];
-
+    
     Array.from(files).forEach(file => {
         newImages.push(file);
         const reader = new FileReader();
         reader.onload = (e) => {
-            newPreviews.push(e.target.result);
+            newPreviews.push({
+                id: null,
+                url: e.target.result
+            });
             if (newPreviews.length === files.length) {
-                form.images.push(...newImages);
+                newUploads.value.push(...newImages);
                 imagePreviews.value.push(...newPreviews);
             }
         };
@@ -46,18 +67,33 @@ function handleImageChange(event) {
     });
 }
 
-function submitBlog() {
+/**
+ * Handles the deletion of an image.
+ * @param {number} id - The ID of the image to delete.
+ */
+function handleDeleteImage(id) {
+    const imageIndex = imagePreviews.value.findIndex(image => image.id === id);
+    const image = imagePreviews.value[imageIndex];
+    if (image.id) {
+        form.deleted_images.push(image.id);
+    }
+    imagePreviews.value.splice(imageIndex, 1);
+}
+
+/**
+ * Updates the blog with the new content and images.
+ */
+function updateBlog() {
     const deltaContent = blogContent.value;
     const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
+
+    if(newUploads.value.length > 0) {
+        form.new_images = newUploads.value;
+    }else {
+        form.new_images = null;
+    }
     form.content = converter.convert();
-    form.post(route('admin.blog.store'),
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                form.reset();
-                imagePreviews.value = [];
-            }
-        });
+    form.post(route('admin.blog.update', props.blog.id));
 }
 
 onMounted(() => {
@@ -66,11 +102,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Create Blog" />
-
+    <Head title="Edit Blog" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create Blog</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit Blog</h2>
         </template>
         <div class="py-12">
             <div class="flex flex-col space-y-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -103,17 +138,13 @@ onMounted(() => {
                             <Toggle v-model="form.is_featured" />
                         </div>
                     </div>
-                    <div>
-                        <label for="images" class="block text-lg font-medium text-gray-700">Images</label>
-                        <input id="images" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" type="file" multiple @change="handleImageChange">
-                    </div>
                     <div class="flex flex-wrap mt-4">
                         <VueDraggableNext v-model="imagePreviews" tag="div" class="flex flex-wrap">
-                            <div v-for="(src, index) in imagePreviews" :key="index" class="w-1/4 p-2">
-                                <button @click="imagePreviews.splice(index, 1)" class="relative top-0 right-0">
+                            <div v-for="img in imagePreviews" :key="img.id" class="w-1/4 p-2">
+                                <button @click="handleDeleteImage(img.id)" class="relative top-0 right-0">
                                     <i style="color:red" class="pi pi-times-circle"></i>
                                 </button>
-                                <img :src="src" class="w-full h-auto rounded-md shadow-md cursor-move"/>
+                                <img :src="img.url" class="w-full h-auto rounded-md shadow-md cursor-move"/>
                             </div>
                         </VueDraggableNext>
                         <InputError class="mt-2" :message="form.errors.images" />
@@ -130,8 +161,8 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" @click="submitBlog">
-                        Submit
+                    <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" @click="updateBlog">
+                        Update
                     </button>
                 </div>
             </div>

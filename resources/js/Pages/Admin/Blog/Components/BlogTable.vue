@@ -1,5 +1,7 @@
 <script setup>
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
+import Modal from '@/Components/Modal.vue';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     blogs: {
@@ -41,8 +43,6 @@ function sortByClicks() {
     toggleSort('clicks');
     props.blogs.sort((a, b) => sortOrder.clicks === 'asc' ? a.clicks - b.clicks : b.clicks - a.clicks);
 }
-
-// Toggle sort order function
 function toggleSort(column) {
     sortOrder[column] = sortOrder[column] === 'asc' ? 'desc' : 'asc';
 }
@@ -89,21 +89,75 @@ function toggleSort(column) {
         </thead>
         <tbody>
             <tr :class="blog.is_published ? '':'not-published'" v-for="blog in props.blogs" :key="blog.id">
-                <td>{{ blog.title }}</td>
-                <td>{{ blog.name }}</td>
+                <td>
+                    <Link class="hover:underline hover:text-blue-400" :href="route('blog.show',blog.id)">{{ blog.title }}</Link>
+                </td>
+                <td>{{ blog.first_name }}</td>
                 <td>{{ blog.is_published ? 'Published' : 'Not Published' }}</td>
                 <td>{{ blog.is_featured ? 'Yes' : 'No' }}</td>
                 <td>{{ blog.clicks }}</td>
                 <td>
-                    <button class="ps-3">
-                        <i class="pi pi-ellipsis-v"></i>
-                    </button>
+                    <span>
+                        <Link :href="route('admin.blog.edit',blog.id)" class="ps-3">
+                            <i style="color:green" class="pi pi-pencil"></i>
+                        </Link>
+                        <button @click="openDeleteModal(blog.title,blog.id)" class="ps-3">
+                            <i style="color:red" class="pi pi-trash"></i>
+                        </button>
+                    </span>
                 </td>
             </tr>
         </tbody>
     </table>
+    <Modal maxWidth="md" v-model:show="showDeleteModal" @close="showDeleteModal=false">
+        <div class="flex flex-col items-center space-y-4 p-8 bg-gray-100 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold text-center text-red-400">Delete Blog</h1>
+            <p class="text-center">Are you sure you want to delete <span class="font-semibold">"{{selected.title}}"</span>?</p>
+            <div class="flex space-x-4">
+                <button @click="showDeleteModal=false" class="bg-gray-400 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button @click="deleteBlog(selected.id)" class="bg-red-400 text-white px-4 py-2 rounded-lg">Delete</button>
+            </div>
+        </div>        
+    </Modal>
 </template>
-
+<script>
+import { useToast } from 'vue-toastification';
+const toast = useToast();
+    export default {
+        data() {
+            return {
+                showDeleteModal: false,
+                selected: {
+                    title: null,
+                    id: null
+                }
+            }
+        },
+        methods: {
+            openDeleteModal(title,id) {
+                this.selected.title = title;
+                this.selected.id = id;
+                this.showDeleteModal = true;
+            },
+            deleteBlog(id) {
+                this.$inertia.delete(route('admin.blog.destroy',id),{
+                    onSuccess: () => {
+                        toast.success('Blog deleted successfully!');
+                        this.selected.title = null;
+                        this.selected.id = null;
+                        this.showDeleteModal = false;
+                    },
+                    onError: () => {
+                        toast.error('Failed to delete blog!');
+                        this.selected.title = null;
+                        this.selected.id = null;
+                        this.showDeleteModal = false;
+                    },
+                });
+            }
+        }
+    }
+</script>
 <style scoped>
 td{
     text-overflow: ellipsis;

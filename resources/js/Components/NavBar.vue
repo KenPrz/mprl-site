@@ -6,9 +6,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import Login from '@/Pages/Auth/Login.vue';
 import Register from '@/Pages/Auth/Register.vue';
 import { Link } from '@inertiajs/vue3';
-import {ref, onMounted, onUnmounted} from 'vue';
-import { show } from '@unovis/ts/components/tooltip/style';
-
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 const autoAlign = ref('right');
 const updateAutoAlign = () => {
   if (window.innerWidth < 1200) {
@@ -58,6 +56,16 @@ onUnmounted(() => {
         </div>
         <div>
             <ul class="flex space-x-5 sm:text-sm md:text-md lg:text-lg">
+                <div v-if="$page.props.auth.user">
+                    <li v-if="$page.props.auth.user.role_id == 1">
+                        <NavLink class="hidden:block" :href="route('dashboard')" :active="route().current('dashboard')" :is_black="is_black">
+                            <span class="hidden md:block">Admin</span>
+                            <span class="md:hidden" >
+                                <i style="font-size: 1.2rem" :style="is_black? 'color:black':'color:white'" class="pi pi-shield"></i>
+                            </span>
+                        </NavLink>
+                    </li>
+                </div>
                 <li>
                     <NavLink class="hidden:block" :href="route('welcome')" :active="route().current('welcome')" :is_black="is_black">
                         <span class="hidden md:block">Home</span>
@@ -91,7 +99,7 @@ onUnmounted(() => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink class="hidden:block" :href="route('blog.index')" :active="route().current('blog.index')" :is_black="is_black">
+                    <NavLink class="hidden:block" :href="route('blog.index')" :active="route().current('blog.index') || route().current('blog.show')" :is_black="is_black">
                         <span class="hidden md:block">Blog</span>
                         <span class="md:hidden" >
                             <i style="font-size: 1rem" :style="is_black? 'color:black':'color:white'" class="pi pi-pencil"></i>
@@ -118,7 +126,7 @@ onUnmounted(() => {
             <Dropdown :align="autoAlign" width="32">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
-                        <span class="rounded-full"
+                        <span class="rounded-full cursor-pointer"
                         >
                             <i class="pi pi-user"
                             style="font-size:1.2em" :style="is_black? 'color:black':'color:white'"></i>
@@ -200,6 +208,8 @@ onUnmounted(() => {
     </div>
 </template>
 <script>
+import { useToast } from 'vue-toastification';
+const toast = useToast();
     export default {
         props: {
             is_black: Boolean
@@ -214,7 +224,11 @@ onUnmounted(() => {
         },
         methods: {
             logout() {
-                this.$inertia.post(route('logout'));
+                this.$inertia.post(route('logout'),{
+                    onFinish: () => {
+                        toast.success('Logged out successfully!');
+                    }
+                });
             },
             handleRegisterSwitch() {
                 this.showLoginModal = false;

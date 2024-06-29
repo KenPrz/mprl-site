@@ -32,7 +32,7 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::post('/blog', [BlogAdminController::class, 'store'])->name('admin.blog.store');
     Route::get('/blog/{id}', [BlogAdminController::class, 'show'])->name('admin.blog.show');
     Route::get('/blog/{id}/edit', [BlogAdminController::class, 'edit'])->name('admin.blog.edit');
-    Route::patch('/blog/{id}', [BlogAdminController::class, 'update'])->name('admin.blog.update');
+    Route::post('/blog/{id}', [BlogAdminController::class, 'update'])->name('admin.blog.update');
     Route::delete('/blog/{id}', [BlogAdminController::class, 'destroy'])->name('admin.blog.destroy');
 
     Route::get('/products', [ProductsAdminController::class, 'index'])->name('admin.products.index');
@@ -50,5 +50,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//dummy routes since our login and register routes are a modal in the welcome page
+//dummy login route
+Route::get('/login', fn()=>
+    redirect()->route('welcome')
+)->name('login');
+
+//dummy register route
+Route::get('/register', fn()=>
+    redirect()->route('welcome')
+)->name('register');
 
 require __DIR__.'/auth.php';

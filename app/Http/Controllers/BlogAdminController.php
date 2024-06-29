@@ -162,7 +162,6 @@ class BlogAdminController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('admin.blog.index');
     }
     

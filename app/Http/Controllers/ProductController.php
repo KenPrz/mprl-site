@@ -37,9 +37,14 @@ class ProductController extends Controller
         ]);
     }
     public function show($id){
-        $products = Product::find($id);
+        $product = Product::with('category')->find($id);
+        $categories = ProductCategory::select('id', 'name')->get();
+
+        // Add the categories to the product object
+        $product->categories = $categories;
+
         return Inertia::render('Product/Show', [
-            'products' => $products
+            'products' => $product,
         ]);
     }
 }

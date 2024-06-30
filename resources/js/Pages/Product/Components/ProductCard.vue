@@ -1,18 +1,19 @@
 <template>
-    <div class="mt-5 hover:scale-105 transition-transform duration-300 w-52 p-6 bg-white rounded-lg shadow dark:bg-slate-200 dark:border-gray-700 ">
-      <a :href="`/product/${product.id}`">
-        <img class="w-full h-48" :src="product.image_url" alt="">
-        <h6 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h6>
-      </a>
-      <p class="hover:scale-105 transition-transform duration-300 mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{{ product.category_id }}</p>
-      <a :href="`/product/${product.id}`" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg>
-      </a>
-    </div>
-  </template>
+  <div class="mt-5 hover:scale-105 transition-transform duration-300 w-full sm:w-auto p-6 bg-white rounded-lg shadow-lg dark:bg-slate-200 dark:border-gray-700">
+    <a :href="`/product/${product.id}`" class="block relative group">
+      <div class="relative">
+        <img class="w-full h-48 object-cover" :src="`/images/products-images/solarpanel.png`" alt="">
+        <div class="absolute inset-0 flex items-center justify-center bg-gray-100/50 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <p class="text-white text-sm font-bold bg-lime-500 p-2 rounded-lg">View Details</p>
+        </div>
+      </div>
+      <h6 class="mt-2 mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white overflow-ellipsis overflow-hidden whitespace-nowrap">
+        <span>{{ product.power_out }}</span> {{ product.name }}
+      </h6>
+    </a>
+    <p class="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400">{{ product.supplier }} | {{ product.voltage }} | {{ product.dimension }}</p>
+  </div>
+</template>
   
   <script setup>
   import { defineProps } from 'vue';
@@ -23,6 +24,11 @@
   </script>
   
   <style scoped>
-
+    .group:hover .group-hover\:opacity-100 {
+      opacity: 1;
+    }
+    .backdrop-blur-md {
+      backdrop-filter: blur(10px);
+    }
   </style>
   

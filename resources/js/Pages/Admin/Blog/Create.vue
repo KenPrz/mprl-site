@@ -105,10 +105,43 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <label for="images" class="block text-lg font-medium text-gray-700">Images</label>
-                        <input id="images" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" type="file" multiple @change="handleImageChange">
-                    </div>
+                    <div v-show="imagePreviews.length<1" class="mb-4">
+                        <label for="images" class="block text-lg font-medium text-gray-700 mb-2">
+                          Images
+                        </label>
+                        <div class="relative">
+                          <input
+                            id="images"
+                            type="file"
+                            multiple
+                            @change="handleImageChange"
+                            class="hidden"
+                          />
+                          <label
+                            for="images"
+                            class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent"
+                          >
+                            <svg
+                              class="w-5 h-5 mr-2 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                              ></path>
+                            </svg>
+                            <span>Choose images</span>
+                          </label>
+                          <p class="mt-1 text-sm text-gray-500">
+                            Select one or more image files
+                          </p>
+                        </div>
+                      </div>
                     <div class="flex flex-wrap mt-4">
                         <VueDraggableNext v-model="imagePreviews" tag="div" class="flex flex-wrap">
                             <div v-for="(src, index) in imagePreviews" :key="index" class="w-1/4 p-2">
@@ -121,7 +154,14 @@ onMounted(() => {
                         <InputError class="mt-2" :message="form.errors.images" />
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500" @click="$refs.moreImages.click()">Add More Images</button>
+                        <button
+                            v-show="imagePreviews.length > 0"
+                            @click="$refs.moreImages.click()"
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-main-500 border border-transparent rounded-md shadow-sm hover:bg-main-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-500 transition duration-150 ease-in-out"
+                            >
+                            <i class="pi pi-plus pe-2"></i>
+                            Add More Images
+                        </button>
                         <input id="more-images" ref="moreImages" class="hidden" type="file" multiple @change="handleImageChange">
                     </div>
                 </div>
@@ -131,9 +171,10 @@ onMounted(() => {
                         <QuillEditor toolbar="essential" v-model:content="blogContent" theme="snow"/>
                     </div>
                 </div>
-                <div class="flex justify-end mt-4">
-                    <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" @click="submitBlog">
-                        Submit
+                <div class="flex justify-center mt-4">
+                    <button class="w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-white bg-main-500 border border-transparent rounded-md shadow-sm hover:bg-main-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-500 transition duration-150 ease-in-out" @click="submitBlog">
+                        <i style="font-size:1.2rem" class="pi pi-arrow-circle-up me-2"></i>
+                        <span class="text-lg font-semibold">Submit</span>
                     </button>
                 </div>
             </div>

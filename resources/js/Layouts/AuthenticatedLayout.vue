@@ -17,15 +17,15 @@ const showingNavigationDropdown = ref(false);
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
-                        <div class="flex">
+                        <div class="flex items-center">
                             <!-- Logo -->
                             <div class="flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo/>
+                                    <ApplicationLogo :isDark="true"/>
                                 </Link>
                             </div>
                             <!-- Navigation Links -->
-                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-if="$page.props.auth.user.role_id==1">
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-24 sm:flex items-center" v-if="$page.props.auth.user.role_id==1">
                                     <AdminNavLink :href="route('welcome')" :active="route().current('welcome')">
                                         Site
                                     </AdminNavLink>

@@ -94,13 +94,15 @@ onMounted(() => {
                             </select>
                             <InputError class="mt-2" :message="form.errors.category" />
                         </div>
-                        <div>
-                            <label for="is_published" class="block text-lg font-medium text-gray-700">Published</label>
-                            <Toggle v-model="form.is_published" />
-                        </div>
-                        <div>
-                            <label for="is_featured" class="block text-lg font-medium text-gray-700">Featured</label>
-                            <Toggle v-model="form.is_featured" />
+                        <div class="flex space-x-3">
+                            <div>
+                                <label for="is_published" class="block text-lg font-medium text-gray-700">Published</label>
+                                <Toggle v-model="form.is_published" />
+                            </div>
+                            <div>
+                                <label for="is_featured" class="block text-lg font-medium text-gray-700">Featured</label>
+                                <Toggle v-model="form.is_featured" />
+                            </div>
                         </div>
                     </div>
                     <div>

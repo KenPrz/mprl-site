@@ -49,66 +49,70 @@ function toggleSort(column) {
 </script>
 
 <template>
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>
-                    <button @click="sortByTitle">
-                        Title
-                        <i class="pi pi-sort"></i>
-                    </button>
-                </th>
-                <th>
-                    <button @click="sortByAuthor">
-                        Author
-                        <i class="pi pi-sort"></i>
-                    </button>
-                </th>
-                <th>
-                    <button @click="sortByStatus">
-                        Status
-                        <i class="pi pi-sort"></i>
-                    </button>
-                </th>
-                <th>
-                    <button @click="sortByFeatured">
-                        Featured
-                        <i class="pi pi-sort"></i>
-                    </button>
-                </th>
-                <th>
-                    <button @click="sortByClicks">
-                        Clicks
-                        <i class="pi pi-sort"></i>
-                    </button>
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr :class="blog.is_published ? '':'not-published'" v-for="blog in props.blogs" :key="blog.id">
-                <td>
-                    <Link class="hover:underline hover:text-blue-400" :href="route('blog.show',blog.id)">{{ blog.title }}</Link>
-                </td>
-                <td>{{ blog.first_name }}</td>
-                <td>{{ blog.is_published ? 'Published' : 'Not Published' }}</td>
-                <td>{{ blog.is_featured ? 'Yes' : 'No' }}</td>
-                <td>{{ blog.clicks }}</td>
-                <td>
-                    <span>
-                        <Link :href="route('admin.blog.edit',blog.id)" class="ps-3">
-                            <i style="color:green" class="pi pi-pencil"></i>
-                        </Link>
-                        <button @click="openDeleteModal(blog.title,blog.id)" class="ps-3">
-                            <i style="color:red" class="pi pi-trash"></i>
+    <div class="overflow-x-auto">
+        <table class="styled-table w-full">
+            <thead>
+                <tr>
+                    <th class="table-cell">
+                        <button @click="sortByTitle">
+                            Title
+                            <i class="pi pi-sort"></i>
                         </button>
-                    </span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    </th>
+                    <th class="hidden sm:table-cell">
+                        <button @click="sortByAuthor">
+                            Author
+                            <i class="pi pi-sort"></i>
+                        </button>
+                    </th>
+                    <th class="hidden lg:table-cell">
+                        <button @click="sortByStatus">
+                            Status
+                            <i class="pi pi-sort"></i>
+                        </button>
+                    </th>
+                    <th class="hidden xl:table-cell">
+                        <button @click="sortByFeatured">
+                            Featured
+                            <i class="pi pi-sort"></i>
+                        </button>
+                    </th>
+                    <th class="hidden lg:table-cell">
+                        <button @click="sortByClicks">
+                            Clicks
+                            <i class="pi pi-sort"></i>
+                        </button>
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr :class="blog.is_published ? '':'not-published'" v-for="blog in props.blogs" :key="blog.id">
+                    <td class="table-cell">
+                        <Link class="text-ellipsis hover:underline hover:text-blue-400" :href="route('blog.show',blog.id)">{{ blog.title }}</Link>
+                    </td>
+                    <td class="hidden sm:table-cell">{{ blog.first_name }}</td>
+                    <td class="hidden lg:table-cell">{{ blog.is_published ? 'Published' : 'Not Published' }}</td>
+                    <td class="hidden xl:table-cell">{{ blog.is_featured ? 'Yes' : 'No' }}</td>
+                    <td class="hidden lg:table-cell">{{ blog.clicks }}</td>
+                    <td>
+                        <span class="flex items-center space-x-2">
+                            <Link :href="route('admin.blog.edit',blog.id)" class="text-green-500">
+                                <i class="pi pi-pencil"></i>
+                            </Link>
+                            <button @click="openDeleteModal(blog.title,blog.id)" class="text-red-500">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                            <Link class="md:hidden text-blue-500 hover:underline" :href="route('blog.show',blog.id)">View</Link>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <Modal maxWidth="md" v-model:show="showDeleteModal" @close="showDeleteModal=false">
         <div class="flex flex-col items-center space-y-4 p-8 bg-gray-100 rounded-lg shadow-md">
             <h1 class="text-2xl font-semibold text-center text-red-400">Delete Blog</h1>
@@ -159,32 +163,32 @@ const toast = useToast();
     }
 </script>
 <style scoped>
-td{
-    text-overflow: ellipsis;
-}
 .styled-table {
-    width: 100%;
     border-collapse: collapse;
-    font-size: 1em;
+    font-size: 0.9em;
     font-family: 'Arial', sans-serif;
-    min-width: 400px;
+    width: 100%;
 }
 .styled-table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
 }
-
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 8px 12px;
 }
-
 .styled-table tbody tr {
     border-bottom: 1px solid #dddddd;
 }
-
 .not-published { 
     background-color: #f3f3f3;
+}
+
+@media (max-width: 640px) {
+    .styled-table th,
+    .styled-table td {
+        padding: 6px 8px;
+    }
 }
 </style>

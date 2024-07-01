@@ -28,24 +28,28 @@ onUnmounted(() => {
         <NavBar :is_black="scroll > 0" />
     </nav>
     <main>
-        <section data-aos="fade-in" data-aos-duration="500" class="relative py-48 bg-cover bg-center h-auto"
-            style="background-image: url('/images/solar-header-bg.jpg');">
+        <section data-aos="fade-in" data-aos-duration="500" data-aos-once="true" class="relative py-24 md:py-48 bg-cover bg-center h-auto" style="background-image: url('/images/solar-header-bg.jpg');">
             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
-                <div class="flex flex-col items-center justify-center space-y-4">
-                    <h1 data-aos="fade-right" data-aos-delay="300" data-aos-duration="600"
-                        class="text-4xl text-offset-500">Renewable Energy</h1>
-                    <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600"
-                        class="text-5xl font-semibold text-white">Shine brighter, Live lighter</h2>
-                </div>
-                <div class="flex w-full sm:w-2/3 items-center justify-center space-x-5 p-10 sm:p-14">
-                    <span  class="sm:w-2/6 px-6 py-2 rounded-lg text-sm sm:text-md border-none bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 cursor-pointer">
-                        <span>Request a Quote</span>
-                    </span>
-                    <span  class="sm:w-2/6 border border-white text-sm sm:text-md px-4 py-2 text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer">
-                        Download Brochure
-                    </span>
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col items-center justify-center space-y-6 mb-10">
+                        <h1 data-aos="fade-right" data-aos-delay="300" data-aos-duration="600" data-aos-once="true" class="text-3xl md:text-5xl text-yellow-400 font-semibold">
+                            Renewable Energy
+                        </h1>
+                        <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true" class="text-4xl md:text-6xl font-semibold text-white">
+                            Shine brighter, Live lighter
+                        </h2>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true" class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
+                        <a href="#" class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-500 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
+                            Request a Quote
+                        </a>
+                        <a href="#" class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
+                            Download Brochure
+                        </a>
+                    </div>
                 </div>
             </div>
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent opacity-70"></div>
         </section>
         <section class="relative py-48 bg-cover bg-center h-auto"
             style="background-image: url('/images/mission-vision-bg.jpg');">

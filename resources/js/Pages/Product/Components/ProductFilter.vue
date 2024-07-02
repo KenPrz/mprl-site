@@ -7,12 +7,11 @@ const props = defineProps({
     type: Array,
     default: () => ['all'],
     required: true,
-    
   },
 });
 
 const emit = defineEmits(['update-products']);
-const selectedCategory = ref('all');
+const selectedCategory = ref('all'); // Ensure 'all' is the initial default
 
 const fetchFilteredProduct = async (category) => {
   try {
@@ -28,6 +27,7 @@ const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId;
   fetchFilteredProduct(categoryId);
 };
+
 </script>
 
 <template>

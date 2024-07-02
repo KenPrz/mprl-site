@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,10 @@ class ProductsAdminController extends Controller
      */
     public function create()
     {
-        //
+        $categories = ProductCategory::all();
+        return Inertia::render('Admin/Product/Create',[
+            'categories' => $categories
+        ]);
     }
 
     /**

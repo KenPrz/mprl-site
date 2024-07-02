@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboradController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BlogAdminController;
@@ -34,6 +35,10 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/blog/{id}/edit', [BlogAdminController::class, 'edit'])->name('admin.blog.edit');
     Route::post('/blog/{id}', [BlogAdminController::class, 'update'])->name('admin.blog.update');
     Route::delete('/blog/{id}', [BlogAdminController::class, 'destroy'])->name('admin.blog.destroy');
+
+    Route::post('/blog-category', [BlogCategoryController::class, 'store'])->name('admin.blog-category.store');
+    Route::post('/blog-category/{id}', [BlogCategoryController::class, 'update'])->name('admin.blog-category.update');
+    Route::delete('/blog-category/{id}', [BlogCategoryController::class, 'destroy'])->name('admin.blog-category.destroy');
 
     Route::get('/products', [ProductsAdminController::class, 'index'])->name('admin.products.index');
     Route::get('/products/create', [ProductsAdminController::class, 'create'])->name('admin.products.create');

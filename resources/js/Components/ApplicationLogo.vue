@@ -44,8 +44,7 @@
     transform: scale(0.8);
   }
   .svg-scale {
-    transform: scale(1.1);
-    transform-origin: left center;
+    transform: scale(1.0);
   }
   @media screen and (min-width: 768px){
     .svg-scale {

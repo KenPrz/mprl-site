@@ -26,11 +26,11 @@ const showingNavigationDropdown = ref(false);
                             </div>
                             <!-- Navigation Links -->
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-24 sm:flex items-center" v-if="$page.props.auth.user.role_id==1">
-                                    <AdminNavLink :href="route('welcome')" :active="route().current('welcome')">
-                                        Site
-                                    </AdminNavLink>
                                     <AdminNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                         Dashboard
+                                    </AdminNavLink>
+                                    <AdminNavLink :href="route('welcome')" :active="route().current('welcome')">
+                                        Site
                                     </AdminNavLink>
                                     <AdminNavLink :href="route('admin.blog.index')" :active="route().current('admin.blog.index')">
                                         Blogs
@@ -121,12 +121,11 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('welcome')" :active="route().current('welcome')">
-                            Site
-                        </ResponsiveNavLink>
-
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('welcome')" :active="route().current('welcome')">
+                            Site
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('admin.blog.index')" :active="route().current('admin.blog.index')">
                             Blogs
@@ -151,14 +150,12 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
             </nav>
-
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
             </header>
-
             <!-- Page Content -->
             <main>
                 <slot />

@@ -22,7 +22,7 @@
         </div>
     </section>
   <main>
-    <div class="flex flex-col lg:ml-40 mt-10">
+    <div class="flex flex-col lg:ml-20 mt-10">
       <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
         <!-- Categories Section -->
         <div class="lg:flex lg:items-center lg:w-1/4">

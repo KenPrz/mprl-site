@@ -27,7 +27,7 @@ onUnmounted(() => {
 <template>
     <!-- Hide this section when scrolling -->
     <div
-        class="ps-2 md:px-10 lg:px-48 flex sm:px-10 justify-start md:justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
+        class="ps-2 md:px-10 lg:px-20 flex sm:px-10 justify-start md:justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
         <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
             <a href="https://internet.com/" class="flex items-center space-x-2">
                 <i class="pi pi-map-marker"></i>
@@ -120,7 +120,7 @@ onUnmounted(() => {
             <button
                 @click="showModal"
                 id="get-quote"
-                class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
+                class="border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
                 Get a Quote
             </button>
             <Dropdown :align="autoAlign" width="32">
@@ -182,7 +182,7 @@ onUnmounted(() => {
         />
     </Modal>
     <Modal maxWidth="md" v-model:show="showRegisterModal" @close="showRegisterModal=false">
-        <Register 
+        <Register
             @openLogin="handleLoginSwitch"
             @closeRegister="showRegisterModal=false"
         />

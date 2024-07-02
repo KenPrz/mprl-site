@@ -32,7 +32,7 @@ onUnmounted(() => {
             <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
                 <div class="container mx-auto px-4">
                     <div class="flex flex-col items-center justify-center space-y-6 mb-10">
-                        <h1 data-aos="fade-right" data-aos-delay="300" data-aos-duration="600" data-aos-once="true" class="text-3xl md:text-5xl text-yellow-400 font-semibold">
+                        <h1 data-aos="fade-right" data-aos-delay="300" data-aos-duration="600" data-aos-once="true" class="text-3xl md:text-5xl text-offset-400 font-semibold">
                             Renewable Energy
                         </h1>
                         <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true" class="text-4xl md:text-6xl font-semibold text-white">
@@ -40,7 +40,7 @@ onUnmounted(() => {
                         </h2>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true" class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
-                        <a href="#" class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-500 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
+                        <a href="#" class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
                             Request a Quote
                         </a>
                         <a href="#" class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
@@ -55,18 +55,18 @@ onUnmounted(() => {
             style="background-image: url('/images/mission-vision-bg.jpg');">
             <div
                 class="absolute inset-0 bg-black bg-opacity-40 flex flex-col md:flex-row justify-center items-center md:px-48 text-white space-y-3 md:space-y-0 md:space-x-3">
-                <div data-aos="fade-left" data-aos-duration="500" class="px-4 md:w-1/2 flex flex-col items-start">
+                <div data-aos="fade-left" data-aos-once="true" data-aos-duration="500" class="px-4 md:w-1/2 flex flex-col items-start">
                     <h1 class="font-semibold text-left text-3xl py-3">
                         About MPRL Solar Trading
                     </h1>
-                    <p data-aos="fade-left" data-aos-delay="25" data-aos-duration="500" class="font-light font-pretty">
+                    <p data-aos="fade-left" data-aos-once="true" data-aos-delay="25" data-aos-duration="500" class="font-light font-pretty">
                         MPRL Solar Panel Trading offers hassle-free illumination solutions with our selection of
                         solar-powered LED lights. Easily install our lights within hours to light up pillars and columns
                         without the need for electrical wiring. With various types, styles, sizes, and colors available,
                         find the perfect fit for your space. Embrace sustainability - our solar lights are easy to
                         install and operate independently from the main electrical supply.
                     </p>
-                    <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500" class="mt-4">
+                    <div data-aos="fade-left" data-aos-once="true" data-aos-delay="50" data-aos-duration="500" class="mt-4">
                         <Link :href="route('about.index')"
                             class="border py-1 px-2 rounded-xl hover:bg-white hover:text-black transition-all duration-200">
                         Read More
@@ -89,9 +89,9 @@ export default {
     data() {
         return {
             accordionItems: [
-                { title: 'Mission', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis alias ipsa beatae officiis sunt, veniam totam numquam. Nesciunt, nobis exercitationem soluta, error, veritatis iure ab quod tempore sint reprehenderit nam quos laboriosam!' },
-                { title: 'Vision', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam deleniti, pariatur autem nihil iusto dicta vel consectetur. Sint ab tempora blanditiis aperiam earum eum.' },
-                { title: 'Core Values', content: 'Content for Accordion Item 3' }
+                { title: 'Mission', content: 'To harness the power of the sun to provide innovative, sustainable, and affordable energy solutions, empowering communities and businesses to achieve energy independence and environmental stewardship.' },
+                { title: 'Vision', content: 'To be a global leader in solar energy, driving the transition to a clean energy future, where solar power is accessible to all, and creating a sustainable planet for generations to come.' },
+                { title: 'Core Values', content: 'Innovation: Continuously seeking new and better ways to improve solar technology and energy solutions.' }
             ],
         };
     },

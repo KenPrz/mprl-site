@@ -88,9 +88,11 @@ const props = defineProps({
           </div>
           </div>
           <div class="flex space-x-2">
-            <Link v-if="$page.props.auth.user.role_id == 1" :href="route('admin.blog.edit',props.blog.id)">
-              <i class="pi pi-pen-to-square"></i>
-            </Link>
+            <div v-if="$page.props.auth.user">
+              <Link v-if="$page.props.auth.user.role_id == 1" :href="route('admin.blog.edit',props.blog.id)">
+                <i class="pi pi-pen-to-square"></i>
+              </Link>
+            </div>
             <h1 class="text-3xl font-bold mb-4">{{ blog.title }}</h1>
           </div>
           <p class="text-gray-600 mb-4">By {{ blog.user_name }} on {{ formatDate(blog.created_at) }}</p>

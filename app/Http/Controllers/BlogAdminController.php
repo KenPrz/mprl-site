@@ -112,6 +112,8 @@ class BlogAdminController extends Controller
             ->with('category:id,name')
             ->where('id', $id)
             ->first();
+
+        $blog->body = json_decode($blog->body, true);
         $categories = BlogCategory::select('id', 'name')->get();
             return Inertia::render('Admin/Blog/Edit', [
                 'blog' => $blog,
@@ -124,7 +126,7 @@ class BlogAdminController extends Controller
      */
     public function update(Request $request, int $id)
     {
-
+        dd($request->all());
         $request->validate([
             'title' => 'required',
             'category' => 'required',

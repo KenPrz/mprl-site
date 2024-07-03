@@ -5,7 +5,6 @@ import Toggle from '@/Components/Toggle.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 const props = defineProps({
@@ -47,9 +46,7 @@ function handleImageChange(event) {
 }
 
 function submitBlog() {
-    const deltaContent = blogContent.value;
-    const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
-    form.content = converter.convert();
+    form.content = JSON.stringify(blogContent.value);
     form.post(route('admin.blog.store'),
         {
             preserveScroll: true,
@@ -83,7 +80,7 @@ onMounted(() => {
                     <div class="flex-row sm:flex sm:items-center sm:space-x-4">
                         <div class="sm:w-3/4">
                             <label for="form-title" class="block text-lg font-medium text-gray-700">Title</label>
-                            <input id="form-title" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.title" type="text">
+                            <input :disabled="form.processing" id="form-title" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.title" type="text">
                             <InputError class="mt-2" :message="form.errors.title" />
                         </div>
                         <div class="sm:w-1/4">
@@ -111,6 +108,7 @@ onMounted(() => {
                         </label>
                         <div class="relative">
                           <input
+                            :disabled="form.processing"
                             id="images"
                             type="file"
                             multiple
@@ -155,6 +153,7 @@ onMounted(() => {
                     </div>
                     <div class="mt-4 flex justify-end">
                         <button
+                            :disabled="form.processing"
                             v-show="imagePreviews.length > 0"
                             @click="$refs.moreImages.click()"
                             class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-main-500 border border-transparent rounded-md shadow-sm hover:bg-main-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-500 transition duration-150 ease-in-out"
@@ -162,7 +161,7 @@ onMounted(() => {
                             <i class="pi pi-plus pe-2"></i>
                             Add More Images
                         </button>
-                        <input id="more-images" ref="moreImages" class="hidden" type="file" multiple @change="handleImageChange">
+                        <input :disabled="form.processing" id="more-images" ref="moreImages" class="hidden" type="file" multiple @change="handleImageChange">
                     </div>
                 </div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -172,7 +171,7 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="flex justify-center mt-4">
-                    <button class="w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-white bg-main-500 border border-transparent rounded-md shadow-sm hover:bg-main-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-500 transition duration-150 ease-in-out" @click="submitBlog">
+                    <button :disabled="form.processing" class="w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-white bg-main-500 border border-transparent rounded-md shadow-sm hover:bg-main-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main-500 transition duration-150 ease-in-out" @click="submitBlog">
                         <i style="font-size:1.2rem" class="pi pi-arrow-circle-up me-2"></i>
                         <span class="text-lg font-semibold">Submit</span>
                     </button>

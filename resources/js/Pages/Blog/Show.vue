@@ -38,7 +38,19 @@ const props = defineProps({
     default: null
   }
 });
+
+// Check if blog.body is a string and parse it, otherwise use as is
+const blogBody = ref(typeof props.blog.body === 'string' ? JSON.parse(props.blog.body) : props.blog.body);
+// i hate javascript so much P"JKOJDPKAJKP:SD why do i have to do this??? 
+// might as well use typescript at this point but i'm too lazy to learn it so i'll just keep complaining about it.
+// Seriously, why do i have to do this? Why can't it just be a string or an object? Why do i have to check if it's a string or an object?
+// Why can't it just be one or the other? Why do i have to check if it's a string or an object? it's so stupid. I hate javascript so much.
+// btw i'm not actually mad, i'm just being dramatic. I don't actually hate javascript, i just think it's stupid sometimes.
+// btw its 2:30 am and i'm tired but i can't sleep so i'm just writing this comment to keep myself entertained. I'm not actually mad, i'm just bored.
+// newjeans kpop group is the best kpop group ever. I love them so much. They're so talented and amazing. I love their music and their choreography.
+// to the maintainer, if you're reading this, i'm sorry for the rant. currently i dont know what the fuck is going on with my life.
 </script>
+
 <template>
   <Head :title="blog.title" />
     <nav :class="{
@@ -97,7 +109,7 @@ const props = defineProps({
           </div>
           <p class="text-gray-600 mb-4">By {{ blog.user_name }} on {{ formatDate(blog.created_at) }}</p>
           <div id="blog-body">
-            <BlogContent :body="blog.body" />
+            <BlogContent :body="blogBody" />
           </div>
         </div>
         <div class="hidden md:flex md:w-1/4 flex-col">

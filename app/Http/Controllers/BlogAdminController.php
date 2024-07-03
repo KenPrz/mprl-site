@@ -30,7 +30,7 @@ class BlogAdminController extends Controller
             if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
                 $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
                 $query->orWhere('is_published', $booleanValue)
-                    ->orWhere('is_featured', $booleanValue);
+                      ->orWhere('is_featured', $booleanValue);
             } else {
                 // Search for boolean values as strings
                 $query->orWhere('is_published', 'like', '%' . $search_query . '%')
@@ -67,23 +67,21 @@ class BlogAdminController extends Controller
             'content' => 'required',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
         $blog = BlogPost::create([
             'title' => $request->title,
             'category_id' => $request->category,
-            'body' => $request->content,
+            'body' => json_encode($request->content),
             'is_published' => $request->is_published,
             'is_featured' => $request->is_featured,
             'created_by' => auth()->id(),
         ]);
-    
+
         if($request->has('images')) {
             foreach($request->file('images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');
-    
                 $blog->images()->create([
                     'image' => $path,
                     'blog_post_id' => $blog->id
@@ -114,6 +112,8 @@ class BlogAdminController extends Controller
             ->with('category:id,name')
             ->where('id', $id)
             ->first();
+
+        $blog->body = json_decode($blog->body, true);
         $categories = BlogCategory::select('id', 'name')->get();
             return Inertia::render('Admin/Blog/Edit', [
                 'blog' => $blog,
@@ -126,7 +126,7 @@ class BlogAdminController extends Controller
      */
     public function update(Request $request, int $id)
     {
-
+        dd($request->all());
         $request->validate([
             'title' => 'required',
             'category' => 'required',

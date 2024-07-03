@@ -51,6 +51,7 @@ class BlogController extends Controller
             'searchQuery' => $searchQuery,
         ]);
     }
+    
     public function show($id)
     {
         $blog = BlogPost::select('blog_posts.id', 'blog_posts.title', 'blog_posts.body', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')
@@ -65,6 +66,10 @@ class BlogController extends Controller
         $blog_image = $blog->image;
         $featured = $this->getFeatured($id);
         $more = $this->getMorePosts($id);
+    
+        // Ensure blog.body is always an object
+        $blog->body = json_decode($blog->body, true);
+    
         return Inertia::render('Blog/Show', [
             'featured' => $featured,
             'more' => $more,
@@ -72,7 +77,7 @@ class BlogController extends Controller
             'blog_image' => $blog_image
         ]);
     }
-
+    
     private function getMorePosts($id)
     {
         $more = BlogPost::select('blog_posts.id','blog_posts.clicks', 'blog_posts.title', 'blog_posts.created_at', 'blog_posts.category_id', 'blog_posts.created_by', 'users.first_name as user_name')

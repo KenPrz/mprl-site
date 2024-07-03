@@ -1,14 +1,18 @@
 <template>
-    <div class="content-wrapper" v-html="props.body"></div>
+    <div class="content-wrapper" v-html="htmlData"></div>
 </template>
 
 <script setup>
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 const props = defineProps({
     body: {
-        type: String,
+        type: Object,
         required: true
     }
-})
+});
+const deltaContent = props.body;
+const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
+const htmlData = converter.convert();
 </script>
 
 <style scoped>

@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 <template>
     <footer>
-        <div class="flex flex-col pt-4 space-y-2">
+        <div class="flex flex-col pt-4 space-y-2 bg-white-200">
             <section class="text-center px-8 md:px-16 ">
                 <h1 class="text-xl font-semibold text-main-500 text-pretty">MPRL Solar Panel Trading</h1>
                 <p class="font-light text-sm">MPRL Solar Panel Trading specializes in supplying efficient and eco-friendly solar-powered LED

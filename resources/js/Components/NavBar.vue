@@ -139,27 +139,28 @@ onUnmounted(() => {
                             <i style="font-size: 1rem" class="pi pi-user"></i>
                             <span>Account</span>
                         </Link>
-                        <span
+                        <button
+                            type="button"
                             @click="logout"
                             class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1"
                         >
                             <i style="font-size: 1rem" class="pi pi-sign-out"></i>
                             <span>Logout</span>
-                        </span>
+                        </button>
                     </div>
                     <div v-else class="flex flex-col text-sm font-semibold">
-                        <span @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        <button @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-sign-in"></i>
                             <span>
                                 Login
                             </span>
-                        </span>
-                        <span @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        </button>
+                        <button @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-user-plus"></i>
                             <span>
                                 Sign Up
                             </span>
-                        </span>
+                        </button>
                     </div>
                 </template>
             </Dropdown>

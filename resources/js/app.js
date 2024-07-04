@@ -2,10 +2,8 @@ import './bootstrap';
 import '../css/app.css';
 import 'aos/dist/aos.css';
 import 'primeicons/primeicons.css'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
-import { QuillEditor } from '@vueup/vue-quill'
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -26,7 +24,6 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
-            .component('QuillEditor', QuillEditor)
             .use(ZiggyVue)
             .use(Toast, options)
             .mount(el);

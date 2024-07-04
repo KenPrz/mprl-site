@@ -66,10 +66,6 @@ class BlogController extends Controller
         $blog_image = $blog->image;
         $featured = $this->getFeatured($id);
         $more = $this->getMorePosts($id);
-    
-        // Ensure blog.body is always an object
-        $blog->body = json_decode($blog->body, true);
-    
         return Inertia::render('Blog/Show', [
             'featured' => $featured,
             'more' => $more,

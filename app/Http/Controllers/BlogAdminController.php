@@ -30,7 +30,7 @@ class BlogAdminController extends Controller
             if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
                 $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
                 $query->orWhere('is_published', $booleanValue)
-                    ->orWhere('is_featured', $booleanValue);
+                      ->orWhere('is_featured', $booleanValue);
             } else {
                 // Search for boolean values as strings
                 $query->orWhere('is_published', 'like', '%' . $search_query . '%')
@@ -67,9 +67,8 @@ class BlogAdminController extends Controller
             'content' => 'required',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // fix this with custom validation rule
         ]);
-    
         $blog = BlogPost::create([
             'title' => $request->title,
             'category_id' => $request->category,
@@ -78,19 +77,16 @@ class BlogAdminController extends Controller
             'is_featured' => $request->is_featured,
             'created_by' => auth()->id(),
         ]);
-    
-        if($request->has('images')) {
+        if($request->images) {
             foreach($request->file('images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');
-    
                 $blog->images()->create([
                     'image' => $path,
                     'blog_post_id' => $blog->id
                 ]);
             }
         }
-    
         return Inertia::location(route('blog.show', $blog->id));
     }
     
@@ -126,7 +122,6 @@ class BlogAdminController extends Controller
      */
     public function update(Request $request, int $id)
     {
-
         $request->validate([
             'title' => 'required',
             'category' => 'required',
@@ -136,13 +131,11 @@ class BlogAdminController extends Controller
             'deleted_images' => 'array',
             'new_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $blog = BlogPost::findOrFail($id);
 
         if($request->has('deleted_images')) {
             $this->handleDeletedImages($request->deleted_images);
         }
-
         $blog->update([
             'title' => $request->title,
             'category_id' => $request->category,
@@ -151,7 +144,7 @@ class BlogAdminController extends Controller
             'is_featured' => $request->is_featured,
         ]);
     
-        if($request->has('new_images') !== null) {
+        if($request->new_images !== null) {
             foreach($request->file('new_images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');

@@ -26,7 +26,7 @@ onUnmounted(() => {
 
 const props = defineProps({
   blog: {
-    type: Object,
+    type: String,
     required: true,
   },
   featured:{
@@ -39,6 +39,7 @@ const props = defineProps({
   }
 });
 </script>
+
 <template>
   <Head :title="blog.title" />
     <nav :class="{
@@ -97,7 +98,7 @@ const props = defineProps({
           </div>
           <p class="text-gray-600 mb-4">By {{ blog.user_name }} on {{ formatDate(blog.created_at) }}</p>
           <div id="blog-body">
-            <BlogContent :body="blog.body" />
+            <BlogContent :body="props.blog.body" />
           </div>
         </div>
         <div class="hidden md:flex md:w-1/4 flex-col">

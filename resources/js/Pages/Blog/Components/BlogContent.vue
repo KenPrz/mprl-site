@@ -5,10 +5,9 @@
 <script setup>
 const props = defineProps({
     body: {
-        type: String,
         required: true
     }
-})
+});
 </script>
 
 <style scoped>

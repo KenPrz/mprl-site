@@ -32,7 +32,7 @@ onUnmounted(() => {
     <section>
         <div class="relative py-44 bg-cover bg-center h-auto"
             style="background-image: url('/images/blog-header-bg.png');">
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
+            <div class="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-center items-center text-center">
                 <div class="flex flex-col items-center justify-center space-y-6">
                     <h2 class="text-4xl md:text-5xl font-semibold text-white">Blog</h2>
                     <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">

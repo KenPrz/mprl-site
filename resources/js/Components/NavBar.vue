@@ -27,8 +27,8 @@ onUnmounted(() => {
 <template>
     <!-- Hide this section when scrolling -->
     <div
-        class="ps-2 md:ps-0 flex pe-2 md:pe-0 justify-start md:justify-around bg-black text-white w-full text-sm font-light py-1 space-x-2">
-        <div class="flex md:justify-center items-center space-x-1 md:space-x-4">
+        class="ps-2 md:px-10 lg:px-20 flex sm:px-10 justify-start md:justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
+        <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
             <a href="https://internet.com/" class="flex items-center space-x-2">
                 <i class="pi pi-map-marker"></i>
                 <span>6620 Purok 1, San Antonio, Los Baños, Laguna</span>
@@ -51,7 +51,7 @@ onUnmounted(() => {
     <div class="flex justify-between md:justify-around py-1 items-center h-30">
         <div class="flex flex-col px-4 md:px-2">
             <NavLink :href="route('welcome')" :is_black="is_black">
-                <ApplicationLogo />
+                <ApplicationLogo :isDark="is_black"/>
             </NavLink>
         </div>
         <div>
@@ -117,12 +117,12 @@ onUnmounted(() => {
             </ul>
         </div>
         <div class="flex items-center space-x-5 px-2">
-            <span
+            <button
                 @click="showModal"
                 id="get-quote"
-                class="bg-main-500 hover:bg-main-600 transition-colors duration-200 text-white py-1 px-3 rounded-2xl hidden md:block">
+                class="border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
                 Get a Quote
-            </span>
+            </button>
             <Dropdown :align="autoAlign" width="32">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
@@ -139,27 +139,28 @@ onUnmounted(() => {
                             <i style="font-size: 1rem" class="pi pi-user"></i>
                             <span>Account</span>
                         </Link>
-                        <span
+                        <button
+                            type="button"
                             @click="logout"
                             class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1"
                         >
                             <i style="font-size: 1rem" class="pi pi-sign-out"></i>
                             <span>Logout</span>
-                        </span>
+                        </button>
                     </div>
                     <div v-else class="flex flex-col text-sm font-semibold">
-                        <span @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        <button @click="showLoginModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-sign-in"></i>
                             <span>
                                 Login
                             </span>
-                        </span>
-                        <span @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
+                        </button>
+                        <button @click="showRegisterModal=true" class="flex items-center space-x-3 px-2 text-black hover:bg-slate-300 py-1">
                             <i class="pi pi-user-plus"></i>
                             <span>
                                 Sign Up
                             </span>
-                        </span>
+                        </button>
                     </div>
                 </template>
             </Dropdown>
@@ -182,7 +183,7 @@ onUnmounted(() => {
         />
     </Modal>
     <Modal maxWidth="md" v-model:show="showRegisterModal" @close="showRegisterModal=false">
-        <Register 
+        <Register
             @openLogin="handleLoginSwitch"
             @closeRegister="showRegisterModal=false"
         />
@@ -192,16 +193,16 @@ onUnmounted(() => {
     </Modal>
     <div class="absolute -right-7 hover:right-0 sm:right-0 h-screen transition-all duration-200">
         <section id="icon-handler" class="flex flex-col h-full justify-center space-y-3">
-            <span class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-facebook"></i>
             </span>
-            <span  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-instagram"></i>
             </span>
-            <span @click="showContact=true"  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span @click="showContact=true"  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-phone"></i>
             </span>
-            <span  class="p-2 sm:p-4 rounded-s-md bg-red-400 flex items-center justify-center hover:bg-red-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-envelope"></i>
             </span>
         </section>

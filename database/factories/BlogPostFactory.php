@@ -16,7 +16,6 @@ class BlogPostFactory extends Factory
      */
     public function definition(): array
     {
-
         $body_data = [
             '
             <h1>Heading 1</h1>
@@ -125,38 +124,38 @@ class BlogPostFactory extends Factory
             ,
 
             '
-    <h1>Heading 1</h1>
-    <p>
-        <strong>Kane alfred alcor ali lucius doom.</strong> Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face.
-    </p>
-    <img src="example.jpg" alt="Example Image">
-    <h2>Heading 2</h2>
-    <p>
-        <em>Abbott spoiler canary, diamond wing azrael rupert scarecrow fright.</em> Gargoyle maxie creeper knight. Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated!
-    </p>
-    <h3>Heading 3</h3>
-    <ul>
-        <li>Firefly bruce oracle pit prey elongated calendar batcave lantern temblor.</li>
-        <li>Ragman nyssa jim fox croc?</li>
-        <li>Superman carmine moth killer carmine harvey anarky batarang pennyworth.</li>
-    </ul>
-    <h4>Heading 4</h4>
-    <p>
-        Todd oracle barrow kobra killer cobblepot shade league anarky? Kane charlatan justice owl fright maroni oswald atom of grundy justice grundy checkmate.
-    </p>
-    <h5>Heading 5</h5>
-    <p>
-        Bartok zeus amanda outsider. Batarang spoiler croc aiko czonk hatter blink deathstroke harley superman thomas.
-    </p>
-    <h6>Heading 6</h6>
-    <p>
-        Gamora braddock constrictor stick chamber, madrox maximus? Kingpin brood professorx archangel x-statix archangel arnim yellowjacket contessa invaders elektra madrox.
-    </p>'
+            <h1>Heading 1</h1>
+            <p>
+                <strong>Kane alfred alcor ali lucius doom.</strong> Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face.
+            </p>
+            <img src="example.jpg" alt="Example Image">
+            <h2>Heading 2</h2>
+            <p>
+                <em>Abbott spoiler canary, diamond wing azrael rupert scarecrow fright.</em> Gargoyle maxie creeper knight. Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated!
+            </p>
+            <h3>Heading 3</h3>
+            <ul>
+                <li>Firefly bruce oracle pit prey elongated calendar batcave lantern temblor.</li>
+                <li>Ragman nyssa jim fox croc?</li>
+                <li>Superman carmine moth killer carmine harvey anarky batarang pennyworth.</li>
+            </ul>
+            <h4>Heading 4</h4>
+            <p>
+                Todd oracle barrow kobra killer cobblepot shade league anarky? Kane charlatan justice owl fright maroni oswald atom of grundy justice grundy checkmate.
+            </p>
+            <h5>Heading 5</h5>
+            <p>
+                Bartok zeus amanda outsider. Batarang spoiler croc aiko czonk hatter blink deathstroke harley superman thomas.
+            </p>
+            <h6>Heading 6</h6>
+            <p>
+                Gamora braddock constrictor stick chamber, madrox maximus? Kingpin brood professorx archangel x-statix archangel arnim yellowjacket contessa invaders elektra madrox.
+            </p>'
 
         ];
         return [
             'title' => $this->faker->sentence,
-            'body' => $body_data[rand(0, 2)],
+            'body' => $body_data[rand(0, 3)],
             'category_id' => rand(1, 10),
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),

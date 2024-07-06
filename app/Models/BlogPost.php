@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class BlogPost extends Model
 {
@@ -23,6 +24,7 @@ class BlogPost extends Model
         'is_published' => 'boolean',
         'is_featured' => 'boolean',
         'clicks' => 'integer',
+        'body' => PurifyHtmlOnGet::class, // Protect against XSS
     ];
 
     public function category()

@@ -7,7 +7,7 @@ import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { VueDraggableNext } from 'vue-draggable-next';
-
+import Editor from '@/Components/Editor.vue';
 const props = defineProps({
     categories: {
         type: Array,
@@ -84,15 +84,13 @@ function handleDeleteImage(id) {
  * Updates the blog with the new content and images.
  */
 function updateBlog() {
-    const deltaContent = blogContent.value;
-    const converter = new QuillDeltaToHtmlConverter(deltaContent.ops, {});
 
     if(newUploads.value.length > 0) {
         form.new_images = newUploads.value;
     }else {
         form.new_images = null;
     }
-    form.content = converter.convert();
+    form.content = blogContent.value;
     form.post(route('admin.blog.update', props.blog.id));
 }
 
@@ -156,9 +154,7 @@ onMounted(() => {
                 </div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <InputError class="mt-2" :message="form.errors.content" />
-                    <div>
-                        <QuillEditor toolbar="essential" v-model:content="blogContent" theme="snow"/>
-                    </div>
+                    <Editor v-model="blogContent" />
                 </div>
                 <div class="flex justify-end mt-4">
                     <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" @click="updateBlog">

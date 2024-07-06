@@ -4,6 +4,7 @@ import Accordion from '@/Components/Accordion.vue'
 import { onMounted, onUnmounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
+//import { Link } from '@inertiajs/vue3';
 const scroll = ref(0);
 
 const handleScroll = () => {
@@ -149,7 +150,7 @@ onUnmounted(() => {
                     </div>
                     <div class="relative mb-8">
                         <textarea id="address" rows="2" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
-                        <label for="address" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Address</label>
+                        <label for="address" class="mt-1 absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-10 peer-focus:text-white">Address</label>
                     </div>
                     <div class="flex flex-wrap gap-4 mb-8">
                         <div class="relative flex-1">
@@ -157,20 +158,23 @@ onUnmounted(() => {
                             <label for="monthly_elecBill" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Monthly Electric Bill</label>
                         </div>
                         <div class="relative flex-1">
-                            <input type="date" id="site_visit" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
-                            <label for="site_visit" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Book a site visit</label>
-                        </div>
-                    </div>
+                            <input id="datepicker-actions" datepicker datepicker-buttons datepicker-autoselect-today type="text" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none mx-3">
+                                    <i class="fa-solid fa-calendar-days" style="color: #707070;"></i>
+                                </div>
+                            <label for="datepicker-actions" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Book a Site Visit</label>
+                        </div>                        
+                    </div>                    
                     <div class="relative mb-8">
                         <textarea id="message" rows="5" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
-                        <label for="message" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2.5 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-white">Message</label>
+                        <label for="message" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-8 scale-90 top-2 z-10 origin-[0] bg-transparent px-5 mt-1 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-10 peer-focus:text-white">Message</label>
                     </div>
                     <button type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                 </form>
             </div>
         </div>
     </section>                      
-    <Footer />
+<Footer />
 </template>
 <script>
 export default {

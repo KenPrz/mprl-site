@@ -46,11 +46,11 @@ onUnmounted(() => {
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
                         class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
                         <a href="#"
-                            class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
+                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
                             Request a Quote
                         </a>
                         <a href="#"
-                            class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
+                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
                             Download Brochure
                         </a>
                     </div>
@@ -205,12 +205,12 @@ onUnmounted(() => {
                             <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold mb-16">Ready to make the switch to <span class="text-offset-500">solar?</span></h1>
                             <div class="flex flex-col w-full justify-start space-y-4">
                                 <a href="#"
-                                    class="flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 space-x-2">
+                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 space-x-2">
                                     <i class="pi pi-pencil"></i>
                                     <span>Request a Quote</span>
                                 </a>
                                 <a href="#"
-                                    class="flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
+                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
                                     <i class="pi pi-phone"></i>
                                     <span>Contact Us</span>
                                 </a>

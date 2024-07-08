@@ -120,7 +120,7 @@ onUnmounted(() => {
             <button
                 @click="showModal"
                 id="get-quote"
-                class="border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
+                class="rounded-md border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
                 Get a Quote
             </button>
             <Dropdown :align="autoAlign" width="32">

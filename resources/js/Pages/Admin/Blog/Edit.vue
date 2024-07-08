@@ -1,16 +1,23 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Multiselect from 'vue-multiselect'
 import InputError from '@/Components/InputError.vue';
 import Toggle from '@/Components/Toggle.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { VueDraggableNext } from 'vue-draggable-next';
 import Editor from '@/Components/Editor.vue';
+
+// Define the Category interface if using TypeScript
+// interface Category {
+//     id: number;
+//     name: string;
+// }
+
 const props = defineProps({
     categories: {
-        type: Array,
+        type: Array, // Array as PropType<Category[]> if using TypeScript
         required: true
     },
     blog: {
@@ -18,11 +25,12 @@ const props = defineProps({
         required: true
     }
 });
+
 const newUploads = ref([]);
 const form = useForm({
     new_images: [],
     deleted_images: [],
-    category: props.blog.category_id,
+    categories: props.blog.categories || [], // This should be an array of category objects
     title: props.blog.title,
     content: props.blog.body,
     is_published: props.blog.is_published,
@@ -30,10 +38,7 @@ const form = useForm({
 });
 
 const blogContent = ref(props.blog.body);
-/**
- * Represents the reactive reference to the image previews.
- * @type {ref}
- */
+
 const imagePreviews = ref(
     props.blog.images.map(image => ({
         id: image.id,
@@ -41,10 +46,6 @@ const imagePreviews = ref(
     }))
 );
 
-/**
- * Handles the change event when selecting images.
- * @param {Event} event - The change event.
- */
 function handleImageChange(event) {
     const files = event.target.files;
     const newImages = [];
@@ -67,10 +68,6 @@ function handleImageChange(event) {
     });
 }
 
-/**
- * Handles the deletion of an image.
- * @param {number} id - The ID of the image to delete.
- */
 function handleDeleteImage(id) {
     const imageIndex = imagePreviews.value.findIndex(image => image.id === id);
     const image = imagePreviews.value[imageIndex];
@@ -80,17 +77,15 @@ function handleDeleteImage(id) {
     imagePreviews.value.splice(imageIndex, 1);
 }
 
-/**
- * Updates the blog with the new content and images.
- */
 function updateBlog() {
-
     if(newUploads.value.length > 0) {
         form.new_images = newUploads.value;
-    }else {
+    } else {
         form.new_images = null;
     }
     form.content = blogContent.value;
+    // Extract just the IDs from the category objects
+    form.categories = form.categories.map(cat => cat.id);
     form.post(route('admin.blog.update', props.blog.id));
 }
 
@@ -111,22 +106,39 @@ onMounted(() => {
                     <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.blog.index')">
                         Back
                     </Link>
+                    {{form.errors}}
                 </div>
-                <div class="w-full bg-white rounded-md p-4 shadow-md space-y-2">
-                    <div class="flex-row sm:flex sm:items-center sm:space-x-4">
-                        <div class="sm:w-3/4">
+                <div class="w-full bg-white rounded-md p-4 shadow-md space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="col-span-1 sm:col-span-2">
                             <label for="form-title" class="block text-lg font-medium text-gray-700">Title</label>
                             <input id="form-title" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.title" type="text">
                             <InputError class="mt-2" :message="form.errors.title" />
                         </div>
-                        <div class="sm:w-1/4">
-                            <label for="category" class="block text-lg font-medium text-gray-700">Category</label>
-                            <select id="category" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.category">
-                                <option disabled default>Category</option>
-                                <option v-for="category in props.categories" :key="category.id" :value="category.id">{{category.name}}</option>
-                            </select>
-                            <InputError class="mt-2" :message="form.errors.category" />
+                        <div class="col-span-1 sm:col-span-2">
+                            <label for="categories" class="block text-lg font-medium text-gray-700">Categories</label>
+                            <multiselect 
+                                v-model="form.categories" 
+                                :options="props.categories"
+                                :multiple="true" 
+                                :close-on-select="false" 
+                                :clear-on-select="false"
+                                :preserve-search="true" 
+                                placeholder="Select categories" 
+                                label="name" 
+                                track-by="id"
+                                :preselect-first="false"
+                            >
+                                <template #selection="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values.length && !isOpen">
+                                        {{ values.length }} categories selected
+                                    </span>
+                                </template>
+                            </multiselect>
+                            <InputError class="mt-2" :message="form.errors.categories" />
                         </div>
+                    </div>
+                    <div class="flex flex-wrap space-x-4">
                         <div>
                             <label for="is_published" class="block text-lg font-medium text-gray-700">Published</label>
                             <Toggle v-model="form.is_published" />
@@ -138,9 +150,9 @@ onMounted(() => {
                     </div>
                     <div class="flex flex-wrap mt-4">
                         <VueDraggableNext v-model="imagePreviews" tag="div" class="flex flex-wrap">
-                            <div v-for="img in imagePreviews" :key="img.id" class="w-1/4 p-2">
-                                <button @click="handleDeleteImage(img.id)" class="relative top-0 right-0">
-                                    <i style="color:red" class="pi pi-times-circle"></i>
+                            <div v-for="img in imagePreviews" :key="img.id" class="relative w-1/2 sm:w-1/3 md:w-1/4 p-2">
+                                <button @click="handleDeleteImage(img.id)" class="absolute -top-2 -right-2 text-white rounded-full p-1">
+                                    <i style="color: red" class="pi pi-times-circle"></i>
                                 </button>
                                 <img :src="img.url" class="w-full h-auto rounded-md shadow-md cursor-move"/>
                             </div>
@@ -166,6 +178,7 @@ onMounted(() => {
     </AuthenticatedLayout>
 </template>
 
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style scoped>
     #form-title {
         border: 1px solid #d1d5db;
@@ -173,4 +186,5 @@ onMounted(() => {
         padding: 0.5rem;
         margin-top: 0.5rem;
     }
+    /* Add any additional custom styles for multiselect here if needed */
 </style>

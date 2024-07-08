@@ -27,9 +27,9 @@ class BlogPost extends Model
         'body' => PurifyHtmlOnGet::class, // Protect against XSS
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(BlogCategory::class);
+        return $this->belongsToMany(BlogCategory::class, 'blog_post_category');
     }
 
     public function user()

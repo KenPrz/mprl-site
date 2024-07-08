@@ -15,19 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->boolean('is_featured')
-                ->default(false);
-            $table->boolean('is_published')
-                ->default(false);
-            $table->integer('clicks')
-                ->unsigned()
-                ->default(0);
-            $table->foreignId('category_id')
-                ->constrained('blog_categories')
-                ->onDelete('cascade');
-            $table->foreignId('created_by')
-                ->constrained('users')
-                ->onDelete('cascade');
+            $table->boolean('is_featured')->default(false);
+            $table->boolean('is_published')->default(false);
+            $table->integer('clicks')->unsigned()->default(0);
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

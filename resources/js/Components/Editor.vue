@@ -32,7 +32,7 @@ const editor = useEditor({
     },
     editorProps: {
         attributes: {
-            class: 'border border-gray-400 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto prose max-w-none focus:outline-none',
+            class: 'border border-gray-400 p-4 min-h-[12rem] max-h-[64rem] overflow-y-auto prose max-w-none focus:outline-none',
         },
     },
     extensions: [StarterKit],

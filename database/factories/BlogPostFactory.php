@@ -128,7 +128,6 @@ class BlogPostFactory extends Factory
             <p>
                 <strong>Kane alfred alcor ali lucius doom.</strong> Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face.
             </p>
-            <img src="example.jpg" alt="Example Image">
             <h2>Heading 2</h2>
             <p>
                 <em>Abbott spoiler canary, diamond wing azrael rupert scarecrow fright.</em> Gargoyle maxie creeper knight. Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated!
@@ -156,7 +155,6 @@ class BlogPostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'body' => $body_data[rand(0, 3)],
-            'category_id' => rand(1, 10),
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),
             'created_by' => 1,

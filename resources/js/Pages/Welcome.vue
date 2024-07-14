@@ -40,17 +40,17 @@ onUnmounted(() => {
                         </h1>
                         <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true"
                             class="text-4xl md:text-6xl font-semibold text-white">
-                            Shine brighter, Live lighter
+                            Harnessing the power of the sun to create a brighter future
                         </h2>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
                         class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
                         <a href="#"
-                            class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
-                            Request a Quote
+                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
+                            Contact us
                         </a>
                         <a href="#"
-                            class="w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
+                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
                             Download Brochure
                         </a>
                     </div>
@@ -95,7 +95,8 @@ onUnmounted(() => {
             <div class="relative inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <div class="container mx-auto px-4 py-16 lg:py-32">
                     <h2 data-aos="fade-up" data-aos-once="true"
-                        class="text-4xl font-semibold text-center mb-16 text-white">Why Choose Our <span class="text-offset-400">Solar</span> Solutions?</h2>
+                        class="text-4xl font-semibold text-center mb-16 text-white">Why Choose Our <span
+                            class="text-offset-400">Solar</span> Solutions?</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
                             class="bg-white rounded-lg shadow-md p-6 hover-card">
@@ -143,7 +144,8 @@ onUnmounted(() => {
                 </div>
             </div>
         </section>
-        <section class="relative bg-cover bg-center h-auto" style="background-image: url('/images/guest-slideshow/bg-1.jpg');">
+        <section class="relative bg-cover bg-center h-auto"
+            style="background-image: url('/images/guest-slideshow/bg-1.jpg');">
             <div class="w-full absolute bottom-0 py-[3px] bg-offset-500 z-10"></div>
             <div class="w-full absolute top-0 py-[3px] bg-main-400 z-10"></div>
             <div class="relative inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -197,20 +199,22 @@ onUnmounted(() => {
                 </div>
             </div>
         </section>
-        <section class="relative bg-cover bg-center screen-height h-auto" style="background-image: url('/images/solar-header-bg.jpg');">
+        <section class="relative bg-cover bg-center screen-height h-auto"
+            style="background-image: url('/images/solar-header-bg.jpg');">
             <div class="relative screen-height inset-0 bg-black bg-opacity-20 flex items-center justify-center">
                 <div class="container mx-auto px-4 py-16 lg:py-32 text-white-500 text-center">
                     <div class="flex">
                         <div class="flex flex-col justify-start">
-                            <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold mb-16">Ready to make the switch to <span class="text-offset-500">solar?</span></h1>
+                            <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold mb-16">Ready to make the switch to
+                                <span class="text-offset-500">solar?</span></h1>
                             <div class="flex flex-col w-full justify-start space-y-4">
                                 <a href="#"
-                                    class="flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 space-x-2">
+                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 space-x-2">
                                     <i class="pi pi-pencil"></i>
-                                    <span>Request a Quote</span>
+                                    <span>Contact Us</span>
                                 </a>
                                 <a href="#"
-                                    class="flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
+                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
                                     <i class="pi pi-phone"></i>
                                     <span>Contact Us</span>
                                 </a>
@@ -220,7 +224,7 @@ onUnmounted(() => {
                 </div>
             </div>
             <div class="w-full absolute top-0 py-[3px] bg-main-400 z-10"></div>
-        </section>        
+        </section>
     </main>
     <Footer />
 </template>
@@ -233,9 +237,32 @@ export default {
     data() {
         return {
             accordionItems: [
-                { title: 'Mission', content: 'To harness the power of the sun to provide innovative, sustainable, and affordable energy solutions, empowering communities and businesses to achieve energy independence and environmental stewardship.' },
-                { title: 'Vision', content: 'To be a global leader in solar energy, driving the transition to a clean energy future, where solar power is accessible to all, and creating a sustainable planet for generations to come.' },
-                { title: 'Core Values', content: 'Innovation: Continuously seeking new and better ways to improve solar technology and energy solutions.' }
+                {
+                    title: 'Mission',
+                    content: `Our mission is to accelerate the adoption of solar 
+                    energy by providing innovative, reliable, and cost-effective solar solutions to our customers. We are
+                    committed to reducing carbon emissions, promoting
+                    sustainability, and creating a cleaner, greener future for
+                    generations to come. Through our expertise,
+                    dedication, and passion for renewable energy, we aim
+                    to empower individuals and businesses to harness the
+                    power of the sun to meet their energy needs while
+                    contributing to a more sustainable planet.`
+                },
+                {
+                    title: 'Vision',
+                    content: `Our vision at MPRL Solar Panel Trading and
+                    Construction Services is to be a global leader in
+                    solar energy solutions, known for our commitment
+                    to excellence, innovation, and sustainability. We
+                    envision a world where solar power is the primary
+                    source of energy, powering homes, businesses, and
+                    communities with clean, renewable energy.
+                    Through continuous research, development, and
+                    collaboration, we strive to revolutionize the way
+                    energy is produced and consumed, making solar
+                    energy accessible and affordable for everyone.`
+                },
             ],
         };
     },

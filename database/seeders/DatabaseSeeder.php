@@ -35,10 +35,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BlogCategorySeeder::class,
             BlogPostSeeder::class,
+            BlogPostCategorySeeder::class,
             BlogImageSeeder::class,
             ContactFormSeeder::class,
-            ProductCategorySeeder::class,
-            ProductSeeder::class,
+            // ProductCategorySeeder::class,
+            // ProductSeeder::class,
             VisitorSeeder::class,
         ]);
     }

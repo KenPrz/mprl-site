@@ -26,7 +26,7 @@ function sortByTitle() {
 
 function sortByAuthor() {
     toggleSort('name');
-    props.blogs.sort((a, b) => sortOrder.name === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    props.blogs.sort((a, b) => sortOrder.name === 'asc' ? a.first_name.localeCompare(b.first_name) : b.first_name.localeCompare(a.first_name));
 }
 
 function sortByStatus() {

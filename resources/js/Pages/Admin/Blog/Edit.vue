@@ -106,7 +106,6 @@ onMounted(() => {
                     <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.blog.index')">
                         Back
                     </Link>
-                    {{form.errors}}
                 </div>
                 <div class="w-full bg-white rounded-md p-4 shadow-md space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

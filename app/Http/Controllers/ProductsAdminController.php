@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductsAdminController extends Controller
 {
@@ -98,7 +99,16 @@ class ProductsAdminController extends Controller
             'datasheet' => $request->file('datasheet') ? $request->file('datasheet')->store('datasheets') : null,
             'is_displayed' => $request->input('is_displayed', false),
         ]);
-        
+        if($request->img_path) {
+            foreach($request->file('img_path') as $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('product-images', $filename, 'public');
+                $products->images()->create([
+                    'images' => $path,
+                    'product_id' => $products->id
+                ]);
+            }
+        }
         
         
     }

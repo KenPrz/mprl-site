@@ -1,2 +1,6 @@
 *
 !.gitignore
+
+# Allow the Brochure folder and its contents
+!Brochure/
+!Brochure/**

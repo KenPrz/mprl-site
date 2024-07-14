@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-full overflow-hidden">
-        <img :src="imageUrl" :alt="imageUrl" :classes="classes" class="object-cover w-full h-full">
+        <img :src="imageUrl" :alt="alt" :classes="classes" class="object-cover w-full h-full">
     </div>
 </template>
 
@@ -11,6 +11,10 @@
         imageUrl: {
             type: String,
             required: true
+        },
+        alt: {
+            type: String,
+            default: ''
         },
         classes : {
             type: String,

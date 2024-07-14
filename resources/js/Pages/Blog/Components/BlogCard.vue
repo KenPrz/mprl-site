@@ -15,13 +15,18 @@ const handleMouseLeave = () => {
 <template>
     <div :id="isHovered ? 'my-hover' : ''" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" class="mb-2 border card-height rounded-b-sm shadow-md">
         <Link :href="route('blog.show', blog.id)">
-            <BlogImage class="card-image-height" :imageUrl="`storage/${blog.images[0].image}`" v-if="blog.images.length > 0" /> 
-                <!-- ^ the code above is an abomination of an implementation please do not replicate im sleepy af -->
+            <BlogImage class="card-image-height" :imageUrl="`storage/${blog.image}`" :alt="blog.title" /> 
         </Link>
         <div class="relative card-descr-h flex flex-col p-2 px-4 justify-around">
             <div class="flex flex-wrap font-light text-xs space-x-2 mb-1 text-gray-600">
-                <span v-for="tag in tags" :key="tag">
-                    <Link :href="`/blog/${blog.id}`"><span class="underline">{{ tag }}</span>{{' |'}}</Link>
+                <span v-for="(category, index) in blog.categories" :key="category.id">
+                    <Link
+                      :href="route('blog.index', { category: category.id })"
+                      class="hover:text"
+                    >
+                      <span class="underline">{{ category.name }}</span>
+                    </Link>
+                    <span v-if="index < blog.categories.length - 1"> | </span>
                 </span>
             </div>
             <h1 class="text-xl font-semibold">
@@ -53,12 +58,6 @@ export default {
         },
     },
 }
-
-const tags = [
-    'Solar Panel',
-    'Solar Energy',
-    'Renewable Energy',
-]
 </script>
 
 <style scoped>

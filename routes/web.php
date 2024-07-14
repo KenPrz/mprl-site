@@ -15,6 +15,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ProductsAdminController;
+use App\Http\Controllers\BrochureController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
@@ -24,6 +26,7 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/brochure', [BrochureController::class, 'downLoadBrochure'])->name('brochure.download');
 
 Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');
@@ -47,6 +50,8 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/products/{id}/edit', [ProductsAdminController::class, 'edit'])->name('admin.products.edit');
     Route::patch('/products/{id}', [ProductsAdminController::class, 'update'])->name('admin.products.update');
     Route::delete('/products/{id}', [ProductsAdminController::class, 'destroy'])->name('admin.products.destroy');
+
+    Route::post('/dashboard/update-brochure', [BrochureController::class, 'store'])->name('admin.brochure.store');
 });
 
 

@@ -26,7 +26,7 @@ onUnmounted(() => {
 
 const props = defineProps({
   blog: {
-    type: String,
+    type: Object,
     required: true,
   },
   featured:{

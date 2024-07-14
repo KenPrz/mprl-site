@@ -40,7 +40,7 @@ onUnmounted(() => {
                         </h1>
                         <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true"
                             class="text-4xl md:text-6xl font-semibold text-white">
-                            Harnessing the power of the sun to create a brighter future
+                            Harnessing the power of the <span class="text-offset-400">sun</span> to create a brighter future
                         </h2>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
@@ -219,7 +219,7 @@ onUnmounted(() => {
                                     <span>Browse our products</span>
                                 </a>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>

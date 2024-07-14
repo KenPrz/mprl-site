@@ -18,16 +18,16 @@ const handleMouseLeave = () => {
             <BlogImage class="card-image-height" :imageUrl="`storage/${blog.image}`" :alt="blog.title" /> 
         </Link>
         <div class="relative card-descr-h flex flex-col p-2 px-4 justify-around">
-            <div class="flex flex-wrap font-light text-xs space-x-2 mb-1 text-gray-600">
-                <span v-for="(category, index) in blog.categories" :key="category.id">
+            <div class="flex flex-wrap font-light text-xs mb-1 text-gray-600">
+                <template v-for="(category, index) in blog.categories" :key="category.id">
                     <Link
-                      :href="route('blog.index', { category: category.id })"
-                      class="hover:text"
+                        :href="route('blog.index', { category: category.id })"
+                        class="hover:text underline"
                     >
-                      <span class="underline">{{ category.name }}</span>
+                        {{ category.name }}
                     </Link>
-                    <span v-if="index < blog.categories.length - 1"> | </span>
-                </span>
+                    <span v-if="index < blog.categories.length - 1" class="mx-1">|</span>
+                </template>
             </div>
             <h1 class="text-xl font-semibold">
                 <Link class="hover:text-main-500 duration-300 transition-colors" :href="`/blog/${blog.id}`">

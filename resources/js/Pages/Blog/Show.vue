@@ -94,7 +94,7 @@ const props = defineProps({
                 <i class="pi pi-pen-to-square"></i>
               </Link>
             </div>
-            <h1 class="text-3xl font-bold mb-4">{{ blog.title }}</h1>
+            <h1 class="text-3xl font-bold mb-4 mt-3">{{ blog.title }}</h1>
           </div>
           <p class="text-gray-600 mb-4">By {{ blog.user_name }} on {{ formatDate(blog.created_at) }}</p>
           <div id="blog-body">
@@ -105,7 +105,7 @@ const props = defineProps({
           <section class="mb-6">
               <Card>
                 <div class="px-5">
-                  <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-2">Featured</h1> 
+                  <h1 class="font-semibold text-xl text-center mt-2 pb-2">Featured</h1> 
                 </div>
                 <Carousel class="pt-1 shadow-md"
                   :plugins="[Autoplay({

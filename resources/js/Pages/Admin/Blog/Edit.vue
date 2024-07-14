@@ -9,15 +9,9 @@ import { Link, useForm } from '@inertiajs/vue3';
 import { VueDraggableNext } from 'vue-draggable-next';
 import Editor from '@/Components/Editor.vue';
 
-// Define the Category interface if using TypeScript
-// interface Category {
-//     id: number;
-//     name: string;
-// }
-
 const props = defineProps({
     categories: {
-        type: Array, // Array as PropType<Category[]> if using TypeScript
+        type: Array,
         required: true
     },
     blog: {
@@ -30,7 +24,7 @@ const newUploads = ref([]);
 const form = useForm({
     new_images: [],
     deleted_images: [],
-    categories: props.blog.categories || [], // This should be an array of category objects
+    categories: props.blog.categories || [],
     title: props.blog.title,
     content: props.blog.body,
     is_published: props.blog.is_published,

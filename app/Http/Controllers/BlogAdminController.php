@@ -78,30 +78,33 @@ class BlogAdminController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'categories' => 'array|required|min:1',
             'content' => 'required',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // fix this with custom validation rule
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,heic,svg|max:2048',
         ]);
+    
         $blog = BlogPost::create([
             'title' => $request->title,
-            'category_id' => $request->category,
             'body' => $request->content,
             'is_published' => $request->is_published,
             'is_featured' => $request->is_featured,
             'created_by' => auth()->id(),
         ]);
+        // Bind the categories to the blog post
+        $this->bindCategories($blog->id, $request->categories);
+    
         if($request->images) {
             foreach($request->file('images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');
                 $blog->images()->create([
                     'image' => $path,
-                    'blog_post_id' => $blog->id
                 ]);
             }
         }
+    
         return Inertia::location(route('blog.show', $blog->id));
     }
     
@@ -220,12 +223,9 @@ class BlogAdminController extends Controller
             $categories = [$categories];
         }
     
-        // Filter out any non-numeric values
         $categories = array_filter($categories, 'is_numeric');
     
-        // Convert all elements to integers
         $categories = array_map('intval', $categories);
-        // Sync the categories
         DB::table('blog_post_category')
             ->where('blog_post_id', $blog->id)
             ->delete();
@@ -235,7 +235,22 @@ class BlogAdminController extends Controller
                 'blog_category_id' => $category,
             ]);
         }
+    }
 
-        return;
+    private function bindCategories($blog_id, $categories)
+    {
+        if (!is_array($categories)) {
+            $categories = [$categories];
+        }
+
+        $categories = array_filter($categories, 'is_numeric');
+        $categories = array_map('intval', $categories);
+
+        foreach ($categories as $category) {
+            DB::table('blog_post_category')->insert([
+                'blog_post_id' => $blog_id,
+                'blog_category_id' => $category,
+            ]);
+        }
     }
 }

@@ -7,6 +7,7 @@ import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { VueDraggableNext } from 'vue-draggable-next';
 import Editor from '@/Components/Editor.vue';
+import Multiselect from 'vue-multiselect'
 
 
 const props = defineProps({
@@ -18,7 +19,7 @@ const props = defineProps({
 
 const form = useForm({
     images: [],
-    category: '',
+    categories: [],
     title: '',
     content: '',
     is_published: true,
@@ -49,6 +50,7 @@ function handleImageChange(event) {
 
 function submitBlog() {
     form.content = blogContent.value;
+    form.categories = form.categories.map(cat => cat.id);
     form.post(route('admin.blog.store'),
         {
             preserveScroll: true,
@@ -89,15 +91,26 @@ onMounted(() => {
                             <InputError class="mt-2" :message="form.errors.title" />
                         </div>
                         <div class="sm:w-1/4">
-                            <label for="category" class="block text-lg font-medium text-gray-700">Category</label>
-                            <select id="category"
-                                class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                v-model="form.category">
-                                <option disabled default>Category</option>
-                                <option v-for="category in props.categories" :key="category.id" :value="category.id">
-                                    {{ category.name }}</option>
-                            </select>
-                            <InputError class="mt-2" :message="form.errors.category" />
+                            <label for="categories" class="block text-lg font-medium text-gray-700">Categories</label>
+                            <multiselect 
+                                v-model="form.categories" 
+                                :options="props.categories"
+                                :multiple="true" 
+                                :close-on-select="false" 
+                                :clear-on-select="false"
+                                :preserve-search="true" 
+                                placeholder="Select categories" 
+                                label="name" 
+                                track-by="id"
+                                :preselect-first="false"
+                            >
+                                <template #selection="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values.length && !isOpen">
+                                        {{ values.length }} categories selected
+                                    </span>
+                                </template>
+                            </multiselect>
+                            <InputError class="mt-2" :message="form.errors.categories" />
                         </div>
                         <div class="flex space-x-3">
                             <div>
@@ -171,7 +184,7 @@ onMounted(() => {
         </div>
     </AuthenticatedLayout>
 </template>
-
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style scoped>
 #form-title {
     border: 1px solid #d1d5db;

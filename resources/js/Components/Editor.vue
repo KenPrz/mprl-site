@@ -14,7 +14,6 @@ import Heading6Icon from 'vue-material-design-icons/FormatHeader6.vue';
 import BulletedListIcon from 'vue-material-design-icons/FormatListBulleted.vue';
 import OrderedListIcon from 'vue-material-design-icons/FormatListNumbered.vue';
 import BlockquoteIcon from 'vue-material-design-icons/FormatQuoteOpen.vue';
-import HorizontalRuleIcon from 'vue-material-design-icons/Minus.vue';
 
 const props = defineProps({
     modelValue: {
@@ -109,10 +108,6 @@ const editor = useEditor({
                     :class="{ 'bg-gray-200': editor.isActive('blockquote') }"
                     class="btn">
                     <BlockquoteIcon :size="20" title="Blockquote"/>
-                </button>
-                <button @click="editor.chain().focus().setHorizontalRule().run()"
-                    class="btn">
-                    <HorizontalRuleIcon :size="20" title="Horizontal Rule"/>
                 </button>
             </div>
             <editor-content :editor="editor" />

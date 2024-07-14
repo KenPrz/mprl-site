@@ -17,144 +17,135 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         $body_data = [
-            '
-            <h1>Heading 1</h1>
-            <h2>Heading 2</h2>
-            <h3>Heading 3</h3>
-            <h4>Heading 4</h4>
-            <h5>Heading 5</h5>
-            <h6>Heading 6</h6>
+            "
+            <h1>The Future of Solar: Emerging Technologies in Photovoltaics</h1>
+            <h2>Perovskite Solar Cells</h2>
+            <h3>Bifacial Solar Panels</h3>
+            <h4>Solar Skin Design</h4>
             <p>
-                Kane alfred alcor ali lucius doom. Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face. Damian killer metallo martha prey todd collector lynx huntress outsider spoiler chase. Raatko batman arkham jason grey knight oracle outsider. Green tally maxie abbott deathstroke ventriloquist gordon atomic batmobile, smoke cypher ragdoll? Firefly bruce oracle pit prey elongated calendar batcave lantern temblor. Ragman nyssa jim fox croc? Superman carmine moth killer carmine harvey anarky batarang pennyworth. Toymaker edward a ra cypher scorn justice spectre raatko atom calendar face. Elongated barrow blake todd clench society jason. Fairchild charlatan temblor lynx prey! Chill oracle bat manor chill clench thomas shade? Swamp diamond joker.
-                </p>
-                <p>
-                Abbott spoiler canary, diamond wing azrael rupert scarecrow fright. Gargoyle maxie creeper knight. Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated! Harley chase huntress damian harlequin bennett batcave freeze. Todd oracle barrow kobra killer cobblepot shade league anarky? Kane charlatan justice owl fright maroni oswald atom of grundy justice grundy checkmate. Blink harley sinestro fox penguin. Deadshot aiko beetle metallo amanda anarky oracle oswald. Spoiler snake czonk fox of lynx. Crane solomon wing ra wayne montoya fox blake kyle. Maxie young pennyworth joker fox. Bullock amanda raatko of croc. Pit lantern katana kobra rupert league bennett fright ragman. League maxie freeze green doom poison creeper shade gearhead batmobile zeus. Solomon firefly mad.
-                </p>
-                <p>
-                Bartok zeus amanda outsider. Batarang spoiler croc aiko czonk hatter blink deathstroke harley superman thomas. Abdullah ventriloquist wayne; temblor justice fright lynx. Strange poison ragdoll metallo joe cluemaster bullock shiva mask atkins clayface cobblepot harlequin. Hatter harlequin scarecrow face wayne canary toymaker spoiler batarang batmobile swamp solomon grey. Abdullah supergirl?
-                </p>
-                <p>
-                Young kane pennyworth ali spoiler bat, calendar croc. Grey zeus smoke cobblepot falcone tumbler shrike. Beetle, elongated vale nocturna chill azrael night croc canary moth. Quinn ragman basil martha collector! Beetle, cypher spectre beetle lantern sinestro. Fairchild katana atom justice mugsy edward penguin, edward smoke pit knight faith. Swamp ragman shrike night fox rupert batman elongated ventriloquist? Alfred gotham lynx scarecrow ragdoll zucco atkins.
-                </p>
-                <p>
-                Ali manor tumbler grayson young lynx boomerang hood tally nocturna hangman toymaker. Fright abbott, shiva scorn chase joe owl hatter. Katana dick jason supergirl sinestro blue faith, metallo hangman hatter calendar harlequin. Faith gordon copperhead birds. Lucius cluemaster czonk atomic maxie master mister. Katana nocturna charlatan blake blink rupert anarky young shade oracle. Copperhead grey arkham shadow black hangman azrael cypher. Hammer thomas young checkmate firefly face hatter huntress batman zatanna harley chimera clock. Freeze hammer shade grey shrike abattoir snake aiko nyssa. Croc, kane america gordon joker tumbler bartok martha harley maroni zeus! Ragman penguin prey elongated clench alcor hugo. Wing helena knight scorn. Fright ra rose chill rumor. Luthor young mask bat, batman bane pennyworth. Lazarus thomas; shrike thomas blink. League!
-            </p>',
-            '
-                <h1>Heading 1</h1>
-                <p>
-                    Kane alfred alcor ali lucius doom. Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face.
-                </p>
-                <blockquote>
-                    "Raatko batman arkham jason grey knight oracle outsider. Green tally maxie abbott deathstroke ventriloquist gordon atomic batmobile, smoke cypher ragdoll?"
-                </blockquote>
-                <ul>
-                    <li>Firefly bruce oracle pit prey elongated calendar batcave lantern temblor.</li>
-                    <li>Ragman nyssa jim fox croc?</li>
-                    <li>Superman carmine moth killer carmine harvey anarky batarang pennyworth.</li>
-                </ul>
-                <h2>Heading 2</h2>
-                <p>
-                    Angel silvermane magneto, ricochet lilandra titania invaders janefoster. Nighthawk bucky, satana moleculeman scarletspider dust.
-                </p>
-                <p>
-                    Rand spectrum skaar morbius hydra snowbird gorillaman deathlok. Arcade natasha riptide spider-woman greengoblin prism pryde harrier stature titania johnnyblaze constrictor.
-                </p>
-                <h3>Heading 3</h3>
-                <ol>
-                    <li>Posuere enim litora varius natoque ac primis donec at praesent imperdiet.</li>
-                    <li>Nec phasellus volutpat elit, viverra rhoncus vestibulum ante dui ullamcorper diam eleifend.</li>
-                    <li>Sociosqu turpis ad quis semper luctus praesent.</li>
-                </ol>
-                <p>
-                    Montes odio senectus mollis consectetur. Class massa quis elit vivamus hendrerit potenti tempor at at.
-                </p>
-                <h4>Heading 4</h4>
-                <p>
-                    Vehicula proin sit velit! Taciti lacus gravida porttitor a? Mus adipiscing natoque eu potenti viverra purus platea tincidunt hac.
-                </p>
-                <p>
-                    Ultrices maecenas cras facilisi sapien? Habitant massa lectus imperdiet proin sodales? Magna aenean est mattis luctus vitae fames neque sociosqu scelerisque.
-                </p>'
-            ,
-            '
-                <h1>Heading 1</h1>
-                <table>
-                    <tr>
-                        <th>Character</th>
-                        <th>Description</th>
-                    </tr>
-                    <tr>
-                        <td>Kane</td>
-                        <td>alfred alcor ali lucius doom.</td>
-                    </tr>
-                    <tr>
-                        <td>Dent</td>
-                        <td>charlatan faith superman batmobile ghul society zucco owl calendar penguin.</td>
-                    </tr>
-                </table>
-                <h2>Heading 2</h2>
-                <p>
-                    Abbott spoiler canary, diamond wing azrael rupert scarecrow fright. Gargoyle maxie creeper knight.
-                </p>
-                <h3>Heading 3</h3>
-                <p>
-                    Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated!
-                </p>
-                <blockquote>
-                    "Harley chase huntress damian harlequin bennett batcave freeze."
-                </blockquote>
-                <p>
-                    Todd oracle barrow kobra killer cobblepot shade league anarky? Kane charlatan justice owl fright maroni oswald atom of grundy justice grundy checkmate.
-                </p>
-                <h4>Heading 4</h4>
-                <p>
-                    Bartok zeus amanda outsider. Batarang spoiler croc aiko czonk hatter blink deathstroke harley superman thomas.
-                </p>
-                <p>
-                    Abdullah ventriloquist wayne; temblor justice fright lynx. Strange poison ragdoll metallo joe cluemaster bullock shiva mask atkins clayface cobblepot harlequin.
-                </p>
-                <h5>Heading 5</h5>
-                <p>
-                    Montes odio senectus mollis consectetur. Class massa quis elit vivamus hendrerit potenti tempor at at.
-                </p>
-                <h6>Heading 6</h6>
-                <p>
-                    Gamora braddock constrictor stick chamber, madrox maximus? Kingpin brood professorx archangel x-statix archangel arnim yellowjacket contessa invaders elektra madrox.
-                </p>'
-            ,
-
-            '
-            <h1>Heading 1</h1>
-            <p>
-                <strong>Kane alfred alcor ali lucius doom.</strong> Dent charlatan faith superman batmobile ghul society zucco owl calendar penguin. Owl creeper huntress shade chill face.
+                As a leader in solar energy solutions, we're always looking ahead to the next big innovations in the industry. Today, we're excited to share some of the emerging technologies that are set to revolutionize solar power.
             </p>
-            <h2>Heading 2</h2>
             <p>
-                <em>Abbott spoiler canary, diamond wing azrael rupert scarecrow fright.</em> Gargoyle maxie creeper knight. Sinestro arkham nyssa bruce joe two shiva shrike arkham league chimera elongated. Luthor fright batarang lazarus wing elongated!
+                Perovskite solar cells are a promising new technology that could significantly increase the efficiency of solar panels while reducing costs. These cells can be manufactured using simple and inexpensive techniques, potentially making solar energy even more accessible.
             </p>
-            <h3>Heading 3</h3>
+            <p>
+                Bifacial panels can capture sunlight from both sides, increasing energy production by up to 30% compared to traditional panels. This technology is particularly effective in certain installations, such as on reflective surfaces or in large solar farms.
+            </p>
+            <p>
+                For homeowners concerned about aesthetics, solar skin technology allows solar panels to blend in with your roof. This custom design solution can match your roof's color and pattern while still delivering efficient energy production.
+            </p>
+            <p>
+                As these technologies continue to develop, we're committed to bringing the best solar solutions to our customers. Stay tuned for updates as we incorporate these innovations into our product offerings!
+            </p>",
+        
+            "
+            <h1>Maximizing Your Solar Investment: Tips for Optimal Panel Performance</h1>
+            <p>
+                You've made the smart choice to invest in solar energy. Now, let's ensure you're getting the most out of your system with these practical tips for optimal performance.
+            </p>
+            <h2>1. Keep Your Panels Clean</h2>
+            <p>
+                Regular cleaning can increase your panels' efficiency by up to 5%. We recommend a gentle cleaning with water and a soft brush at least twice a year.
+            </p>
+            <h2>2. Monitor Your System's Output</h2>
+            <p>
+                Use your monitoring system to track your energy production. If you notice a significant drop, it could indicate a problem that needs attention.
+            </p>
+            <h2>3. Trim Overhanging Branches</h2>
+            <p>
+                Keep trees trimmed to prevent shading on your panels. Even partial shade can significantly reduce a panel's output.
+            </p>
+            <h2>4. Consider a System Upgrade</h2>
+            <p>
+                If your system is more than 10 years old, newer technologies could significantly boost your energy production. Contact us for a free assessment of your current system.
+            </p>
+            <p>
+                Remember, our maintenance team is always here to help keep your system in top shape. Schedule your annual check-up today!
+            </p>",
+        
+            "
+            <h1>Solar Battery Storage: Is It Right for Your Home?</h1>
+            <table>
+                <tr>
+                    <th>Benefit</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Energy Independence</td>
+                    <td>Use stored solar power during outages</td>
+                </tr>
+                <tr>
+                    <td>Maximize Self-Consumption</td>
+                    <td>Use your own solar energy even when the sun isn't shining</td>
+                </tr>
+            </table>
+            <h2>Benefits of Solar Battery Storage</h2>
+            <p>
+                As solar technology advances, more homeowners are considering adding battery storage to their systems. But is it the right choice for you? Let's explore the benefits and considerations.
+            </p>
+            <h3>Considerations</h3>
+            <p>
+                While battery storage offers many benefits, it's important to consider factors such as:
+            </p>
             <ul>
-                <li>Firefly bruce oracle pit prey elongated calendar batcave lantern temblor.</li>
-                <li>Ragman nyssa jim fox croc?</li>
-                <li>Superman carmine moth killer carmine harvey anarky batarang pennyworth.</li>
+                <li>Initial cost and return on investment</li>
+                <li>Your current and future energy needs</li>
+                <li>Local utility policies and net metering rates</li>
             </ul>
-            <h4>Heading 4</h4>
             <p>
-                Todd oracle barrow kobra killer cobblepot shade league anarky? Kane charlatan justice owl fright maroni oswald atom of grundy justice grundy checkmate.
+                Every home's energy needs are unique. Our expert team can help you determine if battery storage is the right addition to your solar system. Contact us for a personalized assessment!
+            </p>",
+        
+            "
+            <h1>Going Green and Saving Green: Solar Tax Incentives for Homeowners</h1>
+            <p>
+                <strong>Investing in solar energy isn't just good for the environment - it's also great for your wallet</strong>, especially when you factor in available tax incentives.
             </p>
-            <h5>Heading 5</h5>
+            <h2>Federal Solar Investment Tax Credit (ITC)</h2>
             <p>
-                Bartok zeus amanda outsider. Batarang spoiler croc aiko czonk hatter blink deathstroke harley superman thomas.
+                <em>The federal government offers a significant tax credit for solar installations.</em> In 2023, you can deduct 30% of the cost of your solar system from your federal taxes.
             </p>
-            <h6>Heading 6</h6>
+            <h3>State-Specific Incentives</h3>
+            <ul>
+                <li>Property tax exemptions for solar installations</li>
+                <li>Performance-based incentives</li>
+                <li>Solar Renewable Energy Credits (SRECs)</li>
+            </ul>
+            <h4>Act Now to Maximize Your Savings</h4>
             <p>
-                Gamora braddock constrictor stick chamber, madrox maximus? Kingpin brood professorx archangel x-statix archangel arnim yellowjacket contessa invaders elektra madrox.
-            </p>'
-
+                While these incentives are fantastic, they won't last forever. The federal ITC is set to decrease in the coming years, so now is the perfect time to go solar.
+            </p>
+            <h5>Ready to Start Saving?</h5>
+            <p>
+                Contact us for a free consultation and learn how much you could save with solar!
+            </p>",
+        
+            "
+            <h1>Solar Myths Debunked: Separating Fact from Fiction</h1>
+            <h2>Myth 1: Solar Panels Don't Work in Cold or Cloudy Climates</h2>
+            <p>
+                Fact: Solar panels can actually be more efficient in cooler temperatures. While cloud cover can reduce output, modern panels are designed to work even in less-than-ideal conditions.
+            </p>
+            <h3>Myth 2: Solar Installations Damage Your Roof</h3>
+            <p>
+                Fact: When installed correctly by professionals, solar panels can actually protect your roof from wear and tear. Our installation process ensures your roof's integrity is maintained.
+            </p>
+            <h4>Myth 3: Solar Is Too Expensive</h4>
+            <p>
+                Fact: While there is an upfront cost, solar systems pay for themselves over time through energy savings. With available incentives and financing options, solar is more affordable than ever.
+            </p>
+            <h5>Myth 4: Solar Panels Require a Lot of Maintenance</h5>
+            <p>
+                Fact: Solar panels are relatively low-maintenance. Regular cleaning and occasional check-ups are usually all that's needed to keep your system running efficiently.
+            </p>
+            <h6>Have More Questions?</h6>
+            <p>
+                We're here to provide clear, honest information. Contact us to learn more about how solar can work for you!
+            </p>",
         ];
         return [
             'title' => $this->faker->sentence,
-            'body' => $body_data[rand(0, 3)],
+            'body' => $body_data[rand(0, 4)],
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),
             'created_by' => 1,

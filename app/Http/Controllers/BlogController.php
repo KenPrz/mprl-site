@@ -71,6 +71,11 @@ class BlogController extends Controller
         $blog = BlogPost::with(['images', 'categories', 'user'])
             ->where('id', $id)
             ->firstOrFail();
+            
+        if($blog->is_published == false && ( (auth()->user() == null) || auth()->user()->role_id != 1)) {
+            abort(404);
+        }
+
         $this->addClick($id);
     
         $blog = [

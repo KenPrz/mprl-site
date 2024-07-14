@@ -45,11 +45,11 @@ onUnmounted(() => {
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
                         class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
-                        <a href="#"
+                        <a :href="route('contact.index')"
                             class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200">
                             Contact us
                         </a>
-                        <a href="#"
+                        <a :href="route('brochure.download')"
                             class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
                             Download Brochure
                         </a>
@@ -60,7 +60,7 @@ onUnmounted(() => {
             </div>
             <div class="w-full absolute bottom-0 py-[3px] bg-main-400"></div>
         </section>
-        <section class="relative py-48 bg-cover bg-center screen-height h-auto"
+        <section class="relative py-48 bg-cover bg-center screen-height-custom h-auto"
             style="background-image: url('/images/guest-slideshow/bg-2.jpg');">
             <div
                 class="absolute inset-0 bg-black bg-opacity-40 flex flex-col md:flex-row justify-center items-center md:px-48 text-white space-y-3 md:space-y-0 md:space-x-3">
@@ -278,6 +278,17 @@ export default {
     height: 100vh;
 }
 
+@media screen and (max-width: 768px) {
+    .screen-height-custom {
+        height: 120vh;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .screen-height-custom {
+        height: 100vh;
+    }
+}
 .bg-center {
     background-position: center 100%;
 }

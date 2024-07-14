@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('stock_level')->nullable();
             $table->string('supplier')->nullable();
             $table->string('certification')->nullable();
-            $table->text('desciption');
+            $table->text('description');
             $table->string('img_path')->nullable();
             $table->string('datasheet')->nullable();
             $table->boolean('is_displayed')

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\ProductSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +26,7 @@ class Product extends Model
         'stock_level',
         'supplier',
         'certification',
-        'desciption',
+        'description',
         'img_path',
         'datasheet',
         'is_displayed',
@@ -33,5 +34,15 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImages::class);
+    }
+
+    public function firstImage()
+    {
+        return $this->hasOne(ProductImages::class)->oldest();
     }
 }

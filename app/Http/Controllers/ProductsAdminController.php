@@ -126,7 +126,15 @@ class ProductsAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $selectedCatergory = ProductCategory::all();
+        $product = Product::with(['images', 'category:id,name'])
+            ->where('id', $id)
+            ->firstOrFail();
+        return Inertia::render('Admin/Product/Edit', [
+            'categories' => $selectedCatergory,
+            'product' => $product
+        ]);
     }
 
     /**
@@ -134,8 +142,60 @@ class ProductsAdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Fetch the product
+        $product = Product::findOrFail($id);
+
+        // Validate the incoming data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:product_categories,id',
+            'power_out' => 'required|string|max:255',
+            'efficiency' => 'required|string|max:255',
+            'dimension' => 'required|string|max:255',
+            'weight' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'voltage' => 'required|string|max:255',
+            'current' => 'required|string|max:255',
+            'temp_coeff' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'warranty' => 'required|string|max:255',
+            'stock_level' => 'required|integer',
+            'supplier' => 'required|string|max:255',
+            'certification' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'img_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
+            'datasheet' => 'nullable|file|mimes:pdf|max:2048', // Example for datasheet file
+            'is_displayed' => 'boolean',
+        ]);
+
+        // Update product fields
+        $product->fill($validatedData);
+
+        // Handle image uploads if there are new images
+        if ($request->hasFile('img_path')) {
+            $images = [];
+            foreach ($request->file('img_path') as $image) {
+                $path = $image->store('public/images'); // Adjust storage path as needed
+                $images[] = $path;
+            }
+            // Save image paths to product
+            $product->img_path = $images;
+        }
+
+        // Handle datasheet upload if there is a new datasheet
+        if ($request->hasFile('datasheet')) {
+            $datasheetPath = $request->file('datasheet')->store('public/datasheets'); // Adjust storage path as needed
+            $product->datasheet = $datasheetPath;
+        }
+
+        // Save the updated product
+        $product->save();
+
+        // Redirect or respond with success message
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

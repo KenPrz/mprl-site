@@ -134,7 +134,7 @@ watch([() => form.selectedYear, () => form.selectedMonth], () => {
                     <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-6">
                         <h3 class="text-lg font-semibold">Users</h3>
                         <p class="mt-4 text-2xl">{{ totalUsers }}</p>
-                        <a class="text-right text-xs text-blue-400 hover:underline" href="#">Visit Users</a>
+                        <a class="text-right text-xs text-blue-400 hover:underline" :href="route('admin.users.index')">Visit Users</a>
                     </div>
                 </div>
                 <div class="my-5 bg-white shadow-sm sm:rounded-lg p-6">

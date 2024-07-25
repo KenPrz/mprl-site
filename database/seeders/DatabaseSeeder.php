@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
 
         $this->call([
             RoleSeeder::class,
@@ -33,13 +33,14 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
         ]);
         $this->call([
+            UserSeeder::class,
             BlogCategorySeeder::class,
             BlogPostSeeder::class,
             BlogPostCategorySeeder::class,
             BlogImageSeeder::class,
             ContactFormSeeder::class,
-            ProductCategorySeeder::class,
-            ProductSeeder::class,
+            // ProductCategorySeeder::class,
+            // ProductSeeder::class,
             VisitorSeeder::class,
         ]);
     }

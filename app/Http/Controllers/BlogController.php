@@ -100,7 +100,6 @@ class BlogController extends Controller
     
         $featured = $this->getFeatured($id);
         $more = $this->getMorePosts($id);
-    
         return Inertia::render('Blog/Show', [
             'featured' => $featured,
             'more' => $more,

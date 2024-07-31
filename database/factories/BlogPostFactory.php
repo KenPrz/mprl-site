@@ -18,7 +18,6 @@ class BlogPostFactory extends Factory
     {
         $body_data = [
             "
-            <h1>The Future of Solar: Emerging Technologies in Photovoltaics</h1>
             <h2>Perovskite Solar Cells</h2>
             <h3>Bifacial Solar Panels</h3>
             <h4>Solar Skin Design</h4>
@@ -64,21 +63,6 @@ class BlogPostFactory extends Factory
             </p>",
         
             "
-            <h1>Solar Battery Storage: Is It Right for Your Home?</h1>
-            <table>
-                <tr>
-                    <th>Benefit</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>Energy Independence</td>
-                    <td>Use stored solar power during outages</td>
-                </tr>
-                <tr>
-                    <td>Maximize Self-Consumption</td>
-                    <td>Use your own solar energy even when the sun isn't shining</td>
-                </tr>
-            </table>
             <h2>Benefits of Solar Battery Storage</h2>
             <p>
                 As solar technology advances, more homeowners are considering adding battery storage to their systems. But is it the right choice for you? Let's explore the benefits and considerations.
@@ -97,7 +81,6 @@ class BlogPostFactory extends Factory
             </p>",
         
             "
-            <h1>Going Green and Saving Green: Solar Tax Incentives for Homeowners</h1>
             <p>
                 <strong>Investing in solar energy isn't just good for the environment - it's also great for your wallet</strong>, especially when you factor in available tax incentives.
             </p>
@@ -121,7 +104,6 @@ class BlogPostFactory extends Factory
             </p>",
         
             "
-            <h1>Solar Myths Debunked: Separating Fact from Fiction</h1>
             <h2>Myth 1: Solar Panels Don't Work in Cold or Cloudy Climates</h2>
             <p>
                 Fact: Solar panels can actually be more efficient in cooler temperatures. While cloud cover can reduce output, modern panels are designed to work even in less-than-ideal conditions.
@@ -143,8 +125,19 @@ class BlogPostFactory extends Factory
                 We're here to provide clear, honest information. Contact us to learn more about how solar can work for you!
             </p>",
         ];
+
+        $titles = [
+            'The Future of Solar: Emerging Technologies in Photovoltaics',
+            'Maximizing Your Solar Investment: Tips for Optimal Panel Performance',
+            'Solar Battery Storage: Is It Right for Your Home?',
+            'Going Green and Saving Green: Solar Tax Incentives for Homeowners',
+            'Solar Myths Debunked: Separating Fact from Fiction',
+            'The Benefits of Solar Energy for Your Home',
+            'How to Choose the Right Solar Installer for Your Home',
+            'The Environmental Impact of Solar Energy',
+        ];
         return [
-            'title' => $this->faker->sentence,
+            'title' => $titles[rand(0, 7)],
             'body' => $body_data[rand(0, 4)],
             'is_published' => $this->faker->boolean(70),
             'is_featured' => $this->faker->boolean(20),

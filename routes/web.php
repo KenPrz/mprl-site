@@ -16,6 +16,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ProductsAdminController;
 use App\Http\Controllers\BrochureController;
+use App\Http\Controllers\UserAdminController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
@@ -30,6 +31,8 @@ Route::get('/brochure', [BrochureController::class, 'downLoadBrochure'])->name('
 
 Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');
+
+    Route::get('/users', [UserAdminController::class, 'index'])->name('admin.users.index');
 
     Route::get('/blog', [BlogAdminController::class, 'index'])->name('admin.blog.index');
     Route::get('/blog/create', [BlogAdminController::class, 'create'])->name('admin.blog.create');

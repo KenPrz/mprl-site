@@ -40,7 +40,7 @@ onUnmounted(() => {
                         </h1>
                         <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true"
                             class="text-4xl md:text-6xl font-semibold text-white">
-                            Harnessing the power of the sun to create a brighter future
+                            Harnessing the power of the <span class="text-offset-400">sun</span> to create a brighter future
                         </h2>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
@@ -208,18 +208,18 @@ onUnmounted(() => {
                             <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold mb-16">Ready to make the switch to
                                 <span class="text-offset-500">solar?</span></h1>
                             <div class="flex flex-col w-full justify-start space-y-4">
-                                <a href="#"
+                                <a :href="route('contact.index')"
                                     class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 space-x-2">
-                                    <i class="pi pi-pencil"></i>
-                                    <span>Contact Us</span>
-                                </a>
-                                <a href="#"
-                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
                                     <i class="pi pi-phone"></i>
                                     <span>Contact Us</span>
                                 </a>
+                                <a :href="route('products')"
+                                    class="rounded-md flex items-center w-full sm:w-1/5 px-6 py-3 text-start text-sm md:text-lg font-medium border-offset-600 bg-offset-600 text-white hover:bg-offset-700 transition-colors duration-200 space-x-2">
+                                    <i class="pi pi-shopping-bag"></i>
+                                    <span>Browse our products</span>
+                                </a>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>

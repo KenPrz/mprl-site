@@ -3,14 +3,14 @@
       <img
         v-if="isDark"
         class="h-20 svg-scale"
-        :src="'/images/svg/logo/horizontal/Horizontal-Logo-Black-01.svg'"
+        :src="'images/svg/logo/Horizontal/Horizontal-Logo-Black-01.svg'"
         alt="Dark Logo"
       >
       <img
         v-else
         class="h-20 svg-scale"
-        :src="'/images/svg/logo/horizontal/Horizontal-Logo-01.svg'"
-        alt="Light Logo"
+        :src="'images/svg/logo/Horizontal/Horizontal-Logo-01.svg'"
+        alt="Light Logo"  
       >
     </div>
     <div class="block sm:hidden">

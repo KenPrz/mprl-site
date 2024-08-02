@@ -43,6 +43,8 @@ class ProductController extends Controller
     {
         $product = Product::with(['category', 'images'])->find($id);
         $categories = ProductCategory::select('id', 'name')->get();
+        $newProducts = Product::with('firstImage')
+                                ->orderBy('created_at', 'desc')->take(5)->get();
         $similarproducts = Product::with('category', 'firstImage')
                                         ->orderBy('created_at', 'desc')->take(3)->get();
 
@@ -51,7 +53,8 @@ class ProductController extends Controller
 
         return Inertia::render('Product/Show', [
             'products' => $product,
-            'similarproducts' => $similarproducts
+            'similarproducts' => $similarproducts,
+            'newproducts' => $newProducts
         ]);
     }
 

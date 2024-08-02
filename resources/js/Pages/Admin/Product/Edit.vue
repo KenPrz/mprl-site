@@ -5,6 +5,7 @@ import { Head } from '@inertiajs/vue3';
 import Toggle from '@/Components/Toggle.vue';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import Editor from '@/Components/Editor.vue';
 
 const props = defineProps({
     categories: {
@@ -106,7 +107,8 @@ onMounted(() => {
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="col-span-1">
                             <label for="prod-name" class="block text-lg font-medium text-gray-700">Description</label>
-                            <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea>
+                            <!-- <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea> -->
+                            <Editor v-model="form.description" />
                             <InputError class="mt-2" :message="form.errors.description" />
                         </div>
                         <div class="col-span-1">

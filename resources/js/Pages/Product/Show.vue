@@ -25,19 +25,33 @@
   </section>
   <section class="w-full mt-5">
     <div class="flex flex-col md:flex-row justify-center md:px-32 gap-4">
-      <div class="flex flex-col md:flex-row items-center md:items-start ">
-        <div class="border-lime-600 border-l-4 md:mr-4 hidden sm:block">
-          <div class="ml-10 md:ml-20 text-xl font-medium text-lime-600">CATEGORIES</div>
+      <div class="flex flex-col md:flex-row items-center md:items-start">
+        <div class="mt-10 hidden sm:block w-full">
+          <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
+            <p class="ml-5 font-bold">NEW PRODUCTS</p>
+          </div>
+          <div class="mt-3">
+            <div class="border rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-md p-2" v-for="newproduct in newproducts" :key="newproduct.id">
+              <div class="flex gap-1 items-start mt-2">
+                <img class="w-1/3 h-20 object-cover" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
+                <div class="flex flex-col justify-between">
+                  <p class="text-sm font-bold">{{ newproduct.name }}</p>
+                  <p class="text-xs">{{ newproduct.power_out }} Watts | {{ newproduct.voltage }} Volts</p>
+                  <a :href="`/product/${newproduct.id}`" class="text-xs  rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div>
           <p class="w-full text-start rounded-lg shadow-md px-4 py-2 m-1 bg-lime-500 text-white mt-10 lg:hidden">{{ products.category.name }}</p>
         </div>
       </div>
       <div class="container mx-auto w-full md:w-3/4 bg-white shadow-lg rounded border p-4">
+        <!-- Product Details -->
         <div class="flex flex-col md:flex-row">
           <div class="w-full md:w-2/5">
             <h2 class="text-xl font-bold">{{ products.name }}</h2>
-            
             <div>
               <div class="border mt-2 p-3 flex justify-center align-middle rounded-md">
                 <img class="w-full md:w-1/2" :src="mainImage" alt="Main Image">
@@ -53,13 +67,10 @@
                 </div>
               </div>
             </div>
-            <p class="text-sm mt-2 tracking-widest">{{ products.description }}</p>
           </div>
           <div class="w-full md:w-3/5 mt-4 md:mt-0 md:ml-10">
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">
-                PRODUCT SPECIFICATIONS
-              </h4>
+              <h4 class="bg-gray-200 mt-2 align-middle p-1">PRODUCT SPECIFICATIONS</h4>
               <div class="flex border gap-2">
                 <div class="w-1/3 border-r-2">Brand</div>
                 <div class="ml-2">{{ products.name }}</div>
@@ -70,9 +81,7 @@
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">
-                TECHNICAL SPECIFICATIONS
-              </h4>
+              <h4 class="bg-gray-200 mt-2 align-middle p-1">TECHNICAL SPECIFICATIONS</h4>
               <div class="flex border gap-2">
                 <div class="w-1/3 border-r-2">Power Output</div>
                 <div class="ml-2">{{ products.power_out }} Watts</div>
@@ -99,11 +108,9 @@
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">
-                PHYSICAL CHARACTERISTIC
-              </h4>
+              <h4 class="bg-gray-200 mt-2 align-middle p-1">PHYSICAL CHARACTERISTIC</h4>
               <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2"> Dimensions</div>
+                <div class="w-1/3 border-r-2">Dimensions</div>
                 <div class="ml-2">{{ products.dimension }}</div>
               </div>
               <div class="flex border gap-2">
@@ -112,11 +119,9 @@
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">
-                OTHER DETAILS
-              </h4>
+              <h4 class="bg-gray-200 mt-2 align-middle p-1">OTHER DETAILS</h4>
               <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2"> Warranty</div>
+                <div class="w-1/3 border-r-2">Warranty</div>
                 <div class="ml-2">{{ products.warranty }} years</div>
               </div>
               <div class="flex border gap-2">
@@ -133,26 +138,28 @@
             </div>
           </div>
         </div>
-        <div class="border-t-4 mt-3">
+        <div class="mt-3">
+          <div class="mt-2">
+            <p class="text-xl">Product Description*</p>
+          </div>
+          <div>
+            <p class="text-sm mt-2 tracking-widest" v-html="products.description"></p>
+          </div>
+        </div>
+        <div class="border-t-4 mt-6">
           <div class="mt-2">
             <p class="text-xl">Similar Product Listing</p>
           </div>
           <div class="flex flex-wrap gap-5 justify-center">
-              <div class="w-full sm:w-1/2 lg:w-1/4 mt-5" v-for="similarproduct in similarproducts" :key="similarproduct.id">
-                <div class="bg-gray-200 border rounded-md hover:shadow-md p-4">
-                  <div class="flex justify-center h-1/2">
-                    <img :src="similarproduct.first_image ? `/storage/${similarproduct.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-1/2" alt="">
-                  </div>
-                  <div class="p-3">
-                    <p class="font-bold text-center">{{ similarproduct.name }}</p>
-                    <p class="ml-2 text-sm text-center">{{ similarproduct.power_out}}Watts</p>
-                    <p class="ml-2 text-sm text-center">{{ similarproduct.supplier}}</p>
-                    <a :href="`/product/${similarproduct.id}`" class="mt-2 px-2 bg-orange-300 rounded-md text-white ml-10">View</a>
-                  </div>
-                </div>
+            <div class="w-full sm:w-1/2 lg:w-1/4 mt-5" v-for="similarproduct in similarproducts" :key="similarproduct.id">
+              <div class="hover:bg-slate-200 rounded-lg hover:shadow-md p-4">
+                <img :src="similarproduct.first_image ? `/storage/${similarproduct.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-40 object-cover rounded-lg" alt="Similar Product Image">
+                <p class="text-sm font-bold mt-2">{{ similarproduct.name }}</p>
+                <p class="text-xs">{{ similarproduct.power_out }} Watts | {{ similarproduct.voltage }} Volts</p>
+                <a :href="`/product/${similarproduct.id}`" class="text-xs bg-orange-200 rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
               </div>
             </div>
-
+          </div>
         </div>
       </div>
     </div>
@@ -162,7 +169,7 @@
 
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
@@ -181,6 +188,10 @@ const props = defineProps({
     required: true,
   },
   similarproducts: {
+    type: Array,
+    required: true
+  },
+  newproducts:{
     type: Array,
     required: true
   }

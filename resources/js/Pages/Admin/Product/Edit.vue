@@ -1,8 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import Toggle from '@/Components/Toggle.vue';
 import { Head } from '@inertiajs/vue3';
+import Toggle from '@/Components/Toggle.vue';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import Editor from '@/Components/Editor.vue';
@@ -11,42 +11,44 @@ const props = defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    product: {
+        type: Object,
+        required: true
     }
 });
 
 const form = useForm({
-    name: '',
-    category_id: '',
-    power_out: '',
-    efficiency: '',
-    dimension: '',
-    weight: '',
-    type: '',
-    voltage: '',
-    current: '',
-    temp_coeff: '',
-    price: '',
-    discount: '',
-    warranty: '',
-    stock_level: '',
-    supplier: '',
-    certification: '',
-    description: '',
+    name: props.product.name,
+    category_id: props.product.category_id,
+    power_out: props.product.power_out,
+    efficiency: props.product.efficiency,
+    dimension: props.product.dimension,
+    weight: props.product.weight,
+    type: props.product.type,
+    voltage: props.product.voltage,
+    current: props.product.current,
+    temp_coeff: props.product.temp_coeff,
+    price: props.product.price,
+    discount: props.product.discount,
+    warranty: props.product.warranty,
+    stock_level: props.product.stock_level,
+    supplier: props.product.supplier,
+    certification: props.product.certification,
+    description: props.product.description,
     img_path: [],
-    datasheet: '',
-    is_displayed: false
+    datasheet: props.product.datasheet,
+    is_displayed: props.product.is_displayed,
 });
 
-const imagePreviews = ref([]);
-function addProduct() {
-    form.post(route('admin.products.store'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            form.reset();
-            imagePreviews.value = [];
-        }
-    });
-}
+//put the update function here
+
+const imagePreviews = ref(
+    props.product.images.map(image => ({
+        id: image.id,
+        url: `/storage/${image.images}`
+    }))
+);
 
 function handleFiles(event) {
     const files = event.target.files;
@@ -54,10 +56,10 @@ function handleFiles(event) {
         const file = files[i];
         const reader = new FileReader();
         reader.onload = (e) => {
-            imagePreviews.value.push(e.target.result);
-            form.img_path.push(file);
+            imagePreviews.value.push({ id: i, url: e.target.result });
         };
         reader.readAsDataURL(file);
+        form.img_path = [...form.img_path, file]; // Update img_path here
     }
 }
 
@@ -66,22 +68,24 @@ function removeImage(index) {
     form.img_path.splice(index, 1);
 }
 
+function updateProduct(){
+    form.patch(route('admin.products.update', props.product.id));
+}
 onMounted(() => {
     form.clearErrors();
 });
 </script>
-
 <template>
-    <Head title="Add Product" />
+    <Head title="Update Product" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">New Product Information Form</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Update Product Information</h2>
         </template>
-        <div class="p-2">
+        <div class="py-12">
             <div class="flex flex-col space-y-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-start">
-                    <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.products.index')">
-                        <i class="fa-solid fa-arrow-left px-4"></i><span>Go Back</span>
+                    <Link class="bg-main-400 px-3  rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.products.index')">
+                        <i class="fa-solid fa-arrow-left m-2"></i>Back
                     </Link>
                 </div>
                 <div class="w-full bg-white rounded-md p-4 shadow-md space-y-2">
@@ -123,7 +127,7 @@ onMounted(() => {
                             <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
                                 <div class="flex space-x-2">
                                     <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                                        <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
+                                        <img :src="preview.url" class="w-24 h-24 object-cover rounded-lg" />
                                         <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
                                             <i class="fa-solid fa-times"></i>
                                         </button>
@@ -216,11 +220,12 @@ onMounted(() => {
                             </div>
                         </div>
                         <div class="flex justify-end mt-5">
-                            <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="addProduct">
+                            <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="updateProduct">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
+
 </template>

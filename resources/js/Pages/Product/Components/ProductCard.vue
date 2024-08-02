@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 hover:scale-105 transition-transform duration-300 w-full sm:w-auto p-6 bg-white border rounded-lg hover:shadow-lg dark:bg-slate-200 dark:border-gray-700">
+  <div class="mt-5 hover:scale-105 transition-transform duration-300 w-full sm:w-auto p-6 bg-white rounded-lg hover:shadow-lg dark:bg-slate-200 dark:border">
     <a :href="`/product/${product.id}`" class="block relative group">
       <div class="relative">
         <img class="w-full h-48 object-cover" :src="product.first_image ? `/storage/${product.first_image.images}` : '/images/products-images/solarpanel.png'" alt="">

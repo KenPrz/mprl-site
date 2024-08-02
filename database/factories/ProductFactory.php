@@ -33,7 +33,7 @@ class ProductFactory extends Factory
             'stock_level' => $this->faker->numberBetween(0, 100),
             'supplier' => $this->faker->company,
             'certification' => $this->faker->randomElement(['CE', 'ISO', 'TUV']),
-            'desciption' => $this->faker->paragraph,
+            'description' => $this->faker->paragraph,
             'img_path' => $this->faker->imageUrl(640, 480, 'products', true),
             'datasheet' => $this->faker->url,
             'is_displayed' => $this->faker->boolean,

@@ -33,12 +33,12 @@ const form = useForm({
 
 const blogContent = ref(props.blog.body);
 
-const imagePreviews = ref(
-    props.blog.images.map(image => ({
-        id: image.id,
-        url: `/storage/${image.image}`
-    }))
-);
+    const imagePreviews = ref(
+        props.blog.images.map(image => ({
+            id: image.id,
+            url: `/storage/${image.image}`
+        }))
+    );
 
 function handleImageChange(event) {
     const files = event.target.files;

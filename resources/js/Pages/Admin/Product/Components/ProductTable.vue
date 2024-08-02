@@ -1,5 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import Modal from '@/Components/Modal.vue';
+import { Link } from '@inertiajs/vue3';
 const props = defineProps({
     products: {
         type: Array,
@@ -68,9 +70,15 @@ function toggleSort(column) {
                 <td>{{ product.price }}</td>
                 <td>{{ product.is_displayed ? 'Yes' : 'No' }}</td> <!-- Correctly display is_displayed -->
                 <td>
-                    <button class="ps-3">
-                        <i class="pi pi-ellipsis-v"></i>
-                    </button>
+                        <span class="flex items-center space-x-2">
+                            <Link :href="route('admin.products.edit',product.id)" class="text-green-500">
+                                <i class="fa-solid fa-pen"></i>
+                            </Link>
+                            <button @click="" class="text-red-500">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                            
+                        </span>
                 </td>
             </tr>
         </tbody>

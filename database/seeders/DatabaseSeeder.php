@@ -39,9 +39,9 @@ class DatabaseSeeder extends Seeder
             BlogPostCategorySeeder::class,
             BlogImageSeeder::class,
             ContactFormSeeder::class,
-            // ProductCategorySeeder::class,
-            // ProductSeeder::class,
-            // VisitorSeeder::class,
+            ProductCategorySeeder::class,
+            ProductSeeder::class,
+            VisitorSeeder::class,
         ]);
     }
 }

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('google_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('role_id')->constrained('roles','id')->default(2);
             $table->string('password');
+            $table->boolean('is_google_user')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

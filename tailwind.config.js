@@ -42,6 +42,10 @@ module.exports = {
       },
     },
     extend: {
+      blur: {
+        xs: '2px',
+        '2xs': '1px',
+      },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },

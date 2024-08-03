@@ -34,6 +34,7 @@ class BlogController extends Controller
             ->when($selectedMonth !== 'all', function ($query) use ($selectedMonth) {
                 $query->whereMonth('blog_posts.created_at', $selectedMonth);
             })
+            ->where('is_published', true)
             ->orderBy('blog_posts.created_at', 'desc')
             ->orderBy('blog_posts.clicks', 'desc')
             ->paginate(9);
@@ -71,7 +72,6 @@ class BlogController extends Controller
         $blog = BlogPost::with(['images', 'categories', 'user'])
             ->where('id', $id)
             ->firstOrFail();
-            
         if($blog->is_published == false && ( (auth()->user() == null) || auth()->user()->role_id != 1)) {
             abort(404);
         }

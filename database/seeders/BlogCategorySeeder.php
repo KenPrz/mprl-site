@@ -14,6 +14,7 @@ class BlogCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
+            'Project',
             'Solar Panels',
             'Solar Inverters',
             'Solar Batteries',

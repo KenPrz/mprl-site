@@ -20,7 +20,9 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'google_id',
         'password',
+        'is_google_user',
         'role_id',
     ];
 
@@ -45,6 +47,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'role_id' => 'integer',
+            'is_google_user' => 'boolean',
         ];
     }
 

@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             ContactFormSeeder::class,
             // ProductCategorySeeder::class,
             // ProductSeeder::class,
-            VisitorSeeder::class,
+            // VisitorSeeder::class,
         ]);
     }
 }

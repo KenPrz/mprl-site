@@ -8,8 +8,14 @@ import { ref } from 'vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
-
+const props = defineProps({
+    is_google_user: {
+        type: Boolean,
+        required: true,
+    },
+})
 const form = useForm({
+    is_google_user: props.is_google_user,
     current_password: '',
     password: '',
     password_confirmation: '',
@@ -42,9 +48,8 @@ const updatePassword = () => {
                 Ensure your account is using a long, random password to stay secure.
             </p>
         </header>
-
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
-            <div>
+            <div v-if="!is_google_user">
                 <InputLabel for="current_password" value="Current Password" />
 
                 <TextInput
@@ -58,10 +63,13 @@ const updatePassword = () => {
 
                 <InputError :message="form.errors.current_password" class="mt-2" />
             </div>
-
+            <div v-if="is_google_user">
+                <p class="text-green-500">
+                    You are currently using Google to sign in. Enter a new password below to secure your account.
+                </p>
+            </div>
             <div>
                 <InputLabel for="password" value="New Password" />
-
                 <TextInput
                     id="password"
                     ref="passwordInput"
@@ -76,7 +84,6 @@ const updatePassword = () => {
 
             <div>
                 <InputLabel for="password_confirmation" value="Confirm Password" />
-
                 <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
@@ -84,7 +91,6 @@ const updatePassword = () => {
                     class="mt-1 block w-full"
                     autocomplete="new-password"
                 />
-
                 <InputError :message="form.errors.password_confirmation" class="mt-2" />
             </div>
 

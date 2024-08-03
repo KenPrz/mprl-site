@@ -15,15 +15,29 @@ class PasswordController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
+        if($request->is_google_user && $request->current_password == null){
+            $this->handleGoogleUser($request);
+        }else{
+            $validated = $request->validate([
+                'current_password' => ['required', 'current_password'],
+                'password' => ['required', Password::defaults(), 'confirmed'],
+            ]);
+            $request->user()->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+        }
+        return back();
+
+    }
+    private function handleGoogleUser($request)
+    {
         $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
-
         $request->user()->update([
             'password' => Hash::make($validated['password']),
+            'is_google_user' => false,
         ]);
-
-        return back();
+        return;
     }
 }

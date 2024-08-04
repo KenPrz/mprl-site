@@ -15,7 +15,7 @@ class ProductsAdminController extends Controller
     public function index(Request $request)
     {
         $search_query = $request->searchQuery;
-        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_name', 'products.price', 'products.is_displayed')
+        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_id', 'products.price', 'products.is_displayed')
         ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
         ->with('category:id,name')
         ->where(function($query) use ($search_query) {

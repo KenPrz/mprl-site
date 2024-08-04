@@ -38,10 +38,16 @@ const showingNavigationDropdown = ref(false);
                                     <AdminNavLink :href="route('admin.products.index')" :active="route().current('admin.products.index')">
                                         Products
                                     </AdminNavLink>
+                                    <AdminNavLink :href="route('admin.services.index')" :active="route().current('admin.services.index')">
+                                        Services
+                                    </AdminNavLink>
+                                    <AdminNavLink :href="route('admin.projects.index')" :active="route().current('admin.projects.index')">
+                                        Projects
+                                    </AdminNavLink>
                                 </div>
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-else>
                                     <AdminNavLink :href="route('welcome')" :active="route().current('dashboard')">
-                                        Home
+                                        Home    
                                     </AdminNavLink>
                                 </div>
                         </div>

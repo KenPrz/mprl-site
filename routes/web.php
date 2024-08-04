@@ -16,8 +16,11 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ProductsAdminController;
 use App\Http\Controllers\BrochureController;
+use App\Http\Controllers\ServicesAdminController;
 use App\Http\Controllers\UserAdminController;
-
+use App\Http\Controllers\ProjectAdminController;
+use Carbon\Laravel\ServiceProvider;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
@@ -53,6 +56,15 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/products/{id}/edit', [ProductsAdminController::class, 'edit'])->name('admin.products.edit');
     Route::patch('/products/{id}', [ProductsAdminController::class, 'update'])->name('admin.products.update');
     Route::delete('/products/{id}', [ProductsAdminController::class, 'destroy'])->name('admin.products.destroy');
+
+    Route::get('/services', [ServicesAdminController::class, 'index'])->name('admin.services.index');
+    Route::get('/services/create', [ServicesAdminController::class, 'create'])->name('admin.services.create');
+    Route::post('/services', [ServicesAdminController::class, 'store'])->name('admin.services.store');
+    Route::get('/services/{id}/edit', [ProductsAdminController::class, 'edit'])->name('admin.services.edit');
+
+    Route::get('/projects', [ProjectAdminController::class, 'index'])->name('admin.projects.index');
+    Route::get('/projects/create', [ProjectAdminController::class, 'create'])->name('admin.projects.create');
+    Route::post('/projects', [ProjectAdminController::class, 'store'])->name('admin.projects.store');
 
     Route::post('/dashboard/update-brochure', [BrochureController::class, 'store'])->name('admin.brochure.store');
 });

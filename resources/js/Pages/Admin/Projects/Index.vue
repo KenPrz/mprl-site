@@ -17,16 +17,16 @@
                 class="w-1/4 p-2"
                 @input="handleInput"
               />
-              <!-- <Link
+              <Link
                 class="flex space-x-1 items-center bg-main-400 px-3 py-2 rounded-md text-white hover:bg-main-500"
-                :href="route('admin.services.create')"
+                :href="route('admin.projects.create')"
               >
-                <span>Create Service</span>
+                <span>Add Project</span>
                 <i class="pi pi-plus-circle"></i>
-              </Link> -->
+              </Link>
             </section>
             <section>
-              <!-- <ServicesTable :services="services.data" /> -->
+              <ProjectTable :projects="projects.data" />
             </section>
             <section class="py-3">
               <Pagination
@@ -48,6 +48,7 @@
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import Pagination from '@/Components/Pagination.vue';
   import { Head, useForm, Link } from '@inertiajs/vue3';
+  import ProjectTable from './Components/ProjectTable.vue';
   
   const props = defineProps({
     projects: {

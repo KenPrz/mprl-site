@@ -1,24 +1,30 @@
 <template>
-    <div>
-      <div class="flex border-b-2">
-        <div
-          v-for="category in projectCategory"
-          :key="category.id"
-          @click="selectCategory(category.id)"
-          :class="['cursor-pointer px-4 py-2', selectedCategory === category.id ? 'active-tab' : 'inactive-tab']"
-        >
-          {{ category.name }}
-        </div>
+  <div>
+    <div class="flex border-b-2">
+      <div
+        v-for="category in projectCategory"
+        :key="category.id"
+        @click="selectCategory(category.id)"
+        :class="['cursor-pointer px-4 py-2', selectedCategory === category.id ? 'active-tab' : 'inactive-tab']"
+      >
+        {{ category.name }}
       </div>
-      <div class="mt-5">
-        <!-- Display services or content based on the selected category -->
-        <div v-for="service in filteredServices" :key="service.id">
-          <h3>{{ service.name }}</h3>
-          <p v-html="service.description"></p>
+    </div>
+    <div class="mt-5">
+      <!-- Display projects based on the selected category -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div v-for="project in filteredProjects" :key="project.id" class="border rounded-lg overflow-hidden shadow-md">
+          <!-- <img :src="`/storage/${project.image}`" :alt="project.name" class="w-full h-48 object-cover"> -->
+          <div class="p-4">
+            <h3 class="font-bold text-lg">{{ project.title }}</h3>
+            <p class="text-gray-600">{{ project.content }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
   <script>
   export default {
@@ -28,7 +34,7 @@
         default: () => [],
         required: true,
       },
-      services: {
+      projects: {
         type: Array,
         default: () => [],
         required: true,
@@ -40,9 +46,9 @@
       };
     },
     computed: {
-      filteredServices() {
-        if (this.selectedCategory === null) return this.services;
-        return this.services.filter(service => service.category_id === this.selectedCategory);
+      filteredProjects() {
+        if (this.selectedCategory === null) return this.projects;
+        return this.projects.filter(project => project.category_id === this.selectedCategory);
       },
     },
     mounted() {
@@ -59,14 +65,14 @@
   };
   </script>
   
-  <style>
-  .active-tab {
-    font-weight: bold;
-    color: #003e57; /* Change to desired color */
-    border-bottom: 2px solid #00b050; /* Change to desired underline color */
-  }
-  .inactive-tab {
-    color: #c0c0c0; /* Greyed out color */
-  }
-  </style>
   
+  <style>
+.active-tab {
+  font-weight: bold;
+  color: #003e57; /* Change to desired color */
+  border-bottom: 2px solid #00b050; /* Change to desired underline color */
+}
+.inactive-tab {
+  color: #c0c0c0; /* Greyed out color */
+}
+</style>

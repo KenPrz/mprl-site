@@ -19,8 +19,8 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('system_size');
             $table->string('monthly_saving');
-            $table->string('content');
-            $table->string('img_path');
+            $table->text('content');
+            $table->string('img_path')->nullable();
             $table->timestamps();
         });
     }

@@ -160,14 +160,14 @@ onUnmounted(() => {
             </div>
           </section>
           <section>
-            <div class="mt-20">
-              <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
-              <p class="text-3xl font-semibold text-center">Project Portfolio</p>
-            </div>
-            <div class="mt-10">
-              <ProjectTabs :projectCategory="projectCategory" :services="services" />
-            </div>
-          </section>
+              <div class="mt-20">
+                <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
+                <p class="text-3xl font-semibold text-center">Project Portfolio</p>
+              </div>
+              <div class="mt-10">
+                <ProjectTabs :projectCategory="projectCategory" :services="services" />
+              </div>
+            </section>
         </div>
       </div>
     </div>

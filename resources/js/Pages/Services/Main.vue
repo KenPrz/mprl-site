@@ -6,6 +6,7 @@ import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import ServicesCategory from '@/Pages/Services/Components/ServicesCategory.vue';
+import ProjectTabs from '@/Pages/Services/Components/ProjectTabs.vue';
 
 const scroll = ref(0);
 const props = defineProps({
@@ -19,11 +20,19 @@ const props = defineProps({
     default: () => [],
     required: true,
   },
+  projectCategory:{
+    type: Array,
+    default: () => [],
+    required: true,
+  }
 });
 
 // Computed property to get the first category
 const firstCategory = computed(() => {
   return props.servicesCategory.length > 0 ? props.servicesCategory[0] : null;
+});
+const secondCategory = computed(() => {
+  return props.servicesCategory.length > 0 ? props.servicesCategory[1] : null;
 });
 
 const handleScroll = () => {
@@ -73,7 +82,7 @@ onUnmounted(() => {
     <div class="flex flex-col lg:ml-20 mt-10">
       <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
         <!-- categories -->
-        <div class="lg:flex lg:items-center lg:w-2/5">
+        <div class="lg:flex lg:items-center lg:w-1/4">
           <div class="border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0">
             <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
               <p class="ml-5 font-bold">SERVICES</p>
@@ -111,12 +120,52 @@ onUnmounted(() => {
               </div>
               <!-- Display services here -->
               <div v-for="service in services" :key="service.id" class="mt-20">
-                <h3 class="font-semibold text-xl mt-5 mb-5">{{ service.name }}</h3>
-                <div>
-                  <img :src="`/storage/${service.image}`" :alt="service.name">
+                <div v-if="service.category_id === 6 || service.category_id === '6'" class="">
+                  <h3 class="font-semibold text-xl mt-5 mb-5">{{ service.name }}</h3>
+                  <div>
+                    <img :src="`/storage/${service.image}`" :alt="service.name" class="">
+                  </div>
+                  <p class="text-md mt-10 tracking-widest" v-html="service.description"></p>
                 </div>
-                <p class="text-md mt-10 tracking-widest " v-html="service.description"></p>
               </div>
+            </div>
+          </section>
+          <section class="mt-5 bg-no-repeat" style="background-image: url('images/bg-service.png'); background-size: 500px; background-position: left bottom;">
+            <div class="mt-20">
+              <div class="flex justify-center">
+                <p v-if="firstCategory" class="text-3xl font-bold">
+                  {{ secondCategory.service_category }}
+                </p>
+              </div>
+              <div class="flex justify-center text-center mt-10">
+                <p class="text-md">
+                  ONE MPRL is providing a solution for a ground mount solar photovoltaic power plant, 
+                  encompassing the full spectrum of services from initial site assessment and design to installation and 
+                  ongoing maintenance, ensuring optimal performance and efficiency.
+                </p>
+              </div>
+            </div>
+            <div class="container mx-auto">
+              <div class="flex flex-wrap justify-center -mx-2 sm:p-10">
+                <div v-for="service in services" :key="service.id" class="w-full sm:w-1/2 lg:w-1/3 p-2">
+                  <div v-if="service.category_id === 7 || service.category_id === '7'" class="flex flex-col h-full border rounded-lg shadow-md p-4 bg-white bg-opacity-90">
+                    <div class="flex justify-center">
+                      <img :src="`/storage/${service.image}`" :alt="service.name" class="rounded-t-lg">
+                    </div>
+                    <h3 class="font-bold text-lg mt-4 mb-5 text-center text-blue-500">{{ service.name }}</h3>
+                    <p class="text-sm font-semibold text-green-500 mt-3 ml-5 flex-grow" v-html="service.description"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="mt-20">
+              <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
+              <p class="text-3xl font-semibold text-center">Project Portfolio</p>
+            </div>
+            <div class="mt-10">
+              <ProjectTabs :projectCategory="projectCategory" :services="services" />
             </div>
           </section>
         </div>

@@ -7,7 +7,6 @@ use App\Models\Projects;
 use App\Models\Services;
 use App\Models\ServicesCategory;
 use Inertia\Inertia;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class ServicesController extends Controller
 {
@@ -15,11 +14,9 @@ class ServicesController extends Controller
     {
         $servicesCategory = ServicesCategory::select('id', 'service_category')->get();
         $projectCategory = ProjectCatergory::select('id', 'name')->get();
-        $projects = Projects::all();
+        $projects = Projects::with('firstImage')
+                            ->orderBy('created_at', 'desc')->take(5)->get();
         $services = Services::all();
-
-        // Log the data to ensure it's correct
-    
 
         return Inertia::render('Services/Main', [
             'servicesCategory' => $servicesCategory,

@@ -63,7 +63,7 @@
         <!-- Product Display Cards -->
           <div class="lg:w-3/4">
             <div class="flex flex-col sm:flex-row sm:justify-between">
-                <div class="sm:mr-4 mb-4 sm:mb-0">
+                <div class="sm:mr-4 mb-4 sm:mb-1">
                   <select name="sortBy" id="" class="mt-2 ml-4 sm:ml-0 px-3 py-1 border rounded-2xl" v-model="selectedSortOption" @change="sortProducts">
                     <option value="all" selected>Sort By</option>
                     <option value="name">Name</option>
@@ -71,17 +71,9 @@
                     <option value="voltage">Voltage</option>
                   </select>
                 </div>
-                <div class="relative w-full sm:w-auto">
+                <div class="relative w-full sm:w-auto mt-2">
                   <input type="text" v-model="searchQuery" class="border rounded-2xl px-3 py-1 m-1 sm:m-0 w-full sm:w-auto" placeholder="Search Product">
-                  <button @click="searchProducts" class="bg-green-600 text-white rounded-3xl px-5 py-1 absolute top-1/2 right-0 transform -translate-y-1/2 sm:translate-x-1/2"><i class="fa-solid fa-magnifying-glass"></i><span> search</span></button>
-                </div>
-                <div class="flex gap-2 px-3 py-1 mt-2 sm:mt-0">
-                  <div>
-                    <button class="hover:bg-orange-400 px-2 pt-1 rounded-full text-black-300 hover:text-white"><i class="fa-solid fa-border-all text-2xl"></i></button>
-                  </div>
-                  <div>
-                    <button class="hover:bg-orange-400 px-2 pt-1 rounded-full text-black-300  hover:text-white"><i class="fa-solid fa-list text-2xl "></i></button>
-                  </div>
+                  <!-- <button @click="searchProducts" class="bg-green-600 text-white rounded-3xl px-5 py-1 absolute top-1/2 right-0 transform -translate-y-1/2 sm:translate-x-1/2"><i class="fa-solid fa-magnifying-glass"></i><span> search</span></button> -->
                 </div>
               </div>
 

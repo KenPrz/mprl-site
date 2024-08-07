@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits } from 'vue';
+import { defineProps, ref, defineEmits, onMounted } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
@@ -28,6 +28,10 @@ const selectCategory = (categoryId) => {
   fetchFilteredProduct(categoryId);
 };
 
+// Fetch products for the 'all' category when the component is mounted
+onMounted(() => {
+  fetchFilteredProduct('all');
+});
 </script>
 
 <template>

@@ -164,7 +164,7 @@ onUnmounted(() => {
                     <p class="text-sm font-semibold text-green-500 mt-3 ml-5 flex-grow" v-html="service.description"></p>
                   </div>
                 </div>
-              </div>
+              </div>  
             </div>
           </section>
           <section>

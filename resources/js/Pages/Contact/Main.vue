@@ -33,9 +33,9 @@ onUnmounted(() => {
                 <div class="flex flex-col items-center justify-center space-y-6">
                     <h2 class="text-4xl md:text-5xl font-semibold text-white">CONTACT US</h2>
                     <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">
-                        <Link class="hover:underline" :href="route('welcome')">HOME</Link>
+                        <a class="hover:underline" :href="route('welcome')">HOME</a>
                         <span class="mx-2">/</span>
-                        <Link class="hover:underline" :href="route('blog.index')">BLOG</Link>
+                        <a class="hover:underline" :href="route('blog.index')">BLOG</a>
                     </div>
                 </div>
             </div>
@@ -50,25 +50,25 @@ onUnmounted(() => {
                             <div class="text-5xl font-semibold tracking-tighter max-md:max-w-full max-md:text-4xl">
                                 We Would Love to Connect with You!
                             </div>
-                            <div data-aos="fade-left"  data-aos-duration="500" class="mt-14 text-xl tracking-tight text-justify max-md:mt-10 max-md:max-w-full">
+                            <div data-aos-once="true" data-aos="fade-left"  data-aos-duration="500" class="mt-14 text-xl tracking-tight text-justify max-md:mt-10 max-md:max-w-full">
                                 Interested in getting solar? Start a conversation with us through
                                 email or messenger, or get in touch with our team using the form
                                 below.
                             </div>
-                            <div data-aos="fade-left" data-aos-duration="500" class="row mt-12">
+                            <div data-aos-once="true" data-aos="fade-left" data-aos-duration="500" class="row mt-12">
                                 <div class="text-3xl font-semibold tracking-tighter max-md:max-w-full max-md:text-4xl">
                                     Follow Us
                                 </div>
                             </div>
                             <div class="row mt-3 flex">
-                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500">
+                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500" data-aos-once="true">
                                     <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
                                         <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
                                             <i class="pi pi-facebook" style="font-size: 20px"></i>
                                         </button>
                                     </a>
                                 </div>
-                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500">
+                                <div data-aos="fade-left" data-aos-delay="50" data-aos-duration="500" data-aos-once="true">
                                     <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
                                         <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
                                             <i class="fa-brands fa-facebook-messenger" style="font-size: 20px"></i>
@@ -90,9 +90,9 @@ onUnmounted(() => {
                     allowfullscreen src="https://www.google.com/maps/embed/v1/view?zoom=15&center=14.1757%2C121.2482&key=AIzaSyCoYUwKxuWHK_QlAe2vJuApe_SbGirZ-fM"></iframe>
                 </div>
                 <div class="flex flex-row justify-center gap-6 mt-28 h-full">
-                    <div data-aos="fade-right" data-aos-delay="50" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
+                    <div data-aos-once="true" data-aos="fade-right" data-aos-delay="50" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
                         <div class="row my-3">
-                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                            <span class="w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-envelope" style="font-size: 25px"></i>
                             </span>
                         </div>
@@ -101,7 +101,7 @@ onUnmounted(() => {
                     </div>                        
                     <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
                         <div class="row my-3">
-                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                            <span class="w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-location-dot" style="font-size: 25px"></i>
                             </span>
                         </div>
@@ -110,7 +110,7 @@ onUnmounted(() => {
                     </div>
                     <div data-aos="fade-right" data-aos-delay="150" data-aos-duration="700" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-2/3 min-h-48">
                         <div class="row my-3">
-                            <span class="inline-block w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
+                            <span class="w-14 h-14 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-phone" style="font-size: 25px"></i>
                             </span>
                         </div>

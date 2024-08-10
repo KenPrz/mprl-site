@@ -29,6 +29,6 @@ class Projects extends Model
 
     public function firstImage()
     {
-        return $this->hasOne(ProjectImage::class)->oldest();
+        return $this->hasOne(ProjectImage::class, 'project_id')->oldest();
     }
 }

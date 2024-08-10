@@ -1,5 +1,8 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { Link, useForm } from '@inertiajs/vue3';
+import { useToast } from 'vue-toastification';
+import Modal from '@/Components/Modal.vue';
 const props = defineProps({
     projects: {
         type: Array,
@@ -31,6 +34,44 @@ function sortByDescription() {
 // Toggle sort order function
 function toggleSort(column) {
     sortOrder[column] = sortOrder[column] === 'asc' ? 'desc' : 'asc';
+}
+</script>
+<script>
+const toast = useToast();
+
+export default {
+    data() {
+        return {
+            showDeleteModal: false,
+            selected: {
+                title: null,
+                id: null
+            }
+        }
+    },
+    methods: {
+        openDeleteModal(title, id) {
+            this.selected.title = title;
+            this.selected.id = id;
+            this.showDeleteModal = true;
+        },
+        deleteProject(id) {
+            this.$inertia.delete(route('admin.projects.destroy', id), {
+                onSuccess: () => {
+                    toast.success('Project deleted successfully!');
+                    this.selected.title = null;
+                    this.selected.id = null;
+                    this.showDeleteModal = false;
+                },
+                onError: () => {
+                    toast.error('Failed to delete project!');
+                    this.selected.title = null;
+                    this.selected.id = null;
+                    this.showDeleteModal = false;
+                },
+            });
+        }
+    }
 }
 </script>
 
@@ -74,11 +115,11 @@ function toggleSort(column) {
                 <td>{{ project.name }}</td> <!-- Use category_name instead of category_id -->
                 <td>{{ project.content }}</td>
                 <td>
-                        <span class="flex items-center space-x-2">
-                            <Link :href="route('admin.services.edit',project.id)" class="text-green-500">
+                    <span class="flex items-center space-x-2">
+                            <Link :href="route('admin.projects.edit',project.id)" class="text-green-500">
                                 <i class="fa-solid fa-pen"></i>
                             </Link>
-                            <button @click="" class="text-red-500">
+                            <button @click="openDeleteModal(project.title, project.id)" class="text-red-500">
                                 <i class="pi pi-trash"></i>
                             </button>
                             
@@ -87,6 +128,16 @@ function toggleSort(column) {
             </tr>
         </tbody>
     </table>
+    <Modal maxWidth="md" v-model:show="showDeleteModal" @close="showDeleteModal = false">
+        <div class="flex flex-col items-center space-y-4 p-8 bg-gray-100 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold text-center text-red-400">Delete Project</h1>
+            <p class="text-center">Are you sure you want to delete <span class="font-semibold">"{{ selected.title }}"</span>?</p>
+            <div class="flex space-x-4">
+                <button @click="showDeleteModal = false" class="bg-gray-400 text-white px-4 py-2 rounded-lg">Cancel</button>
+                <button @click="deleteProject(selected.id)" class="bg-red-400 text-white px-4 py-2 rounded-lg">Delete</button>
+            </div>
+        </div>        
+    </Modal>
 </template>
 
 <style scoped>

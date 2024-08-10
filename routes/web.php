@@ -65,6 +65,9 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/projects', [ProjectAdminController::class, 'index'])->name('admin.projects.index');
     Route::get('/projects/create', [ProjectAdminController::class, 'create'])->name('admin.projects.create');
     Route::post('/projects', [ProjectAdminController::class, 'store'])->name('admin.projects.store');
+    Route::get('/projects/{id}/edit', [ProjectAdminController::class, 'edit'])->name('admin.projects.edit');
+    Route::patch('/projects/{id}', [ProjectAdminController::class, 'update'])->name('admin.projects.update');
+    Route::delete('/projects/{id}', [ProjectAdminController::class, 'destroy'])->name('admin.projects.destroy');
 
     Route::post('/dashboard/update-brochure', [BrochureController::class, 'store'])->name('admin.brochure.store');
 });

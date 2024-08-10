@@ -1,12 +1,14 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import Accordion from '@/Components/Accordion.vue';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import ServicesCategory from '@/Pages/Services/Components/ServicesCategory.vue';
 import ProjectTabs from '@/Pages/Services/Components/ProjectTabs.vue';
+import FaqTabs from '@/Pages/Services/Components/FaqTabs.vue';
+import ProjectCard from '@/Pages/Services/Components/ProjectCard.vue';
+
 
 const scroll = ref(0);
 const props = defineProps({
@@ -20,11 +22,16 @@ const props = defineProps({
     default: () => [],
     required: true,
   },
-  projectCategory:{
+  projectCategory: {
     type: Array,
     default: () => [],
     required: true,
-  }
+  },
+  projects: {
+    type: Array,
+    default: () => [],
+    required: true,
+  },
 });
 
 // Computed property to get the first category
@@ -33,6 +40,9 @@ const firstCategory = computed(() => {
 });
 const secondCategory = computed(() => {
   return props.servicesCategory.length > 0 ? props.servicesCategory[1] : null;
+});
+const thirdCategory = computed(() => {
+  return props.servicesCategory.length > 0 ? props.servicesCategory[3] : null;
 });
 
 const handleScroll = () => {
@@ -47,8 +57,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 </script>
-
-
 
 <template>
   <Head title="Services" />
@@ -156,18 +164,28 @@ onUnmounted(() => {
                     <p class="text-sm font-semibold text-green-500 mt-3 ml-5 flex-grow" v-html="service.description"></p>
                   </div>
                 </div>
-              </div>
+              </div>  
             </div>
           </section>
           <section>
-              <div class="mt-20">
-                <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
-                <p class="text-3xl font-semibold text-center">Project Portfolio</p>
+            <div class="mt-20">
+              <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
+              <p class="text-3xl font-semibold text-center">Project Portfolio</p>
+            </div>
+            <div class="mt-10">
+              <ProjectTabs :projectCategory="projectCategory" :services="services" :projects="projects"/>
+            </div>
+          </section>
+          <section class="mt-20">
+              <div class="flex justify-center">
+                <p v-if="firstCategory" class="text-3xl font-bold">
+                  {{ thirdCategory.service_category }}
+                </p>
               </div>
               <div class="mt-10">
-                <ProjectTabs :projectCategory="projectCategory" :services="services" />
-              </div>
-            </section>
+              <FaqTabs :projectCategory="projectCategory" :services="services"/>
+            </div>
+          </section>
         </div>
       </div>
     </div>

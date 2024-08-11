@@ -194,7 +194,8 @@ onUnmounted(() => {
             <section class="flex flex-col items-center justify-center max-w-6xl mx-auto">
                 <div class="flex flex-col text-center mb-8 text-blue-500">
                     <h1 class="text-xl">Our Products</h1>
-                    <h2 class="text-2xl font-semibold">Illuminate with the power of the <span class="text-offset-500">sun</span></h2>
+                    <h2 class="text-2xl font-semibold">Illuminate with the power of the <span
+                            class="text-offset-500">sun</span></h2>
                 </div>
                 <div class="flex w-full justify-center items-center">
                     <!-- Left Image Display Area -->
@@ -219,41 +220,66 @@ onUnmounted(() => {
                 </div>
             </section>
             <section class="flex flex-col md:max-w-5xl border-t-2 border-blue-400 pt-5 md:pt-10 mx-auto">
-    <h1 class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems</h1>
-    <div class="flex flex-col md:flex-row w-full items-center justify-center space-y-5 md:space-y-0 md:space-x-5">
-        <!-- Card 1 -->
-        <div
-            class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
-            <div class="w-3/4 flex justify-center">
-                <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png" alt="Residential Solar System">
-            </div>
-            <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
-                <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Residential Solar System</h2>
-                <p class="text-sm md:text-base my-4">Empower your home with clean, renewable energy through our customized residential solar
-                    solutions. Save on electricity bills and contribute to a sustainable future.</p>
-            </div>
-            <button class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
-                Learn more
-            </button>
-        </div>
-
-        <!-- Card 2 -->
-        <div
-            class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
-            <div class="w-3/4 flex justify-center">
-                <img class="h-auto w-full object-contain" src="/images/solar-icons/industrial.png" alt="Commercial & Industrial Solar System">
-            </div>
-            <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
-                <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Commercial & Industrial (CNI) Solar System</h2>
-                <p class="text-sm md:text-base my-2">Optimize your business operations with our robust solar power systems. Reduce energy costs and enhance your company's sustainability footprint.</p>
-            </div>
-            <button class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
-                Learn more
-            </button>
-        </div>
-    </div>
-</section>
-
+                <h1 class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems
+                </h1>
+                <div
+                    class="flex flex-col md:flex-row w-full items-center justify-center space-y-5 md:space-y-0 md:space-x-5">
+                    <!-- Card 1 -->
+                    <div
+                        class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
+                        <div class="w-3/4 flex justify-center">
+                            <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png"
+                                alt="Residential Solar System">
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
+                            <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Residential Solar System</h2>
+                            <p class="text-sm md:text-base my-4">Empower your home with clean, renewable energy through
+                                our
+                                customized residential solar
+                                solutions. Save on electricity bills and contribute to a sustainable future.</p>
+                        </div>
+                        <button
+                            class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
+                            Learn more
+                        </button>
+                    </div>
+                    <!-- Card 2 -->
+                    <div
+                        class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
+                        <div class="w-3/4 flex justify-center">
+                            <img class="h-auto w-full object-contain" src="/images/solar-icons/industrial.png"
+                                alt="Commercial & Industrial Solar System">
+                        </div>
+                        <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
+                            <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Commercial & Industrial (CNI)
+                                Solar System
+                            </h2>
+                            <p class="text-sm md:text-base my-2">Optimize your business operations with our robust solar
+                                power
+                                systems. Reduce energy costs and enhance your company's sustainability footprint.</p>
+                        </div>
+                        <button
+                            class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
+                            Learn more
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section class="flex flex-col items-center justify-center w-full h-screen">
+                <div class="flex w-4/5 max-w-6xl items-center justify-center">
+                    <!-- Accordion Section -->
+                    <div class="w-full md:w-1/2 p-5">
+                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 text-start">Frequently Asked Questions</h1>
+                        <Accordion :items="faq" />
+                    </div>
+                    <!-- Image Section -->
+                    <div class="w-full md:w-1/2 p-5 flex justify-center">
+                        <div class="h-64 w-64 flex items-center justify-center">
+                            <img src="/images/solar-icons/faq.png" alt="Solar Panels" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
     <Footer />
@@ -293,6 +319,32 @@ export default {
                     description: 'A solar system combines solar panels with other energy sources, like batteries or the grid, for efficient and reliable power generation.',
                     image: '/images/solar-icons/solar-system.png'
                 },
+            ],
+            faq: [
+                {
+                    title: 'Is my home suitable for solar?',
+                    content: 'Most homes are suitable for solar power, as long as they have a roof or open space that receives direct sunlight for most of the day. Our team can assess your property and recommend the best solar solution for your needs.'
+                },
+                {
+                    title: 'How much will I save on my electricity bill?',
+                    content: 'Your savings depend on your current energy usage, system size, and local electricity rates. Solar installers can provide estimates based on your specific situation.',
+                },
+                {
+                    title: 'How much does a residential solar system cost?',
+                    content: 'The cost of a residential solar system varies depending on the system size, location, and installation complexity. Our team can provide a customized quote based on your energy needs and budget.',
+                },
+                {
+                    title: 'Does solar power my entire home at night?',
+                    content: 'Solar panels generate electricity during the day, but not at night. To power your home at night, you can use energy stored in batteries or draw power from the grid. Our team can help you design a system that meets your energy needs 24/7.',
+                },
+                {
+                    title: 'How much maintenance does a solar system require?',
+                    content: 'Solar panels require minimal maintenance, usually limited to occasional cleaning and inspections. Inverters and batteries may need more regular maintenance, but our team can help you keep your system running smoothly.',
+                },
+                {
+                    title: 'How long does it take to install a residential solar system?',
+                    content: 'The installation timeline for a residential solar system varies depending on the system size, complexity, and local regulations. Our team can provide an estimated timeline for your specific project.',
+                }
             ],
             hoveredImage: '/images/solar-icons/solar-panel.png'
         };

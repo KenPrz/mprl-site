@@ -62,15 +62,18 @@ onUnmounted(() => {
         </section>
         <div class="mt-10 flex flex-col items-center justify-center bg-white-500 mx-10 md:mx-24 md:space-y-10">
             <section class="flex-row md:flex items-center justify-center my-5 space-y-5">
-                <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true" class="w-full md:w-1/2 flex items-center justify-end me-10">
+                <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true"
+                    class="w-full md:w-1/2 flex items-center justify-end me-10">
                     <img src="/images/mprl-projects/who-are-we.jpeg" alt="House"
                         class="w-full md:w-3/4 h-full object-cover rounded-lg">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col">
-                    <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true" class="text-2xl font-bold">Who are we?</h1>
+                    <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                        class="text-2xl font-bold">Who are we?</h1>
                     <div class="flex flex-col space-y-2">
                         <p data-aos="fade-left" data-aos-delay="300" data-aos-duration="400" data-aos-once="true">
-                            <span class="font-semibold">ONE MPRL <span class="text-offset-500">Solar</span> Power Corporation</span> is a leading provider of solar energy solutions in the
+                            <span class="font-semibold">ONE MPRL <span class="text-offset-500">Solar</span> Power
+                                Corporation</span> is a leading provider of solar energy solutions in the
                             Philippines, with a strong foundation in the Bicol Region since 2013. We are a company on
                             the move, with a vision to expand our expertise and quality service to NCR, CALABARZON, and
                             neighboring provinces.
@@ -85,69 +88,225 @@ onUnmounted(() => {
                     </div>
                 </div>
             </section>
-            <section class="flex flex-col">
-                <div class="flex flex-col items-start space-y-3 w-1/2">
-                    <h1 class="text-xl font-semibold">How Does Solar Power Works?</h1>
-                    <p class="text-lg">Uncover the Magic Behind Solar Panels: Turning Sunlight into Clean, Renewable Energy for Your
-                        Home or Business</p>
-                    <button class="bg-main-400 hover:bg-main-600 rounded-lg text-md py-1 px-2 text-white-500 transition-colors duration-200">
-                        Learn More
-                    </button>
-                </div>
-                <div class="">
-                    <p>
-                        Discover how sunlight transforms into clean, renewable energy! Learn about the fascinating process behind solar panels and how they power your home or business efficiently and sustainably. Dive into the future of energy today!
-                    </p>
-                </div>
-            </section>
-            <section class="flex items-center justify-center">
+            <section class="flex flex-col items-center my-10 px-4 md:px-8 border-b-2 pb-5 sm:pb-10">
+                <!-- Pulsating H1 -->
+                <h1 class="text-xl md:text-2xl font-semibold mb-5 p-4 md:p-5 bg-offset-400 text-white rounded-xl relative z-10 animate-pulse"
+                    data-aos="fade-down" data-aos-once="true">
+                    How Does Solar Power Work?
+                </h1>
 
+                <div class="relative flex flex-col items-center w-full max-w-xl md:max-w-4xl">
+                    <!-- Timeline Line with Multiple Traveling Circles -->
+                    <div class="absolute w-1 bg-gray-300 h-full top-0 left-1/2 transform -translate-x-1/2 z-0">
+                        <div class="circle-traveling" style="animation-delay: 0s;"></div>
+                        <div class="circle-traveling" style="animation-delay: 2s;"></div>
+                        <div class="circle-traveling" style="animation-delay: 4s;"></div>
+                    </div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
+                        data-aos-once="true">
+                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5 z-10 md:z-0">
+                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg">
+                                Step 1: Sunlight Hits Panels - Solar panels capture sunlight with photovoltaic (PV)
+                                cells.
+                            </div>
+                        </div>
+                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
+                        <div class="w-0 md:w-1/2"></div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="flex w-full flex-col md:flex-row justify-end items-center mb-8" data-aos="fade-left"
+                        data-aos-once="true">
+                        <div class="w-0 md:w-1/2"></div>
+                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
+                        <div class="w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
+                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
+                                Step 2: Electricity Generation - PV cells convert sunlight into direct current (DC)
+                                electricity.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
+                        data-aos-once="true">
+                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5">
+                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
+                                Step 3: Inverter Conversion - An inverter transforms DC into alternating current (AC)
+                                for home use.
+                            </div>
+                        </div>
+                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
+                        <div class="w-0 md:w-1/2"></div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="flex w-full flex-col md:flex-row justify-end items-center mb-8" data-aos="fade-left"
+                        data-aos-once="true">
+                        <div class="w-0 md:w-1/2"></div>
+                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
+                        <div class="w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
+                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
+                                Step 4: Powering Your Space - The AC electricity powers your appliances and devices.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 5 -->
+                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
+                        data-aos-once="true">
+                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5">
+                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
+                                Step 5: Storing Energy - Excess energy is stored in batteries for later use or fed back
+                                into the grid.
+                            </div>
+                        </div>
+                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
+                        <div class="w-0 md:w-1/2"></div>
+                    </div>
+
+                    <!-- Battery Section with Blinking Light -->
+                    <div class="flex w-full md:w-1/2 justify-center items-center mt-5 md:mt-10 z-30" data-aos="fade-up"
+                        data-aos-once="true">
+                        <div class="bg-gray-700 text-white py-4 px-6 rounded-lg shadow-lg flex items-center space-x-4">
+                            <div class="w-5 h-5 bg-yellow-500 rounded-full blink"></div>
+                            <div>
+                                <p class="font-semibold">Battery Storage</p>
+                                <p>Stored energy is ready for use when the sun isn't shining or as backup power.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call-to-Action Section -->
+                <div class="flex flex-col items-center mt-12" data-aos="fade-up" data-aos-once="true">
+                    <p class="text-lg font-semibold mb-3">Want to Learn More?</p>
+                    <p class="text-gray-700 mb-5 text-center">Interested in how solar power can work for you?</p>
+                    <a href="#"
+                        class="py-2 px-5 bg-main-500 text-white text-sm rounded-full hover:bg-main-600 transition-colors duration-200">
+                        Yes, I'm Interested!
+                    </a>
+                </div>
             </section>
+
+            <section class="flex flex-col items-center justify-center max-w-6xl mx-auto">
+                <div class="flex flex-col text-center mb-8 text-blue-500">
+                    <h1 class="text-xl">Our Products</h1>
+                    <h2 class="text-2xl font-semibold">Illuminate with the power of the <span class="text-offset-500">sun</span></h2>
+                </div>
+                <div class="flex w-full justify-center items-center">
+                    <!-- Left Image Display Area -->
+                    <div class="hidden lg:flex items-center justify-center w-1/3 h-auto">
+                        <img :src="hoveredImage" alt="Product Image" class="w-full h-auto object-contain"
+                            v-if="hoveredImage">
+                    </div>
+                    <!-- Grid Layout -->
+                    <div class="w-full lg:w-2/3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+                            <template v-for="(product, index) in products" :key="index">
+                                <div @mouseover="showImage(product.image)"
+                                    class="hover-card bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
+                                    data-aos="fade-up" data-aos-once="true">
+                                    <img :src="product.image" :alt="product.name" class="w-24 h-24 object-contain">
+                                    <h3 class="text-lg font-semibold mt-3">{{ product.name }}</h3>
+                                    <p class="text-sm text-center">{{ product.description }}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="flex flex-col md:max-w-5xl border-t-2 border-blue-400 pt-5 md:pt-10 mx-auto">
+    <h1 class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems</h1>
+    <div class="flex flex-col md:flex-row w-full items-center justify-center space-y-5 md:space-y-0 md:space-x-5">
+        <!-- Card 1 -->
+        <div
+            class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
+            <div class="w-3/4 flex justify-center">
+                <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png" alt="Residential Solar System">
+            </div>
+            <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
+                <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Residential Solar System</h2>
+                <p class="text-sm md:text-base my-4">Empower your home with clean, renewable energy through our customized residential solar
+                    solutions. Save on electricity bills and contribute to a sustainable future.</p>
+            </div>
+            <button class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
+                Learn more
+            </button>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+            class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
+            <div class="w-3/4 flex justify-center">
+                <img class="h-auto w-full object-contain" src="/images/solar-icons/industrial.png" alt="Commercial & Industrial Solar System">
+            </div>
+            <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
+                <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Commercial & Industrial (CNI) Solar System</h2>
+                <p class="text-sm md:text-base my-2">Optimize your business operations with our robust solar power systems. Reduce energy costs and enhance your company's sustainability footprint.</p>
+            </div>
+            <button class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
+                Learn more
+            </button>
+        </div>
+    </div>
+</section>
+
         </div>
     </main>
     <Footer />
 </template>
-
 <script>
 export default {
-    components: {
-        Accordion
-    },
     data() {
         return {
-            accordionItems: [
+            products: [
                 {
-                    title: 'Mission',
-                    content: `Our mission is to accelerate the adoption of solar 
-                    energy by providing innovative, reliable, and cost-effective solar solutions to our customers. We are
-                    committed to reducing carbon emissions, promoting
-                    sustainability, and creating a cleaner, greener future for
-                    generations to come. Through our expertise,
-                    dedication, and passion for renewable energy, we aim
-                    to empower individuals and businesses to harness the
-                    power of the sun to meet their energy needs while
-                    contributing to a more sustainable planet.`
+                    name: 'Solar Panels',
+                    description: 'A solar panel is a device that converts sunlight into electricity, providing a clean and renewable energy source.',
+                    image: '/images/solar-icons/solar-panel.png'
                 },
                 {
-                    title: 'Vision',
-                    content: `Our vision at MPRL Solar Panel Trading and
-                    Construction Services is to be a global leader in
-                    solar energy solutions, known for our commitment
-                    to excellence, innovation, and sustainability. We
-                    envision a world where solar power is the primary
-                    source of energy, powering homes, businesses, and
-                    communities with clean, renewable energy.
-                    Through continuous research, development, and
-                    collaboration, we strive to revolutionize the way
-                    energy is produced and consumed, making solar
-                    energy accessible and affordable for everyone.`
+                    name: 'Solar Streetlights',
+                    description: 'A solar streetlight uses solar panels to convert sunlight into electricity, illuminating streets with sustainable, eco-friendly energy.',
+                    image: '/images/solar-icons/street-light.png'
+                },
+                {
+                    name: 'Inverter',
+                    description: 'An inverter converts the direct current (DC) from solar panels into alternating current (AC), which powers your home or business.',
+                    image: '/images/solar-icons/inverter.png'
+                },
+                {
+                    name: 'Battery',
+                    description: 'A battery stores energy from solar panels, providing power when sunlight is not available.',
+                    image: '/images/solar-icons/battery.png'
+                },
+                {
+                    name: 'Mounting System',
+                    description: 'A mounting system securely holds solar panels in place, ensuring optimal sunlight exposure for maximum energy production.',
+                    image: '/images/solar-icons/solar-mounts.png'
+                },
+                {
+                    name: 'Solar System',
+                    description: 'A solar system combines solar panels with other energy sources, like batteries or the grid, for efficient and reliable power generation.',
+                    image: '/images/solar-icons/solar-system.png'
                 },
             ],
+            hoveredImage: '/images/solar-icons/solar-panel.png'
         };
     },
+    methods: {
+        showImage(image) {
+            this.hoveredImage = image;
+        },
+        hideImage() {
+            this.hoveredImage = null;
+        }
+    }
 };
 </script>
-
 <style scoped>
 .bg-cover {
     background-size: cover;
@@ -183,5 +342,66 @@ export default {
 .hover-card:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px) !important;
+}
+
+/* Pulsating H1 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Circle Traveling Down the Line */
+@keyframes travel {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+.circle-traveling {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: yellow;
+    border-radius: 50%;
+    animation: travel 6s infinite linear;
+    transform: translateX(-50%);
+}
+
+/* Blinking Light in Battery */
+@keyframes blink {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0.5;
+    }
+}
+
+.blink {
+    animation: blink 1.2s infinite;
 }
 </style>

@@ -1,31 +1,32 @@
 <template>
-    <div>
-      <div class="flex border-b-2 justify-center text-lg gap-10">
-        <div
-          v-for="category in projectCategory"
-          :key="category.id"
-          @click="selectCategory(category.id)"
-          :class="['cursor-pointer px-4 py-2', selectedCategory === category.id ? 'active-tab' : 'inactive-tab']"
-        >
-          {{ category.name }}
-        </div>
+  <div>
+    <!-- Category Selection -->
+    <div class="flex border-b-2 justify-center text-lg gap-10">
+      <div
+        v-for="category in projectCategory"
+        :key="category.id"
+        @click="selectCategory(category.id)"
+        :class="['cursor-pointer px-4 py-2', selectedCategory === category.id ? 'active-tab' : 'inactive-tab']"
+      >
+        {{ category.name }}
       </div>
-      <div class="mt-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div v-for="project in filteredProjects" :key="project.id" class="overflow-hidden">
-            <img :src="project.first_image ? `/storage/${project.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-48 object-cover rounded-2xl">
-            <div class="mt-5">
-              <h3 class="font-bold text-lg text-blue-500">{{ project.title }}</h3>
-              <div class="flex">
-                <p class="text-blue-600 font-semibold text-sm">System Size: <span class="text-orange-500">{{ project.system_size }}</span></p>
-                <p class="text-blue-600 font-semibold text-sm ml-5">Monthly Saving: <span class="text-orange-500">{{ project.monthly_saving }}</span></p>
-              </div>
-            </div>
-          </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-5">
+      <div v-for="(faq, index) in filteredProjects" :key="faq.id" class="overflow-hidden border-b-2 py-2">
+        <div @click="toggleFaq(index)" class="flex justify-between items-center cursor-pointer">
+          <h3 class="font-bold text-lg text-blue-500">{{ faq.question }}</h3>
+          <i :class="activeFaq === index ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'" class="text-xl"></i>
+        </div>
+        <div v-if="activeFaq === index" class="text-blue-600 text-sm mt-2">
+          <span  v-html="faq.answer"></span>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
 <script>
 export default {
   props: {
@@ -34,7 +35,7 @@ export default {
       default: () => [],
       required: true,
     },
-    projects: {
+    faqs: {
       type: Array,
       default: () => [],
       required: true,
@@ -43,16 +44,16 @@ export default {
   data() {
     return {
       selectedCategory: null,
+      activeFaq: null, // Track the currently active FAQ
     };
   },
   computed: {
     filteredProjects() {
-      if (this.selectedCategory === null) return this.projects;
-      return this.projects.filter(project => project.category_id === this.selectedCategory);
+      if (this.selectedCategory === null) return this.faqs;
+      return this.faqs.filter(faq => faq.category_id === this.selectedCategory);
     },
   },
   mounted() {
-    // Select the first category by default
     if (this.projectCategory.length > 0) {
       this.selectedCategory = this.projectCategory[0].id;
     }
@@ -60,8 +61,22 @@ export default {
   methods: {
     selectCategory(categoryId) {
       this.selectedCategory = categoryId;
+      this.activeFaq = null; // Reset the active FAQ when category changes
     },
+    toggleFaq(index) {
+      this.activeFaq = this.activeFaq === index ? null : index;
+    }
   },
 };
 </script>
-  
+
+<style>
+.active-tab {
+  font-weight: bold;
+  color: #003e57;
+  border-bottom: 2px solid #00b050;
+}
+.inactive-tab {
+  color: #c0c0c0;
+}
+</style>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProjectCatergory;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -42,6 +43,12 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSeeder::class,
             VisitorSeeder::class,
+            ProductCategorySeeder::class,
+            ProductSeeder::class,
+            ServicesCategoriesSeeder::class,
+            FaqSeeder::class    
+
+
         ]);
     }
 }

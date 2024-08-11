@@ -16,6 +16,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ProductsAdminController;
 use App\Http\Controllers\BrochureController;
+use App\Http\Controllers\FAQsController;
 use App\Http\Controllers\ServicesAdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\ProjectAdminController;
@@ -68,6 +69,13 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/projects/{id}/edit', [ProjectAdminController::class, 'edit'])->name('admin.projects.edit');
     Route::patch('/projects/{id}', [ProjectAdminController::class, 'update'])->name('admin.projects.update');
     Route::delete('/projects/{id}', [ProjectAdminController::class, 'destroy'])->name('admin.projects.destroy');
+
+    Route::get('/faqs', [FAQsController::class, 'index'])->name('admin.faqs.index');
+    Route::get('/faqs/create', [FAQsController::class, 'create'])->name('admin.faqs.create');
+    Route::post('/faqs', [FAQsController::class, 'store'])->name('admin.faqs.store');
+    Route::get('/faqs/{id}/edit', [FAQsController::class, 'edit'])->name('admin.faqs.edit');
+    Route::patch('/faqs/{id}', [FAQsController::class, 'update'])->name('admin.faqs.update');
+    Route::delete('/faqs/{id}', [FAQsController::class, 'destroy'])->name('admin.faqs.destroy');
 
     Route::post('/dashboard/update-brochure', [BrochureController::class, 'store'])->name('admin.brochure.store');
 });

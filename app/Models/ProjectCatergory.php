@@ -17,4 +17,9 @@ class ProjectCatergory extends Model
     {
         return $this->hasMany(Projects::class);
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faqs::class);
+    }
 }

@@ -1,8 +1,8 @@
 <template>
-    <Head title="Admin: Projects" />
+    <Head title="Admin: FAQs" />
     <AuthenticatedLayout>
       <template #header>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Projects</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Frequently Ask Questions</h2>
       </template>
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -19,22 +19,22 @@
               />
               <Link
                 class="flex space-x-1 items-center bg-main-400 px-3 py-2 rounded-md text-white hover:bg-main-500"
-                :href="route('admin.projects.create')"
+                :href="route('admin.faqs.create')"
               >
-                <span>Add Project</span>
                 <i class="pi pi-plus-circle"></i>
+                <span>Add Q&A</span>
               </Link>
             </section>
             <section>
-              <ProjectTable :projects="projects.data" />
+              <FaqsTable :faqs="faqs.data" />
             </section>
             <section class="py-3">
               <Pagination
-                :first_page_url="projects.first_page_url"
-                :from="projects.from"
-                :last_page="projects.last_page"
-                :last_page_url="projects.last_page_url"
-                :links="projects.links"
+                :first_page_url="faqs.first_page_url"
+                :from="faqs.from"
+                :last_page="faqs.last_page"
+                :last_page_url="faqs.last_page_url"
+                :links="faqs.links"
               />
             </section>
           </div>
@@ -48,10 +48,10 @@
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import Pagination from '@/Components/Pagination.vue';
   import { Head, useForm, Link } from '@inertiajs/vue3';
-  import ProjectTable from './Components/ProjectTable.vue';
+  import FaqsTable from './Components/FaqsTable.vue';
   
   const props = defineProps({
-    projects: {
+    faqs: {
       type: Object,
       required: true
     },
@@ -76,7 +76,7 @@
   }
   
   const debouncedSearch = debounce(() => {
-    form.get(route('admin.projects.index'));
+    form.get(route('admin.faqs.index'));
   }, 600);
   
   const handleInput = () => {

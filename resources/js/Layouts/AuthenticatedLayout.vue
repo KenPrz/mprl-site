@@ -44,6 +44,9 @@ const showingNavigationDropdown = ref(false);
                                     <AdminNavLink :href="route('admin.projects.index')" :active="route().current('admin.projects.index')">
                                         Projects
                                     </AdminNavLink>
+                                    <AdminNavLink :href="route('admin.faqs.index')" :active="route().current('admin.faqs.index')">
+                                        FAQs 
+                                    </AdminNavLink>
                                 </div>
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex items-center" v-else>
                                     <AdminNavLink :href="route('welcome')" :active="route().current('dashboard')">

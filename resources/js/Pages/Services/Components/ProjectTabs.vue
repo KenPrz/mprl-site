@@ -23,7 +23,7 @@
                   <p class="text-blue-600 font-semibold text-sm ml-5">Monthly Saving: <span class="text-orange-500">{{ proj.monthly_saving }}</span></p>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>

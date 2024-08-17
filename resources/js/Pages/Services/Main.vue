@@ -32,6 +32,11 @@ const props = defineProps({
     default: () => [],
     required: true,
   },
+  faqs: {
+    type: Array,
+    default: () => [],
+    required: true,
+  },
 });
 
 // Computed property to get the first category
@@ -183,7 +188,7 @@ onUnmounted(() => {
                 </p>
               </div>
               <div class="mt-10">
-              <FaqTabs :projectCategory="projectCategory" :services="services"/>
+              <FaqTabs :projectCategory="projectCategory" :services="services" :faqs="faqs"/>
             </div>
           </section>
         </div>

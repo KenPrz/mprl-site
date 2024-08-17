@@ -220,12 +220,13 @@ onUnmounted(() => {
                 </div>
             </section>
             <section class="flex flex-col md:max-w-5xl border-t-2 border-blue-400 pt-5 md:pt-10 mx-auto">
-                <h1 class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems
+                <h1 data-aos="fade-up" data-aos-once="true" class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems
                 </h1>
                 <div
                     class="flex flex-col md:flex-row w-full items-center justify-center space-y-5 md:space-y-0 md:space-x-5">
                     <!-- Card 1 -->
                     <div
+                        data-aos="fade-right" data-aos-once="true"
                         class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
                         <div class="w-3/4 flex justify-center">
                             <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png"
@@ -245,6 +246,7 @@ onUnmounted(() => {
                     </div>
                     <!-- Card 2 -->
                     <div
+                        data-aos="fade-left" data-aos-once="true"
                         class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
                         <div class="w-3/4 flex justify-center">
                             <img class="h-auto w-full object-contain" src="/images/solar-icons/industrial.png"
@@ -265,15 +267,15 @@ onUnmounted(() => {
                     </div>
                 </div>
             </section>
-            <section class="flex flex-col items-center justify-center w-full h-screen">
-                <div class="flex w-4/5 max-w-6xl items-center justify-center">
+            <section class="flex flex-col items-center justify-center w-full min-h-screen p-5">
+                <div class="flex flex-col md:flex-row w-full max-w-6xl items-center justify-center">
                     <!-- Accordion Section -->
                     <div class="w-full md:w-1/2 p-5">
-                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 text-start">Frequently Asked Questions</h1>
+                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 md:text-left text-center">Frequently Asked Questions</h1>
                         <Accordion :items="faq" />
                     </div>
                     <!-- Image Section -->
-                    <div class="w-full md:w-1/2 p-5 flex justify-center">
+                    <div class="w-full md:w-1/2 p-5 flex justify-center mt-8 md:mt-0">
                         <div class="h-64 w-64 flex items-center justify-center">
                             <img src="/images/solar-icons/faq.png" alt="Solar Panels" class="w-full h-auto object-cover">
                         </div>

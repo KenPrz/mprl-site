@@ -1,10 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { useToast } from 'vue-toastification';
 import { ref, computed, watch } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import VisitorChart from '@/Pages/Admin/Charts/VisitorChart.vue';
-
+const toast = useToast();
 const props = defineProps({
     blog_posts: {
         type: Number,
@@ -46,18 +47,42 @@ const months = computed(() => (form.selectedYear ? visitorDates.value[form.selec
 const form = useForm({
     'selectedYear': selectedYear.value,
     'selectedMonth': selectedMonth.value,
-})
+});
+
+const brochureForm = useForm({
+    file: null,
+});
 
 function submitForm() {
     if (form.selectedYear && form.selectedMonth) {
         form.get(route('dashboard'),{
             preserveScroll: true,
             onSuccess: () => {
+                toast.success('Data fetched successfully!');
                 console.log('success');
             }
-
         });
     }
+}
+
+function submitBrochure() {
+    brochureForm.post(route('admin.brochure.store'), {
+        preserveScroll: true,
+        forceFormData: true,
+        onSuccess: (response) => {
+            console.log('success', response);
+            toast.success('Brochure uploaded successfully!');
+            removeBrochure();
+        },
+        onError: (errors) => {
+            console.error('error', errors);
+        },
+    });
+}
+
+function removeBrochure() {
+    brochureForm.file = null;
+    document.querySelector('input[type="file"]').value = '';
 }
 
 function convertToMonthString(dateString) {
@@ -109,9 +134,70 @@ watch([() => form.selectedYear, () => form.selectedMonth], () => {
                     <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-6">
                         <h3 class="text-lg font-semibold">Users</h3>
                         <p class="mt-4 text-2xl">{{ totalUsers }}</p>
-                        <a class="text-right text-xs text-blue-400 hover:underline" href="#">Visit Users</a>
+                        <a class="text-right text-xs text-blue-400 hover:underline" :href="route('admin.users.index')">Visit Users</a>
                     </div>
                 </div>
+                <div class="my-5 bg-white shadow-sm sm:rounded-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4">Brochure</h3>
+                    <a 
+                        target="_blank" 
+                        :href="route('brochure.download')"
+                        class="text-blue-600 hover:text-blue-800 underline mb-4 inline-block"
+                    >
+                        Preview Brochure
+                    </a>
+                    <form @submit.prevent="submitBrochure" class="mt-4">
+                        <div class="flex items-center justify-center w-full">
+                            <label 
+                                for="dropzone-file" 
+                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                                v-if="!brochureForm.file"
+                            >
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span></p>
+                                    <p class="text-xs text-gray-500">PDF (MAX. 100MB)</p>
+                                </div>
+                                <input 
+                                    id="dropzone-file" 
+                                    type="file" 
+                                    class="hidden" 
+                                    @input="brochureForm.file = $event.target.files[0]"
+                                    accept=".pdf"
+                                />
+                            </label>
+                            <div v-else class="w-full">
+                                <div class="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <div class="flex items-center">
+                                        <svg class="w-8 h-8 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <span class="text-sm text-gray-500">{{ brochureForm.file.name }}</span>
+                                    </div>
+                                    <button 
+                                        :disabled="brochureForm.processing"
+                                        type="button" 
+                                        @click="removeBrochure" 
+                                        class="text-red-600 hover:text-red-800"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <button 
+                                type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                                :disabled="!brochureForm.file"
+                            >
+                                Upload Brochure
+                            </button>
+                        </div>
+                    </form>
+                </div>          
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-5 py-6 mt-6">
                     <div class="flex justify-between">
                         <div class="flex flex-col">

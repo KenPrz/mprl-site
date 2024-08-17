@@ -57,7 +57,7 @@ onUnmounted(() => {
         />
         <div class="flex flex-col items-center justify-center">
             <div v-if="$page.props.blogs.data" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                <BlogCard data-aos="fade-left" data-aos-delay="20" v-for="blog in $page.props.blogs.data" :blog="blog" />
+                <BlogCard data-aos="fade-left" data-aos-delay="20" data-aos-once="true"  v-for="blog in $page.props.blogs.data" :blog="blog" />
             </div>
             <div v-else class="flex items-center justify-center h-96">
                 <p class="text-lg">No blogs found.</p>

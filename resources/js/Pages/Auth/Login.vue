@@ -90,10 +90,10 @@ const closeLogin = () => {
             <div class="border-b border-gray-300 w-full mt-4 mb-4"></div>
           </div>
           <div class="flex w-full">
-            <button class="relative flex  item-center  justify-center w-full border p-3 border-black hover:bg-gray-100 rounded-lg space-x-2 text-xs sm:text-sm">
+            <a :href="route('google.login')" class="relative flex  item-center  justify-center w-full border p-3 border-black hover:bg-gray-100 rounded-lg space-x-2 text-xs sm:text-sm cursor-pointer">
               <i class="absolute left-5 pi pi-google ps-2" style="font-size:1.2rem"></i>
               <span class="text-black ps-2">Connect with Google</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

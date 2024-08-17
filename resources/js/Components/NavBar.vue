@@ -117,12 +117,6 @@ onUnmounted(() => {
             </ul>
         </div>
         <div class="flex items-center space-x-5 px-2">
-            <button
-                @click="showModal"
-                id="get-quote"
-                class="border-main-600 bg-main-600 text-white hover:bg-main-700 transition-colors duration-200 text-white py-1 px-3 hidden md:block">
-                Get a Quote
-            </button>
             <Dropdown :align="autoAlign" width="32">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
@@ -193,16 +187,16 @@ onUnmounted(() => {
     </Modal>
     <div class="absolute -right-7 hover:right-0 sm:right-0 h-screen transition-all duration-200">
         <section id="icon-handler" class="flex flex-col h-full justify-center space-y-3">
-            <span class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-facebook"></i>
             </span>
-            <span  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span  class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-instagram"></i>
             </span>
-            <span @click="showContact=true"  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span @click="showContact=true"  class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-phone"></i>
             </span>
-            <span  class="p-2 sm:p-4 rounded-s-md bg-blue-600 flex items-center justify-center hover:bg-blue-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
+            <span  class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-envelope"></i>
             </span>
         </section>

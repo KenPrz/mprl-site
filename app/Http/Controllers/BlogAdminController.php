@@ -6,6 +6,7 @@ use App\Models\BlogImage;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -17,29 +18,43 @@ class BlogAdminController extends Controller
     public function index(Request $request)
     {
         $search_query = $request->searchQuery;
-        $blogs = BlogPost::select('blog_posts.id', 'title', 'blog_categories.name as category_name', 'is_published', 'users.first_name', 'is_featured', 'clicks')
-        ->join('blog_categories', 'blog_categories.id', '=', 'blog_posts.category_id')
-        ->join('users', 'users.id', '=', 'blog_posts.created_by')
-        ->with('category:id,name')
-        ->with('user:id,name')
-        ->where(function($query) use ($search_query) {
-            $query->where('title', 'like', '%' . $search_query . '%')
-                ->orWhere('blog_categories.name', 'like', '%' . $search_query . '%')
-                ->orWhere('users.first_name', 'like', '%' . $search_query . '%')
-                ->orWhere('clicks', 'like', '%' . $search_query . '%');
-            if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
-                $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
-                $query->orWhere('is_published', $booleanValue)
-                      ->orWhere('is_featured', $booleanValue);
-            } else {
-                // Search for boolean values as strings
-                $query->orWhere('is_published', 'like', '%' . $search_query . '%')
-                    ->orWhere('is_featured', 'like', '%' . $search_query . '%');
-            }
-        })
-        ->orderBy('blog_posts.id', 'desc')
-        ->paginate(10);    
-        return Inertia::render('Admin/Blog/Index',[
+    
+        $blogs = BlogPost::with(['categories:id,name', 'user:id,first_name'])
+            ->where(function($query) use ($search_query) {
+                $query->where('title', 'like', '%' . $search_query . '%')
+                    ->orWhere('clicks', 'like', '%' . $search_query . '%')
+                    ->orWhereHas('categories', function($q) use ($search_query) {
+                        $q->where('name', 'like', '%' . $search_query . '%');
+                    })
+                    ->orWhereHas('user', function($q) use ($search_query) {
+                        $q->where('first_name', 'like', '%' . $search_query . '%');
+                    });
+    
+                if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
+                    $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
+                    $query->orWhere('is_published', $booleanValue)
+                          ->orWhere('is_featured', $booleanValue);
+                } else {
+                    $query->orWhere('is_published', 'like', '%' . $search_query . '%')
+                          ->orWhere('is_featured', 'like', '%' . $search_query . '%');
+                }
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+    
+        $blogs->through(function ($blog) {
+            return [
+                'id' => $blog->id,
+                'title' => $blog->title,
+                'categories' => $blog->categories->pluck('name'),
+                'is_published' => $blog->is_published,
+                'is_featured' => $blog->is_featured,
+                'first_name' => $blog->user->first_name,
+                'clicks' => $blog->clicks,
+            ];
+        });
+    
+        return Inertia::render('Admin/Blog/Index', [
             'searchQuery' => $search_query,
             'blogs' => $blogs
         ]);
@@ -63,30 +78,33 @@ class BlogAdminController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'categories' => 'array|required|min:1',
             'content' => 'required',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // fix this with custom validation rule
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,heic,svg|max:2048',
         ]);
+    
         $blog = BlogPost::create([
             'title' => $request->title,
-            'category_id' => $request->category,
             'body' => $request->content,
             'is_published' => $request->is_published,
             'is_featured' => $request->is_featured,
             'created_by' => auth()->id(),
         ]);
+        // Bind the categories to the blog post
+        $this->bindCategories($blog->id, $request->categories);
+    
         if($request->images) {
             foreach($request->file('images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');
                 $blog->images()->create([
                     'image' => $path,
-                    'blog_post_id' => $blog->id
                 ]);
             }
         }
+    
         return Inertia::location(route('blog.show', $blog->id));
     }
     
@@ -105,16 +123,36 @@ class BlogAdminController extends Controller
      */
     public function edit(int $id)
     {
-        $blog = BlogPost::select('id', 'title', 'category_id', 'body', 'is_published', 'is_featured')
-            ->with('images')
-            ->with('category:id,name')
+        $blog = BlogPost::with(['images', 'categories:id,name'])
             ->where('id', $id)
-            ->first();
+            ->firstOrFail();
+    
+        $blog = [
+            'id' => $blog->id,
+            'title' => $blog->title,
+            'body' => $blog->body,
+            'is_published' => $blog->is_published,
+            'is_featured' => $blog->is_featured,
+            'categories' => $blog->categories->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                ];
+            }),
+            'images' => $blog->images->map(function ($image) {
+                return [
+                    'id' => $image->id,
+                    'image' => $image->image,
+                ];
+            }),
+        ];
+    
         $categories = BlogCategory::select('id', 'name')->get();
-            return Inertia::render('Admin/Blog/Edit', [
-                'blog' => $blog,
-                'categories' => $categories
-            ]);
+    
+        return Inertia::render('Admin/Blog/Edit', [
+            'blog' => $blog,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -124,7 +162,7 @@ class BlogAdminController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'categories' => 'array|required|min:1',
             'content' => 'required',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
@@ -132,29 +170,31 @@ class BlogAdminController extends Controller
             'new_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $blog = BlogPost::findOrFail($id);
-
-        if($request->has('deleted_images')) {
+    
+        if ($request->has('deleted_images')) {
             $this->handleDeletedImages($request->deleted_images);
         }
+    
         $blog->update([
             'title' => $request->title,
-            'category_id' => $request->category,
             'body' => $request->content,
             'is_published' => $request->is_published,
             'is_featured' => $request->is_featured,
         ]);
+        // Sync categories
+        $this->syncCategories($blog, $request->categories);
     
-        if($request->new_images !== null) {
-            foreach($request->file('new_images') as $image) {
+        if ($request->hasFile('new_images')) {
+            foreach ($request->file('new_images') as $image) {
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('images', $filename, 'public');
     
                 $blog->images()->create([
                     'image' => $path,
-                    'blog_post_id' => $blog->id
                 ]);
             }
         }
+    
         return redirect()->route('admin.blog.index');
     }
     
@@ -173,6 +213,44 @@ class BlogAdminController extends Controller
             $image = BlogImage::findOrFail($imageId);
             Storage::disk('public')->delete($image->image);
             $image->delete();
+        }
+    }
+    
+    private function syncCategories($blog, $categories)
+    {
+        // Ensure $categories is an array
+        if (!is_array($categories)) {
+            $categories = [$categories];
+        }
+    
+        $categories = array_filter($categories, 'is_numeric');
+    
+        $categories = array_map('intval', $categories);
+        DB::table('blog_post_category')
+            ->where('blog_post_id', $blog->id)
+            ->delete();
+        foreach ($categories as $category) {
+            DB::table('blog_post_category')->insert([
+                'blog_post_id' => $blog->id,
+                'blog_category_id' => $category,
+            ]);
+        }
+    }
+
+    private function bindCategories($blog_id, $categories)
+    {
+        if (!is_array($categories)) {
+            $categories = [$categories];
+        }
+
+        $categories = array_filter($categories, 'is_numeric');
+        $categories = array_map('intval', $categories);
+
+        foreach ($categories as $category) {
+            DB::table('blog_post_category')->insert([
+                'blog_post_id' => $blog_id,
+                'blog_category_id' => $category,
+            ]);
         }
     }
 }

@@ -67,10 +67,10 @@ const toggleSidebar = () => {
   </div>
 
   <main>
-    <div class="flex flex-col mx-5 md:mx-20 lg:mx-40 mt-10">
+    <div class="flex flex-col mx-5 md:mx-20 lg:mx-20 mt-10">
       <div class="lg:flex">
         <!-- sidemenu -->
-        <div class="hidden lg:block lg:w-1/4">
+        <div class="hidden lg:block lg:w-2/5">
             <div class="pl-5">
             <div class="border-blue-600 border-l-4">
                 <p class="text-xl font-bold text-blue-600 ml-5">ABOUT ONE MPRL</p>
@@ -157,9 +157,10 @@ const toggleSidebar = () => {
         </div>
 
       <!-- Content Area -->
-        <div class="lg:w-3/4 lg:ml-5 mt-10 lg:mt-0 border">
+        <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0 border">
             <section id="solar1">
-            <div class="text-2xl font-bold text-blue-600 text-center border">Solar Power</div>
+                <div class="text-2xl font-bold text-blue-600 text-center border">Solar Power</div>
+
             </section>
         </div>
       </div>

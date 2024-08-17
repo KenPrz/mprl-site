@@ -46,9 +46,7 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSeeder::class,
             ServicesCategoriesSeeder::class,
-            FaqSeeder::class    
-
-
+            FaqSeeder::class
         ]);
     }
 }

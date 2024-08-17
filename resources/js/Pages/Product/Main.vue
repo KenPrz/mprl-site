@@ -51,7 +51,7 @@
                     <div>
                       <p class="ml-3 font-bold">{{ newproduct.name }}</p>
                       <p class="ml-3 text-sm flex mt-1">{{ newproduct.power_out }}Watts|{{newproduct.voltage }}Volts</p>
-                      <a :href="`/product/${newproduct.id}`" class="text-sm bg-orange-200 rounded-md text-white px-2 ml-3">View</a>
+                      <a :href="`/product/${newproduct.id}`" class="text-sm bg-green-500 rounded-md text-white px-2 ml-3">View</a>
                     </div>
                   </div>
                 </div>

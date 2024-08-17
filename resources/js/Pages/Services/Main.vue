@@ -120,7 +120,7 @@ onUnmounted(() => {
                 </p>
               </div>
               <div class="w-full md:w-1/2 mt-2">
-                <img src="/images/house.png" alt="House" class="w-full h-full object-cover">
+                <img src="/images/house.png" alt="" class="w-full h-full object-cover">
               </div>
             </div>
           </div>

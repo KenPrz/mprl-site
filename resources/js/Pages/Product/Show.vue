@@ -156,7 +156,7 @@
                 <img :src="similarproduct.first_image ? `/storage/${similarproduct.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-40 object-cover rounded-lg" alt="Similar Product Image">
                 <p class="text-sm font-bold mt-2">{{ similarproduct.name }}</p>
                 <p class="text-xs">{{ similarproduct.power_out }} Watts | {{ similarproduct.voltage }} Volts</p>
-                <a :href="`/product/${similarproduct.id}`" class="text-xs bg-orange-200 rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
+                <a :href="`/product/${similarproduct.id}`" class="text-xs bg-green-500 rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
               </div>
             </div>
           </div>

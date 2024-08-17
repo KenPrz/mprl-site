@@ -40,16 +40,16 @@ onMounted(() => {
       <li>
         <button 
           @click="selectCategory('all')" 
-          class="w-5/6 text-start text-sm rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-600 hover:text-white"
-          :class="{'bg-blue-600 text-white': selectedCategory === 'all'}">
+          class="w-5/6 text-start text-sm rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-green-600 hover:text-white"
+          :class="{'bg-green-600 text-white': selectedCategory === 'all'}">
           All Categories
         </button>
       </li>
       <li v-for="category in categories" :key="category.id">
         <button 
           @click="selectCategory(category.id)" 
-          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-600 hover:text-white"
-          :class="{'bg-blue-600 text-white': selectedCategory === category.id}">
+          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-green-600 hover:text-white"
+          :class="{'bg-green-600 text-white': selectedCategory === category.id}">
           {{ category.name }}
         </button>
       </li>

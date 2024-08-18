@@ -150,38 +150,38 @@ const closePreview = () => {
             <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSidebarOpen }"></i>
             </button>
             <ul v-show="isSidebarOpen" class="mt-4 space-y-2">
-            <li>
-                <button
-                @click="openSolarMenu"
-                class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
-                >
-                Solar Power
-                <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
-                </button>
-                <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                <li><a href="#solar1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                <li><a href="#typeofsolar" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                <li><a href="#benefits" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
-                </ul>
-            </li>
-            <li class="mt-1">
-                <button
-                @click="openCompanyProfile"
-                class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
-                >
-                Company Profile
-                <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
-                </button>
-                <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
-                </ul>
-            </li>
-            <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a></li>
-            <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a></li>
-            <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a></li>
+                <li>
+                    <button
+                    @click="openSolarMenu"
+                    class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
+                    >
+                    Solar Power
+                    <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
+                    </button>
+                    <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
+                    <li><a href="#solar1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
+                    <li><a href="#typeofsolar" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
+                    <li><a href="#benefits" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                    </ul>
+                </li>
+                <li class="mt-1">
+                    <button
+                    @click="openCompanyProfile"
+                    class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
+                    >
+                    Company Profile
+                    <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
+                    </button>
+                    <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
+                    <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
+                    <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
+                    <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
+                    <li><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                    </ul>
+                </li>
+                <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a></li>
+                <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a></li>
+                <li class="mt-1"><a href="#" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a></li>
             </ul>
         </div>
 

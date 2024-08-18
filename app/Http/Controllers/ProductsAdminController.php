@@ -6,6 +6,7 @@ use App\Models\ProductCategory;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Storage;
 
 class ProductsAdminController extends Controller
 {
@@ -140,61 +141,76 @@ class ProductsAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        // Fetch the product
-        $product = Product::findOrFail($id);
-
-        // Validate the incoming data
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:product_categories,id',
-            'power_out' => 'required|string|max:255',
-            'efficiency' => 'required|string|max:255',
-            'dimension' => 'required|string|max:255',
-            'weight' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:product_categories,id',
             'type' => 'required|string|max:255',
-            'voltage' => 'required|string|max:255',
-            'current' => 'required|string|max:255',
-            'temp_coeff' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'warranty' => 'required|string|max:255',
-            'stock_level' => 'required|integer',
-            'supplier' => 'required|string|max:255',
-            'certification' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'img_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
-            'datasheet' => 'nullable|file|mimes:pdf|max:2048', // Example for datasheet file
-            'is_displayed' => 'boolean',
+            'img_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjust for optional image
+            'voltage' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'power_out' => 'required|string|max:255',
+            'efficiency' => 'nullable|numeric|min:0|max:100',
+            'dimension' => 'nullable|string|max:255',
+            'weight' => 'nullable|numeric|min:0',
+            'current' => 'nullable|numeric|min:0',
+            'temp_coeff' => 'nullable|numeric',
+            'price' => 'nullable|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0|max:100',
+            'warranty' => 'nullable|string|max:255',
+            'stock_level' => 'nullable|integer|min:0',
+            'supplier' => 'nullable|string|max:255',
+            'certification' => 'nullable|string|max:255',
+            'datasheet' => 'nullable|file|mimes:pdf|max:10000',
+            'is_displayed' => 'nullable|boolean',
         ]);
 
-        // Update product fields
-        $product->fill($validatedData);
+        $product->update([
+            'name' => $request->input('name'),
+            'category_id' => $request->input('category_id'),
+            'power_out' => $request->input('power_out'),
+            'efficiency' => $request->input('efficiency'),
+            'dimension' => $request->input('dimension'),
+            'weight' => $request->input('weight'),
+            'type' => $request->input('type'),
+            'voltage' => $request->input('voltage'),
+            'current' => $request->input('current'),
+            'temp_coeff' => $request->input('temp_coeff'),
+            'price' => $request->input('price'),
+            'discount' => $request->input('discount'),
+            'warranty' => $request->input('warranty'),
+            'stock_level' => $request->input('stock_level'),
+            'supplier' => $request->input('supplier'),
+            'certification' => $request->input('certification'),
+            'description' => $request->input('description'),
+            'datasheet' => $request->file('datasheet') ? $request->file('datasheet')->store('datasheets') : $product->datasheet,
+            'is_displayed' => $request->input('is_displayed', false),
+        ]);
 
-        // Handle image uploads if there are new images
         if ($request->hasFile('img_path')) {
-            $images = [];
-            foreach ($request->file('img_path') as $image) {
-                $path = $image->store('public/images'); // Adjust storage path as needed
-                $images[] = $path;
+            // Delete existing images if new images are uploaded
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->images);
+                $image->delete();
             }
-            // Save image paths to product
-            $product->img_path = $images;
+
+            // Save the new images
+            foreach($request->file('img_path') as $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('product-images', $filename, 'public');
+                $product->images()->create([
+                    'images' => $path,
+                    'product_id' => $product->id
+                ]);
+            }
         }
 
-        // Handle datasheet upload if there is a new datasheet
-        if ($request->hasFile('datasheet')) {
-            $datasheetPath = $request->file('datasheet')->store('public/datasheets'); // Adjust storage path as needed
-            $product->datasheet = $datasheetPath;
-        }
-
-        // Save the updated product
-        $product->save();
-
-        // Redirect or respond with success message
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
+
+
+
 
 
     /**

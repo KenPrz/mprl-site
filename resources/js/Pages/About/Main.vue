@@ -332,7 +332,7 @@ const closePreview = () => {
                     <div v-if="isPreviewOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
                     <div class="relative">
                         <img :src="previewImage" alt="Preview" class="max-w-full max-h-full" />
-                        <button @click="closePreview" class="absolute top-2 right-2 text-white">X</button>
+                        <button @click="closePreview" class="absolute top-0 right-1 text-black text-md font-semibold">X</button>
                     </div>
                     </div>
                 </div>

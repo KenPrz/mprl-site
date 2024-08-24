@@ -11,6 +11,10 @@ import ProjectCard from '@/Pages/Services/Components/ProjectCard.vue';
 
 
 const scroll = ref(0);
+const isSidebarOpen = ref(false);
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
 const props = defineProps({
   servicesCategory: {
     type: Array,
@@ -95,15 +99,45 @@ onUnmounted(() => {
     <div class="flex flex-col lg:ml-20 mt-10">
       <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
         <!-- categories -->
-        <div class="lg:flex lg:items-center lg:w-1/4">
-          <div class="border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0">
+        <div class="hidden  lg:flex lg:items-center lg:w-1/4">
+          <div class="lg:block border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0"
+          :class="{
+              'fixed mb-60': scroll > 3,
+              'border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0 ': scroll === 0,
+            }">
             <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
               <p class="ml-5 font-bold">SERVICES</p>
             </div>
             <div class="mt-2 sm:mt-0 lg:mt-2 w-full">
-              <ServicesCategory :servicesCategory="servicesCategory" />
+              <ServicesCategory :servicesCategory="servicesCategory" :is_black="scroll > 0" />
             </div>
           </div>
+        </div>
+        <!-- dropdown for smalle screen -->
+        <div class="lg:hidden">
+          <button
+            @click="toggleSidebar"
+            class="flex justify-between items-center w-full text-left py-2 px-4 bg-blue-600 text-white rounded-md"
+            >
+            SERVICES
+            <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSidebarOpen }"></i>
+            </button>
+            <ul v-show="isSidebarOpen" class="mt-4 space-y-2">
+              <div class="mt-2 ml-3">
+                  <ul class="list-none p-0">
+                      <li v-for="service in servicesCategory" :key="service.id">
+                        <a :href="'#' + service.service_category">
+                            <button 
+                                @click="selectCategory(service.id)" 
+                                class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-600 hover:text-white"
+                                :class="{'bg-blue-600 text-white': selectedCategory === service.id}">
+                                {{ service.service_category }}
+                            </button>
+                        </a>
+                      </li>
+                  </ul>
+              </div>
+            </ul>
         </div>
         <!-- services -->
         <div class="lg:w-3/4 ">
@@ -127,8 +161,8 @@ onUnmounted(() => {
           <section>
             <div class="mt-20">
               <div class="flex justify-center">
-                  <p v-if="firstCategory" class="text-3xl font-bold">
-                  {{ firstCategory.service_category }}
+                  <p v-if="firstCategory" :id="firstCategory.service_category" class="text-3xl font-bold">
+                      {{ firstCategory.service_category }}
                   </p>
               </div>
               <!-- Display services here -->
@@ -146,7 +180,7 @@ onUnmounted(() => {
           <section class="mt-5 bg-no-repeat" style="background-image: url('images/bg-service.png'); background-size: 500px; background-position: left bottom;">
             <div class="mt-20">
               <div class="flex justify-center">
-                <p v-if="firstCategory" class="text-3xl font-bold">
+                <p v-if="firstCategory" class="text-3xl font-bold" :id="secondCategory.service_category">
                   {{ secondCategory.service_category }}
                 </p>
               </div>
@@ -183,7 +217,7 @@ onUnmounted(() => {
           </section>
           <section class="mt-20">
               <div class="flex justify-center">
-                <p v-if="firstCategory" class="text-3xl font-bold">
+                <p v-if="firstCategory" class="text-3xl font-bold" :id="thirdCategory.service_category" >
                   {{ thirdCategory.service_category }}
                 </p>
               </div>

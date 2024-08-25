@@ -128,13 +128,13 @@ const closePreview = () => {
                   @click="openSolarMenu"
                   class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
                 >
-                  Solar Power
+                  <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('solar1')" href="#solar1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                  <li><a @click.prevent="scrollToSection('solar2')" href="#solar2" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                  <li><a @click.prevent="scrollToSection('solar3')" href="#solar3" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
+                <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
+                <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
                 </ul>
               </li>
               <li class="mt-1">
@@ -142,14 +142,14 @@ const closePreview = () => {
                   @click="openCompanyProfile"
                   class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
                 >
-                  <a @click.prevent="scrollToSection('profile')" href="#profile">Company Profile</a>
+                  <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">Company Profile</a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
                 </button>
                 <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('profile1')" href="#profile1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                  <li><a @click.prevent="scrollToSection('profile2')" href="#profile2" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                  <li><a @click.prevent="scrollToSection('profile3')" href="#profile3" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                  <li><a @click.prevent="scrollToSection('profile4')" href="#profile4" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                  <li><a @click.prevent="scrollToSection('history')" href="#history" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
+                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
+                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
+                  <li><a @click.prevent="scrollToSection('team')" href="#team" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
                 </ul>
               </li>
               <li class="mt-1"><a @click.prevent="scrollToSection('certificates')" href="#certificates" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a></li>
@@ -174,13 +174,13 @@ const closePreview = () => {
                 @click="openSolarMenu"
                 class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
               >
-                Solar Power
+                <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
                 <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
               </button>
               <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                <li><a @click.prevent="scrollToSection('solar1')" href="#solar1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                <li><a @click.prevent="scrollToSection('solar2')" href="#solar2" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                <li><a @click.prevent="scrollToSection('solar3')" href="#solar3" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                <li><a @click.prevent="scrollToSection('solar')" href="#solar" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
+                <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
+                <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
               </ul>
             </li>
             <li class="mt-1">
@@ -188,14 +188,14 @@ const closePreview = () => {
                 @click="openCompanyProfile"
                 class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
               >
-                <a @click.prevent="scrollToSection('profile')" href="#profile">Company Profile</a>
+                <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">Company Profile</a>
                 <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
               </button>
               <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                <li><a @click.prevent="scrollToSection('profile1')" href="#profile1" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                <li><a @click.prevent="scrollToSection('profile2')" href="#profile2" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                <li><a @click.prevent="scrollToSection('profile3')" href="#profile3" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                <li><a @click.prevent="scrollToSection('profile4')" href="#profile4" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                <li><a @click.prevent="scrollToSection('history')" href="#history" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
+                <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
+                <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
+                <li><a @click.prevent="scrollToSection('team')" href="#team" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
               </ul>
             </li>
             <li class="mt-1"><a @click.prevent="scrollToSection('certificates')" href="#certificates" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a></li>
@@ -205,11 +205,11 @@ const closePreview = () => {
         </div>
         
       <!-- Content Area -->
-        <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0">
-            <section class="space-y-32">
-                <section v-if="selectedSection === 'solar1' || selectedSection === null" id="solar1" >
-                    <div class="text-2xl font-bold text-blue-600 text-center">Solar Power</div>
-                    <div class="mt-5" data-aos="fade-right">
+        <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0 space-y-32">
+            <section id="about-solar" class="space-y-32">
+                <section id="solar" >
+                    <h1 class="text-4xl font-bold text-center">Solar Power</h1>
+                    <div class="mt-5 text-justify text-lg" data-aos="fade-right">
                         <p>Solar energy is a clean, abundant, and renewable resource that's essential for building a sustainable future. By harnessing the sun's power, we can significantly reduce greenhouse gas emissions and lessen our dependence on fossil fuels.</p>
                         <p class="mt-2">Ready to dive deeper into solar energy? Let's explore how solar panels work or discover the different types of solar energy systems.</p>
                     </div>
@@ -217,12 +217,12 @@ const closePreview = () => {
                         <img src="images/about-images/history.png" alt="hisdtou"  data-aos="fade-left">
                     </div>
                 </section>
-                <section v-if="selectedSection === 'solar2'" id="solar2">
-                        <div class="text-2xl font-bold text-blue-600 text-center">Types of Solar Systems</div>
+                <section id="solar-types">
+                        <h1 class="text-4xl font-bold text-center">Types of Solar Power Systems</h1>
                         <div class="flex flex-col lg:flex-row mt-10">
                             <div class="w-full lg:w-2/3" data-aos="fade-right">
-                                <p class="text-xl font-semibold text-blue-600 tracking-wide">Residential</p>
-                                <p class="mt-5 text-sm tracking-wide">
+                                <p class="text-2xl font-semibold text-blue-600 tracking-wide">Residential</p>
+                                <p class="mt-3 text-lg tracking-wide">
                                     Residential solar power systems are designed for private homes, providing an eco-friendly way to generate electricity for everyday use.
                                 </p>
 
@@ -250,8 +250,8 @@ const closePreview = () => {
 
                         <div class="flex flex-col lg:flex-row-reverse mt-10">
                             <div class="w-full lg:w-2/3" data-aos="fade-left">
-                                <p class="text-xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
-                                <p class="mt-5 text-sm tracking-wide text-end">
+                                <p class="text-2xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
+                                <p class="mt-5 text-lg tracking-wide text-end">
                                     Commercial and industrial solar power systems are designed for businesses and large-scale operations, providing scalable and efficient energy solutions.
                                 </p>
                                 <div class="mt-10 hidden lg:block">
@@ -276,13 +276,14 @@ const closePreview = () => {
                             </div>
                         </div>
                 </section>
-                <section v-if="selectedSection === 'solar3'" id="solar3" class="focus">
-                    <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
-                    <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
-                    <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 
-                        reduction in your carbon footprint. 
-                        Additionally, solar power offers long-term financial benefits and contributes to environmental sustainability. 
-                        Discover the many rewards of transitioning to solar energy!
+                <section id="solar-benefits">
+                    <h1 class="text-4xl font-semibold text-center text-blue-600">Four Major Benefits of</h1>
+                    <h2 class="text-3xl font-light text-center text-blue-600 mt-2">Solar Energy</h2>
+                    <p class="mt-10 text-lg text-justify">
+                        Adopting solar power for your home brings numerous advantages, including significant savings on 
+                        electricity bills and a reduction in your carbon footprint. 
+                        Additionally, solar power offers long-term financial benefits and contributes to 
+                        environmental sustainability. Discover the many rewards of transitioning to solar energy!
                     </p>
                     <div class="mt-10">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 justify-center">
@@ -325,15 +326,8 @@ const closePreview = () => {
                     </div>
                 </section>
             </section>
-            <section 
-              v-if="selectedSection === null ||
-                  selectedSection === 'profile' || 
-                  selectedSection === 'profile1' || 
-                  selectedSection === 'profile2' || 
-                  selectedSection === 'profile3' || 
-                  selectedSection === 'profile4'" 
-                id="profile" class="space-y-16">
-              <div data-aos="fade-right" data-aos-once="true">
+            <section id="company-profile" class="space-y-32">
+              <section id="intro" data-aos="fade-right" data-aos-once="true">
                 <h1 class="text-4xl font-bold">
                   Empowering Sustainability: ONE MPRL Solar's Commitment to Renewable Energy
                 </h1>
@@ -359,9 +353,9 @@ const closePreview = () => {
                     <img src="/images/mprl-projects/received_463160816647010.jpeg" alt="about-us" class="mt-2 w-full lg:h-24 h-48 rounded-lg object-cover">
                   </div>
                 </div>
-              </div>
-              <section v-if="selectedSection === 'profile' || selectedSection === 'profile1'" id="profile1" class="pb-16">
-                <h1 class="text-4xl font-bold text-center">History Timeline</h1>
+              </section>
+              <section id="history">
+                <h1 class="text-4xl font-semibold text-blue-600 text-center">History Timeline</h1>
                 <h4 class="text-xl font-semibold text-center tracking-wide mt-3">Milestones in Solar Innovation</h4>
                 
                 <div class="relative flex flex-col items-center w-full max-w-xl md:max-w-4xl mt-10">
@@ -459,8 +453,8 @@ const closePreview = () => {
                     </div>
                 </div>
               </section>
-              <section v-if="selectedSection === 'profile' || selectedSection === 'profile2'" id="profile2">
-                <div class="text-4xl font-bold text-center ">Vision - Mission</div>
+              <section id="vision-mission">
+                <h1 class="text-4xl font-semibold text-blue-600 text-center">Vision - Mission</h1>
                 <div class="flex flex-col md:flex-row md:space-x-8 mt-10">
                   <div class="w-full lg:w-3/5 md:w-1/2 space-y-10">
                     <div data-aos="fade-right" data-aos-once="true">
@@ -489,8 +483,8 @@ const closePreview = () => {
                   </div>
                 </div>
               </section>
-              <section v-if="selectedSection === 'profile' || selectedSection === 'profile3'" id="profile3" class="pb-16">
-                <div class="text-4xl font-bold text-center ">Core Values</div>
+              <section id="core-values">
+                <h1 class="text-4xl font-semibold text-blue-600 text-center">Core Values</h1>
                 <div class="justify-start flex space-x-5 mt-10">
                   <div class="w-1/2 space-y-5">
                     <div data-aos="fade-right" data-aos-once="true">
@@ -522,7 +516,7 @@ const closePreview = () => {
                   </div>
                 </div>
               </section>
-              <section v-if="selectedSection === 'profile' || selectedSection === 'profile4'" id="profile4" class="pb-16">
+              <section id="team">
                 <div class="justify-start flex space-x-5 mt-10 mb-10">
                   <div class="lg:w-1/2 space-y-5">
                     <div>
@@ -555,7 +549,7 @@ const closePreview = () => {
                 </div>
               </section>
             </section>
-            <section v-if="selectedSection === 'org-chart'" id="org-chart" class="pb-16">
+            <section id="org-chart">
               <div class="text-4xl font-bold text-center ">Organizational Structure</div>
               <div data-aos="fade-right" data-aos-once="true">
                 <p class="mt-10 text-justify text-lg">
@@ -566,9 +560,9 @@ const closePreview = () => {
               </div>
               <img src="images/company-profile/Organizational.png" alt="Organizational chart" class="mt-5 w-full h-full rounded-lg object-cover">
             </section>
-            <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0">
-                <div v-if="selectedSection === 'certificates' || selectedSection === null" id="certificates">
-                    <div class="text-2xl font-bold text-blue-600 text-center">Certificates & Awards</div>
+            <section class="space-y-32">
+              <div id="certificates">
+                    <h1 class="text-4xl font-bold text-center">Certificates & Awards</h1>
                     <p class="mt-10">ONE MPRL Solar Power Corporation is recognized for its exceptional contributions to sustainable energy solutions. 
                         The company has earned numerous certificates and awards, including:
                     </p>
@@ -590,9 +584,9 @@ const closePreview = () => {
                         </div>
                         </div>
                     </div>
-                </div>
-                <div v-if="selectedSection === 'shareholders' || selectedSection === null" id="shareholders">
-                    <div class="text-2xl font-bold text-blue-600 text-center">Share Holder & Investors</div>
+              </div>
+                <div id="shareholders">
+                    <h1 class="text-4xl font-bold text-center">Share Holders & Investors</h1>
                     <p class="mt-10">ONE MPRL Solar Power Corporation values the critical role of its shareholders and investors in driving the company’s growth and success in the renewable energy sector. The company is committed to maintaining transparent,
                         productive relationships with its financial supporters.
                     </p>
@@ -600,7 +594,7 @@ const closePreview = () => {
                         <img src="images/about-images/Shareholder.png" alt="" data-aos="fade-left">
                     </div>
                 </div>
-            </div>
+            </section>
       </div>
     </div>
     </div>

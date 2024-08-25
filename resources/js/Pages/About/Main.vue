@@ -276,7 +276,7 @@ const closePreview = () => {
                             </div>
                         </div>
                 </section>
-                <section v-if="selectedSection === 'solar3'" id="solar3">
+                <section v-if="selectedSection === 'solar3'" id="solar3" class="focus">
                     <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
                     <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
                     <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 

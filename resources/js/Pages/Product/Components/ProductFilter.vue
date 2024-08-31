@@ -28,7 +28,6 @@ const selectCategory = (categoryId) => {
   fetchFilteredProduct(categoryId);
 };
 
-// Fetch products for the 'all' category when the component is mounted
 onMounted(() => {
   fetchFilteredProduct('all');
 });
@@ -40,26 +39,41 @@ onMounted(() => {
       <li>
         <button 
           @click="selectCategory('all')" 
-          class="w-5/6 text-start text-sm rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-green-600 hover:text-white"
-          :class="{'bg-green-600 text-white': selectedCategory === 'all'}">
+          class="w-5/6 text-start text-sm rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-400 hover:text-white"
+          :class="{'bg-blue-600 text-white': selectedCategory === 'all'}">
           All Categories
         </button>
       </li>
       <li v-for="category in categories" :key="category.id">
         <button 
           @click="selectCategory(category.id)" 
-          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-green-600 hover:text-white"
-          :class="{'bg-green-600 text-white': selectedCategory === category.id}">
+          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-600 hover:text-white"
+          :class="{'bg-blue-600 text-white': selectedCategory === category.id}">
           {{ category.name }}
         </button>
       </li>
     </ul>
-    <select class="block sm:hidden w-full p-2 rounded-lg shadow-md mt-3 border ml-10 border-blue-500" @change="selectCategory($event.target.value)">
-      <option value="all" :selected="selectedCategory === 'all'">All Categories</option>
-      <option v-for="category in categories" :value="category.id" :selected="selectedCategory === category.id">
+    <select 
+      class="block lg:hidden w-full text-left py-2 px-4 bg-blue-600 text-white rounded-md" 
+      @change="selectCategory($event.target.value)"
+    >
+      <option 
+        value="all" 
+        :selected="selectedCategory === 'all'"
+        class="bg-gray-200 hover:text-white hover:bg-blue-600"
+      >
+        All Categories
+      </option>
+      <option 
+        v-for="category in categories" 
+        :value="category.id" 
+        :selected="selectedCategory === category.id"
+        class="bg-gray-200 hover:text-white hover:bg-blue-600"
+      >
         {{ category.name }}
       </option>
     </select>
+
   </div>
 </template>
 

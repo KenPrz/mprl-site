@@ -36,12 +36,10 @@ const form = useForm({
     supplier: props.product.supplier,
     certification: props.product.certification,
     description: props.product.description,
-    img_path: [],
+    img_path: [], // Initialize with an empty array
     datasheet: props.product.datasheet,
     is_displayed: props.product.is_displayed,
 });
-
-//put the update function here
 
 const imagePreviews = ref(
     props.product.images.map(image => ({
@@ -59,7 +57,7 @@ function handleFiles(event) {
             imagePreviews.value.push({ id: i, url: e.target.result });
         };
         reader.readAsDataURL(file);
-        form.img_path = [...form.img_path, file]; // Update img_path here
+        form.img_path.push(file); // Append the file to img_path array
     }
 }
 
@@ -69,12 +67,18 @@ function removeImage(index) {
 }
 
 function updateProduct(){
-    form.patch(route('admin.products.update', props.product.id));
+    form.patch(route('admin.products.update', props.product.id), {
+        onSuccess: () => {
+            form.clearErrors();
+        }
+    });
 }
+
 onMounted(() => {
     form.clearErrors();
 });
 </script>
+
 <template>
     <Head title="Update Product" />
     <AuthenticatedLayout>

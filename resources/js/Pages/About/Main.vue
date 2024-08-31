@@ -329,7 +329,7 @@ const closePreview = () => {
                             </div>
                         </div>
                 </section>
-                <section id="solar3">
+                <section id="solar-benefits">
                     <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
                     <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
                     <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 

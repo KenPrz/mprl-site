@@ -249,7 +249,7 @@ const closePreview = () => {
         
       <!-- Content Area -->
         <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0 space-y-32">
-            <section id="about-solar" class="space-y-32 w-3/4">
+            <section id="about-solar" class="space-y-32">
                 <section id="solar" >
                     <h1 class="text-4xl font-bold text-center">Solar Power</h1>
                     <div class="mt-5 text-justify text-lg" data-aos="fade-right">
@@ -319,7 +319,7 @@ const closePreview = () => {
                             </div>
                         </div>
                 </section>
-                <section v-if="selectedSection === 'solar3'" id="solar3">
+                <section id="solar3">
                     <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
                     <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
                     <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 

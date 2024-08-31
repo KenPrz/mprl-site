@@ -126,7 +126,7 @@ const closePreview = () => {
               <li>
                 <button
                   @click="openSolarMenu"
-                  :class="{'bg-blue-600 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
+                  :class="{'border bg-gray-200': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
                   <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
@@ -150,10 +150,10 @@ const closePreview = () => {
                   </li>
                 </ul>
               </li>
-              <li class="mt-1">
+              <li class="mt-2">
                 <button
                   @click="openCompanyProfile"
-                  :class="{'bg-blue-600 text-white': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
+                  :class="{'border bg-gray-200': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                   >
                   <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">
@@ -184,17 +184,17 @@ const closePreview = () => {
                     </li>
                   </ul>
               </li>
-              <li class="mt-1">
+              <li class="mt-2">
                 <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-700 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Certificates & Awards
                 </a>
               </li>
-              <li class="mt-1">
+              <li class="mt-2">
                 <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-700 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Share Holder & Investors
                 </a>
               </li>
-              <li class="mt-1">
+              <li class="mt-2">
                 <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-700 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Organizational Chart
                 </a>

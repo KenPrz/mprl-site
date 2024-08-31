@@ -7,8 +7,6 @@ import { Link } from '@inertiajs/vue3';
 import ServicesCategory from '@/Pages/Services/Components/ServicesCategory.vue';
 import ProjectTabs from '@/Pages/Services/Components/ProjectTabs.vue';
 import FaqTabs from '@/Pages/Services/Components/FaqTabs.vue';
-import ProjectCard from '@/Pages/Services/Components/ProjectCard.vue';
-
 
 const scroll = ref(0);
 const isSidebarOpen = ref(false);

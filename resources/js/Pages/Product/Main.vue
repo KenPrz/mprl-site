@@ -27,8 +27,8 @@
         <!-- Categories Section -->
         <div class="lg:flex lg:items-center lg:w-2/5">
           <div class="border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0">
-            <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
-              <p class="ml-5 font-bold">CATEGORIES</p>
+            <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 lg:border-blue-600 lg:border-l-4">
+              <p class="ml-5 font-bold hidden lg:block">CATEGORIES</p>
             </div>
             <div class="mt-2 sm:mt-0 lg:mt-2 w-full">
               <ProductFilter :categories="categories" @update-products="updateProducts" />

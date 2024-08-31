@@ -53,12 +53,27 @@ onMounted(() => {
         </button>
       </li>
     </ul>
-    <select class="block sm:hidden w-full p-2 rounded-lg shadow-md mt-3 border ml-10 border-blue-600" @change="selectCategory($event.target.value)">
-      <option value="all" :selected="selectedCategory === 'all'">All Categories</option>
-      <option v-for="category in categories" :value="category.id" :selected="selectedCategory === category.id">
+    <select 
+      class="block lg:hidden w-full text-left py-2 px-4 bg-blue-600 text-white rounded-md" 
+      @change="selectCategory($event.target.value)"
+    >
+      <option 
+        value="all" 
+        :selected="selectedCategory === 'all'"
+        class="bg-gray-200 hover:text-white hover:bg-blue-600"
+      >
+        All Categories
+      </option>
+      <option 
+        v-for="category in categories" 
+        :value="category.id" 
+        :selected="selectedCategory === category.id"
+        class="bg-gray-200 hover:text-white hover:bg-blue-600"
+      >
         {{ category.name }}
       </option>
     </select>
+
   </div>
 </template>
 

@@ -134,17 +134,17 @@ const closePreview = () => {
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
                   <li>
-                    <a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-600 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                    <a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-700 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                       How Solar Power Works?
                     </a>
                   </li>
                   <li>
-                    <a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-600 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                    <a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-700 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                       Types of Solar Systems
                     </a>
                   </li>
                   <li>
-                    <a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-600 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                    <a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-700 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                       Four Major Benefits of Solar Energy
                     </a>
                   </li>
@@ -163,39 +163,39 @@ const closePreview = () => {
                 </button>
                   <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
                     <li>
-                      <a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-600 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      <a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-700 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                         History Timeline
                       </a>
                     </li>
                     <li>
-                      <a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-600 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      <a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-700 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                         Vision - Mission
                       </a>
                     </li>
                     <li>
-                      <a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-600 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      <a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-700 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                         Core Values
                       </a>
                     </li>
                     <li>
-                      <a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-600 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      <a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-700 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                       Team - Commitment
                       </a>
                     </li>
                   </ul>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-600 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-700 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Certificates & Awards
                 </a>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-600 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-700 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Share Holder & Investors
                 </a>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-600 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-700 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
                   Organizational Chart
                 </a>
               </li>

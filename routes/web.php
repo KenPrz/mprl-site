@@ -32,6 +32,7 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/brochure', [BrochureController::class, 'downLoadBrochure'])->name('brochure.download');
+// Route::post('/inquire', [ContactController::class, 'sendEmail'])->name('inquire');
 
 Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');

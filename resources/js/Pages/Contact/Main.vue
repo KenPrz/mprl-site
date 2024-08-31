@@ -1,11 +1,44 @@
 <script setup>
-import NavBar from '@/Components/NavBar.vue'
-import { onMounted, onUnmounted, ref } from 'vue';
+import NavBar from '@/Components/NavBar.vue';
 import Footer from '@/Components/Footer.vue';
+import Modal from '@/Components/Modal.vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import Login from '@/Pages/Auth/Login.vue';
+import Register from '@/Pages/Auth/Register.vue';
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
+
+const openLogin = () => {
+    showLoginModal.value = true;
+}
+
+const showLoginModal = ref(false);
+const showRegisterModal = ref(false);
+
+// Function to open the login modal and close the register modal
+const handleLoginSwitch = () => {
+    showLoginModal.value = true;
+    showRegisterModal.value = false;
+};
+
+// Function to open the register modal and close the login modal
+const handleRegisterSwitch = () => {
+    showRegisterModal.value = true;
+    showLoginModal.value = false;
+};
+
+// Function to close both modals
+const closeAllModals = () => {
+    showLoginModal.value = false;
+    showRegisterModal.value = false;
+};
+
+// Scroll position state
 const scroll = ref(0);
 
+// Form state using Inertia's useForm
 const form = useForm({
     first_name: '',
     last_name: '',
@@ -17,18 +50,12 @@ const form = useForm({
     message: '',
 });
 
-const submit = () => {
-    form.post(route('inquire'), {
-        onSuccess: () => {
-            form.reset();
-        },
-    });
-};
-
+// Function to handle scroll events
 const handleScroll = () => {
     scroll.value = Math.round(window.scrollY);
 };
 
+// Mount and unmount event listeners for scroll
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
 });
@@ -36,6 +63,24 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
+
+// Submit function to handle form submission
+const submit = () => {
+    form.post(route('inquire'), {
+        onError: (errors) => {
+            if (errors.loginRequired) {
+                openLogin(); // Show the login modal
+            }
+        },
+        onSuccess: () => {
+            toast.success('Inquiry sent successfully!');
+            form.reset();
+        },
+    });
+};
+
+// Emit event to open the login modal (if needed elsewhere)
+const emit = defineEmits(['openLogin']);
 </script>
 <template>
     <Head title="Contact" />
@@ -60,6 +105,21 @@ onUnmounted(() => {
             </div>
         </div>
     </section>
+    <!-- Login Modal -->
+    <Modal maxWidth="md" v-model:show="showLoginModal" @close="closeAllModals">
+        <Login 
+            @openRegister="handleRegisterSwitch"
+            @closeLogin="closeAllModals"
+        />
+    </Modal>
+
+    <!-- Register Modal -->
+    <Modal maxWidth="md" v-model:show="showRegisterModal" @close="closeAllModals">
+        <Register
+            @openLogin="handleLoginSwitch"
+            @closeRegister="closeAllModals"
+        />
+    </Modal>
     <main class="px-5 md:px-28 cursor-default">
         <div class="flex flex-col items-center justify-center">
             <div class="self-center mt-24 mb-24 w-full max-w-[1346px] max-md:mt-10 max-md:max-w-full">
@@ -176,7 +236,7 @@ onUnmounted(() => {
                         </div>
                         <div class="relative flex-1">
                             <input v-model="form.date" id="date" name="date" type="date" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
-                            <label for="date" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Book a Site Visit</label>
+                            <label for="date" class="absolute text-sm text-slate-50 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Book a Site Visit</label>
                         </div>                        
                     </div>                    
                     <div class="relative mb-8">
@@ -185,19 +245,6 @@ onUnmounted(() => {
                     </div>
                     <button type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                 </form>
-                <!-- <form @submit.prevent="submit">
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <div class="relative flex-1">
-                            <input v-model="form.first_name" type="text" id="first_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
-                            <label for="first_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">First Name</label>
-                        </div>
-                        <div class="relative flex-1">
-                            <input v-model="form.last_name" type="text" id="last_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
-                            <label for="last_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Last Name</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
-                </form> -->
             </div>
         </div>
     </section>                      

@@ -18,6 +18,11 @@ class ContactController extends Controller
      */
     public function sendEmail(Request $request)
     {
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return redirect()->back()->withErrors(['loginRequired' => true]);
+        }
+
         // Validate the form data
         $data = $request->validate([
             'first_name' => 'required|string|max:255',
@@ -31,10 +36,9 @@ class ContactController extends Controller
         ]);
 
         // Send the email using the ContactFormMail class
-        Mail::to('mprl@gmail.com')->send(new ContactFormMail($data)); // Change the email to the recipient address
+        Mail::to('mprl@gmail.com')->send(new ContactFormMail($data));
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }
-

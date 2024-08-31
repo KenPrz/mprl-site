@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 Route::middleware('guest')->group(function () {
-    Route::post('/inquire', [ContactController::class, 'sendEmail'])->name('inquire');
+    // Route::post('/inquire', [ContactController::class, 'sendEmail'])->name('inquire');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');

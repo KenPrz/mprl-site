@@ -39,6 +39,6 @@ class ContactController extends Controller
         Mail::to('mprl@gmail.com')->send(new ContactFormMail($data));
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        return back()->with('success', 'Your message has been sent successfully!');
     }
 }

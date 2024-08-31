@@ -126,39 +126,82 @@ const closePreview = () => {
               <li>
                 <button
                   @click="openSolarMenu"
-                  class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
+                  :class="{'bg-blue-600 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
+                  class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
                   <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                  <li>
+                    <a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-600 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      How Solar Power Works?
+                    </a>
+                  </li>
+                  <li>
+                    <a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-600 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      Types of Solar Systems
+                    </a>
+                  </li>
+                  <li>
+                    <a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-600 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      Four Major Benefits of Solar Energy
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="mt-1">
                 <button
                   @click="openCompanyProfile"
-                  class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
-                >
-                  <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">Company Profile</a>
+                  :class="{'bg-blue-600 text-white': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
+                  class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
+                  >
+                  <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">
+                    Company Profile
+                  </a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
                 </button>
-                <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('history')" href="#history" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                  <li><a @click.prevent="scrollToSection('team')" href="#team" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
-                </ul>
+                  <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
+                    <li>
+                      <a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-600 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                        History Timeline
+                      </a>
+                    </li>
+                    <li>
+                      <a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-600 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                        Vision - Mission
+                      </a>
+                    </li>
+                    <li>
+                      <a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-600 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                        Core Values
+                      </a>
+                    </li>
+                    <li>
+                      <a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-600 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                      Team - Commitment
+                      </a>
+                    </li>
+                  </ul>
               </li>
-              <li class="mt-1"><a @click.prevent="scrollToSection('certificates')" href="#certificates" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a></li>
-              <li class="mt-1"><a @click.prevent="scrollToSection('shareholders')" href="#shareholders" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a></li>
-              <li class="mt-1"><a @click.prevent="scrollToSection('org-chart')" href="#org-chart" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a></li>
+              <li class="mt-1">
+                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-600 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                  Certificates & Awards
+                </a>
+              </li>
+              <li class="mt-1">
+                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-600 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                  Share Holder & Investors
+                </a>
+              </li>
+              <li class="mt-1">
+                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-600 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
+                  Organizational Chart
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-      
         <!-- to make dropdown -->
         <div class="lg:hidden">
           <button
@@ -206,7 +249,7 @@ const closePreview = () => {
         
       <!-- Content Area -->
         <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0 space-y-32">
-            <section id="about-solar" class="space-y-32">
+            <section id="about-solar" class="space-y-32 w-3/4">
                 <section id="solar" >
                     <h1 class="text-4xl font-bold text-center">Solar Power</h1>
                     <div class="mt-5 text-justify text-lg" data-aos="fade-right">
@@ -276,14 +319,13 @@ const closePreview = () => {
                             </div>
                         </div>
                 </section>
-                <section id="solar-benefits">
-                    <h1 class="text-4xl font-semibold text-center text-blue-600">Four Major Benefits of</h1>
-                    <h2 class="text-3xl font-light text-center text-blue-600 mt-2">Solar Energy</h2>
-                    <p class="mt-10 text-lg text-justify">
-                        Adopting solar power for your home brings numerous advantages, including significant savings on 
-                        electricity bills and a reduction in your carbon footprint. 
-                        Additionally, solar power offers long-term financial benefits and contributes to 
-                        environmental sustainability. Discover the many rewards of transitioning to solar energy!
+                <section v-if="selectedSection === 'solar3'" id="solar3">
+                    <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
+                    <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
+                    <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 
+                        reduction in your carbon footprint. 
+                        Additionally, solar power offers long-term financial benefits and contributes to environmental sustainability. 
+                        Discover the many rewards of transitioning to solar energy!
                     </p>
                     <div class="mt-10">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 justify-center">

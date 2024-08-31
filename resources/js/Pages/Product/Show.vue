@@ -152,7 +152,7 @@
           </div>
           <div class="flex flex-wrap gap-5 justify-center">
             <div class="w-full sm:w-1/2 lg:w-1/4 mt-5" v-for="similarproduct in similarproducts" :key="similarproduct.id">
-              <div class="hover:bg-slate-200 rounded-lg hover:shadow-md p-4">
+              <div class="hover:bg-slate-200 rounded-lg hover:shadow-lg p-4 h-full border">
                 <img :src="similarproduct.first_image ? `/storage/${similarproduct.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-40 object-cover rounded-lg" alt="Similar Product Image">
                 <p class="text-sm font-bold mt-2">{{ similarproduct.name }}</p>
                 <p class="text-xs">{{ similarproduct.power_out }} Watts | {{ similarproduct.voltage }} Volts</p>

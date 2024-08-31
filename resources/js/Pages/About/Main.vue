@@ -1,13 +1,13 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
 import { Link } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 
 // Scroll-related logic
 const scroll = ref(0);
-
+const isFixedTop = ref(false);
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
 };
@@ -19,6 +19,16 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
+
+watch(()=> {
+  scroll.value;
+  if (scroll.value > 230) {
+    isFixedTop.value = true;
+  } else {
+    isFixedTop.value = false;
+  }
+});
+
 
 // Menu and Sidebar logic
 const isSolarMenuOpen = ref(false);
@@ -118,9 +128,9 @@ const closePreview = () => {
       <div class="lg:flex">
         <!-- sidemenu -->
         <div class="hidden lg:block lg:w-2/5">
-          <div class="pl-5">
+          <div :class="[isFixedTop ? 'fixed top-40':'','pl-5']">
             <div class="border-blue-600 border-l-4">
-              <p class="text-xl font-bold text-blue-600 ml-5">ABOUT ONE MPRL</p>
+              <p class="text-xl font-bold text-blue-600 ml-5">ABOUT ONE MPRL {{scroll}}</p>
             </div>
             <ul class="mt-4">
               <li>

@@ -77,13 +77,11 @@
                 </div>
               </div>
 
-          <div class="border-t-4 p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:flex-1">
-          <div v-for="product in filteredProducts" :key="product.id" class="w-full">
-            <ProductCard data-aos="fade-left" data-aos-delay="20" :product="product" />
-          </div>
-          <ProductPagination :totalItems="products.length" :itemsPerPage="itemsPerPage" @updatePage="updatePage" />
-        </div>
-
+            <div class="border-t-4 p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:flex-1">
+              <div v-for="product in filteredProducts" :key="product.id" class="w-full">
+                <ProductCard data-aos="fade-left" data-aos-delay="20" :product="product" />
+              </div>
+            </div>
           </div>
         
       </div>
@@ -99,7 +97,7 @@
   import { Link } from '@inertiajs/vue3';
   import NavBar from '@/Components/NavBar.vue';
   import ProductCard from '@/Pages/Product/Components/ProductCard.vue';
-  import ProductPagination from '@/Pages/Product/Components/ProductPagination.vue';
+  import Pagination from '@/Components/Pagination.vue';
   import ProductFilter from '@/Pages/Product/Components/ProductFilter.vue';
   import Footer from '@/Components/Footer.vue';
 
@@ -109,8 +107,6 @@
 
   const selectedSortOption = ref('all');
   const searchQuery = ref('');
-  const itemsPerPage = ref(8);
-  const currentPage = ref(1);
 
   const props = defineProps({
   initialProducts: Array,
@@ -166,15 +162,7 @@
   function searchProducts() {
   filteredProducts.value;
   }
-  
-  const paginatedProducts = computed(() => {
-    const start = (currentPage.value - 1) * itemsPerPage.value;
-    return products.value.slice(start, start + itemsPerPage.value);
-  });
 
-const updatePage = (page) => {
-  currentPage.value = page;
-};
   </script>
 
 <style scoped>

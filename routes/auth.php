@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 Route::middleware('guest')->group(function () {
+    // Route::post('/inquire', [ContactController::class, 'sendEmail'])->name('inquire');
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 

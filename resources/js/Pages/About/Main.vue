@@ -1,13 +1,13 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
 import { Link } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 
 // Scroll-related logic
 const scroll = ref(0);
-
+const isFixedTop = ref(false);
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
 };
@@ -20,6 +20,15 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
+watch(() => {
+  scroll.value;
+  if (scroll.value > 230) {
+    isFixedTop.value = true;
+  } else {
+    isFixedTop.value = false;
+  }
+});
+
 // Menu and Sidebar logic
 const isSolarMenuOpen = ref(false);
 const isComProfOpn = ref(false);
@@ -27,15 +36,26 @@ const activeMenuItem = ref(null);
 const isSidebarOpen = ref(false);
 const selectedSection = ref(null);
 
-const openSolarMenu = () => {
-  isSolarMenuOpen.value = !isSolarMenuOpen.value;
-  activeMenuItem.value = 'solar';
+const toggleSolarMenu = () => {
+  if (!isSolarMenuOpen.value) {
+    isSolarMenuOpen.value = true;
+    isComProfOpn.value = false; // Close Company Profile menu
+    activeMenuItem.value = 'solar';
+  } else {
+    isSolarMenuOpen.value = false;
+    activeMenuItem.value = null;
+  }
 };
 
-
-const openCompanyProfile = () => {
-  isComProfOpn.value = !isComProfOpn.value;
-  activeMenuItem.value = 'companyProfile';
+const toggleCompanyProfileMenu = () => {
+  if (!isComProfOpn.value) {
+    isComProfOpn.value = true;
+    isSolarMenuOpen.value = false; // Close Solar Power menu
+    activeMenuItem.value = 'companyProfile';
+  } else {
+    isComProfOpn.value = false;
+    activeMenuItem.value = null;
+  }
 };
 
 const toggleSidebar = () => {
@@ -85,6 +105,7 @@ const closePreview = () => {
 };
 </script>
 
+
 <template>
   <Head title="About" />
   <nav
@@ -118,14 +139,14 @@ const closePreview = () => {
       <div class="lg:flex">
         <!-- sidemenu -->
         <div class="hidden lg:block lg:w-2/5">
-          <div class="pl-5">
+          <div :class="[isFixedTop ? 'fixed top-40' : '', 'pl-5']">
             <div class="border-blue-600 border-l-4">
               <p class="text-xl font-bold text-blue-600 ml-5">ABOUT ONE MPRL</p>
             </div>
             <ul class="mt-4">
               <li>
                 <button
-                  @click="openSolarMenu"
+                  @click="toggleSolarMenu"
                   :class="{'bg-blue-600 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
@@ -133,76 +154,42 @@ const closePreview = () => {
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li>
-                    <a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-700 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                      How Solar Power Works?
-                    </a>
-                  </li>
-                  <li>
-                    <a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-700 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                      Types of Solar Systems
-                    </a>
-                  </li>
-                  <li>
-                    <a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-700 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                      Four Major Benefits of Solar Energy
-                    </a>
-                  </li>
+                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-700 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
+                  <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-700 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
+                  <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-700 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
                 </ul>
               </li>
               <li class="mt-1">
                 <button
-                  @click="openCompanyProfile"
+                  @click="toggleCompanyProfileMenu"
                   :class="{'bg-blue-600 text-white': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
-                  >
+                >
                   <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">
                     Company Profile
                   </a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
                 </button>
-                  <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                    <li>
-                      <a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-700 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                        History Timeline
-                      </a>
-                    </li>
-                    <li>
-                      <a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-700 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                        Vision - Mission
-                      </a>
-                    </li>
-                    <li>
-                      <a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-700 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                        Core Values
-                      </a>
-                    </li>
-                    <li>
-                      <a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-700 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                      Team - Commitment
-                      </a>
-                    </li>
-                  </ul>
+                <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
+                  <li><a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-700 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
+                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-700 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
+                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-700 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
+                  <li><a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-700 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                </ul>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-700 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                  Certificates & Awards
-                </a>
+                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-700 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-700 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                  Share Holder & Investors
-                </a>
+                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-700 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a>
               </li>
               <li class="mt-1">
-                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-700 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">
-                  Organizational Chart
-                </a>
+                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-700 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a>
               </li>
             </ul>
           </div>
         </div>
-        <!-- to make dropdown -->
+        <!-- to make dropdown in smal scrn -->
         <div class="lg:hidden">
           <button
             @click="toggleSidebar"
@@ -214,7 +201,7 @@ const closePreview = () => {
           <ul v-show="isSidebarOpen" class="mt-4 space-y-2">
             <li>
               <button
-                @click="openSolarMenu"
+                @click="toggleSolarMenu"
                 class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
               >
                 <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
@@ -228,7 +215,7 @@ const closePreview = () => {
             </li>
             <li class="mt-1">
               <button
-                @click="openCompanyProfile"
+                @click="toggleCompanyProfileMenu"
                 class="flex justify-between items-center w-full text-left py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md"
               >
                 <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">Company Profile</a>
@@ -245,9 +232,8 @@ const closePreview = () => {
             <li class="mt-1"><a @click.prevent="scrollToSection('shareholders')" href="#shareholders" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a></li>
             <li class="mt-1"><a @click.prevent="scrollToSection('org-chart')" href="#org-chart" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a></li>
           </ul>
-        </div>
-        
-      <!-- Content Area -->
+        </div>  
+        <!-- Content Area -->
         <div class="lg:w-3/4 lg:ml-20 mt-10 lg:mt-0 space-y-32">
             <section id="about-solar" class="space-y-32">
                 <section id="solar" >

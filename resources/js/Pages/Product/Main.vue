@@ -77,12 +77,11 @@
                 </div>
               </div>
 
-          <div class="border-t-4 p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:flex-1">
-          <div v-for="product in filteredProducts" :key="product.id" class="w-full">
-            <ProductCard data-aos="fade-left" data-aos-delay="20" :product="product" />
-          </div>
-        </div>
-
+            <div class="border-t-4 p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:flex-1">
+              <div v-for="product in filteredProducts" :key="product.id" class="w-full">
+                <ProductCard data-aos="fade-left" data-aos-delay="20" :product="product" />
+              </div>
+            </div>
           </div>
         
       </div>

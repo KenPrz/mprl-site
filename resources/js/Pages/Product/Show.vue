@@ -133,7 +133,8 @@
                 <div class="ml-2">{{ products.datasheet }}</div>
               </div>
               <div class="mt-5">
-                <a href="" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</a>
+                <!-- Changed <a> to <button> -->
+                <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
               </div>
             </div>
           </div>
@@ -164,8 +165,35 @@
       </div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-xl font-bold mb-4">Inquire Now</h2>
+      <form @submit.prevent="submitInquiry">
+        <div class="mb-4">
+          <label class="block text-gray-700">Name</label>
+          <input v-model="inquiry.name" type="text" class="w-full px-3 py-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Email</label>
+          <input v-model="inquiry.email" type="email" class="w-full px-3 py-2 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Message</label>
+          <textarea v-model="inquiry.message" class="w-full px-3 py-2 border rounded-md" required></textarea>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" @click="showModal = false" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancel</button>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Send Inquiry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <Footer />
 </template>
+
 
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
@@ -173,13 +201,34 @@ import { onMounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
+import axios from 'axios';
 
 const scroll = ref(0);
+const showModal = ref(false); // Modal visibility state
+const inquiry = ref({
+  name: '',
+  email: '',
+  message: '',
+});
 
 const mainImage = ref('');
 
 const changeImage = (image) => {
   mainImage.value = image;
+};
+
+const submitInquiry = () => {
+  axios.post('api/inquire-product',{
+    'name': this.inquiry.name,
+    'email': this.inquiry.email,
+    'message': this.inquiry.message
+  }).then(res =>{
+    console.log(res)
+  }).catch(e =>{
+    console.log(e)
+  })
+  console.log('Inquiry submitted:', inquiry.value);
+  showModal.value = false; // Close modal after submission
 };
 
 const props = defineProps({
@@ -191,7 +240,7 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  newproducts:{
+  newproducts: {
     type: Array,
     required: true
   }
@@ -204,6 +253,7 @@ onMounted(() => {
 });
 </script>
 
+
 <style>
 img {
   cursor: pointer;
@@ -211,5 +261,28 @@ img {
 }
 img:hover {
   transform: scale(1.1);
+}
+
+/* Modal styles */
+.fixed {
+  position: fixed;
+}
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.bg-black {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 </style>

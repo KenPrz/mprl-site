@@ -17,6 +17,7 @@ use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ProductsAdminController;
 use App\Http\Controllers\BrochureController;
 use App\Http\Controllers\FAQsController;
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ServicesAdminController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\ProjectAdminController;
@@ -32,6 +33,7 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/product', [ProductController::class, 'index'])->name('products');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/brochure', [BrochureController::class, 'downLoadBrochure'])->name('brochure.download');
+Route::post('/inquire-product', [InquiryController::class, 'send'])->name('inquire.send');
 
 Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');

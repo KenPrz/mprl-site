@@ -133,8 +133,8 @@
                 <div class="ml-2">{{ products.datasheet }}</div>
               </div>
               <div class="mt-5">
-                <!-- Changed <a> to <button> -->
                 <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
+                <span v-if="inquirySuccess" class="ml-4 text-green-600">Message sent successfully!</span>
               </div>
             </div>
           </div>
@@ -173,15 +173,19 @@
       <form @submit.prevent="submitInquiry">
         <div class="mb-4">
           <label class="block text-gray-700">Name</label>
-          <input v-model="inquiry.name" type="text" class="w-full px-3 py-2 border rounded-md" required>
+          <input v-model="inquiry.name" type="text" class="w-full px-3 py-2 border rounded-md">
         </div>
         <div class="mb-4">
           <label class="block text-gray-700">Email</label>
-          <input v-model="inquiry.email" type="email" class="w-full px-3 py-2 border rounded-md" required>
+          <input v-model="inquiry.email" type="email" class="w-full px-3 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Phone Numer</label>
+          <input v-model="inquiry.phone" type="number" class="w-full px-3 py-2 border rounded-md">
         </div>
         <div class="mb-4">
           <label class="block text-gray-700">Message</label>
-          <textarea v-model="inquiry.message" class="w-full px-3 py-2 border rounded-md" required></textarea>
+          <textarea v-model="inquiry.message" class="w-full px-3 py-2 border rounded-md"></textarea>
         </div>
         <div class="flex justify-end">
           <button type="button" @click="showModal = false" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancel</button>
@@ -202,33 +206,42 @@ import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import axios from 'axios';
-
 const scroll = ref(0);
-const showModal = ref(false); // Modal visibility state
+const showModal = ref(false);
 const inquiry = ref({
   name: '',
   email: '',
+  phone: '',
+  product: '',
   message: '',
 });
 
-const mainImage = ref('');
-
-const changeImage = (image) => {
-  mainImage.value = image;
-};
-
+const inquirySuccess = ref(false);
 const submitInquiry = () => {
-  axios.post('api/inquire-product',{
-    'name': this.inquiry.name,
-    'email': this.inquiry.email,
-    'message': this.inquiry.message
-  }).then(res =>{
-    console.log(res)
-  }).catch(e =>{
-    console.log(e)
+  axios.post('/inquire-product', {
+    name: inquiry.value.name,
+    email: inquiry.value.email,
+    phone: inquiry.value.phone,
+    product: props.products.name,
+    message: inquiry.value.message
   })
-  console.log('Inquiry submitted:', inquiry.value);
-  showModal.value = false; // Close modal after submission
+  .then(response => {
+    console.log('Inquiry submitted:', response.data);
+    showModal.value = false;
+    inquirySuccess.value = true; 
+    inquiry.value = {
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    };
+    setTimeout(() => {
+      inquirySuccess.value = false;
+    }, 5000);
+  })
+  .catch(error => {
+    console.error('Error submitting inquiry:', error);
+  });
 };
 
 const props = defineProps({
@@ -251,7 +264,14 @@ onMounted(() => {
     mainImage.value = `/storage/${props.products.images[0].images}`;
   }
 });
+
+const mainImage = ref('');
+
+const changeImage = (image) => {
+  mainImage.value = image;
+};
 </script>
+
 
 
 <style>
@@ -261,28 +281,5 @@ img {
 }
 img:hover {
   transform: scale(1.1);
-}
-
-/* Modal styles */
-.fixed {
-  position: fixed;
-}
-.inset-0 {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.bg-black {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.bg-white {
-  background-color: #ffffff;
-}
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-.shadow-lg {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 </style>

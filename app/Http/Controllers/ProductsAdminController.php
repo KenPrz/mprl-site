@@ -7,6 +7,9 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Storage;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateProductRequest;
+use App\Models\ProductImages;
 
 class ProductsAdminController extends Controller
 {
@@ -141,77 +144,64 @@ class ProductsAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:product_categories,id',
-            'type' => 'required|string|max:255',
-            'img_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjust for optional image
-            'voltage' => 'required|numeric|min:0',
-            'description' => 'required|string',
-            'power_out' => 'required|string|max:255',
-            'efficiency' => 'nullable|numeric|min:0|max:100',
-            'dimension' => 'nullable|string|max:255',
-            'weight' => 'nullable|numeric|min:0',
-            'current' => 'nullable|numeric|min:0',
-            'temp_coeff' => 'nullable|numeric',
-            'price' => 'nullable|numeric|min:0',
-            'discount' => 'nullable|numeric|min:0|max:100',
-            'warranty' => 'nullable|string|max:255',
-            'stock_level' => 'nullable|integer|min:0',
-            'supplier' => 'nullable|string|max:255',
-            'certification' => 'nullable|string|max:255',
-            'datasheet' => 'nullable|file|mimes:pdf|max:10000',
-            'is_displayed' => 'nullable|boolean',
-        ]);
+        // Start a transaction to ensure all database operations succeed or fail together
+        DB::beginTransaction();
 
-        $product->update([
-            'name' => $request->input('name'),
-            'category_id' => $request->input('category_id'),
-            'power_out' => $request->input('power_out'),
-            'efficiency' => $request->input('efficiency'),
-            'dimension' => $request->input('dimension'),
-            'weight' => $request->input('weight'),
-            'type' => $request->input('type'),
-            'voltage' => $request->input('voltage'),
-            'current' => $request->input('current'),
-            'temp_coeff' => $request->input('temp_coeff'),
-            'price' => $request->input('price'),
-            'discount' => $request->input('discount'),
-            'warranty' => $request->input('warranty'),
-            'stock_level' => $request->input('stock_level'),
-            'supplier' => $request->input('supplier'),
-            'certification' => $request->input('certification'),
-            'description' => $request->input('description'),
-            'datasheet' => $request->file('datasheet') ? $request->file('datasheet')->store('datasheets') : $product->datasheet,
-            'is_displayed' => $request->input('is_displayed', false),
-        ]);
+        try {
+            // Update product details
+            $product->update($request->only([
+                'name',
+                'category_id',
+                'power_out',
+                'efficiency',
+                'dimension',
+                'weight',
+                'type',
+                'voltage',
+                'current',
+                'temp_coeff',
+                'price',
+                'discount',
+                'warranty',
+                'stock_level',
+                'supplier',
+                'certification',
+                'description',
+                'is_displayed'
+            ]));
 
-        if ($request->hasFile('img_path')) {
-            // Delete existing images if new images are uploaded
-            foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image->images);
-                $image->delete();
+            // Handle images upload
+            if ($request->hasFile('img_path')) {
+                // Delete old images
+                $product->images()->delete();
+
+                // Upload new images and save their paths
+                foreach ($request->file('img_path') as $file) {
+                    $path = $file->store('products', 'public');
+                    ProductImages::create([
+                        'images' => $path,
+                        'product_id' => $product->id
+                    ]);
+                }
             }
 
-            // Save the new images
-            foreach($request->file('img_path') as $image) {
-                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('product-images', $filename, 'public');
-                $product->images()->create([
-                    'images' => $path,
-                    'product_id' => $product->id
-                ]);
-            }
+            // Commit the transaction
+            DB::commit();
+
+            // Return a successful response
+            return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something goes wrong
+            DB::rollBack();
+
+            // Log the error or handle it as needed
+            return back()->withErrors(['error' => 'Failed to update product. Please try again.']);
         }
-
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
-
-
-
-
+    
 
     /**
      * Remove the specified resource from storage.

@@ -1,9 +1,16 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
 import { Link } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+  sectionScroll: {
+    type: String,
+    default: null
+  }
+})
 
 // Scroll-related logic
 const scroll = ref(0);
@@ -12,9 +19,23 @@ const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
 };
 
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('scroll', handleScroll);
+  if (props.sectionScroll) {
+    await waitForFullPageLoad();
+    scrollToSection(props.sectionScroll);
+  }
 });
+
+const waitForFullPageLoad = () => {
+  return new Promise((resolve) => {
+    if (document.readyState === 'complete') {
+      resolve();
+    } else {
+      window.addEventListener('load', resolve);
+    }
+  });
+};
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
@@ -65,12 +86,10 @@ const toggleSidebar = () => {
 const scrollToSection = (targetId) => {
   selectedSection.value = targetId;
   const targetElement = document.getElementById(targetId);
-
   if (targetElement) {
     const offset = 150; // Adjust based on your fixed header height
     const elementPosition = targetElement.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.scrollY - offset;
-
     window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth'
@@ -250,8 +269,11 @@ const closePreview = () => {
                         <h1 class="text-4xl font-bold text-center">Types of Solar Power Systems</h1>
                         <div class="flex flex-col lg:flex-row mt-10">
                             <div class="w-full lg:w-2/3" data-aos="fade-right">
-                                <p class="text-2xl font-semibold text-blue-600 tracking-wide">Residential</p>
-                                <p class="mt-3 text-lg tracking-wide">
+                                <p 
+                                  id="residential-type"
+                                  class="text-2xl font-semibold text-blue-600 tracking-wide">Residential</p>
+                                <p 
+                                   class="mt-3 text-lg tracking-wide">
                                     Residential solar power systems are designed for private homes, providing an eco-friendly way to generate electricity for everyday use.
                                 </p>
 
@@ -279,7 +301,9 @@ const closePreview = () => {
 
                         <div class="flex flex-col lg:flex-row-reverse mt-10">
                             <div class="w-full lg:w-2/3" data-aos="fade-left">
-                                <p class="text-2xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
+                                <p 
+                                  id="commercial-type"
+                                  class="text-2xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
                                 <p class="mt-5 text-lg tracking-wide text-end">
                                     Commercial and industrial solar power systems are designed for businesses and large-scale operations, providing scalable and efficient energy solutions.
                                 </p>

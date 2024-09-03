@@ -20,8 +20,10 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex items-center">
                             <!-- Logo -->
                             <div class="flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo :isDark="true"/>
+                                <Link 
+                                    :href="route('dashboard')">
+                                    <ApplicationLogo 
+                                        :isDark="true"/>
                                 </Link>
                             </div>
                             <!-- Navigation Links -->

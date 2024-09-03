@@ -144,63 +144,60 @@ class ProductsAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        // Start a transaction to ensure all database operations succeed or fail together
-        DB::beginTransaction();
+    public function update(Request $request, string $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|integer|exists:product_categories,id',
+        'power_out' => 'nullable|string|max:255',
+        'efficiency' => 'nullable|string|max:255',
+        'dimension' => 'nullable|string|max:255',
+        'weight' => 'nullable|string|max:255',
+        'type' => 'required|string|max:255',
+        'voltage' => 'nullable|string|max:255',
+        'current' => 'nullable|string|max:255',
+        'temp_coeff' => 'nullable|string|max:255',
+        'price' => 'numeric',
+        'discount' => 'nullable|numeric',
+        'warranty' => 'required|string|max:255',
+        'stock_level' => 'nullable|integer',
+        'supplier' => 'required|string|max:255',
+        'certification' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'img_path.*' => 'nullable|file|image|max:2048', 
+        'datasheet' => 'nullable|file|mimes:pdf|max:10240',
+        'is_displayed' => 'required|boolean',
+    ]);
 
-        try {
-            // Update product details
-            $product->update($request->only([
-                'name',
-                'category_id',
-                'power_out',
-                'efficiency',
-                'dimension',
-                'weight',
-                'type',
-                'voltage',
-                'current',
-                'temp_coeff',
-                'price',
-                'discount',
-                'warranty',
-                'stock_level',
-                'supplier',
-                'certification',
-                'description',
-                'is_displayed'
-            ]));
+    // Find the product by ID
+    $product = Product::findOrFail($id);
 
-            // Handle images upload
-            if ($request->hasFile('img_path')) {
-                // Delete old images
-                $product->images()->delete();
+    // Update the product with validated data
+    $product->update($validatedData);
 
-                // Upload new images and save their paths
-                foreach ($request->file('img_path') as $file) {
-                    $path = $file->store('products', 'public');
-                    ProductImages::create([
-                        'images' => $path,
-                        'product_id' => $product->id
-                    ]);
-                }
-            }
-
-            // Commit the transaction
-            DB::commit();
-
-            // Return a successful response
-            return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
-
-        } catch (\Exception $e) {
-            // Rollback the transaction if something goes wrong
-            DB::rollBack();
-
-            // Log the error or handle it as needed
-            return back()->withErrors(['error' => 'Failed to update product. Please try again.']);
+    // Handle image uploads
+    if ($request->hasFile('img_path')) {
+        foreach ($request->file('img_path') as $image) {
+            $imagePath = $image->store('product_images', 'public');
+            ProductImages::create([
+                'product_id' => $product->id,
+                'images' => $imagePath,
+            ]);
         }
     }
+
+    // // Handle datasheet upload
+    // if ($request->hasFile('datasheet')) {
+    //     $datasheetPath = $request->file('datasheet')->store('product_datasheets', 'public');
+    //     $product->datasheet = $datasheetPath;
+    // }
+
+    // Save the product with any changes made above
+    $product->save();
+
+    // Redirect or return success message
+    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+}
     
 
     /**

@@ -54,7 +54,7 @@
             <h2 class="text-xl font-bold">{{ products.name }}</h2>
             <div>
               <div class="border mt-2 p-3 flex justify-center align-middle rounded-md">
-                <img class="w-full md:w-1/2" :src="mainImage" alt="Main Image">
+                <img class="w-full md:w-1/2" :src="mainImage ? `/storage/${props.products.images[0].images}` : '/images/products-images/solarpanel.png' " alt="Main Image">
               </div>
               <div class="flex gap-1 justify-center mt-2">
                 <div

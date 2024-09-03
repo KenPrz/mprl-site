@@ -17,6 +17,7 @@ const scroll = ref(0);
 const isFixedTop = ref(false);
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
+  console.log(scroll.value);
 };
 
 onMounted(async () => {
@@ -154,11 +155,11 @@ const closePreview = () => {
   </div>
 
   <main>
-    <div class="flex flex-col mx-5 md:mx-20 lg:mx-20 mt-10">
+    <div class="flex flex-col mx-5 md:mx-20 lg:mx-20 mt-10 overflow-hidden">
       <div class="lg:flex">
         <!-- sidemenu -->
-        <div class="hidden lg:block lg:w-2/5">
-          <div :class="[isFixedTop ? 'fixed top-40' : '', 'pl-5']">
+        <div class="hidden lg:block lg:w-1/4">
+          <div :class="[isFixedTop ? 'fixed top-40 w-1/5' : '']">
             <div class="border-blue-600 border-l-4">
               <p class="text-xl font-bold text-blue-600 ml-5">ABOUT ONE MPRL</p>
             </div>
@@ -166,19 +167,19 @@ const closePreview = () => {
               <li>
                 <button
                   @click="toggleSolarMenu"
-                  :class="{'bg-blue-600 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
+                  :class="{'bg-blue-700 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
                   <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-700 text-white': selectedSection === 'solar'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                  <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-700 text-white': selectedSection === 'solar-types'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                  <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-700 text-white': selectedSection === 'solar-benefits'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-600 text-white': selectedSection === 'solar', 'bg-gray-200': selectedSection !== 'solar'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
+                  <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-600 text-white': selectedSection === 'solar-types', 'bg-gray-200': selectedSection !== 'solar-types'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
+                  <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-600 text-white': selectedSection === 'solar-benefits', 'bg-gray-200': selectedSection !== 'solar-benefits'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
                 </ul>
               </li>
-              <li class="mt-1">
+              <li class="mt-2">
                 <button
                   @click="toggleCompanyProfileMenu"
                   :class="{'bg-blue-600 text-white': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
@@ -190,20 +191,20 @@ const closePreview = () => {
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
                 </button>
                 <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-700 text-white': selectedSection === 'history'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-700 text-white': selectedSection === 'vision-mission'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-700 text-white': selectedSection === 'core-values'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                  <li><a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-700 text-white': selectedSection === 'team'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                  <li><a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-600 text-white': selectedSection === 'history', 'bg-gray-200': selectedSection !== 'history'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
+                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-600 text-white': selectedSection === 'vision-mission', 'bg-gray-200': selectedSection !== 'vision-mission'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
+                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-600 text-white': selectedSection === 'core-values', 'bg-gray-200': selectedSection !== 'core-values'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
+                  <li><a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-600 text-white': selectedSection === 'team', 'bg-gray-200': selectedSection !== 'team'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
                 </ul>
               </li>
-              <li class="mt-1">
-                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-700 text-white': selectedSection === 'certificates'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a>
+              <li class="mt-2">
+                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-600 text-white': selectedSection === 'certificates', 'bg-gray-200': selectedSection !== 'certificates'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a>
               </li>
-              <li class="mt-1">
-                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-700 text-white': selectedSection === 'shareholders'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a>
+              <li class="mt-2">
+                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-600 text-white': selectedSection === 'shareholders', 'bg-gray-200': selectedSection !== 'shareholders'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a>
               </li>
-              <li class="mt-1">
-                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-700 text-white': selectedSection === 'org-chart'}" class="block py-2 px-4 bg-gray-200 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a>
+              <li class="mt-2">
+                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-600 text-white': selectedSection === 'org-chart', 'bg-gray-200': selectedSection !== 'org-chart'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a>
               </li>
             </ul>
           </div>
@@ -266,14 +267,14 @@ const closePreview = () => {
                     </div>
                 </section>
                 <section id="solar-types">
-                        <h1 class="text-4xl font-bold text-center">Types of Solar Power Systems</h1>
+                    <h1 class="text-4xl font-semibold text-blue-600 text-center">Types of Solar Power Systems</h1>
                         <div class="flex flex-col lg:flex-row mt-10">
                             <div class="w-full lg:w-2/3" data-aos="fade-right">
                                 <p 
                                   id="residential-type"
                                   class="text-2xl font-semibold text-blue-600 tracking-wide">Residential</p>
                                 <p 
-                                   class="mt-3 text-lg tracking-wide">
+                                    class="mt-3 text-lg tracking-wide">
                                     Residential solar power systems are designed for private homes, providing an eco-friendly way to generate electricity for everyday use.
                                 </p>
 
@@ -330,8 +331,8 @@ const closePreview = () => {
                         </div>
                 </section>
                 <section id="solar-benefits">
-                    <div class="text-2xl font-bold text-blue-600 text-center">Four Major Benefits of</div>
-                    <p class="text-lg  text-blue-600 text-center">Solar Energy</p>
+                    <h1 class="text-4xl font-semibold text-blue-600 text-center">Four Major Benefits of</h1>
+                    <p class="text-lg mt-2 text-xl text-blue-600 text-center">Solar Energy</p>
                     <p class="mt-10">Adopting solar power for your home brings numerous advantages, including significant savings on electricity bills and a 
                         reduction in your carbon footprint. 
                         Additionally, solar power offers long-term financial benefits and contributes to environmental sustainability. 
@@ -601,17 +602,6 @@ const closePreview = () => {
                 </div>
               </section>
             </section>
-            <section id="org-chart">
-              <div class="text-4xl font-bold text-center ">Organizational Structure</div>
-              <div data-aos="fade-right" data-aos-once="true">
-                <p class="mt-10 text-justify text-lg">
-                  ONE MPRL Solar Power Corporation operates with a well-defined 
-                  organizational structure designed to foster efficiency, innovation, 
-                  and collaborative efforts across all levels of the company.
-                </p>
-              </div>
-              <img src="images/company-profile/Organizational.png" alt="Organizational chart" class="mt-5 w-full h-full rounded-lg object-cover">
-            </section>
             <section class="space-y-32">
               <div id="certificates">
                     <h1 class="text-4xl font-bold text-center">Certificates & Awards</h1>
@@ -646,6 +636,17 @@ const closePreview = () => {
                         <img src="images/about-images/Shareholder.png" alt="" data-aos="fade-left">
                     </div>
                 </div>
+            </section>
+            <section id="org-chart">
+              <div class="text-4xl font-bold text-center ">Organizational Structure</div>
+              <div data-aos="fade-right" data-aos-once="true">
+                <p class="mt-10 text-justify text-lg">
+                  ONE MPRL Solar Power Corporation operates with a well-defined 
+                  organizational structure designed to foster efficiency, innovation, 
+                  and collaborative efforts across all levels of the company.
+                </p>
+              </div>
+              <img src="images/company-profile/Organizational.png" alt="Organizational chart" class="mt-5 w-full h-full rounded-lg object-cover">
             </section>
       </div>
     </div>

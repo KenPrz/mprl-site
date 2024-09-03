@@ -168,14 +168,10 @@ class ProductsAdminController extends Controller
         'datasheet' => 'nullable|file|mimes:pdf|max:10240',
         'is_displayed' => 'required|boolean',
     ]);
-
-    // Find the product by ID
     $product = Product::findOrFail($id);
-
-    // Update the product with validated data
     $product->update($validatedData);
 
-    // Handle image uploads
+    // Handle image uploads not yet fix
     if ($request->hasFile('img_path')) {
         foreach ($request->file('img_path') as $image) {
             $imagePath = $image->store('product_images', 'public');
@@ -191,11 +187,7 @@ class ProductsAdminController extends Controller
     //     $datasheetPath = $request->file('datasheet')->store('product_datasheets', 'public');
     //     $product->datasheet = $datasheetPath;
     // }
-
-    // Save the product with any changes made above
     $product->save();
-
-    // Redirect or return success message
     return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
 }
     

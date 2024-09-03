@@ -1,14 +1,11 @@
 <template>
-  <Head :title="products.name" />
-  <nav
-    :class="{
-      'bg-white shadow-md fixed': scroll > 0,
-      'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0,
-    }"
-    class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out"
-  >
-    <NavBar :is_black="scroll > 0" />
-  </nav>
+  <Head title="Product" />
+    <nav :class="{
+        'bg-white shadow-md fixed': scroll > 1,
+        'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
+    }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
+        <NavBar :is_black="scroll > 0" />
+    </nav>
   <section>
     <div class="relative py-44 bg-cover bg-center h-auto" style="background-image: url('/images/blog-header-bg.png');">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
@@ -201,7 +198,7 @@
 
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import { onMounted, ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
@@ -243,7 +240,12 @@ const submitInquiry = () => {
     console.error('Error submitting inquiry:', error);
   });
 };
-
+const handleScroll = () => {
+    scroll.value = Math.round(window.scrollY);
+  };
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 const props = defineProps({
   products: {
     type: Object,
@@ -263,6 +265,7 @@ onMounted(() => {
   if (props.products.images.length > 0) {
     mainImage.value = `/storage/${props.products.images[0].images}`;
   }
+  window.addEventListener('scroll', handleScroll);
 });
 
 const mainImage = ref('');

@@ -1,14 +1,11 @@
 <template>
-  <Head :title="products.name" />
-  <nav
-    :class="{
-      'bg-white shadow-md fixed': scroll > 0,
-      'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0,
-    }"
-    class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out"
-  >
-    <NavBar :is_black="scroll > 0" />
-  </nav>
+  <Head title="Product" />
+    <nav :class="{
+        'bg-white shadow-md fixed': scroll > 1,
+        'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
+    }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
+        <NavBar :is_black="scroll > 0" />
+    </nav>
   <section>
     <div class="relative py-44 bg-cover bg-center h-auto" style="background-image: url('/images/blog-header-bg.png');">
       <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
@@ -54,7 +51,7 @@
             <h2 class="text-xl font-bold">{{ products.name }}</h2>
             <div>
               <div class="border mt-2 p-3 flex justify-center align-middle rounded-md">
-                <img class="w-full md:w-1/2" :src="mainImage" alt="Main Image">
+                <img class="w-full md:w-1/2" :src="mainImage ? `/storage/${props.products.images[0].images}` : '/images/products-images/solarpanel.png' " alt="Main Image">
               </div>
               <div class="flex gap-1 justify-center mt-2">
                 <div
@@ -133,7 +130,8 @@
                 <div class="ml-2">{{ products.datasheet }}</div>
               </div>
               <div class="mt-5">
-                <a href="" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</a>
+                <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
+                <span v-if="inquirySuccess" class="ml-4 text-green-600">Message sent successfully!</span>
               </div>
             </div>
           </div>
@@ -164,24 +162,90 @@
       </div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-xl font-bold mb-4">Inquire Now</h2>
+      <form @submit.prevent="submitInquiry">
+        <div class="mb-4">
+          <label class="block text-gray-700">Name</label>
+          <input v-model="inquiry.name" type="text" class="w-full px-3 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Email</label>
+          <input v-model="inquiry.email" type="email" class="w-full px-3 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Phone Numer</label>
+          <input v-model="inquiry.phone" type="number" class="w-full px-3 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700">Message</label>
+          <textarea v-model="inquiry.message" class="w-full px-3 py-2 border rounded-md"></textarea>
+        </div>
+        <div class="flex justify-end">
+          <button type="button" @click="showModal = false" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancel</button>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Send Inquiry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <Footer />
 </template>
 
+
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import { onMounted, ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
-
+import axios from 'axios';
 const scroll = ref(0);
+const showModal = ref(false);
+const inquiry = ref({
+  name: '',
+  email: '',
+  phone: '',
+  product: '',
+  message: '',
+});
 
-const mainImage = ref('');
-
-const changeImage = (image) => {
-  mainImage.value = image;
+const inquirySuccess = ref(false);
+const submitInquiry = () => {
+  axios.post('/inquire-product', {
+    name: inquiry.value.name,
+    email: inquiry.value.email,
+    phone: inquiry.value.phone,
+    product: props.products.name,
+    message: inquiry.value.message
+  })
+  .then(response => {
+    console.log('Inquiry submitted:', response.data);
+    showModal.value = false;
+    inquirySuccess.value = true; 
+    inquiry.value = {
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    };
+    setTimeout(() => {
+      inquirySuccess.value = false;
+    }, 5000);
+  })
+  .catch(error => {
+    console.error('Error submitting inquiry:', error);
+  });
 };
-
+const handleScroll = () => {
+    scroll.value = Math.round(window.scrollY);
+  };
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 const props = defineProps({
   products: {
     type: Object,
@@ -191,7 +255,7 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  newproducts:{
+  newproducts: {
     type: Array,
     required: true
   }
@@ -201,8 +265,17 @@ onMounted(() => {
   if (props.products.images.length > 0) {
     mainImage.value = `/storage/${props.products.images[0].images}`;
   }
+  window.addEventListener('scroll', handleScroll);
 });
+
+const mainImage = ref('');
+
+const changeImage = (image) => {
+  mainImage.value = image;
+};
 </script>
+
+
 
 <style>
 img {

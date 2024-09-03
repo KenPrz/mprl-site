@@ -43,8 +43,7 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSeeder::class,
             VisitorSeeder::class,
-            ProductCategorySeeder::class,
-            ProductSeeder::class,
+            ProjectCategorySeeder::class,
             ServicesCategoriesSeeder::class,
             FaqSeeder::class
         ]);

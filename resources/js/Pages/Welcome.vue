@@ -1,5 +1,5 @@
 <script setup>
-import { Link, Head } from '@inertiajs/vue3';
+import { Link, Head, router } from '@inertiajs/vue3';
 import { onMounted, onUnmounted, ref } from 'vue';
 import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
@@ -17,6 +17,7 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
+
 </script>
 <template>
 
@@ -183,8 +184,8 @@ onUnmounted(() => {
                 <!-- Call-to-Action Section -->
                 <div class="flex flex-col items-center mt-12" data-aos="fade-up" data-aos-once="true">
                     <p class="text-lg font-semibold mb-3">Want to Learn More?</p>
-                    <p class="text-gray-700 mb-5 text-center">Interested in how solar power can work for you?</p>
-                    <a href="#"
+                    <p class="text-gray-700 mb-5 text-center">Interested in how solar power works?</p>
+                    <a :href="route('about.index')"
                         class="py-2 px-5 bg-main-500 text-white text-sm rounded-full hover:bg-main-600 transition-colors duration-200">
                         Yes, I'm Interested!
                     </a>
@@ -230,7 +231,7 @@ onUnmounted(() => {
                         class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
                         <div class="w-3/4 flex justify-center">
                             <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png"
-                                alt="Residential Solar System">
+                                alt="atial Solar System">
                         </div>
                         <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
                             <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Residential Solar System</h2>
@@ -239,10 +240,13 @@ onUnmounted(() => {
                                 customized residential solar
                                 solutions. Save on electricity bills and contribute to a sustainable future.</p>
                         </div>
-                        <button
+                        <a
+                            :href="route('about.index',{
+                                sectionName: 'residential-type'
+                            })"
                             class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
                             Learn more
-                        </button>
+                        </a>
                     </div>
                     <!-- Card 2 -->
                     <div
@@ -260,10 +264,12 @@ onUnmounted(() => {
                                 power
                                 systems. Reduce energy costs and enhance your company's sustainability footprint.</p>
                         </div>
-                        <button
+                        <a :href="route('about.index',{
+                                sectionName: 'commercial-type'
+                            })"
                             class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
                             Learn more
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>

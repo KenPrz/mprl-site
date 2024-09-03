@@ -7,6 +7,9 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Storage;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateProductRequest;
+use App\Models\ProductImages;
 
 class ProductsAdminController extends Controller
 {
@@ -141,77 +144,53 @@ class ProductsAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:product_categories,id',
-            'type' => 'required|string|max:255',
-            'img_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjust for optional image
-            'voltage' => 'required|numeric|min:0',
-            'description' => 'required|string',
-            'power_out' => 'required|string|max:255',
-            'efficiency' => 'nullable|numeric|min:0|max:100',
-            'dimension' => 'nullable|string|max:255',
-            'weight' => 'nullable|numeric|min:0',
-            'current' => 'nullable|numeric|min:0',
-            'temp_coeff' => 'nullable|numeric',
-            'price' => 'nullable|numeric|min:0',
-            'discount' => 'nullable|numeric|min:0|max:100',
-            'warranty' => 'nullable|string|max:255',
-            'stock_level' => 'nullable|integer|min:0',
-            'supplier' => 'nullable|string|max:255',
-            'certification' => 'nullable|string|max:255',
-            'datasheet' => 'nullable|file|mimes:pdf|max:10000',
-            'is_displayed' => 'nullable|boolean',
-        ]);
+    public function update(Request $request, string $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|integer|exists:product_categories,id',
+        'power_out' => 'nullable|string|max:255',
+        'efficiency' => 'nullable|string|max:255',
+        'dimension' => 'nullable|string|max:255',
+        'weight' => 'nullable|string|max:255',
+        'type' => 'required|string|max:255',
+        'voltage' => 'nullable|string|max:255',
+        'current' => 'nullable|string|max:255',
+        'temp_coeff' => 'nullable|string|max:255',
+        'price' => 'numeric',
+        'discount' => 'nullable|numeric',
+        'warranty' => 'required|string|max:255',
+        'stock_level' => 'nullable|integer',
+        'supplier' => 'required|string|max:255',
+        'certification' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'img_path.*' => 'nullable|file|image|max:2048', 
+        'datasheet' => 'nullable|file|mimes:pdf|max:10240',
+        'is_displayed' => 'required|boolean',
+    ]);
+    $product = Product::findOrFail($id);
+    $product->update($validatedData);
 
-        $product->update([
-            'name' => $request->input('name'),
-            'category_id' => $request->input('category_id'),
-            'power_out' => $request->input('power_out'),
-            'efficiency' => $request->input('efficiency'),
-            'dimension' => $request->input('dimension'),
-            'weight' => $request->input('weight'),
-            'type' => $request->input('type'),
-            'voltage' => $request->input('voltage'),
-            'current' => $request->input('current'),
-            'temp_coeff' => $request->input('temp_coeff'),
-            'price' => $request->input('price'),
-            'discount' => $request->input('discount'),
-            'warranty' => $request->input('warranty'),
-            'stock_level' => $request->input('stock_level'),
-            'supplier' => $request->input('supplier'),
-            'certification' => $request->input('certification'),
-            'description' => $request->input('description'),
-            'datasheet' => $request->file('datasheet') ? $request->file('datasheet')->store('datasheets') : $product->datasheet,
-            'is_displayed' => $request->input('is_displayed', false),
-        ]);
-
-        if ($request->hasFile('img_path')) {
-            // Delete existing images if new images are uploaded
-            foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image->images);
-                $image->delete();
-            }
-
-            // Save the new images
-            foreach($request->file('img_path') as $image) {
-                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
-                $path = $image->storeAs('product-images', $filename, 'public');
-                $product->images()->create([
-                    'images' => $path,
-                    'product_id' => $product->id
-                ]);
-            }
+    // Handle image uploads not yet fix
+    if ($request->hasFile('img_path')) {
+        foreach ($request->file('img_path') as $image) {
+            $imagePath = $image->store('product_images', 'public');
+            ProductImages::create([
+                'product_id' => $product->id,
+                'images' => $imagePath,
+            ]);
         }
-
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
     }
 
-
-
-
+    // // Handle datasheet upload
+    // if ($request->hasFile('datasheet')) {
+    //     $datasheetPath = $request->file('datasheet')->store('product_datasheets', 'public');
+    //     $product->datasheet = $datasheetPath;
+    // }
+    $product->save();
+    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+}
+    
 
     /**
      * Remove the specified resource from storage.

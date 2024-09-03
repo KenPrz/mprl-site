@@ -19,7 +19,7 @@ class InquiryController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
-            'phone' => 'required|string',
+            'phone' => 'required|numeric',
             'product' => 'required',
             'message' => 'required|string',
         ]);

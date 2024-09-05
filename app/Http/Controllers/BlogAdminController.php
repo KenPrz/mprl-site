@@ -77,14 +77,14 @@ class BlogAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'categories' => 'array|required|min:1',
-            'content' => 'required',
+            'title' => 'required|string|max:255',
+            'categories' => 'required|array|min:1',
+            'content' => 'required|string',
             'is_published' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,heic,svg|max:2048',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
         $blog = BlogPost::create([
             'title' => $request->title,
             'body' => $request->content,
@@ -169,6 +169,7 @@ class BlogAdminController extends Controller
             'deleted_images' => 'array',
             'new_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        
         $blog = BlogPost::findOrFail($id);
     
         if ($request->has('deleted_images')) {

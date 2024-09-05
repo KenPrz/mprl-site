@@ -1,24 +1,24 @@
 
 <script setup>
-    import { ref } from 'vue';
-    import Pagination from '@/Components/Pagination.vue';
+    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import UsersTable from './Components/UsersTable.vue';
     const props = defineProps({
         users: {
-            type: Array,
-            default: []
+            type: Object,
+            default: () => ({})
         }
     })
 </script>
 <template>
-    <div>
-        {{ props.users }}
-    </div>
-    <div>
-        <Pagination 
-            :data="props.users"
-            :links="props.users.links"
-        />
-    </div>
+    <AuthenticatedLayout>    
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <UsersTable 
+                    :users="props.users"
+                />
+            </div>
+        </div>
+</AuthenticatedLayout>
 </template>
 <style scoped>
 

@@ -17,12 +17,25 @@ class BlogImageFactory extends Factory
     public function definition(): array
     {
         $images = [
-            'bg-1.jpg',
-            'bg-2.jpg',
-            'bg-3.jpg',
-            'bg-4.jpg',
-            'bg-5.jpg',
-            'bg-6.jpg',
+            'images/bg-1.jpg',
+            'images/bg-2.jpg',
+            'images/bg-3.jpg',
+            'images/bg-4.jpg',
+            'images/bg-5.jpg',
+            'images/bg-6.jpg',
+            'images/bg-7.jpg',
+            'images/bg-8.jpg',
+            'images/bg-9.jpg',
+            'images/bg-10.jpg',
+            'images/bg-11.jpg',
+            'images/bg-12.jpg',
+            'images/bg-13.jpg',
+            'images/bg-14.jpg',
+            'images/bg-15.jpg',
+            'images/bg-16.jpg',
+            'images/bg-17.jpg',
+            'images/bg-18.jpg',
+            'images/bg-19.jpg',
         ];
         return [
             // 'image' => $this->faker->image('public/storage/', rand(480,1080), rand(480,1080), null, false, true, $this->faker->word, false),

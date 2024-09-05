@@ -16,13 +16,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="col-span-1">
                         <label for="form-name" class="block text-lg font-medium text-gray-700">Service Name</label>
-                        <input id="form-name" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.name" type="text" required>
+                        <input id="form-name" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.name" type="text">
                         <InputError class="mt-2" :message="form.errors.name" />
                     </div>
                     <div class="col-span-1">
                         <label for="form-category" class="block text-lg font-medium text-gray-700">Select Category</label>
                         <select id="category" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.category_id">
-                            <option disabled>Category</option>
+                            <option disabled value="">Category</option>
                             <option v-for="category in props.categories" :key="category.id" :value="category.id">{{category.service_category}}</option>
                         </select>
                         <InputError class="mt-2" :message="form.errors.category_id" />
@@ -62,7 +62,7 @@
                         </div>
                     </div>   
                     <div class="flex justify-end mt-5">
-                        <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="addService">
+                        <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="updateService">
                     </div>
                 </div>
             </div>
@@ -72,67 +72,76 @@
     </AuthenticatedLayout>
   </template>
   
-  <script setup>
-  import { ref, watch, onMounted } from 'vue';
+<script setup>
+  import { ref, onMounted } from 'vue';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { Head, useForm, Link } from '@inertiajs/vue3';
   import InputError from '@/Components/InputError.vue';
   import Editor from '@/Components/Editor.vue';
   import { useToast } from 'vue-toastification';
   
-  const toast = useToast();
   const props = defineProps({
-    services: {
+    service: {
       type: Object,
       required: true
     },
     categories: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true
     }
   });
-  
+  const toast = useToast();
   const form = useForm({
-    name: '',
-    category_id: '',
-    description: '',
-    image: []
-
-   
+    name: props.service.name,
+    category_id: props.service.category_id,
+    description: props.service.description,
+    image: [] // initially empty; images will be handled separately
   });
-  function addService() {
-    form.post(route('admin.services.store'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            toast.success('Service added successfully!');
-            form.reset();
-            imagePreviews.value = [];
-        }
-    });
-}
+  
   const imagePreviews = ref([]);
+  
   function handleFiles(event) {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreviews.value.push(e.target.result);
-            form.image.push(file);
-        };
-        reader.readAsDataURL(file);
+      const file = files[i];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreviews.value.push(e.target.result);
+        form.image.push(file);
+      };
+      reader.readAsDataURL(file);
     }
-}
-
-function removeImage(index) {
+  }
+  
+  function removeImage(index) {
     imagePreviews.value.splice(index, 1);
     form.image.splice(index, 1);
-}
-
-onMounted(() => {
+  }
+  
+  function updateService() {
+    form.put(route('admin.services.update', props.service.id), {
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success('Service Updated successfully!');
+        form.reset();
+        imagePreviews.value = [];
+      },
+      onError: () => {
+          toast.error('Failed to update service!');
+      }
+    });
+  }
+  
+  onMounted(() => {
+    // Load image previews from existing service images if available
+    if (props.service.image) {
+      imagePreviews.value.push(`/storage/${props.service.image}`); // Adjust path based on how images are stored
+    }
+  
     form.clearErrors();
-});
-  </script>
+  });
+</script>
+  
   
   <style scoped>
   </style>

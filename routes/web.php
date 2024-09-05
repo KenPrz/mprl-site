@@ -40,6 +40,9 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');
 
     Route::get('/users', [UserAdminController::class, 'index'])->name('admin.users.index');
+    Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('admin.users.show');
+    Route::put('/users/{user}', [UserAdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('admin.users.destroy');
 
     Route::get('/blog', [BlogAdminController::class, 'index'])->name('admin.blog.index');
     Route::get('/blog/create', [BlogAdminController::class, 'create'])->name('admin.blog.create');

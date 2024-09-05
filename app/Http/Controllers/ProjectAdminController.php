@@ -96,4 +96,5 @@ class ProjectAdminController extends Controller
         Projects::destroy($id);
     }
 
+
 }

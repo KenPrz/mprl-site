@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { Link } from '@inertiajs/vue3';
 const props = defineProps({
     services: {
         type: Array,

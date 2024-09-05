@@ -28,12 +28,13 @@ class ServicesAdminController extends Controller
         ]);
     }
     public function store(Request $request){
+        $service = $request->all();
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:services_categories,id',
             'description' => 'required|string',
-            'image' => 'array|max:1', // Assuming a maximum of 1 images can be uploaded
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Individual image validation
+            'image' => 'required|array|max:1', // Assuming a maximum of 1 images can be uploaded
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',   // Individual image validation
         ]);
        
         if($request->image) {
@@ -41,13 +42,39 @@ class ServicesAdminController extends Controller
                 $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
                 $path = $image->storeAs('service-images', $filename, 'public');
                 $service = Services::create([
-                    'name' => $request->input('name'),
-                    'category_id' => $request->input('category_id'),
-                    'description' => $request->input('description'),
                     'image' => $path
                 ]);
             }
         }
+        $service = Services::create([
+                'name' => $request->input('name'),
+                'category_id' => $request->input('category_id'),
+                'description' => $request->input('description'),
+                'image' => $path
+            ]);
         return to_route('admin.services.index')->with('success', 'File uploaded successfully');
+    }
+
+    public function edit(string $id){
+        $categories = ServicesCategory::whereIn('id', [1, 2])->get();
+        $service = Services::with(['category:id,service_category'])
+                                    ->where('id', $id)
+                                    ->firstOrFail();
+        return Inertia::render('Admin/Services/Edit', [
+            'categories' => $categories,
+            'service' => $service
+        ]);
+    }
+
+    public function update(Request $request, int $id){
+        $service = Services::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'description' => 'required|string',
+            'image' => 'required|array|max:1',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
     }
 }

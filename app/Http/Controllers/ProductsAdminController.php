@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Storage;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductImages;
 
 class ProductsAdminController extends Controller
@@ -19,22 +17,21 @@ class ProductsAdminController extends Controller
     public function index(Request $request)
     {
         $search_query = $request->searchQuery;
-        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_id', 'products.price', 'products.is_displayed')
-        ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
-        ->with('category:id,name')
-        ->where(function($query) use ($search_query) {
-            $query->where('products.name', 'like', '%' . $search_query . '%')
-                ->orWhere('product_categories.name', 'like', '%' . $search_query . '%');
-            if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
-                $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
-                $query->orWhere('products.is_displayed', $booleanValue);
-            } else {
-                // Search for boolean values as strings
-                $query->orWhere('products.is_displayed', 'like', '%' . $search_query . '%');
-            }
-        })
-        ->orderBy('products.id', 'desc')
-        ->paginate(10);
+        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_name', 'products.price', 'products.is_displayed')
+                            ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
+                            ->with('category:id,name')
+                            ->where(function($query) use ($search_query) {
+                                $query->where('products.name', 'like', '%' . $search_query . '%')
+                                    ->orWhere('product_categories.name', 'like', '%' . $search_query . '%');
+                                if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
+                                    $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
+                                    $query->orWhere('products.is_displayed', $booleanValue);
+                                } else {
+                                    $query->orWhere('products.is_displayed', 'like', '%' . $search_query . '%');
+                                }
+                            })
+                            ->orderBy('products.id', 'desc')
+                            ->paginate(10);
             return Inertia::render('Admin/Product/Index',[
                 'searchQuery' => $search_query,
                 'products' => $products
@@ -144,63 +141,48 @@ class ProductsAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        // Start a transaction to ensure all database operations succeed or fail together
-        DB::beginTransaction();
+    public function update(Request $request, string $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|integer|exists:product_categories,id',
+        'power_out' => 'nullable|string|max:255',
+        'efficiency' => 'nullable|string|max:255',
+        'dimension' => 'nullable|string|max:255',
+        'weight' => 'nullable|string|max:255',
+        'type' => 'required|string|max:255',
+        'voltage' => 'nullable|string|max:255',
+        'current' => 'nullable|string|max:255',
+        'temp_coeff' => 'nullable|string|max:255',
+        'price' => 'numeric',
+        'discount' => 'nullable|numeric',
+        'warranty' => 'required|string|max:255',
+        'stock_level' => 'nullable|integer',
+        'supplier' => 'required|string|max:255',
+        'certification' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'img_path.*' => 'nullable|file|image|max:2048', 
+        'datasheet' => 'nullable|file|mimes:pdf|max:10240',
+        'is_displayed' => 'required|boolean',
+    ]);
+    $product = Product::findOrFail($id);
+    $product->update($validatedData);
 
-        try {
-            // Update product details
-            $product->update($request->only([
-                'name',
-                'category_id',
-                'power_out',
-                'efficiency',
-                'dimension',
-                'weight',
-                'type',
-                'voltage',
-                'current',
-                'temp_coeff',
-                'price',
-                'discount',
-                'warranty',
-                'stock_level',
-                'supplier',
-                'certification',
-                'description',
-                'is_displayed'
-            ]));
-
-            // Handle images upload
-            if ($request->hasFile('img_path')) {
-                // Delete old images
-                $product->images()->delete();
-
-                // Upload new images and save their paths
-                foreach ($request->file('img_path') as $file) {
-                    $path = $file->store('products', 'public');
-                    ProductImages::create([
-                        'images' => $path,
-                        'product_id' => $product->id
-                    ]);
-                }
-            }
-
-            // Commit the transaction
-            DB::commit();
-
-            // Return a successful response
-            return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
-
-        } catch (\Exception $e) {
-            // Rollback the transaction if something goes wrong
-            DB::rollBack();
-
-            // Log the error or handle it as needed
-            return back()->withErrors(['error' => 'Failed to update product. Please try again.']);
+    // Handle image uploads not yet fix
+    if ($request->hasFile('img_path')) {
+        foreach ($request->file('img_path') as $image) {
+            $imagePath = $image->store('product_images', 'public');
+            ProductImages::create([
+                'product_id' => $product->id,
+                'images' => $imagePath,
+            ]);
         }
     }
+
+    $product->save();
+    
+    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+}
     
 
     /**

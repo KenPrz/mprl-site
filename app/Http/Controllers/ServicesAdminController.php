@@ -7,6 +7,7 @@ use App\Models\ServicesCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -23,7 +24,7 @@ class ServicesAdminController extends Controller
         ]);
     }
     public function create(){
-        $categories = ServicesCategory::all();
+        $categories = ServicesCategory::whereIn('id', [1, 2])->get();
         return Inertia::render('Admin/Services/Create',[
             'categories' => $categories
         ]);
@@ -62,15 +63,40 @@ class ServicesAdminController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $id){
-        $service = Services::findOrFail($id);
-        $request->validate([
+    public function update(Request $request, int $id)
+    {
+        // Validate request data
+        $validatedData = $request->validate([
             'name' => 'required|string',
             'category_id' => 'required|numeric',
             'description' => 'required|string',
-            'image' => 'required|array|max:1',
+            'image' => 'nullable|array|max:1',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
+        // Find the service record
+        $service = Services::findOrFail($id);
+
+        // Check if there's an image and process it
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($service->image) {
+                Storage::delete($service->image);
+            }
+
+            // Store new image
+            $imagePath = $request->file('image')[0]->store('images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+
+        // Update the service with validated data
+        $service->update($validatedData);
+
+        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
+    }
+
+    public function destroy(int $id)
+    {
+        Services::destroy($id);
     }
 }

@@ -91,7 +91,9 @@
   import { Head, useForm, Link } from '@inertiajs/vue3';
   import InputError from '@/Components/InputError.vue';
   import Editor from '@/Components/Editor.vue';
-  
+  import { useToast } from 'vue-toastification';
+
+  const toast = useToast();
   const props = defineProps({
     services: {
       type: Object,
@@ -116,6 +118,7 @@
     form.post(route('admin.projects.store'), {
       preserveScroll: true,
       onSuccess: () => {
+        toast.success('Project added   successfully!');
         form.reset();
         imagePreviews.value = [];
       }

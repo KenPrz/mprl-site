@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import {Link} from '@inertiajs/vue3'
 const props = defineProps({
     services: {
         type: Array,
@@ -71,7 +72,7 @@ function toggleSort(column) {
             <tr v-for="service in props.services" :key="service.id">
                 <td>{{ service.id }}</td>
                 <td>{{ service.name }}</td>
-                <td>{{ service.category_name }}</td> <!-- Use category_name instead of category_id -->
+                <td>{{ service.category_id }}</td> <!-- Use category_name instead of category_id -->
                 <td>{{ service.description }}</td>
                 <td>
                         <span class="flex items-center space-x-2">

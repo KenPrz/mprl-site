@@ -19,22 +19,21 @@ class ProductsAdminController extends Controller
     public function index(Request $request)
     {
         $search_query = $request->searchQuery;
-        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_id', 'products.price', 'products.is_displayed')
-        ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
-        ->with('category:id,name')
-        ->where(function($query) use ($search_query) {
-            $query->where('products.name', 'like', '%' . $search_query . '%')
-                ->orWhere('product_categories.name', 'like', '%' . $search_query . '%');
-            if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
-                $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
-                $query->orWhere('products.is_displayed', $booleanValue);
-            } else {
-                // Search for boolean values as strings
-                $query->orWhere('products.is_displayed', 'like', '%' . $search_query . '%');
-            }
-        })
-        ->orderBy('products.id', 'desc')
-        ->paginate(10);
+        $products = Product::select('products.id', 'products.name', 'product_categories.name as category_name', 'products.price', 'products.is_displayed')
+                            ->join('product_categories', 'product_categories.id', '=', 'products.category_id')
+                            ->with('category:id,name')
+                            ->where(function($query) use ($search_query) {
+                                $query->where('products.name', 'like', '%' . $search_query . '%')
+                                    ->orWhere('product_categories.name', 'like', '%' . $search_query . '%');
+                                if (strtolower($search_query) === 'true' || strtolower($search_query) === 'false') {
+                                    $booleanValue = strtolower($search_query) === 'true' ? 1 : 0;
+                                    $query->orWhere('products.is_displayed', $booleanValue);
+                                } else {
+                                    $query->orWhere('products.is_displayed', 'like', '%' . $search_query . '%');
+                                }
+                            })
+                            ->orderBy('products.id', 'desc')
+                            ->paginate(10);
             return Inertia::render('Admin/Product/Index',[
                 'searchQuery' => $search_query,
                 'products' => $products

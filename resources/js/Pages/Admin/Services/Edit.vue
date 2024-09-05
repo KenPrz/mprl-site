@@ -91,10 +91,10 @@
   });
   
   const form = useForm({
-    name: '',
-    category_id: '',
-    description: '',
-    image: []
+    name: props.services.name,
+    category_id: props.services.category_id,
+    description: props.services.description,
+    image: props.services.image
 
    
   });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Services;
 use App\Models\ServicesCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 
@@ -49,5 +50,27 @@ class ServicesAdminController extends Controller
             }
         }
         return to_route('admin.services.index')->with('success', 'File uploaded successfully');
+    }
+    public function edit(string $id){
+        $categories = ServicesCategory::whereIn('id', [1, 2])->get();
+        $service = Services::with(['category:id,service_category'])
+                                    ->where('id', $id)
+                                    ->firstOrFail();
+        return Inertia::render('Admin/Services/Edit', [
+            'categories' => $categories,
+            'service' => $service
+        ]);
+    }
+
+    public function update(Request $request, int $id){
+        $service = Services::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'description' => 'required|string',
+            'image' => 'required|array|max:1',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
     }
 }

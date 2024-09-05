@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Storage;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductImages;
 
 class ProductsAdminController extends Controller
@@ -181,12 +179,8 @@ class ProductsAdminController extends Controller
         }
     }
 
-    // // Handle datasheet upload
-    // if ($request->hasFile('datasheet')) {
-    //     $datasheetPath = $request->file('datasheet')->store('product_datasheets', 'public');
-    //     $product->datasheet = $datasheetPath;
-    // }
     $product->save();
+    
     return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
 }
     

@@ -32,8 +32,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="col-span-1">
                             <label for="prod-name" class="block text-lg font-medium text-gray-700">Description</label>
-                            <!-- <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea> -->
-                            <Editor v-model="form.description" />
+                            <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea>
+                            <!-- <Editor v-model="form.description" /> -->
                             <InputError class="mt-2" :message="form.errors.description" />
                         </div>
                         <div class="col-span-1">
@@ -78,6 +78,7 @@
   import { Head, useForm, Link } from '@inertiajs/vue3';
   import InputError from '@/Components/InputError.vue';
   import Editor from '@/Components/Editor.vue';
+  import { useToast } from 'vue-toastification';
   
   const props = defineProps({
     service: {
@@ -89,7 +90,7 @@
       required: true
     }
   });
-  
+  const toast = useToast();
   const form = useForm({
     name: props.service.name,
     category_id: props.service.category_id,
@@ -121,8 +122,12 @@
     form.put(route('admin.services.update', props.service.id), {
       preserveScroll: true,
       onSuccess: () => {
+        toast.success('Service Updated successfully!');
         form.reset();
         imagePreviews.value = [];
+      },
+      onError: () => {
+          toast.error('Failed to update service!');
       }
     });
   }

@@ -34,12 +34,15 @@ Route::get('/product', [ProductController::class, 'index'])->name('products');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/brochure', [BrochureController::class, 'downLoadBrochure'])->name('brochure.download');
 Route::post('/inquire', [ContactController::class, 'sendEmail'])->name('inquire.send');
-Route::post('/inquire-product', [InquiryController::class, 'send'])->name('inquire.send');
+Route::post('/inquire-product', [InquiryController::class, 'send'])->name('productInquiry.send');
 
 Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboradController::class, 'index'])->name('dashboard');
 
     Route::get('/users', [UserAdminController::class, 'index'])->name('admin.users.index');
+    Route::get('/users/{user}', [UserAdminController::class, 'show'])->name('admin.users.show');
+    Route::put('/users/{user}', [UserAdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{user}', [UserAdminController::class, 'destroy'])->name('admin.users.destroy');
 
     Route::get('/blog', [BlogAdminController::class, 'index'])->name('admin.blog.index');
     Route::get('/blog/create', [BlogAdminController::class, 'create'])->name('admin.blog.create');
@@ -66,6 +69,7 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::post('/services', [ServicesAdminController::class, 'store'])->name('admin.services.store');
     Route::get('/services/{id}/edit', [ServicesAdminController::class, 'edit'])->name('admin.services.edit');
     Route::put('/services/{id}', [ServicesAdminController::class, 'update'])->name('admin.services.update');
+    Route::delete('/services/{id}', [ServicesAdminController::class, 'destroy'])->name('admin.services.destroy');
 
     Route::get('/projects', [ProjectAdminController::class, 'index'])->name('admin.projects.index');
     Route::get('/projects/create', [ProjectAdminController::class, 'create'])->name('admin.projects.create');

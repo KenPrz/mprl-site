@@ -134,7 +134,6 @@
               </div>
               <div class="mt-5">
                 <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
-                <span v-if="inquirySuccess" class="ml-4 text-green-600">Message sent successfully!</span>
               </div>
             </div>
           </div>
@@ -165,7 +164,21 @@
       </div>
     </div>
   </section>
+  <!-- Login Modal -->
+  <Modal maxWidth="md" v-model:show="showLoginModal" @close="closeAllModals">
+    <Login 
+        @openRegister="handleRegisterSwitch"
+        @closeLogin="closeAllModals"
+    />
+  </Modal>
 
+  <!-- Register Modal -->
+  <Modal maxWidth="md" v-model:show="showRegisterModal" @close="closeAllModals">
+    <Register
+        @openLogin="handleLoginSwitch"
+        @closeRegister="closeAllModals"
+    />
+  </Modal>
   <!-- Modal -->
   <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
     <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-md">
@@ -173,19 +186,19 @@
       <form @submit.prevent="submitInquiry">
         <div class="mb-4">
           <label class="block text-gray-700">Name</label>
-          <input v-model="inquiry.name" type="text" class="w-full px-3 py-2 border rounded-md">
+          <input v-model="form.name" type="text" class="w-full px-3 py-2 border rounded-md" required>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700">Email</label>
-          <input v-model="inquiry.email" type="email" class="w-full px-3 py-2 border rounded-md">
+          <input v-model="form.email" type="email" class="w-full px-3 py-2 border rounded-md" required>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700">Phone Numer</label>
-          <input v-model="inquiry.phone" type="number" class="w-full px-3 py-2 border rounded-md">
+          <input v-model="form.phone" type="text" class="w-full px-3 py-2 border rounded-md" required>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700">Message</label>
-          <textarea v-model="inquiry.message" class="w-full px-3 py-2 border rounded-md"></textarea>
+          <textarea v-model="form.message" class="w-full px-3 py-2 border rounded-md" required></textarea>
         </div>
         <div class="flex justify-end">
           <button type="button" @click="showModal = false" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancel</button>
@@ -204,45 +217,16 @@ import NavBar from '@/Components/NavBar.vue';
 import { onMounted, ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
-import axios from 'axios';
+import { Link, useForm } from '@inertiajs/vue3';
+import Modal from '@/Components/Modal.vue';
+import Login from '@/Pages/Auth/Login.vue';
+import Register from '@/Pages/Auth/Register.vue';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+
 const scroll = ref(0);
 const showModal = ref(false);
-const inquiry = ref({
-  name: '',
-  email: '',
-  phone: '',
-  product: '',
-  message: '',
-});
-
-const inquirySuccess = ref(false);
-const submitInquiry = () => {
-  axios.post('/inquire-product', {
-    name: inquiry.value.name,
-    email: inquiry.value.email,
-    phone: inquiry.value.phone,
-    product: props.products.name,
-    message: inquiry.value.message
-  })
-  .then(response => {
-    console.log('Inquiry submitted:', response.data);
-    showModal.value = false;
-    inquirySuccess.value = true; 
-    inquiry.value = {
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-    };
-    setTimeout(() => {
-      inquirySuccess.value = false;
-    }, 5000);
-  })
-  .catch(error => {
-    console.error('Error submitting inquiry:', error);
-  });
-};
 
 const props = defineProps({
   products: {
@@ -258,6 +242,83 @@ const props = defineProps({
     required: true
   }
 });
+
+const form = useForm({
+  name: '',
+  email: '',
+  phone: '',
+  product: props.products?.name || '',
+  message: '',
+});
+
+const openLogin = () => {
+    showLoginModal.value = true;
+}
+
+const showLoginModal = ref(false);
+const showRegisterModal = ref(false);
+
+// Function to open the login modal and close the register modal
+const handleLoginSwitch = () => {
+    showLoginModal.value = true;
+    showRegisterModal.value = false;
+};
+
+// Function to open the register modal and close the login modal
+const handleRegisterSwitch = () => {
+    showRegisterModal.value = true;
+    showLoginModal.value = false;
+};
+
+// Function to close both modals
+const closeAllModals = () => {
+    showLoginModal.value = false;
+    showRegisterModal.value = false;
+};
+
+function submitInquiry() {
+    form.post(route('productInquiry.send'), {
+        onError: (errors) => {
+          showModal.value = false;
+          console.log(errors);
+            if (errors.loginRequired) {
+                openLogin(); // Show the login modal
+            }
+        },
+        onSuccess: () => {
+            toast.success('Inquiry sent successfully!');
+            form.reset();
+            showModal.value = false;
+        },
+    });
+}
+
+// const inquirySuccess = ref(false);
+// const submitInquiry = () => {
+//   axios.post('/inquire-product', {
+//     name: inquiry.value.name,
+//     email: inquiry.value.email,
+//     phone: inquiry.value.phone,
+//     product: props.products.name,
+//     message: inquiry.value.message
+//   })
+//   .then(response => {
+//     showModal.value = false;
+//     inquirySuccess.value = true; 
+//     inquiry.value = {
+//       name: '',
+//       email: '',
+//       phone: '',
+//       message: '',
+//     };
+//     setTimeout(() => {
+//       inquirySuccess.value = false;
+//     }, 5000);
+//   })
+//   .catch(error => {
+//     console.error('Error submitting inquiry:', error);
+//   });
+// };
 
 onMounted(() => {
   if (props.products.images.length > 0) {

@@ -45,7 +45,7 @@
                     </div>
                     <div class="mt-5">
                       <label for="form-description" class="block text-lg font-medium text-gray-700">Project Description</label>
-                      <Editor v-model="form.content" />
+                      <textarea class="w-full h-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.content"></textarea>
                       <InputError class="mt-2" :message="form.errors.content" />
                     </div>
                   </div>
@@ -154,6 +154,16 @@ function removeImage(index) {
   </script>
   
   <style scoped>
-  /* Add your styles here */
+  textarea {
+  width: 100%;
+  height: 90%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
   </style>
   

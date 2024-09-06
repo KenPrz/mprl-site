@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faqs;
-use App\Models\ProjectCatergory;
+use App\Models\ProjectCategory;
 use App\Models\Projects;
 use App\Models\Services;
 use App\Models\ServicesCategory;
@@ -14,7 +14,7 @@ class ServicesController extends Controller
     public function index()
     {
         $servicesCategory = ServicesCategory::select('id', 'service_category')->get();
-        $projectCategory = ProjectCatergory::select('id', 'name')->get();
+        $projectCategory = ProjectCategory::select('id', 'name')->get();
         $projects = Projects::with('firstImage')
                             ->orderBy('created_at', 'desc')->take(5)->get();
         $faqs = Faqs::orderBy('created_at', 'desc')->get();

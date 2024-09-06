@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('category_id')
-                ->constrained('project_catergories')
+                ->constrained('project_categories')  // Corrected here
                 ->onDelete('cascade');
             $table->string('system_size');
             $table->string('monthly_saving');

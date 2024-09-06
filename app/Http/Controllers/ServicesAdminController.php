@@ -34,8 +34,8 @@ class ServicesAdminController extends Controller
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:services_categories,id',
             'description' => 'required|string',
-            'image' => 'array|max:1', // Assuming a maximum of 1 images can be uploaded
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Individual image validation
+            'image' => 'array|max:1',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
        
         if($request->image) {

@@ -53,7 +53,6 @@
   const props = defineProps({
     services: {
       type: Object,
-      required: true
     },
     searchQuery: {
       type: String,

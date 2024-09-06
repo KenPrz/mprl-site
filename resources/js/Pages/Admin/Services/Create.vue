@@ -84,7 +84,6 @@
   const props = defineProps({
     services: {
       type: Object,
-      required: true
     },
     categories: {
         type: Array,

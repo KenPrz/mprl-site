@@ -5,7 +5,6 @@ import { Head } from '@inertiajs/vue3';
 import Toggle from '@/Components/Toggle.vue';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import Editor from '@/Components/Editor.vue';
 
 const props = defineProps({
     categories: {

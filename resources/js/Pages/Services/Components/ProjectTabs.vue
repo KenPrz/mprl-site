@@ -13,14 +13,15 @@
     <div class=" carousel grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
       <div class="">
         <div class="carousel-inner" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-          <div class="carousel-item m-4 border rounded-2xl shadow-lg p-4" v-for="(project, index) in paginatedProjects" :key="index">
+          <div class="carousel-item m-4 p-4" v-for="(project, index) in paginatedProjects" :key="index">
             <div class="project-card" v-for="(proj, i) in project" :key="proj.id">
-              <img :src="proj.first_image ? `/storage/${proj.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-60 object-cover rounded-2xl">
+              <img 
+                :src="proj.first_image ? `/storage/${proj.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-60 object-cover rounded-2xl shadow-xl">
               <div class="mt-5">
                 <h3 class="font-bold text-lg text-blue-500">{{ proj.title }}</h3>
                 <div class="flex">
                   <p class="text-blue-600 font-semibold text-sm">System Size: <span class="text-orange-500">{{ proj.system_size }}kWp</span></p>
-                  <p class="text-blue-600 font-semibold text-sm ml-5">Monthly Saving: <span class="text-orange-500">{{ proj.monthly_saving }}</span></p>
+                  <p class="text-blue-600 font-semibold text-sm ml-5">Monthly Saving: <span class="text-orange-500">₱{{ proj.monthly_saving }}/month</span></p>
                 </div>
               </div>
 

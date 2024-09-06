@@ -38,7 +38,7 @@ class ProjectAdminController extends Controller
             'system_size' => 'required|numeric',
             'monthly_saving' => 'required|string',
             'img_path' => 'array|max:3', // Assuming a maximum of 1 images can be uploaded
-            'img_path.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Individual image validation
+            'img_path.*' => 'image|mimes:jpeg,png,jpg|max:2048', // Individual image validation
         ]);
         $projects = Projects::create([
             'title' => $request->input('title'),

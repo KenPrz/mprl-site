@@ -10,6 +10,7 @@ import FaqTabs from '@/Pages/Services/Components/FaqTabs.vue';
 
 const scroll = ref(0);
 const isSidebarOpen = ref(false);
+const selectedCategory = ref(null);
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };

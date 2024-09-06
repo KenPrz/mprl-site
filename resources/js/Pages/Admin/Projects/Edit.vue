@@ -65,7 +65,7 @@
                     <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
                       <div class="flex space-x-2">
                         <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                          <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
+                          <img :src="preview.images" class="w-24 h-24 object-cover rounded-lg" />
                           <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
                             <i class="fa-solid fa-times"></i>
                           </button>

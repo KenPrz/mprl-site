@@ -68,6 +68,8 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/services/create', [ServicesAdminController::class, 'create'])->name('admin.services.create');
     Route::post('/services', [ServicesAdminController::class, 'store'])->name('admin.services.store');
     Route::get('/services/{id}/edit', [ServicesAdminController::class, 'edit'])->name('admin.services.edit');
+    Route::put('/services/{id}', [ServicesAdminController::class, 'update'])->name('admin.services.update');
+    Route::delete('/services/{id}', [ServicesAdminController::class, 'destroy'])->name('admin.services.destroy');
 
     Route::get('/projects', [ProjectAdminController::class, 'index'])->name('admin.projects.index');
     Route::get('/projects/create', [ProjectAdminController::class, 'create'])->name('admin.projects.create');

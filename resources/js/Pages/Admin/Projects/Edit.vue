@@ -91,7 +91,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import Editor from '@/Components/Editor.vue';
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const props = defineProps({
   project: {
     type: Object,
@@ -123,7 +125,12 @@ onMounted(() => {
 });
 
 function updateProject(){
-    form.patch(route('admin.projects.update', props.project.id));
+    form.patch(route('admin.projects.update', props.project.id)), {
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success('Project updated successfully!'); 
+      }
+    };
 }
 
 function handleFiles(event) {

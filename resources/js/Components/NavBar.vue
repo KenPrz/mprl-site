@@ -7,6 +7,7 @@ import Login from '@/Pages/Auth/Login.vue';
 import Register from '@/Pages/Auth/Register.vue';
 import { Link } from '@inertiajs/vue3';
 import {ref, onMounted, onUnmounted, computed} from 'vue';
+import MessengerButton from '@/Components/MessengerButton.vue';
 const autoAlign = ref('right');
 const updateAutoAlign = () => {
   if (window.innerWidth < 1200) {
@@ -200,6 +201,7 @@ onUnmounted(() => {
                 <i id="icon-size" style="" class="pi pi-envelope"></i>
             </span>
         </section>
+        <MessengerButton />
     </div>
 </template>
 <script>

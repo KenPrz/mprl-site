@@ -24,7 +24,7 @@ class ServicesAdminController extends Controller
         ]);
     }
     public function create(){
-        $categories = ServicesCategory::whereIn('id', [1, 2])->get();
+        $categories = ServicesCategory::whereIn('id', [2])->get();
         return Inertia::render('Admin/Services/Create',[
             'categories' => $categories
         ]);
@@ -53,7 +53,7 @@ class ServicesAdminController extends Controller
         return to_route('admin.services.index')->with('success', 'File uploaded successfully');
     }
     public function edit(string $id){
-        $categories = ServicesCategory::whereIn('id', [1, 2])->get();
+        $categories = ServicesCategory::whereIn('id', [2])->get();
         $service = Services::with(['category:id,service_category'])
                                     ->where('id', $id)
                                     ->firstOrFail();

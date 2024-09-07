@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, ref } from 'vue';
 
-// Define props to receive the services category list
 const props = defineProps({
   servicesCategory: {
     type: Array,
@@ -10,12 +9,14 @@ const props = defineProps({
   },
 });
 
-// State to track the selected category
 const selectedCategory = ref(null);
 
-// Function to handle category selection
 const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId;
+  const section = document.getElementById(categoryId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
 };
 </script>
 
@@ -24,15 +25,16 @@ const selectCategory = (categoryId) => {
     <ul class="list-none p-0 hidden sm:block">
       <!-- Loop through the services category list -->
       <li v-for="service in servicesCategory" :key="service.id">
-        <a :href="'#' + service.service_category">
-          <!-- Button to select the category -->
-          <button 
-            @click="selectCategory(service.service_category)" 
-            class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
-            :class="{'bg-blue-700 text-white': selectedCategory === service.service_category, 'bg-gray-200': selectedCategory !== service.service_category,}">
-            {{ service.service_category }}
-          </button>
-        </a>
+        <button
+          @click="selectCategory(service.service_category)"
+          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
+          :class="{
+            'bg-blue-700 text-white': selectedCategory === service.service_category,
+            'bg-gray-200': selectedCategory !== service.service_category
+          }"
+        >
+          {{ service.service_category }}
+        </button>
       </li>
     </ul>
   </div>

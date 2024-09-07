@@ -10,14 +10,46 @@ const props = defineProps({
     type: String,
     default: null
   }
-})
+});
 
 // Scroll-related logic
 const scroll = ref(0);
 const isFixedTop = ref(false);
-const isActive = ref(false);
+const isActive = ref(null);
+
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
+  updateActiveSection();
+};
+
+const updateActiveSection = () => {
+  const sections = [
+    'about-solar',
+    'solar', 
+    'solar-types',
+    'solar-benefits',
+    'company-profile',
+    'history',
+    'vision-mission',
+    'core-values',
+    'team',
+    'certificates',
+    'shareholders',
+    'org-chart'
+  ]; 
+  let currentSection = '';
+
+  sections.forEach((sectionId) => {
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      const { top, bottom } = sectionElement.getBoundingClientRect();
+      if (top <= window.innerHeight / 2 && bottom >= window.innerHeight / 2) {
+        currentSection = sectionId;
+      }
+    }
+  });
+
+  isActive.value = currentSection;
 };
 
 onMounted(async () => {
@@ -42,13 +74,15 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
-watch(() => {
-  scroll.value;
+watch(() => scroll.value, () => {
   if (scroll.value > 230) {
     isFixedTop.value = true;
   } else {
     isFixedTop.value = false;
   }
+
+  // Update active section based on scroll position
+  updateActiveSection();
 });
 
 // Menu and Sidebar logic
@@ -126,6 +160,7 @@ const closePreview = () => {
 </script>
 
 
+
 <template>
   <Head title="About" />
   <nav
@@ -167,22 +202,66 @@ const closePreview = () => {
               <li>
                 <button
                   @click="toggleSolarMenu"
-                  :class="{'bg-blue-700 text-white': activeMenuItem === 'solar', 'bg-gray-200': activeMenuItem !== 'solar'}"
+                  :class="{
+                    'bg-blue-600 text-white': 
+                      activeMenuItem === 'solar' || 
+                      isActive === 'solar' ||
+                      isActive === 'solar-types' ||
+                      isActive === 'solar-benefits', 
+                    'bg-gray-200': 
+                      activeMenuItem !== 'solar' &&
+                      isActive !== 'solar' &&
+                      isActive !== 'solar-types' &&
+                      isActive !== 'solar-benefits'
+                    }"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
                   <a @click.prevent="scrollToSection('about-solar')" href="#about-solar">Solar Power</a>
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isSolarMenuOpen }"></i>
                 </button>
                 <ul v-show="isSolarMenuOpen" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" :class="{'bg-blue-600 text-white': selectedSection === 'solar', 'bg-gray-200': selectedSection !== 'solar'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">How Solar Power Works?</a></li>
-                  <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" :class="{'bg-blue-600 text-white': selectedSection === 'solar-types', 'bg-gray-200': selectedSection !== 'solar-types'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Types of Solar Systems</a></li>
-                  <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" :class="{'bg-blue-600 text-white': selectedSection === 'solar-benefits', 'bg-gray-200': selectedSection !== 'solar-benefits'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Four Major Benefits of Solar Energy</a></li>
+                  <li><a @click.prevent="scrollToSection('solar')" href="#solar" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'solar' || isActive === 'solar', 
+                      'bg-gray-200': selectedSection !== 'solar' && isActive !== 'solar'}" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                    How Solar Power Works?
+                  </a></li>
+                  <li><a @click.prevent="scrollToSection('solar-types')" href="#solar-types" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'solar-types' || isActive === 'solar-types', 
+                      'bg-gray-200': selectedSection !== 'solar-types' && isActive !== 'solar-types'}" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                      Types of Solar Systems
+                    </a></li>
+                  <li><a @click.prevent="scrollToSection('solar-benefits')" href="#solar-benefits" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'solar-benefits'  || isActive === 'solar-benefits', 
+                      'bg-gray-200': selectedSection !== 'solar-benefits' && isActive !== 'solar-benefits'}" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                      Four Major Benefits of Solar Energy
+                    </a></li>
                 </ul>
               </li>
               <li class="mt-2">
                 <button
                   @click="toggleCompanyProfileMenu"
-                  :class="{'bg-blue-600 text-white': activeMenuItem === 'companyProfile', 'bg-gray-200': activeMenuItem !== 'companyProfile'}"
+                  :class="{
+                    'bg-blue-600 text-white': 
+                      activeMenuItem === 'companyProfile' || 
+                      isActive === 'company-profile' ||
+                      isActive === 'history' ||
+                      isActive === 'vision-mission' ||
+                      isActive === 'core-values' ||
+                      isActive === 'team', 
+                    'bg-gray-200': 
+                      activeMenuItem !== 'companyProfile' && 
+                      isActive !== 'company-profile' &&
+                      isActive !== 'history' &&
+                      isActive !== 'vision-mission' &&
+                      isActive !== 'core-values' &&
+                      isActive !== 'team'
+                  }"
                   class="flex justify-between items-center w-full text-left py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md"
                 >
                   <a @click.prevent="scrollToSection('company-profile')" href="#company-profile">
@@ -191,20 +270,69 @@ const closePreview = () => {
                   <i class="fa-solid fa-chevron-down" :class="{ 'rotate-180': isComProfOpn }"></i>
                 </button>
                 <ul v-show="isComProfOpn" class="pl-4 mt-2 space-y-2 border-blue-600 border-l-4">
-                  <li><a @click.prevent="scrollToSection('history')" href="#history" :class="{'bg-blue-600 text-white': selectedSection === 'history', 'bg-gray-200': selectedSection !== 'history'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">History Timeline</a></li>
-                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" :class="{'bg-blue-600 text-white': selectedSection === 'vision-mission', 'bg-gray-200': selectedSection !== 'vision-mission'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Vision - Mission</a></li>
-                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" :class="{'bg-blue-600 text-white': selectedSection === 'core-values', 'bg-gray-200': selectedSection !== 'core-values'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Core Values</a></li>
-                  <li><a @click.prevent="scrollToSection('team')" href="#team" :class="{'bg-blue-600 text-white': selectedSection === 'team', 'bg-gray-200': selectedSection !== 'team'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Team - Commitment</a></li>
+                  <li><a @click.prevent="scrollToSection('history')" href="#history" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'history' || isActive === 'history', 
+                      'bg-gray-200': selectedSection !== 'history' && isActive !== 'history'
+                    }" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                      History Timeline
+                  </a></li>
+                  <li><a @click.prevent="scrollToSection('vision-mission')" href="#vision-mission" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'vision-mission' || isActive === 'vision-mission', 
+                      'bg-gray-200': selectedSection !== 'vision-mission' && isActive !== 'vision-mission'
+                    }" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                    Vision - Mission
+                  </a></li>
+                  <li><a @click.prevent="scrollToSection('core-values')" href="#core-values" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'core-values' || isActive === 'core-values', 
+                      'bg-gray-200': selectedSection !== 'core-values' && isActive !== 'core-values'
+                    }" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                    Core Values
+                  </a></li>
+                  <li><a @click.prevent="scrollToSection('team')" href="#team" 
+                    :class="{
+                      'bg-blue-600 text-white': selectedSection === 'team' || isActive === 'team', 
+                      'bg-gray-200': selectedSection !== 'team' && isActive !== 'team'
+                    }" 
+                    class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                    Team - Commitment
+                  </a></li>
                 </ul>
               </li>
               <li class="mt-2">
-                <a @click.prevent="scrollToSection('certificates')" href="#certificates" :class="{'bg-blue-600 text-white': selectedSection === 'certificates', 'bg-gray-200': selectedSection !== 'certificates'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Certificates & Awards</a>
+                <a @click.prevent="scrollToSection('certificates')" href="#certificates" 
+                  :class="{
+                    'bg-blue-600 text-white': selectedSection === 'certificates' || isActive === 'certificates', 
+                    'bg-gray-200': selectedSection !== 'certificates' && isActive !== 'certificates'
+                  }" 
+                  class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                  Certificates & Awards
+                </a>
               </li>
               <li class="mt-2">
-                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" :class="{'bg-blue-600 text-white': selectedSection === 'shareholders', 'bg-gray-200': selectedSection !== 'shareholders'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Share Holder & Investors</a>
+                <a @click.prevent="scrollToSection('shareholders')" href="#shareholders" 
+                  :class="{
+                    'bg-blue-600 text-white': selectedSection === 'shareholders' || isActive === 'shareholders', 
+                    'bg-gray-200': selectedSection !== 'shareholders' && isActive !== 'shareholders'
+                  }" 
+                  class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                  Share Holder & Investors
+                </a>
               </li>
               <li class="mt-2">
-                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" :class="{'bg-blue-600 text-white': selectedSection === 'org-chart', 'bg-gray-200': selectedSection !== 'org-chart'}" class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">Organizational Chart</a>
+                <a @click.prevent="scrollToSection('org-chart')" href="#org-chart" 
+                  :class="{
+                    'bg-blue-600 text-white': selectedSection === 'org-chart' || isActive === 'org-chart', 
+                    'bg-gray-200': selectedSection !== 'org-chart' && isActive !== 'org-chart'
+                  }" 
+                  class="block py-2 px-4 hover:text-white hover:bg-blue-600 rounded-md">
+                  Organizational Chart
+                </a>
               </li>
             </ul>
           </div>
@@ -636,7 +764,22 @@ const closePreview = () => {
                         productive relationships with its financial supporters.
                     </p>
                     <div class="mt-10">
-                        <img src="images/about-images/Shareholder.png" alt="" data-aos="fade-left" data-aos-once="true">
+                        <img 
+                        src="images/about-images/Shareholder.png" 
+                        alt="Shareholder" 
+                        class="mt-5 w-full h-full rounded-lg object-cover"
+                        @click="openPreview('images/about-images/Shareholder.png')"
+                      />
+                      <div 
+                        v-if="isPreviewOpen" 
+                        class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                        @click.self="closePreview"
+                      >
+                        <div class="relative">
+                          <!-- Preview Image -->
+                          <img :src="previewImage" alt="Preview" class="max-w-full max-h-screen rounded-md" />
+                        </div>
+                      </div>
                     </div>
                 </div>
             </section>
@@ -649,7 +792,22 @@ const closePreview = () => {
                   and collaborative efforts across all levels of the company.
                 </p>
               </div>
-              <img src="images/company-profile/Organizational.png" alt="Organizational chart" class="mt-5 w-full h-full rounded-lg object-cover">
+              <img 
+                src="images/company-profile/Organizational.png" 
+                alt="Organizational chart" 
+                class="mt-5 w-full h-full rounded-lg object-cover"
+                @click="openPreview('images/company-profile/Organizational.png')"
+              />
+              <div 
+                v-if="isPreviewOpen" 
+                class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                @click.self="closePreview"
+              >
+                <div class="relative">
+                  <!-- Preview Image -->
+                  <img :src="previewImage" alt="Preview" class="max-w-full max-h-screen rounded-md" />
+                </div>
+              </div>
             </section>
       </div>
     </div>

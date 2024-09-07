@@ -15,6 +15,7 @@ const props = defineProps({
 // Scroll-related logic
 const scroll = ref(0);
 const isFixedTop = ref(false);
+const isActive = ref(false);
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
 };

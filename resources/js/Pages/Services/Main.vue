@@ -1,6 +1,6 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
-import { onMounted, onUnmounted, ref, computed } from 'vue';
+import { onMounted, onUnmounted, ref, computed, watch} from 'vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
@@ -11,6 +11,8 @@ import FaqTabs from '@/Pages/Services/Components/FaqTabs.vue';
 const scroll = ref(0);
 const isSidebarOpen = ref(false);
 const selectedCategory = ref(null);
+const isFixedTop = ref(false);
+const isActive = ref(null);
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
@@ -42,6 +44,7 @@ const props = defineProps({
   },
 });
 
+
 // Computed property to get the first category
 const firstCategory = computed(() => {
   return props.servicesCategory.length > 0 ? props.servicesCategory[0] : null;
@@ -58,6 +61,7 @@ const fourthCategory = computed(() => {
 
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
+  updateActiveSection();
 };
 
 onMounted(() => {
@@ -66,6 +70,33 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+});
+
+const updateActiveSection = () => {
+  const sections = props.servicesCategory.map((category) => category.service_category);
+  let currentSection = '';
+  sections.forEach((sectionId) => {
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      const { top, bottom } = sectionElement.getBoundingClientRect();
+      // Adjust the criteria as needed
+      if (top <= window.innerHeight / 2 && bottom >= window.innerHeight / 2) {
+        currentSection = sectionId;
+      }
+    }
+  });
+
+  isActive.value = currentSection;
+};
+
+
+watch(() => scroll.value, () => {
+  if (scroll.value > 230) {
+    isFixedTop.value = true;
+  } else {
+    isFixedTop.value = false;
+  }
+  updateActiveSection();
 });
 </script>
 
@@ -101,17 +132,18 @@ onUnmounted(() => {
     <div class="flex flex-col lg:ml-20 mt-10">
       <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
         <!-- categories -->
-        <div class="hidden  lg:flex lg:items-center lg:w-1/4">
-          <div class="lg:block border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0"
+        <div class="hidden lg:flex lg:items-center lg:w-1/4">
+          <!-- <div class="lg:block border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0"
           :class="{
               'fixed mb-60': scroll > 3,
               'border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0 ': scroll === 0,
-            }">
+            }"> -->
+          <div :class="[isFixedTop ? 'fixed top-40 w-1/6' : '']">
             <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
               <p class="ml-5 font-bold">SERVICES</p>
             </div>
             <div class="mt-2 sm:mt-0 lg:mt-2 w-full">
-              <ServicesCategory :servicesCategory="servicesCategory" :is_black="scroll > 0" />
+              <ServicesCategory :servicesCategory="servicesCategory" :isActive="isActive" :is_black="scroll > 0" />
             </div>
           </div>
         </div>
@@ -142,7 +174,7 @@ onUnmounted(() => {
             </ul>
         </div>
         <!-- services -->
-        <div class="lg:w-3/4 ">
+        <div class="lg:w-3/4 space-y-20">
           <div class="flex justify-center ">
             <div class="flex flex-col md:flex-row">
               <div class="w-full md:w-1/2 p-4">
@@ -161,7 +193,7 @@ onUnmounted(() => {
             </div>
           </div>
           <section :id="firstCategory.service_category">
-            <div class="mt-20">
+            <div>
               <div class="flex justify-center">
                   <p v-if="firstCategory" class="text-3xl font-bold">
                       {{ firstCategory.service_category }}
@@ -239,8 +271,8 @@ onUnmounted(() => {
               </div>
             </div>
           </section>
-          <section class="mt-5 bg-no-repeat" style="background-image: url('images/bg-service.png'); background-size: 500px; background-position: left bottom;">
-            <div class="mt-20" :id="secondCategory.service_category">
+          <section :id="secondCategory.service_category" class="mt-5 bg-no-repeat" style="background-image: url('images/bg-service.png'); background-size: 500px; background-position: left bottom;">
+            <div>
               <div class="flex justify-center">
                 <p v-if="secondCategory" class="text-3xl font-bold">
                   {{ secondCategory.service_category }}
@@ -273,8 +305,8 @@ onUnmounted(() => {
               </div>  
             </div>
           </section>
-          <section>
-            <div class="mt-20" :id="thirdCategory.service_category">
+          <section :id="thirdCategory.service_category">
+            <div class="">
               <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
               <p v-if="thirdCategory" class="text-3xl font-bold text-center">
                 {{ thirdCategory.service_category }}
@@ -284,9 +316,9 @@ onUnmounted(() => {
               <ProjectTabs :projectCategory="projectCategory" :services="services" :projects="projects"/>
             </div>
           </section>
-          <section class="mt-20">
+          <section class="mt-10" :id="fourthCategory.service_category">
               <div class="flex justify-center">
-                <p v-if="fourthCategory" class="text-3xl font-bold" :id="fourthCategory.service_category" >
+                <p v-if="fourthCategory" class="text-3xl font-bold">
                   {{ fourthCategory.service_category }}
                 </p>
               </div>

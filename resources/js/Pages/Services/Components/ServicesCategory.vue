@@ -7,8 +7,11 @@ const props = defineProps({
     default: () => ['all'],
     required: true,
   },
+  isActive: {
+    type: String,
+    default: '',
+  },
 });
-
 const selectedCategory = ref(null);
 
 const selectCategory = (categoryId) => {
@@ -36,14 +39,18 @@ const selectCategory = (categoryId) => {
       <li v-for="service in servicesCategory" :key="service.id">
         <button
           @click="selectCategory(service.service_category)"
-          class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
+          class="w-full text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
           :class="{
-            'bg-blue-700 text-white': selectedCategory === service.service_category,
-            'bg-gray-200': selectedCategory !== service.service_category
+            'bg-blue-600 text-white': 
+              selectedCategory === service.service_category || 
+              props.isActive === service.service_category,
+            'bg-gray-200': 
+              selectedCategory !== service.service_category &&
+              props.isActive !== service.service_category
           }"
         >
           {{ service.service_category }}
-        </button>
+      </button>      
       </li>
     </ul>
   </div>

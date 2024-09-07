@@ -15,9 +15,18 @@ const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId;
   const section = document.getElementById(categoryId);
   if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
+    // Calculate the top offset (e.g., 100px)
+    const offset = 150;
+    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+    
+    // Scroll to the section with an offset
+    window.scrollTo({
+      top: sectionTop - offset,
+      behavior: 'smooth'
+    });
   }
 };
+
 </script>
 
 <template>

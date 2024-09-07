@@ -141,21 +141,21 @@ const emit = defineEmits(['openLogin']);
                             </div>
                             <div class="row mt-3 flex">
                                 <div data-aos="fade-left" data-aos-delay="300" data-aos-duration="500" data-aos-once="true">
-                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                    <a href="https://www.facebook.com/onemprl/" target="_blank" class="flex items-center mx-2">
                                         <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
                                             <i class="pi pi-facebook" style="font-size: 20px"></i>
                                         </button>
                                     </a>
                                 </div>
                                 <div data-aos="fade-left" data-aos-delay="500" data-aos-duration="500" data-aos-once="true">
-                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                    <a href="https://www.m.me/onemprl?" target="_blank" class="flex items-center mx-2">
                                         <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
                                             <i class="fa-brands fa-facebook-messenger" style="font-size: 20px"></i>
                                         </button>
                                     </a>
                                 </div>
                                 <div data-aos="fade-left" data-aos-delay="700" data-aos-duration="500" data-aos-once="true">
-                                    <a href="https://www.facebook.com/p/MPRL-Solar-Panel-Trading-100066355175014/?paipv=0&eav=AfbZZElfTbUUslLmCJvufBw-zGw2TrPxHRlLWYEZWMl-8Yr17qFc4Pug4XcRPIA2-pc&_rdr" target="_blank" class="flex items-center mx-2">
+                                    <a href="https://www.facebook.com/onemprl/" target="_blank" class="flex items-center mx-2">
                                         <button class="bg-yellow-500 hover:bg-amber-700 text-white rounded-md w-8 h-8 flex justify-center items-center">
                                             <i class="pi pi-instagram" style="font-size: 20px"></i>
                                         </button>

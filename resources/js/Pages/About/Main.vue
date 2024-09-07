@@ -391,7 +391,7 @@ const closePreview = () => {
                         <p class="mt-2">Ready to dive deeper into solar energy? Let's explore how solar panels work or discover the different types of solar energy systems.</p>
                     </div>
                     <div id="solar1" class="mt-20">
-                        <img src="images/about-images/history.png" alt="hisdtou"  data-aos="fade-left" data-aos-once="true">
+                        <img src="images/about-images/history.png" alt="history" data-aos="fade-left" data-aos-once="true">
                     </div>
                 </section>
                 <section id="solar-types">
@@ -428,10 +428,10 @@ const closePreview = () => {
                             </div>
                         </div>
 
-                        <div class="flex flex-col lg:flex-row-reverse mt-10">
+                        <div class="flex flex-col lg:flex-row-reverse mt-10" id="commercial-type">
                             <div class="w-full lg:w-2/3" data-aos="fade-left" data-aos-once="true">
                                 <p 
-                                  id="commercial-type"
+                                  
                                   class="text-2xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
                                 <p class="mt-5 text-lg tracking-wide text-end">
                                     Commercial and industrial solar power systems are designed for businesses and large-scale operations, providing scalable and efficient energy solutions.
@@ -469,8 +469,8 @@ const closePreview = () => {
                     <div class="mt-10">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 justify-center">
                             <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right" data-aos-once="true">
-                                <img src="images/about-images/envi.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
-                                <div class="ml-3 mt-5 text-white">
+                                <img src="images/about-images/envi.png" alt="" class="hidden lg:block mt-2 h-24 w-24 m-5">
+                                <div class="ml-3 mt-5 text-white text-justify m-5">
                                     <p class="text-lg font-semibold">Environmental Protection</p>
                                     <p class="text-sm mt-3">Solar energy is a clean and renewable resource that produces no greenhouse gas emissions, 
                                         helping to mitigate climate change and reduce air pollution.
@@ -478,16 +478,16 @@ const closePreview = () => {
                                 </div>
                             </div>
                             <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left" data-aos-once="true">
-                                <img src="images/about-images/cost.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
-                                <div class="ml-3 mt-5 text-white">
+                                <img src="images/about-images/cost.png" alt="" class="hidden lg:block mt-2 h-24 w-24 m-5">
+                                <div class="ml-3 mt-5 text-white text-justify m-5">
                                     <p class="text-lg font-semibold">Cost Savings</p>
                                     <p class="text-sm mt-3">Solar panels can significantly reduce electricity bills over time, providing long-term financial benefits.
                                     </p>
                                 </div>
                             </div>
                             <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right" data-aos-once="true">
-                                <img src="images/about-images/enerEnv.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
-                                <div class="ml-3 mt-5 text-white">
+                                <img src="images/about-images/enerEnv.png" alt="" class="hidden lg:block mt-2 h-24 w-24 m-5">
+                                <div class="ml-3 mt-5 text-white text-justify m-5">
                                     <p class="text-lg font-semibold">Energy Independence</p>
                                     <p class="text-sm mt-3">
                                         By generating your own electricity, you become less reliant on traditional power grids and fluctuating energy costs.
@@ -495,8 +495,8 @@ const closePreview = () => {
                                 </div>
                             </div>
                             <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left" data-aos-once="true">
-                                <img src="images/about-images/prop.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
-                                <div class="ml-3 mt-5 text-white">
+                                <img src="images/about-images/prop.png" alt="" class="hidden lg:block mt-2 h-24 w-24 m-5">
+                                <div class="ml-3 mt-5 text-white text-justify m-5">
                                     <p class="text-lg font-semibold">Increased Property Value</p>
                                     <p class="text-sm mt-3">
                                         Homes with solar panels often have higher market values, making it a worthwhile investment.
@@ -763,7 +763,7 @@ const closePreview = () => {
                     <p class="mt-10">ONE MPRL Solar Power Corporation values the critical role of its shareholders and investors in driving the company’s growth and success in the renewable energy sector. The company is committed to maintaining transparent,
                         productive relationships with its financial supporters.
                     </p>
-                    <div class="mt-10">
+                    <div class="">
                         <img 
                         src="images/about-images/Shareholder.png" 
                         alt="Shareholder" 
@@ -809,7 +809,7 @@ const closePreview = () => {
                 </div>
               </div>
             </section>
-      </div>
+        </div>
     </div>
     </div>
   </main>

@@ -274,9 +274,9 @@ onUnmounted(() => {
             </div>
           </section>
           <section>
-            <div class="mt-20">
+            <div class="mt-20" :id="thirdCategory.service_category">
               <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
-              <p v-if="thirdCategory" class="text-3xl font-bold text-center" :id="thirdCategory.service_category" >
+              <p v-if="thirdCategory" class="text-3xl font-bold text-center">
                 {{ thirdCategory.service_category }}
               </p>
             </div>

@@ -134,11 +134,6 @@ watch(() => scroll.value, () => {
       <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
         <!-- categories -->
         <div class="hidden lg:flex lg:items-center lg:w-1/4">
-          <!-- <div class="lg:block border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0"
-          :class="{
-              'fixed mb-60': scroll > 3,
-              'border-blue-600 grid grid-cols-1 sm:flex lg:flex-col lg:items-start lg:ml-0 lg:border-0 ': scroll === 0,
-            }"> -->
           <div :class="[isFixedTop ? 'fixed top-40 w-1/6' : '']">
             <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
               <p class="ml-5 font-bold">SERVICES</p>
@@ -203,7 +198,7 @@ watch(() => scroll.value, () => {
               <!-- Display services here -->
               <div>
                   <!-- Display solar system 1 -->
-                  <h3 class="font-semibold text-xl mt-5 mb-5">Off-Grid Solar System</h3>
+                  <h3 class="font-semibold text-2xl mt-5 mb-5">Off-Grid Solar System</h3>
                   <div>
                     <img src="images/solar-system/solar_power_1.png" alt="" class="">
                   </div>
@@ -226,7 +221,7 @@ watch(() => scroll.value, () => {
               </div>
               <div class="mt-20">
                   <!-- Display solar system 1 -->
-                  <h3 class="font-semibold text-xl mt-5 mb-5">Grid-Tied Solar System</h3>
+                  <h3 class="font-semibold text-2xl mt-5 mb-5">Grid-Tied Solar System</h3>
                   <div>
                     <img src="images/solar-system/solar_power_2.png" alt="" class="">
                   </div>
@@ -249,7 +244,7 @@ watch(() => scroll.value, () => {
               </div>
               <div class="mt-20">
                   <!-- Display solar system 3 -->
-                  <h3 class="font-semibold text-xl mt-5 mb-5">Hybrid Solar System</h3>
+                  <h3 class="font-semibold text-2xl mt-5 mb-5">Hybrid Solar System</h3>
                   <div>
                     <img src="images/solar-system/solar_power_3.png" alt="" class="">
                   </div>

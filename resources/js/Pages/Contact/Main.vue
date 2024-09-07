@@ -68,11 +68,11 @@ onUnmounted(() => {
 // Submit function to handle form submission
 function submitInquire() {
     form.post(route('inquire.send'), {
+        preserveScroll: true, // Correctly placed here
         onError: (errors) => {
             if (errors.loginRequired) {
                 openLogin(); // Show the login modal
             }
-            console.log(errors);
         },
         onSuccess: () => {
             toast.success('Inquiry sent successfully!');

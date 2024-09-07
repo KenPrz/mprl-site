@@ -14,9 +14,26 @@ const props = defineProps({
 const selectedCategory = ref(null);
 
 // Function to handle category selection
-const selectCategory = (categoryId) => {
-  selectedCategory.value = categoryId;
+// const selectCategory = (categoryId) => {
+//   selectedCategory.value = categoryId;
+// };
+
+const scrollToSection = (targetId) => {
+  console.log(`Target ID: ${targetId}`); // Debugging log
+  const targetElement = document.getElementById(targetId);
+
+  // Offset adjustment based on fixed header height
+  const offset = 150;
+  const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+  const offsetPosition = elementPosition - offset;
+
+  // Smooth scroll to the target position
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth',
+  });
 };
+
 </script>
 
 <template>
@@ -27,9 +44,9 @@ const selectCategory = (categoryId) => {
         <a :href="'#' + service.service_category">
           <!-- Button to select the category -->
           <button 
-            @click="selectCategory(service.id)" 
-            class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 bg-gray-200 hover:bg-blue-600 hover:text-white"
-            :class="{'bg-blue-700 text-white hover:bg-gray-200': selectedCategory === service.id}">
+            @click="scrollToSection(service.service_category)" 
+            class="w-5/6 text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
+            :class="{'bg-blue-700 text-white': selectedCategory === service.service_category, 'bg-gray-200': selectedCategory !== service.service_category,}">
             {{ service.service_category }}
           </button>
         </a>

@@ -50,6 +50,9 @@ const secondCategory = computed(() => {
   return props.servicesCategory.length > 0 ? props.servicesCategory[1] : null;
 });
 const thirdCategory = computed(() => {
+  return props.servicesCategory.length > 0 ? props.servicesCategory[2] : null;
+});
+const fourthCategory = computed(() => {
   return props.servicesCategory.length > 0 ? props.servicesCategory[3] : null;
 });
 
@@ -157,10 +160,10 @@ onUnmounted(() => {
               </div>
             </div>
           </div>
-          <section>
+          <section :id="firstCategory.service_category">
             <div class="mt-20">
               <div class="flex justify-center">
-                  <p v-if="firstCategory" :id="firstCategory.service_category" class="text-3xl font-bold">
+                  <p v-if="firstCategory" class="text-3xl font-bold">
                       {{ firstCategory.service_category }}
                   </p>
               </div>
@@ -177,9 +180,9 @@ onUnmounted(() => {
             </div>
           </section>
           <section class="mt-5 bg-no-repeat" style="background-image: url('images/bg-service.png'); background-size: 500px; background-position: left bottom;">
-            <div class="mt-20">
+            <div class="mt-20" :id="secondCategory.service_category">
               <div class="flex justify-center">
-                <p v-if="firstCategory" class="text-3xl font-bold" :id="secondCategory.service_category">
+                <p v-if="secondCategory" class="text-3xl font-bold">
                   {{ secondCategory.service_category }}
                 </p>
               </div>
@@ -213,7 +216,9 @@ onUnmounted(() => {
           <section>
             <div class="mt-20">
               <p class="text-center text-lg text-blue-500">Our Completed Solar Power Solutions</p>
-              <p class="text-3xl font-semibold text-center">Project Portfolio</p>
+              <p v-if="thirdCategory" class="text-3xl font-bold text-center" :id="thirdCategory.service_category" >
+                {{ thirdCategory.service_category }}
+              </p>
             </div>
             <div class="mt-10">
               <ProjectTabs :projectCategory="projectCategory" :services="services" :projects="projects"/>
@@ -221,8 +226,8 @@ onUnmounted(() => {
           </section>
           <section class="mt-20">
               <div class="flex justify-center">
-                <p v-if="firstCategory" class="text-3xl font-bold" :id="thirdCategory.service_category" >
-                  {{ thirdCategory.service_category }}
+                <p v-if="fourthCategory" class="text-3xl font-bold" :id="fourthCategory.service_category" >
+                  {{ fourthCategory.service_category }}
                 </p>
               </div>
               <div class="mt-10">

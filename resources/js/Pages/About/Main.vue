@@ -17,7 +17,6 @@ const scroll = ref(0);
 const isFixedTop = ref(false);
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
-  console.log(scroll.value);
 };
 
 onMounted(async () => {

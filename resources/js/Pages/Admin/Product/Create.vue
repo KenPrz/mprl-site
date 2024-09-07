@@ -109,7 +109,7 @@ onMounted(() => {
                         </div>
                         <div>
                             <div class="flex justify-between items-center mb-2">
-                                <label class="block text-sm font-medium text-gray-700">Image/s <span class="text-xs">(max 3 images upload)</span></label>
+                                <label class="block text-sm font-medium text-gray-700">Product Image/s <span class="text-xs">(3 images max)</span></label>
                                 <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
                                     <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                                     <label for="file-upload" class="flex items-center cursor-pointer">

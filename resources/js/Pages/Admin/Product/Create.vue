@@ -5,7 +5,7 @@ import Toggle from '@/Components/Toggle.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
-import Editor from '@/Components/Editor.vue';
+import { useToast } from 'vue-toastification';
 
 const props = defineProps({
     categories: {
@@ -42,6 +42,7 @@ function addProduct() {
     form.post(route('admin.products.store'), {
         preserveScroll: true,
         onSuccess: () => {
+            toast.success('Product added successfully!');
             form.reset();
             imagePreviews.value = [];
         }

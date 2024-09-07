@@ -32,7 +32,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="col-span-1">
                             <label for="prod-name" class="block text-lg font-medium text-gray-700">Description</label>
-                            <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea>
+                            <textarea class="mt-1 w-full h-60 p-5 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" v-model="form.description"></textarea>
                             <!-- <Editor v-model="form.description" /> -->
                             <InputError class="mt-2" :message="form.errors.description" />
                         </div>

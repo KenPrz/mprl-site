@@ -258,18 +258,18 @@ const closePreview = () => {
             <section id="about-solar" class="space-y-32">
                 <section id="solar" >
                     <h1 class="text-4xl font-bold text-center">Solar Power</h1>
-                    <div class="mt-5 text-justify text-lg" data-aos="fade-right">
+                    <div class="mt-5 text-justify text-lg" data-aos="fade-right" data-aos-once="true">
                         <p>Solar energy is a clean, abundant, and renewable resource that's essential for building a sustainable future. By harnessing the sun's power, we can significantly reduce greenhouse gas emissions and lessen our dependence on fossil fuels.</p>
                         <p class="mt-2">Ready to dive deeper into solar energy? Let's explore how solar panels work or discover the different types of solar energy systems.</p>
                     </div>
                     <div id="solar1" class="mt-20">
-                        <img src="images/about-images/history.png" alt="hisdtou"  data-aos="fade-left">
+                        <img src="images/about-images/history.png" alt="hisdtou"  data-aos="fade-left" data-aos-once="true">
                     </div>
                 </section>
                 <section id="solar-types">
                     <h1 class="text-4xl font-semibold text-blue-600 text-center">Types of Solar Power Systems</h1>
                         <div class="flex flex-col lg:flex-row mt-10">
-                            <div class="w-full lg:w-2/3" data-aos="fade-right">
+                            <div class="w-full lg:w-2/3" data-aos="fade-right" data-aos-once="true">
                                 <p 
                                   id="residential-type"
                                   class="text-2xl font-semibold text-blue-600 tracking-wide">Residential</p>
@@ -296,12 +296,12 @@ const closePreview = () => {
                                 </div>
                             </div>
                             <div class="mt-10 lg:mt-0 ">
-                                <img src="images/about-images/photo.png" alt="Residential Solar" data-aos="fade-left">
+                                <img src="images/about-images/photo.png" alt="Residential Solar" data-aos="fade-left" data-aos-once="true">
                             </div>
                         </div>
 
                         <div class="flex flex-col lg:flex-row-reverse mt-10">
-                            <div class="w-full lg:w-2/3" data-aos="fade-left">
+                            <div class="w-full lg:w-2/3" data-aos="fade-left" data-aos-once="true">
                                 <p 
                                   id="commercial-type"
                                   class="text-2xl text-end font-semibold text-blue-600 tracking-wide">Commercial & Industrial</p>
@@ -326,7 +326,7 @@ const closePreview = () => {
                                 </div>
                             </div>
                             <div class="mt-10 lg:mt-0 ">
-                                <img src="images/about-images/comm.png" alt="Commercial Solar" data-aos="fade-right">
+                                <img src="images/about-images/comm.png" alt="Commercial Solar" data-aos="fade-right" data-aos-once="true">
                             </div>
                         </div>
                 </section>
@@ -340,7 +340,7 @@ const closePreview = () => {
                     </p>
                     <div class="mt-10">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 justify-center">
-                            <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right">
+                            <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right" data-aos-once="true">
                                 <img src="images/about-images/envi.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
                                 <div class="ml-3 mt-5 text-white">
                                     <p class="text-lg font-semibold">Environmental Protection</p>
@@ -349,7 +349,7 @@ const closePreview = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left">
+                            <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left" data-aos-once="true">
                                 <img src="images/about-images/cost.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
                                 <div class="ml-3 mt-5 text-white">
                                     <p class="text-lg font-semibold">Cost Savings</p>
@@ -357,7 +357,7 @@ const closePreview = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right">
+                            <div class="flex bg-blue-500 rounded-lg p-3" data-aos="fade-right" data-aos-once="true">
                                 <img src="images/about-images/enerEnv.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
                                 <div class="ml-3 mt-5 text-white">
                                     <p class="text-lg font-semibold">Energy Independence</p>
@@ -366,7 +366,7 @@ const closePreview = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left">
+                            <div class="flex bg-blue-500 rounded-lg p-3"  data-aos="fade-left" data-aos-once="true">
                                 <img src="images/about-images/prop.png" alt="" class="hidden lg:block mt-2 h-20 w-full">
                                 <div class="ml-3 mt-5 text-white">
                                     <p class="text-lg font-semibold">Increased Property Value</p>
@@ -420,15 +420,16 @@ const closePreview = () => {
                       data-aos-once="true">
                       <div class="w-full md:w-1/2 flex pr-0 md:pr-5 z-10 md:z-0">
                         <div class="bg-white w-full lg:text-start text-center px-4 space-y-2">
-                          <h1 class="font-bold italic text-main-500 text-4xl">2013</h1>
+                          <h1 class="font-bold italic text-main-500 text-4xl">2011</h1>
                           <h4 class="font-semibold text-blue-600 text-xl uppercase leading-5">
-                            Established in Bicol Region
+                            Visionary Beginnings in the Bicol Region
                           </h4>
                           <div class="bg-blue-600 mt-2 py-3 px-4 rounded-lg shadow-lg">
                             <p class="text-white text-sm text-justify">
-                              ONE MPRL Solar Power Corporation was founded in 2013 as MPRL Solar Panel Trading 
-                              and Construction Services. The company started its journey in the Bicol Region 
-                              with a vision to provide top-quality solar power solutions.
+                              Founded in 2011 as MPRL Solar Panel Trading and Construction Services, 
+                              ONEMPRL Solarpower Corporation embarked on its journey with an audacious vision to 
+                              revolutionize solar energy solutions in the Bicol Region. 
+                              From the outset, the company was committed to delivering cutting-edge solar power innovations.
                             </p>
                           </div>
                         </div>
@@ -444,15 +445,16 @@ const closePreview = () => {
                         <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 hidden md:block"></div>
                         <div class="bg-white w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
                           <div class="w-full lg:text-start text-center px-4 space-y-2">
-                            <h1 class="font-bold italic  text-main-500 text-4xl">2017</h1>
+                            <h1 class="font-bold italic  text-main-500 text-4xl">2015</h1>
                             <h4 class="font-semibold text-blue-600 text-xl uppercase leading-5">
-                              Expansion to NCR and CALABARZON
+                              Rapid Expansion into NCR and Calabarzon
                             </h4>
                             <div class="bg-blue-600 mt-2 py-3 px-4 rounded-lg shadow-lg">
                               <p class="text-white text-sm text-justify">
-                                By 2015, the company expanded its operations to the National Capital Region 
-                                (NCR) and CALABARZON, establishing itself as a trusted provider of solar energy 
-                                solutions in these key regions.
+                                By 2015, the company had rapidly expanded its footprint to the National Capital Region (NCR) 
+                                and Calabarzon, quickly earning a reputation as a leading provider of solar energy solutions. 
+                                This growth marked the beginning of MPRL's rise as a formidable player in the industry, 
+                                consistently exceeding customer expectations with its innovative approach.
                               </p>
                             </div>
                           </div>
@@ -466,14 +468,14 @@ const closePreview = () => {
                         <div class="bg-white w-full lg:text-start text-center px-4 space-y-2">
                           <h1 class="font-bold italic text-main-500 text-4xl">2021</h1>
                           <h4 class="font-semibold text-blue-600 text-xl uppercase leading-5">
-                            Global Experience and Quality Assurance
+                            Global Expertise and Unmatched Quality Assurance
                           </h4>
                           <div class="bg-blue-600 mt-2 py-3 px-4 rounded-lg shadow-lg">
                             <p class="text-white text-sm text-justify">
-                              By 2021, ONE MPRL Solar Power Corporation had gained extensive 
-                              global experience, enabling it to deliver the highest quality 
-                              solar solutions. The company's reputation for quality and 
-                              reliability continued to grow.
+                              By 2021, MPRL had amassed invaluable global experience, which fueled its capacity 
+                              to deliver superior, world-class solar solutions. With a steadfast commitment to 
+                              excellence, the company reinforced its reputation for unparalleled quality and 
+                              reliability, securing its place as a trailblazer in the solar energy landscape.
                             </p>
                           </div>
                         </div>
@@ -489,16 +491,17 @@ const closePreview = () => {
                         <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 hidden md:block"></div>
                         <div class="bg-white w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
                           <div class="w-full lg:text-start text-center px-4 space-y-2">
-                            <h1 class="font-bold italic  text-main-500 text-4xl">2024</h1>
+                            <h1 class="font-bold italic  text-main-500 text-4xl">2025</h1>
                             <h4 class="font-semibold text-blue-600 text-xl uppercase leading-5">
-                              Rebranding to ONE MPRL Solar Power Corporation
+                              Strategic Evolution to ONEMPRL Solarpower Corporation
                             </h4>
                             <div class="bg-blue-600 mt-2 py-3 px-4 rounded-lg shadow-lg">
                               <p class="text-white text-sm text-justify">
-                                In 2024, the company made a strategic decision to rebrand itself as 
-                                ONE MPRL Solar Power Corporation. This new name reflects the company's 
-                                unified approach and its ongoing mission to be a leading provider of 
-                                solar energy solutions.
+                                In 2025, the company underwent a strategic transformation, 
+                                emerging as ONEMPRL Solarpower Corporation. This rebranding signifies a bold, 
+                                unified approach to the company’s mission of dominating the solar energy sector, 
+                                embodying its relentless pursuit of innovation, leadership, and sustainable 
+                                energy solutions for a brighter future.
                               </p>
                             </div>
                           </div>
@@ -608,7 +611,7 @@ const closePreview = () => {
                     <p class="mt-10">ONE MPRL Solar Power Corporation is recognized for its exceptional contributions to sustainable energy solutions. 
                         The company has earned numerous certificates and awards, including:
                     </p>
-                    <div class="mt-10" data-aos="fade-left">
+                    <div class="mt-10" data-aos="fade-left" data-aos-once="true">
                         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 justify-center">
                             <img
                             v-for="(image, index) in images"
@@ -633,7 +636,7 @@ const closePreview = () => {
                         productive relationships with its financial supporters.
                     </p>
                     <div class="mt-10">
-                        <img src="images/about-images/Shareholder.png" alt="" data-aos="fade-left">
+                        <img src="images/about-images/Shareholder.png" alt="" data-aos="fade-left" data-aos-once="true">
                     </div>
                 </div>
             </section>

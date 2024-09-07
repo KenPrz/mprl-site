@@ -146,7 +146,7 @@ onUnmounted(() => {
                 <p class="text-3xl font-semibold tracking-wider">
                   POWER YOUR HOME WITH SUSTAINABLE SOLAR ENERGY
                 </p>
-                <p class="text-md font-poppins mt-5">
+                <p class="text-lg mt-5 text-justify">
                   We provide environmentally friendly and cost-effective options for powering your home or business
                   through our comprehensive services. Specializing in high-quality solar power systems,
                   we ensure reliable and sustainable energy solutions designed to meet your specific requirements.
@@ -184,7 +184,7 @@ onUnmounted(() => {
                 </p>
               </div>
               <div class="flex justify-center text-center mt-10">
-                <p class="text-md">
+                <p class="text-xl">
                   ONE MPRL is providing a solution for a ground mount solar photovoltaic power plant, 
                   encompassing the full spectrum of services from initial site assessment and design to installation and 
                   ongoing maintenance, ensuring optimal performance and efficiency.
@@ -194,12 +194,17 @@ onUnmounted(() => {
             <div class="container mx-auto">
               <div class="flex flex-wrap justify-center -mx-2 sm:p-10">
                 <div v-for="service in services" :key="service.id" class="w-full sm:w-1/2 lg:w-1/3 p-2">
-                  <div v-if="service.category_id === 2 || service.category_id === '2'" class="flex flex-col h-full border rounded-lg shadow-md p-4 bg-white bg-opacity-90">
+                  <div v-if="service.category_id === 2 || service.category_id === '2'" class="flex flex-col h-full border rounded-lg shadow-md p-5 bg-white bg-opacity-90">
                     <div class="flex justify-center">
                       <img :src="`/storage/${service.image}`" :alt="service.name" class="rounded-t-lg">
                     </div>
-                    <h3 class="font-bold text-lg mt-4 mb-5 text-center text-blue-500">{{ service.name }}</h3>
-                    <p class="text-sm font-semibold text-green-500 mt-3 ml-5 flex-grow" v-html="service.description"></p>
+                    <h3 class="font-bold text-lg mt-4 mb-5 text-center text-blue-500 leading-5">{{ service.name }}</h3>
+                    <div
+                      class="text-sm ml-5 flex-grow"
+                      :style="{ whiteSpace: 'pre-wrap'}"
+                    >
+                      {{ service.description }}
+                    </div>
                   </div>
                 </div>
               </div>  

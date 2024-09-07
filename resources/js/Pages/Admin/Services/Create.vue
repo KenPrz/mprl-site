@@ -30,15 +30,19 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="col-span-1">
+                        <div class="col-span-1 mt-3">
                             <label for="prod-name" class="block text-lg font-medium text-gray-700">Description</label>
-                            <textarea class="w-full h-5/6 border-2 rounded-md" v-model="form.description"></textarea>
+                            <textarea 
+                                class="mt-1 w-full h-60 p-5 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" 
+                                v-model="form.description" 
+                                @input="handleInput"
+                            ></textarea>
                             <!-- <Editor v-model="form.description" /> -->
                             <InputError class="mt-2" :message="form.errors.description" />
                         </div>
                         <div class="col-span-1">
                             <div class="flex justify-between">
-                                <label for="prod-name" class="block text-lg font-medium text-gray-700 p-3">Image/s <sup>(max 1 image upload)</sup></label>
+                                <label for="prod-name" class="block text-lg font-medium text-gray-700 p-3">Service Image <span class="text-xs">(1 image max)</span></label>
                                 <div class="flex justify-between items-center mt-2">
                                     <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
                                         <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
@@ -77,7 +81,6 @@
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { Head, useForm, Link } from '@inertiajs/vue3';
   import InputError from '@/Components/InputError.vue';
-  import Editor from '@/Components/Editor.vue';
   import { useToast } from 'vue-toastification';
   
   const toast = useToast();
@@ -128,11 +131,24 @@ function removeImage(index) {
     form.image.splice(index, 1);
 }
 
+// Function to handle input and add bullets
+function handleInput() {
+  // Split the description into lines
+  const lines = form.description.split('\n');
+
+  // Add bullet point if a line is not empty and doesn't already have one
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i] && !lines[i].startsWith('• ')) {
+      lines[i] = '• ' + lines[i];
+    }
+  }
+
+  // Join the lines back and update the description
+  form.description = lines.join('\n');
+}
+
 onMounted(() => {
     form.clearErrors();
 });
-  </script>
-  
-  <style scoped>
-  </style>
-  
+
+</script>

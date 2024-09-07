@@ -34,18 +34,18 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
         ]);
         $this->call([
-            UserSeeder::class,
+            // UserSeeder::class,
             BlogCategorySeeder::class,
-            BlogPostSeeder::class,
+            // BlogPostSeeder::class,
             BlogPostCategorySeeder::class,
-            BlogImageSeeder::class,
-            ContactFormSeeder::class,
+            // BlogImageSeeder::class,
+            // ContactFormSeeder::class,
             ProductCategorySeeder::class,
-            ProductSeeder::class,
-            VisitorSeeder::class,
+            // ProductSeeder::class,
+            // VisitorSeeder::class,
             ProjectCategorySeeder::class,
             ServicesCategoriesSeeder::class,
-            FaqSeeder::class
+            // FaqSeeder::class
         ]);
     }
 }

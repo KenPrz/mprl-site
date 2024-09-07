@@ -41,7 +41,7 @@
                                 <label for="prod-name" class="block text-lg font-medium text-gray-700 p-3">Image/s <sup>(max 1 image upload)</sup></label>
                                 <div class="flex justify-between items-center mt-2">
                                     <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
-                                        <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
+                                        <input type="file" @change="handleFiles" class="hidden" id="file-upload" />
                                         <label for="file-upload" class="flex cursor-pointer">
                                             <i class="fa-solid fa-plus text-xl"></i>
                                             <span class="ml-1 hidden sm:flex items-center">Add Images</span>
@@ -62,7 +62,7 @@
                         </div>
                     </div>   
                     <div class="flex justify-end mt-5">
-                        <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="updateService">
+                        <button type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="updateService">Update</button>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
     </AuthenticatedLayout>
   </template>
   
-<script setup>
+  <script setup>
   import { ref, onMounted } from 'vue';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { Head, useForm, Link } from '@inertiajs/vue3';
@@ -90,16 +90,18 @@
       required: true
     }
   });
+  
   const toast = useToast();
+  const imagePreviews = ref([]); // Reactive array for image previews
+  
   const form = useForm({
-    name: props.service.name,
-    category_id: props.service.category_id,
-    description: props.service.description,
-    image: [] // initially empty; images will be handled separately
+    name: props.service.name || '', // Ensure initial values are not undefined
+    category_id: props.service.category_id || '',
+    description: props.service.description || '',
+    image: [] // Form images handled separately
   });
   
-  const imagePreviews = ref([]);
-  
+  // Handle file uploads and update image previews
   function handleFiles(event) {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -107,40 +109,44 @@
       const reader = new FileReader();
       reader.onload = (e) => {
         imagePreviews.value.push(e.target.result);
-        form.image.push(file);
+        form.image.push(file); // Push the file object to form data
       };
       reader.readAsDataURL(file);
     }
   }
   
+  // Remove selected image preview and associated file
   function removeImage(index) {
     imagePreviews.value.splice(index, 1);
     form.image.splice(index, 1);
   }
   
+  // Update service data on form submission
   function updateService() {
     form.put(route('admin.services.update', props.service.id), {
       preserveScroll: true,
       onSuccess: () => {
         toast.success('Service Updated successfully!');
-        form.reset();
-        imagePreviews.value = [];
+        // Reset only the image previews if needed, keep other form data intact
+        form.clearErrors(); // Ensure only validation errors are cleared, not field data
+        imagePreviews.value = []; // Clear previews on success
       },
-      onError: () => {
-          toast.error('Failed to update service!');
+      onError: (errors) => {
+        console.log(errors); // Debug validation errors if needed
+        toast.error('Failed to update service!');
       }
     });
   }
   
+  // Load existing image preview on component mount
   onMounted(() => {
-    // Load image previews from existing service images if available
+    // Load image previews from the existing service if an image URL is provided
     if (props.service.image) {
-      imagePreviews.value.push(`/storage/${props.service.image}`); // Adjust path based on how images are stored
+      imagePreviews.value.push(`/storage/${props.service.image}`);
     }
-  
-    form.clearErrors();
   });
 </script>
+  
   
   
   <style scoped>

@@ -16,7 +16,7 @@
     <p><strong>First Name:</strong> {{ $data['first_name'] }}</p>
     <p><strong>Last Name:</strong> {{ $data['last_name'] }}</p>
     <p><strong>Email:</strong> {{ $data['email'] }}</p>
-    <p><strong>Contact Number:</strong> {{ $data['contact_num'] }}</p>
+    <p><strong>Contact Number:</strong> {{ $data['contact_number'] }}</p>
     <p><strong>Address:</strong> {{ $data['address'] }}</p>
     <p><strong>Monthly Electric Bill:</strong> {{ $data['monthly_elecBill'] }}</p>
     <p><strong>Book a Site Visit Date:</strong> {{ $data['date'] }}</p>

@@ -25,18 +25,18 @@ class ContactController extends Controller
 
         // Validate the form data
         $data = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'contact_num' => 'required|string|max:255',
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'email' => 'required|email|max:50',
+            'contact_number' => ['required', 'string', 'regex:/^(09|\\+639)\\d{9}$/'], 
             'address' => 'required|string',
-            'monthly_elecBill' => 'required|string|max:255',
+            'monthly_elecBill' => 'required|numeric',
             'date' => 'required|date',
             'message' => 'required|string',
         ]);
 
         // Send the email using the ContactFormMail class
-        Mail::to('mprl@gmail.com')->send(new ContactFormMail($data));
+        Mail::to('mprlsolarpanel@gmail.com')->send(new ContactFormMail($data));
 
         // Redirect back with a success message
         return back()->with('success', 'Your message has been sent successfully!');

@@ -6,6 +6,7 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import Login from '@/Pages/Auth/Login.vue';
 import Register from '@/Pages/Auth/Register.vue';
+import InputError from '@/Components/InputError.vue';
 import { useToast } from 'vue-toastification';
 
 const toast = useToast();
@@ -43,7 +44,7 @@ const form = useForm({
     first_name: '',
     last_name: '',
     email: '',
-    contact_num: '',
+    contact_number: '',
     address: '',
     monthly_elecBill: '',
     date: '',
@@ -71,6 +72,7 @@ function submitInquire() {
             if (errors.loginRequired) {
                 openLogin(); // Show the login modal
             }
+            console.log(errors);
         },
         onSuccess: () => {
             toast.success('Inquiry sent successfully!');
@@ -209,39 +211,47 @@ const emit = defineEmits(['openLogin']);
                         <div class="relative flex-1">
                             <input v-model="form.first_name" type="text" id="first_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
                             <label for="first_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">First Name</label>
+                            <InputError class="mt-2" :message="form.errors.first_name" />
                         </div>
                         <div class="relative flex-1">
                             <input v-model="form.last_name" type="text" id="last_name" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
                             <label for="last_name" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Last Name</label>
+                            <InputError class="mt-2" :message="form.errors.last_name" />
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-4 mb-8">
                         <div class="relative flex-1">
                             <input v-model="form.email" type="text" id="email" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
                             <label for="email" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Email</label>
+                            <InputError class="mt-2" :message="form.errors.email" />
                         </div>
                         <div class="relative flex-1">
-                            <input v-model="form.contact_num" type="text" id="contact_num" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
-                            <label for="contact_num" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Contact Number</label>
+                            <input v-model="form.contact_number" type="text" id="contact_number" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
+                            <label for="contact_number" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Contact Number</label>
+                            <InputError class="mt-2" :message="form.errors.contact_number" />
                         </div>
                     </div>
                     <div class="relative mb-8">
                         <textarea v-model="form.address" id="address" rows="2" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
                         <label for="address" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Address</label>
+                        <InputError class="mt-2" :message="form.errors.address" />
                     </div>
                     <div class="flex flex-wrap gap-4 mb-8">
                         <div class="relative flex-1">
                             <input v-model="form.monthly_elecBill" type="number" id="monthly_elecBill" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
                             <label for="monthly_elecBill" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Monthly Electric Bill</label>
+                            <InputError class="mt-2" :message="form.errors.monthly_elecBill" />
                         </div>
                         <div class="relative flex-1">
                             <input v-model="form.date" id="date" name="date" type="date" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required />
                             <label for="date" class="absolute text-sm text-slate-50 dark:text-gray-400 duration-300 transform -translate-y-8 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Book a Site Visit</label>
+                            <InputError class="mt-2" :message="form.errors.date" />
                         </div>                        
                     </div>                    
                     <div class="relative mb-8">
                         <textarea v-model="form.message" id="message" rows="5" class="w-full peer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 px-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" " required></textarea>
                         <label for="message" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:text-slate-50 peer-focus:font-bold peer-valid:text-slate-50 peer-valid:-translate-y-8">Message</label>
+                        <InputError class="mt-2" :message="form.errors.message" />
                     </div>
                     <button type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                 </form>

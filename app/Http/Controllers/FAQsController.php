@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faqs;
-use App\Models\ProjectCatergory;
+use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,8 +13,8 @@ class FAQsController extends Controller
 {
     public function index(Request $request){
         $search_query = $request->searchQuery;
-        $faqs = Faqs::select('faqs.id', 'faqs.question', 'project_catergories.name as category_id', 'faqs.answer')
-        ->join('project_catergories', 'project_catergories.id', '=', 'faqs.category_id')
+        $faqs = Faqs::select('faqs.id', 'faqs.question', 'project_categories.name as category_id', 'faqs.answer')
+        ->join('project_categories', 'project_categories.id', '=', 'faqs.category_id')
         ->with('category:id,name')
         ->paginate(5);
         return Inertia::render('Admin/Faqs/Index', [
@@ -22,7 +22,7 @@ class FAQsController extends Controller
         ]);
     }
     public function create(){
-        $categories = ProjectCatergory::all();
+        $categories = ProjectCategory::all();
         return Inertia::render('Admin/Faqs/Create',[
             'categories' => $categories
         ]);
@@ -41,7 +41,7 @@ class FAQsController extends Controller
         return to_route('admin.faqs.index');
     }
     public function edit(int $id){
-        $categories = ProjectCatergory::all();
+        $categories = ProjectCategory::all();
         $faqs = Faqs::with(['category:id,name'])
                         ->where('id', $id)
                         ->firstOrFail();

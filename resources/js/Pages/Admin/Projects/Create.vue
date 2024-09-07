@@ -1,155 +1,178 @@
 <template>
-    <Head title="Admin: Projects" />
-    <AuthenticatedLayout>
-      <template #header>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add Project</h2>
-      </template>
-      <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="flex justify-start">
-            <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.projects.index')">
-              <i class="fa-solid fa-arrow-left px-4"></i><span>Go Back</span>
-            </Link>
+
+  <Head title="Admin: Projects" />
+  <AuthenticatedLayout>
+    <template #header>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Add Project</h2>
+    </template>
+    <div class="p-4 sm:p-6 lg:p-8">
+      <div class="max-w-7xl mx-auto space-y-6">
+        <div class="flex justify-start">
+          <Link class="bg-main-400 px-4 py-2 rounded-md text-white hover:bg-main-500"
+            :href="route('admin.projects.index')">
+          <i class="fa-solid fa-arrow-left mr-2"></i><span>Go Back</span>
+          </Link>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-6 space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="form-name" class="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
+              <input id="form-name"
+                class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                v-model="form.title" type="text" required>
+              <InputError class="mt-2" :message="form.errors.title" />
+            </div>
+            <div>
+              <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Select Category</label>
+              <select id="category"
+                class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                v-model="form.category_id">
+                <option disabled>Category</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}
+                </option>
+              </select>
+              <InputError class="mt-2" :message="form.errors.category_id" />
+            </div>
           </div>
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col">
-            <div class="w-full bg-white rounded-md p-4 shadow-md space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-6">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="col-span-1">
-                  <label for="form-name" class="block text-lg font-medium text-gray-700">Project Name</label>
-                  <input id="form-name" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.title" type="text" required>
-                  <InputError class="mt-2" :message="form.errors.title" />
+                <div>
+                  <label for="form-system-size" class="block text-sm font-medium text-gray-700 mb-1">System Size</label>
+                  <input id="form-system-size"
+                    class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    v-model="form.system_size" type="number" required>
+                  <InputError class="mt-2" :message="form.errors.system_size" />
                 </div>
-                <div class="col-span-1">
-                  <label for="form-category" class="block text-lg font-medium text-gray-700">Select Category</label>
-                  <select id="category" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.category_id">
-                    <option disabled>Category</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}</option>
-                  </select>
-                  <InputError class="mt-2" :message="form.errors.category_id" />
+                <div>
+                  <label for="form-monthly-saving" class="block text-sm font-medium text-gray-700 mb-1">Monthly
+                    Saving</label>
+                  <input id="form-monthly-saving"
+                    class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    v-model="form.monthly_saving" type="text" required>
+                  <InputError class="mt-2" :message="form.errors.monthly_saving" />
                 </div>
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div class="col-span-1">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-                      <div class="col-span-1">
-                        <label for="form-system-size" class="block text-lg font-medium text-gray-700">System Size</label>
-                        <input id="form-system-size" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.system_size" type="number" required>
-                        <InputError class="mt-2" :message="form.errors.system_size" />
-                      </div>
-                      <div class="col-span-1">
-                        <label for="form-monthly-saving" class="block text-lg font-medium text-gray-700">Monthly Saving</label>
-                        <input id="form-monthly-saving" class="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.monthly_saving" type="text" required>
-                        <InputError class="mt-2" :message="form.errors.monthly_saving" />
-                      </div>
-                    </div>
-                    <div class="mt-5">
-                      <label for="form-description" class="block text-lg font-medium text-gray-700">Project Description</label>
-                      <Editor v-model="form.content" />
-                      <InputError class="mt-2" :message="form.errors.content" />
-                    </div>
-                  </div>
-                  <div class="col-span-1">
-                    <div class="flex justify-between">
-                      <label for="file-upload" class="block text-lg font-medium text-gray-700 p-3">Image/s <sup>(max 1 image upload)</sup></label>
-                      <div class="flex justify-between items-center mt-2">
-                        <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
-                          <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
-                          <label for="file-upload" class="flex cursor-pointer">
-                            <i class="fa-solid fa-plus text-xl"></i>
-                            <span class="ml-1 hidden sm:flex items-center">Add Images</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
-                      <div class="flex space-x-2">
-                        <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                          <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
-                          <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
-                            <i class="fa-solid fa-times"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div>
+                <label for="form-description" class="block text-sm font-medium text-gray-700 mb-1">Project
+                  Description</label>
+                <textarea id="form-description"
+                  class="w-full h-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  v-model="form.content"></textarea>
+                <InputError class="mt-2" :message="form.errors.content" />
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label for="file-upload" class="block text-sm font-medium text-gray-700">Image/s <span
+                    class="text-xs">(max
+                    1 image upload)</span></label>
+                <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
+                  <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
+                  <label for="file-upload" class="flex items-center cursor-pointer">
+                    <i class="fa-solid fa-plus text-xl mr-1"></i>
+                    <span class="hidden sm:inline">Add Images</span>
+                  </label>
                 </div>
-                <div class="flex justify-end mt-5">
-                  <button type="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="addProject">Submit</button>
+              </div>
+              <div class="bg-gray-300 rounded-lg w-full h-64 flex items-center justify-center overflow-hidden">
+                <div class="flex space-x-2">
+                  <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
+                    <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
+                    <button @click="removeImage(index)"
+                      class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
+                      <i class="fa-solid fa-times"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="flex justify-end mt-6">
+            <button type="submit" class="bg-green-500 px-4 py-2 text-white rounded-lg hover:bg-green-600"
+              @click="addProject">
+              Submit
+            </button>
+          </div>
         </div>
       </div>
-    </AuthenticatedLayout>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-  import { Head, useForm, Link } from '@inertiajs/vue3';
-  import InputError from '@/Components/InputError.vue';
-  import Editor from '@/Components/Editor.vue';
-  import { useToast } from 'vue-toastification';
+    </div>
+    {{ props.services }}
+  </AuthenticatedLayout>
+</template>
+<script setup>
+import { ref, onMounted } from 'vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head, useForm, Link } from '@inertiajs/vue3';
+import InputError from '@/Components/InputError.vue';
+import { useToast } from 'vue-toastification';
 
-  const toast = useToast();
-  const props = defineProps({
-    services: {
-      type: Object,
-      required: true
-    },
-    categories: {
-      type: Array,
-      required: true
+const toast = useToast();
+const props = defineProps({
+  services: {
+    type: Object,
+    required: true
+  },
+  categories: {
+    type: Array,
+    required: true
+  }
+});
+
+const form = useForm({
+  title: '', // Corrected typo from 'tile' to 'title'
+  category_id: '',
+  content: '',
+  system_size: '',
+  monthly_saving: '',
+  img_path: []
+});
+
+function addProject() {
+  form.post(route('admin.projects.store'), {
+    preserveScroll: true,
+    onSuccess: () => {
+      toast.success('Project added   successfully!');
+      form.reset();
+      imagePreviews.value = [];
     }
   });
-  
-  const form = useForm({
-    title: '', // Corrected typo from 'tile' to 'title'
-    category_id: '',
-    content: '',
-    system_size: '',
-    monthly_saving: '',
-    img_path: []
-  });
-  
-  function addProject() {
-    form.post(route('admin.projects.store'), {
-      preserveScroll: true,
-      onSuccess: () => {
-        toast.success('Project added   successfully!');
-        form.reset();
-        imagePreviews.value = [];
-      }
-    });
+}
+
+const imagePreviews = ref([]);
+function handleFiles(event) {
+  const files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreviews.value.push(e.target.result);
+      form.img_path.push(file);
+    };
+    reader.readAsDataURL(file);
   }
-  
-  const imagePreviews = ref([]);
-  function handleFiles(event) {
-    const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        imagePreviews.value.push(e.target.result);
-        form.img_path.push(file);
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-  
-  function removeImage(index) {
-    imagePreviews.value.splice(index, 1);
-    form.img_path.splice(index, 1);
-  }
-  
-  onMounted(() => {
-    form.clearErrors();
-  });
-  </script>
-  
-  <style scoped>
-  /* Add your styles here */
-  </style>
-  
+}
+
+function removeImage(index) {
+  imagePreviews.value.splice(index, 1);
+  form.img_path.splice(index, 1);
+}
+
+onMounted(() => {
+  form.clearErrors();
+});
+</script>
+
+<style scoped>
+textarea {
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+</style>

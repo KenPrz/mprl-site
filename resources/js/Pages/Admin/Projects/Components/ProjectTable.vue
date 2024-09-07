@@ -112,7 +112,7 @@ export default {
             <tr v-for="project in props.projects" :key="project.id">
                 <td>{{ project.id }}</td>
                 <td>{{ project.title }}</td>
-                <td>{{ project.category_name }}</td> <!-- Use category_name instead of category_id -->
+                <td>{{ project.category_id }}</td>
                 <td>{{ project.content }}</td>
                 <td>
                     <span class="flex items-center space-x-2">

@@ -16,6 +16,6 @@ class Faqs extends Model
     
     public function category()
     {
-        return $this->belongsTo(ProjectCatergory::class);
+        return $this->belongsTo(ProjectCategory::class);
     }
 }

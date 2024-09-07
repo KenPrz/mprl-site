@@ -45,7 +45,7 @@
                     </div>
                     <div class="mt-5">
                       <label for="form-description" class="block text-lg font-medium text-gray-700">Project Description</label>
-                      <Editor v-model="form.content" />
+                      <textarea class="w-full h-40 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.content"></textarea>
                       <InputError class="mt-2" :message="form.errors.content" />
                     </div>
                   </div>
@@ -65,7 +65,7 @@
                     <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
                       <div class="flex space-x-2">
                         <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                          <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
+                          <img :src="preview.images" class="w-24 h-24 object-cover rounded-lg" />
                           <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
                             <i class="fa-solid fa-times"></i>
                           </button>
@@ -154,6 +154,16 @@ function removeImage(index) {
   </script>
   
   <style scoped>
-  /* Add your styles here */
+  textarea {
+  width: 100%;
+  height: 90%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
   </style>
   

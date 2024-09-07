@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('question');
             $table->foreignId('category_id')
-                ->constrained('project_catergories')
+                ->constrained('project_categories')
                 ->onDelete('cascade');
             $table->text('answer');
             $table->timestamps();

@@ -27,6 +27,7 @@
             </section>
             <section>
               <ProjectTable :projects="projects.data" />
+               <!-- {{ projects.data }} -->
             </section>
             <section class="py-3">
               <Pagination

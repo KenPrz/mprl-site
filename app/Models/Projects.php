@@ -18,7 +18,7 @@ class Projects extends Model
     ];
     public function category()
     {
-        return $this->belongsTo(ProjectCatergory::class);
+        return $this->belongsTo(ProjectCategory::class);
     }
 
     public function images()

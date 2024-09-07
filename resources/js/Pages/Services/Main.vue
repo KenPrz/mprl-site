@@ -168,14 +168,74 @@ onUnmounted(() => {
                   </p>
               </div>
               <!-- Display services here -->
-              <div v-for="service in services" :key="service.id" class="mt-20">
-                <div v-if="service.category_id === 1 || service.category_id === '1'" class="">
-                  <h3 class="font-semibold text-xl mt-5 mb-5">{{ service.name }}</h3>
+              <div>
+                  <!-- Display solar system 1 -->
+                  <h3 class="font-semibold text-xl mt-5 mb-5">Off-Grid Solar System</h3>
                   <div>
-                    <img :src="`/storage/${service.image}`" :alt="service.name" class="">
+                    <img src="images/solar-system/solar_power_1.png" alt="" class="">
                   </div>
-                  <p class="text-md mt-10 tracking-widest" v-html="service.description"></p>
-                </div>
+                  <div>
+                    <p class="text-md mt-10 tracking-widest text-green-600 font-bold">Energy Independence</p>
+                    <p class="text-md mt-2 tracking-widest">Live completely off the grid! This system uses batteries to store solar energy for nighttime and cloudy days.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">More Equipment</p>
+                    <p class="text-md mt-2 tracking-widest">Requires batteries, inverters, and a larger initial investment.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Maintenance Needed</p>
+                    <p class="text-md mt-2 tracking-widest">Requires batteries, inverters, and a larger initial investment.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Good for</p>
+                    <p class="text-md mt-2 tracking-widest">Remote locations or those seeking complete energy independence, even during outages.</p>
+                  </div>
+              </div>
+              <div class="mt-20">
+                  <!-- Display solar system 1 -->
+                  <h3 class="font-semibold text-xl mt-5 mb-5">Grid-Tied Solar System</h3>
+                  <div>
+                    <img src="images/solar-system/solar_power_2.png" alt="" class="">
+                  </div>
+                  <div>
+                    <p class="text-md mt-10 tracking-widest text-green-600 font-bold">Simple and Cost-Effective</p>
+                    <p class="text-md mt-2 tracking-widest">This is the most common setup. It connects your solar panels to the power grid.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Sell Surplus Power</p>
+                    <p class="text-md mt-2 tracking-widest">Sunshine powers your home during the day, and extra electricity gets sent back to the grid, often earning you credits on your bill.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">No Backup Power</p>
+                    <p class="text-md mt-2 tracking-widest">If the grid goes down, so does your solar power.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Good for</p>
+                    <p class="text-md mt-2 tracking-widest">People who want to save on electricity bills and help the environment, with reliable grid access.</p>
+                  </div>
+              </div>
+              <div class="mt-20">
+                  <!-- Display solar system 3 -->
+                  <h3 class="font-semibold text-xl mt-5 mb-5">Hybrid Solar System</h3>
+                  <div>
+                    <img src="images/solar-system/solar_power_3.png" alt="" class="">
+                  </div>
+                  <div>
+                    <p class="text-md mt-10 tracking-widest text-green-600 font-bold">Best of Both Worlds</p>
+                    <p class="text-md mt-2 tracking-widest">Combines grid-tie with battery backup. Use solar first, then grid power if needed, and store excess for later.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Increased Self-Reliance</p>
+                    <p class="text-md mt-2 tracking-widest">Provides backup power during outages and lets you maximize solar use.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">More Complex System</p>
+                    <p class="text-md mt-2 tracking-widest">Higher upfront cost than grid-tied, but less than fully off-grid.</p>
+                  </div>
+                  <div>
+                    <p class="text-md mt-6 tracking-widest text-green-600 font-bold">Good for</p>
+                    <p class="text-md mt-2 tracking-widest">People who want significant solar savings with some grid security and backup power for outages. </p>
+                  </div>
               </div>
             </div>
           </section>

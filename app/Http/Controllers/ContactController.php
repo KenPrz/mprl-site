@@ -36,8 +36,7 @@ class ContactController extends Controller
         ]);
 
         // Send the email using the ContactFormMail class
-        Mail::to('kendarylausteroperez@gmail.com')->send(new ContactFormMail($data));
-        // mprlsolarpanel@gmail.com
+        Mail::to('mprlsolarpanel@gmail.com')->send(new ContactFormMail($data));
 
         // Redirect back with a success message
         return back()->with('success', 'Your message has been sent successfully!');

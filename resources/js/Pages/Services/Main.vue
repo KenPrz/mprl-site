@@ -87,6 +87,7 @@ const updateActiveSection = () => {
   });
 
   isActive.value = currentSection;
+  selectedCategory.value = currentSection;
 };
 
 

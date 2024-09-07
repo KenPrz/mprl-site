@@ -11,6 +11,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  selectedCategory: {
+    type: String,
+    default: '',
+  },
 });
 const selectedCategory = ref(null);
 
@@ -18,7 +22,6 @@ const selectCategory = (categoryId) => {
   selectedCategory.value = categoryId;
   const section = document.getElementById(categoryId);
   if (section) {
-    // Calculate the top offset (e.g., 100px)
     const offset = 150;
     const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
     
@@ -42,10 +45,8 @@ const selectCategory = (categoryId) => {
           class="w-full text-start rounded-lg shadow-md px-4 py-2 m-1 hover:bg-blue-600 hover:text-white"
           :class="{
             'bg-blue-600 text-white': 
-              selectedCategory === service.service_category || 
               props.isActive === service.service_category,
             'bg-gray-200': 
-              selectedCategory !== service.service_category &&
               props.isActive !== service.service_category
           }"
         >

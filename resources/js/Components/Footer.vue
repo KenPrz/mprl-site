@@ -12,11 +12,11 @@ import { Link } from '@inertiajs/vue3';
                     convenient and environmentally friendly.</p>
             </section>
             <section class="flex items-center justify-center space-x-4">
-                <a href="#" class="flex items-center">
+                <a href="https://www.facebook.com/onemprl/" class="flex items-center">
                     <i style="font-size: 1.2rem"  class="pi pi-facebook"></i>
                 </a>
                 <span>|</span>
-                <a href="#" class="flex items-center">
+                <a href="https://www.m.me/onemprl?" class="flex items-center">
                     <i style="font-size: 1.2rem"  class="pi pi-comment"></i>
                 </a>
                 <span>|</span>
@@ -92,11 +92,3 @@ import { Link } from '@inertiajs/vue3';
         </div>
     </footer>
 </template>
-<!-- add BG to footer -->
-<script>
-export default {
-
-}
-</script>
-
-<style scoped></style>

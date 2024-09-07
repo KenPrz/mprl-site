@@ -11,6 +11,8 @@
                     </g>
                 </g>
             </svg>
+            <div class="h-7 w-7 fixed bg-white-100 -z-10">
+            </div>
         </a>
 </template>
 

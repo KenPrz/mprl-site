@@ -30,17 +30,17 @@ onUnmounted(() => {
     <div
         class="ps-2 md:px-10 lg:px-20 flex sm:px-10 justify-start md:justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
         <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
-            <a href="https://internet.com/" class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2">
                 <i class="pi pi-map-marker"></i>
                 <span>6620 Purok 1, San Antonio, Los Baños, Laguna</span>
-            </a>
+            </div>
             <a href="mailto:mprlsolar@gmail.com" class="hidden md:flex items-center space-x-2">
                 <i class="pi pi-envelope"></i>
                 <span class="hidden md:block">mprlsolar@gmail.com</span>
             </a>
         </div>
         <div class="hidden md:flex items-center space-x-1 md:space-x-4">
-            <a href="https://www.facebook.com/profile.php?id=100066355175014" target="_blank"class="flex items-center">
+            <a href="https://www.facebook.com/onemprl/" target="_blank" class="flex items-center">
                 <i class="pi pi-facebook"></i>
             </a>
             <a href="#" class="flex items-center">
@@ -189,7 +189,9 @@ onUnmounted(() => {
     <div class="absolute -right-7 hover:right-0 sm:right-0 h-screen transition-all duration-200">
         <section id="icon-handler" class="flex flex-col h-full justify-center space-y-3">
             <span class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
-                <i id="icon-size" style="" class="pi pi-facebook"></i>
+                <a href="https://www.facebook.com/onemprl/">
+                    <i id="icon-size" style="" class="pi pi-facebook"></i>
+                </a>
             </span>
             <span  class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
                 <i id="icon-size" style="" class="pi pi-instagram"></i>
@@ -198,7 +200,9 @@ onUnmounted(() => {
                 <i id="icon-size" style="" class="pi pi-phone"></i>
             </span>
             <span  class="p-2 sm:p-4 rounded-s-md bg-main-600 flex items-center justify-center hover:bg-main-500 hover:scale-[1.2] transition-all duration-200 cursor-pointer">
-                <i id="icon-size" style="" class="pi pi-envelope"></i>
+                <a href="mailto:mprlsolarpanel@gmail.com">
+                    <i id="icon-size" style="" class="pi pi-envelope"></i>
+                </a>
             </span>
         </section>
         <MessengerButton />

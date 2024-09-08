@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
-
+const toast = useToast();
 const props = defineProps({
     categories: {
         type: Array,
@@ -110,6 +110,7 @@ onMounted(() => {
                         <div>
                             <div class="flex justify-between items-center mb-2">
                                 <label class="block text-sm font-medium text-gray-700">Product Image/s <span class="text-xs">(3 images max)</span></label>
+                                <InputError class="mt-2" :message="form.errors.img_path" />
                                 <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
                                     <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                                     <label for="file-upload" class="flex items-center cursor-pointer">

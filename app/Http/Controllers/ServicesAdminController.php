@@ -29,29 +29,6 @@ class ServicesAdminController extends Controller
             'categories' => $categories
         ]);
     }
-    // public function store(Request $request){
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'category_id' => 'required|integer|exists:services_categories,id',
-    //         'description' => 'required|string',
-    //         'image' => 'array|max:1',
-    //         'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-       
-    //     if($request->image) {
-    //         foreach($request->file('image') as $image) {
-    //             $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
-    //             $path = $image->storeAs('service-images', $filename, 'public');
-    //             $service = Services::create([
-    //                 'name' => $request->input('name'),
-    //                 'category_id' => $request->input('category_id'),
-    //                 'description' => $request->input('description'),
-    //                 'image' => $path
-    //             ]);
-    //         }
-    //     }
-    //     return to_route('admin.services.index')->with('success', 'File uploaded successfully');
-    // }
 
     public function store(Request $request)
     {
@@ -60,7 +37,7 @@ class ServicesAdminController extends Controller
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:services_categories,id',
             'description' => 'required|string',
-            'image' => 'array|max:1', // Limit to one image
+            'image' => 'required|array|max:1',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -97,38 +74,6 @@ class ServicesAdminController extends Controller
         ]);
     }
 
-    // public function update(Request $request, int $id)
-    // {
-    //     // Validate request data
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string',
-    //         'category_id' => 'required|numeric',
-    //         'description' => 'required|string',
-    //         'image' => 'nullable|array|max:1',
-    //         'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-
-    //     // Find the service record
-    //     $service = Services::findOrFail($id);
-
-    //     // Check if there's an image and process it
-    //     if ($request->hasFile('image')) {
-    //         // Delete old image if exists
-    //         if ($service->image) {
-    //             Storage::delete($service->image);
-    //         }
-
-    //         // Store new image
-    //         $imagePath = $request->file('image')[0]->store('images', 'public');
-    //         $validatedData['image'] = $imagePath;
-    //     }
-
-    //     // Update the service with validated data
-    //     $service->update($validatedData);
-
-    //     return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
-    // }
-
     public function update(Request $request, int $id)
     {
         // Validate incoming data
@@ -136,7 +81,7 @@ class ServicesAdminController extends Controller
             'name' => 'required|string',
             'category_id' => 'required|integer|exists:services_categories,id',
             'description' => 'required|string',
-            'image' => 'nullable|array|max:1', // Allow up to one image
+            'image' => 'required|array|max:1',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

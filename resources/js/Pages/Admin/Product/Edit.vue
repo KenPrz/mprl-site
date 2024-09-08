@@ -35,10 +35,11 @@ const form = useForm({
     supplier: props.product.supplier,
     certification: props.product.certification,
     description: props.product.description,
-    img_path: [], // Initialize with an empty array
+    img_path: [],
     datasheet: props.product.datasheet,
     is_displayed: props.product.is_displayed,
 });
+
 
 const imagePreviews = ref(
     props.product.images.map(image => ({
@@ -56,22 +57,37 @@ function handleFiles(event) {
             imagePreviews.value.push({ id: i, url: e.target.result });
         };
         reader.readAsDataURL(file);
-        form.img_path.push(file); // Append the file to img_path array
+        form.img_path.push(file); // Ensure img_path is properly initialized as an array
     }
 }
 
+
 function removeImage(index) {
-    imagePreviews.value.splice(index, 1);
-    form.img_path.splice(index, 1);
+    const imageToDelete = imagePreviews.value[index];
+
+    if (imageToDelete.id) {
+        form.delete(route('admin.products.deleteImage', { imageId: imageToDelete.id }), {
+            onSuccess: () => {
+                imagePreviews.value.splice(index, 1);
+            }
+        });
+    } else {
+        imagePreviews.value.splice(index, 1);
+        form.img_path.splice(index, 1);
+    }
 }
 
-function updateProduct(){
+
+function updateProduct() {
     form.patch(route('admin.products.update', props.product.id), {
         onSuccess: () => {
             form.clearErrors();
         }
     });
 }
+
+
+
 
 onMounted(() => {
     form.clearErrors();

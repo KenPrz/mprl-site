@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\ProductImages;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsAdminController extends Controller
 {
@@ -110,7 +111,7 @@ class ProductsAdminController extends Controller
                 ]);
             }
         }
-        
+        return redirect()->route('admin.products.index')->with('success', 'Product added successfully.');
         
     }
 
@@ -131,58 +132,76 @@ class ProductsAdminController extends Controller
         $selectedCatergory = ProductCategory::all();
         $product = Product::with(['images', 'category:id,name'])
             ->where('id', $id)
-            ->firstOrFail();
+            ->findOrFail($id);
         return Inertia::render('Admin/Product/Edit', [
             'categories' => $selectedCatergory,
             'product' => $product
         ]);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'category_id' => 'required|integer|exists:product_categories,id',
-        'power_out' => 'nullable|string|max:255',
-        'efficiency' => 'nullable|string|max:255',
-        'dimension' => 'nullable|string|max:255',
-        'weight' => 'nullable|string|max:255',
-        'type' => 'required|string|max:255',
-        'voltage' => 'nullable|string|max:255',
-        'current' => 'nullable|string|max:255',
-        'temp_coeff' => 'nullable|string|max:255',
-        'price' => 'numeric',
-        'discount' => 'nullable|numeric',
-        'warranty' => 'required|string|max:255',
-        'stock_level' => 'nullable|integer',
-        'supplier' => 'required|string|max:255',
-        'certification' => 'nullable|string|max:255',
-        'description' => 'required|string',
-        'img_path.*' => 'nullable|file|image|max:2048', 
-        'datasheet' => 'nullable|file|mimes:pdf|max:10240',
-        'is_displayed' => 'required|boolean',
-    ]);
-    $product = Product::findOrFail($id);
-    $product->update($validatedData);
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:product_categories,id',
+            'power_out' => 'nullable|string|max:255',
+            'efficiency' => 'nullable|string|max:255',
+            'dimension' => 'nullable|string|max:255',
+            'weight' => 'nullable|string|max:255',
+            'type' => 'required|string|max:255',
+            'voltage' => 'nullable|string|max:255',
+            'current' => 'nullable|string|max:255',
+            'temp_coeff' => 'nullable|string|max:255',
+            'price' => 'numeric',
+            'discount' => 'nullable|numeric',
+            'warranty' => 'required|string|max:255',
+            'stock_level' => 'nullable|integer',
+            'supplier' => 'required|string|max:255',
+            'certification' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'is_displayed' => 'required|boolean',
+            'img_path.*' => 'nullable|file|image|max:2048', 
+            'datasheet' => 'nullable|file|mimes:pdf|max:10240',
+        ]);
 
-    // Handle image uploads not yet fix
-    if ($request->hasFile('img_path')) {
-        foreach ($request->file('img_path') as $image) {
-            $imagePath = $image->store('product_images', 'public');
-            ProductImages::create([
-                'product_id' => $product->id,
-                'images' => $imagePath,
-            ]);
+        $product = Product::findOrFail($id);
+        $product->update($validatedData);
+
+        // Handle image uploads
+        if ($request->hasFile('img_path')) {
+            foreach ($request->file('img_path') as $image) {
+                $imagePath = $image->store('product_images', 'public');
+                ProductImages::create([
+                    'product_id' => $product->id,
+                    'images' => $imagePath,
+                ]);
+            }
         }
+        
+
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
 
-    $product->save();
-    
-    return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
-}
+    /**
+     * Remove the image
+     */
+    public function deleteImage($imageId)
+    {
+        // Find the image by ID
+        $image = ProductImages::findOrFail($imageId);
+        
+        // Delete the image from the storage
+        Storage::disk('public')->delete($image->images);
+
+        // Delete the image record from the database
+        $image->delete();
+    }
+
+
     
 
     /**

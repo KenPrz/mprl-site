@@ -63,6 +63,7 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/products/{id}/edit', [ProductsAdminController::class, 'edit'])->name('admin.products.edit');
     Route::patch('/products/{id}', [ProductsAdminController::class, 'update'])->name('admin.products.update');
     Route::delete('/products/{id}', [ProductsAdminController::class, 'destroy'])->name('admin.products.destroy');
+    Route::delete('/admin/products/delete-image/{imageId}', [ProductsAdminController::class, 'deleteImage'])->name('admin.products.deleteImage');
 
     Route::get('/services', [ServicesAdminController::class, 'index'])->name('admin.services.index');
     Route::get('/services/create', [ServicesAdminController::class, 'create'])->name('admin.services.create');
@@ -77,6 +78,8 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::get('/projects/{id}/edit', [ProjectAdminController::class, 'edit'])->name('admin.projects.edit');
     Route::patch('/projects/{id}', [ProjectAdminController::class, 'update'])->name('admin.projects.update');
     Route::delete('/projects/{id}', [ProjectAdminController::class, 'destroy'])->name('admin.projects.destroy');
+    
+
 
     Route::get('/faqs', [FAQsController::class, 'index'])->name('admin.faqs.index');
     Route::get('/faqs/create', [FAQsController::class, 'create'])->name('admin.faqs.create');

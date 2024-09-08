@@ -5,6 +5,7 @@ import { Head } from '@inertiajs/vue3';
 import Toggle from '@/Components/Toggle.vue';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import { useToast } from 'vue-toastification';
 
 const toast = useToast();
 const props = defineProps({
@@ -80,8 +81,9 @@ function removeImage(index) {
 
 
 function updateProduct() {
-    form.patch(route('admin.products.update', props.product.id), {
+    form.post(route('admin.products.update', props.product.id), {
         onSuccess: () => {
+            toast.success('Product updated successfully!');
             form.clearErrors();
         }
     });

@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
-
+const toast = useToast();
 const props = defineProps({
     categories: {
         type: Array,
@@ -110,6 +110,7 @@ onMounted(() => {
                         <div>
                             <div class="flex justify-between items-center mb-2">
                                 <label class="block text-sm font-medium text-gray-700">Product Image/s <span class="text-xs">(3 images max)</span></label>
+                                <InputError class="mt-2" :message="form.errors.img_path" />
                                 <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
                                     <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                                     <label for="file-upload" class="flex items-center cursor-pointer">
@@ -137,13 +138,13 @@ onMounted(() => {
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <div>
                                     <label for="form-price" class="block text-sm font-medium text-gray-700 mb-1">Current Price</label>
-                                    <input id="form-price" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.price" type="text">
+                                    <input id="form-price" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.price" type="number">
                                     <InputError class="mt-1" :message="form.errors.price" />
                                 </div>
                                 <div>
-                                    <label for="form-discount" class="block text-sm font-medium text-gray-700 mb-1">Discount</label>
-                                    <input id="form-discount" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"  v-model="form.discount" type="text">
-                                    <InputError class="mt-1" :message="form.errors.discount" />
+                                    <label for="form-discount" class="block text-sm font-medium text-gray-700 mb-1">Supplier</label>
+                                    <input id="form-discount" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"  v-model="form.supplier" type="text">
+                                    <InputError class="mt-1" :message="form.errors.supplier" />
                                 </div>
                                 <div>
                                     <label for="form-warranty" class="block text-sm font-medium text-gray-700 mb-1">Warranty*</label>
@@ -152,13 +153,13 @@ onMounted(() => {
                                 </div>
                                 <div>
                                     <label for="form-stock-level" class="block text-sm font-medium text-gray-700 mb-1">Stock Level</label>
-                                    <input id="form-stock-level" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.stock_level" type="text">
+                                    <input id="form-stock-level" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.stock_level" type="number">
                                     <InputError class="mt-1" :message="form.errors.stock_level" />
                                 </div>
                                 <div>
-                                    <label for="form-supplier" class="block text-sm font-medium text-gray-700 mb-1">Supplier*</label>
-                                    <input id="form-supplier" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.supplier" type="text">
-                                    <InputError class="mt-1" :message="form.errors.supplier" />
+                                    <label for="form-supplier" class="block text-sm font-medium text-gray-700 mb-1">DataSheet</label>
+                                    <input id="form-supplier" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.datasheet" type="text">
+                                    <InputError class="mt-1" :message="form.errors.datasheet" />
                                 </div>
                                 <div>
                                     <label for="is_featured" class="block text-sm font-medium text-gray-700 mb-1">Displayed</label>
@@ -171,17 +172,17 @@ onMounted(() => {
                             <h4 class="font-medium mb-2">Technical Information <span class="text-sm font-normal">(Fields with * are required)</span></h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                                 <div>
-                                    <label for="form-power-out" class="block text-sm font-medium text-gray-700 mb-1">Power Out*</label>
-                                    <input id="form-power-out" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.power_out" type="text">
+                                    <label for="form-power-out" class="block text-sm font-medium text-gray-700 mb-1">Power Out* <sup>in watts</sup></label>
+                                    <input id="form-power-out" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.power_out" type="number">
                                     <InputError class="mt-1" :message="form.errors.power_out" />
                                 </div>
                                 <div>
-                                    <label for="form-efficiency" class="block text-sm font-medium text-gray-700 mb-1">Efficiency*</label>
-                                    <input id="form-efficiency" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.efficiency" type="text">
+                                    <label for="form-efficiency" class="block text-sm font-medium text-gray-700 mb-1">Efficiency* <sup>in %</sup></label>
+                                    <input id="form-efficiency" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.efficiency" type="number">
                                     <InputError class="mt-1" :message="form.errors.efficiency" />
                                 </div>
                                 <div>
-                                    <label for="form-voltage" class="block text-sm font-medium text-gray-700 mb-1">Voltage*</label>
+                                    <label for="form-voltage" class="block text-sm font-medium text-gray-700 mb-1">Voltage* <sup>in V</sup></label>
                                     <input id="form-voltage" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.voltage" type="text">
                                     <InputError class="mt-1" :message="form.errors.voltage" />
                                 </div>
@@ -191,17 +192,17 @@ onMounted(() => {
                                     <InputError class="mt-1" :message="form.errors.dimension" />
                                 </div>
                                 <div>
-                                    <label for="form-weight" class="block text-sm font-medium text-gray-700 mb-1">Weight*</label>
-                                    <input id="form-weight" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.weight" type="text">
+                                    <label for="form-weight" class="block text-sm font-medium text-gray-700 mb-1">Weight* <sup>in kilogram</sup></label>
+                                    <input id="form-weight" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.weight" type="number">
                                     <InputError class="mt-1" :message="form.errors.weight" />
                                 </div>
                                 <div>
-                                    <label for="form-current" class="block text-sm font-medium text-gray-700 mb-1">Current*</label>
-                                    <input id="form-current" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.current" type="text">
+                                    <label for="form-current" class="block text-sm font-medium text-gray-700 mb-1">Current* <sup>in ampere</sup></label>
+                                    <input id="form-current" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.current" type="number">
                                     <InputError class="mt-1" :message="form.errors.current" />
                                 </div>
                                 <div>
-                                    <label for="form-temp_coeff" class="block text-sm font-medium text-gray-700 mb-1">Temperature Coefficient*</label>
+                                    <label for="form-temp_coeff" class="block text-sm font-medium text-gray-700 mb-1">Temperature Coefficient* <sup>in °C</sup></label>
                                     <input id="form-temp_coeff" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.temp_coeff" type="text">
                                     <InputError class="mt-1" :message="form.errors.temp_coeff" />
                                 </div>

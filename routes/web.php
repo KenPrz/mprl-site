@@ -61,7 +61,7 @@ Route::middleware([AdminMiddleware::class,'auth'])->prefix('admin')->group(funct
     Route::post('/products', [ProductsAdminController::class, 'store'])->name('admin.products.store');
     Route::get('/products/{id}', [ProductsAdminController::class, 'show'])->name('admin.products.show');
     Route::get('/products/{id}/edit', [ProductsAdminController::class, 'edit'])->name('admin.products.edit');
-    Route::patch('/products/{id}', [ProductsAdminController::class, 'update'])->name('admin.products.update');
+    Route::post('/products/{id}', [ProductsAdminController::class, 'update'])->name('admin.products.update');
     Route::delete('/products/{id}', [ProductsAdminController::class, 'destroy'])->name('admin.products.destroy');
     Route::delete('/admin/products/delete-image/{imageId}', [ProductsAdminController::class, 'deleteImage'])->name('admin.products.deleteImage');
 

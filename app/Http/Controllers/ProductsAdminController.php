@@ -63,9 +63,9 @@ class ProductsAdminController extends Controller
             'type' => 'required|string|max:255',
             'img_path' => 'required|array|max:3', // Assuming a maximum of 3 images can be uploaded
             'img_path.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Individual image validation
-            'voltage' => 'required|numeric|min:0',
+            'voltage' => 'nullable|numeric|min:0',
             'description' => 'required|string',
-            'power_out' => 'required|string|max:255',
+            'power_out' => 'nullable|numeric|max:255',
             'efficiency' => 'nullable|numeric|min:0|max:100',
             'dimension' => 'nullable|string|max:255',
             'weight' => 'nullable|numeric|min:0',
@@ -73,11 +73,11 @@ class ProductsAdminController extends Controller
             'temp_coeff' => 'nullable|numeric',
             'price' => 'nullable|numeric|min:0',
             'discount' => 'nullable|numeric|min:0|max:100',
-            'warranty' => 'nullable|string|max:255',
+            'warranty' => 'nullable|numeric|max:255',
             'stock_level' => 'nullable|integer|min:0',
             'supplier' => 'nullable|string|max:255',
             'certification' => 'nullable|string|max:255',
-            'datasheet' => 'nullable|file|mimes:pdf|max:10000',
+            'datasheet' => 'nullable|string|max:255',
             'is_displayed' => 'nullable|boolean',
         ]);
         $products = Product::create([
@@ -98,7 +98,7 @@ class ProductsAdminController extends Controller
             'supplier' => $request->input('supplier'),
             'certification' => $request->input('certification'),
             'description' => $request->input('description'),
-            'datasheet' => $request->file('datasheet') ? $request->file('datasheet')->store('datasheets') : null,
+            'datasheet' => $request->input('datasheet'),
             'is_displayed' => $request->input('is_displayed', false),
         ]);
         if($request->img_path) {
@@ -156,16 +156,16 @@ class ProductsAdminController extends Controller
             'voltage' => 'nullable|string|max:255',
             'current' => 'nullable|string|max:255',
             'temp_coeff' => 'nullable|string|max:255',
-            'price' => 'numeric',
+            'price' => 'nullable|numeric',
             'discount' => 'nullable|numeric',
             'warranty' => 'required|string|max:255',
             'stock_level' => 'nullable|integer',
-            'supplier' => 'required|string|max:255',
+            'supplier' => 'nullable|string|max:255',
             'certification' => 'nullable|string|max:255',
             'description' => 'required|string',
             'is_displayed' => 'required|boolean',
             'img_path.*' => 'nullable|file|image|max:2048', 
-            'datasheet' => 'nullable|file|mimes:pdf|max:10240',
+            'datasheet' => 'nullable|string|max:255',
         ]);
 
         $product = Product::findOrFail($id);

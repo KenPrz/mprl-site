@@ -65,8 +65,9 @@
             <div>
               <div class="flex justify-between items-center mb-2">
                 <label for="file-upload" class="block text-sm font-medium text-gray-700">Image/s <span
-                    class="text-xs">(max
-                    1 image upload)</span></label>
+                    class="text-xs">(3 images max)</span>
+                </label>
+                <InputError class="" :message="form.errors.image" />
                 <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
                   <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                   <label for="file-upload" class="flex items-center cursor-pointer">
@@ -78,9 +79,11 @@
               <div class="bg-gray-300 rounded-lg w-full h-64 flex items-center justify-center overflow-hidden">
                 <div class="flex space-x-2">
                   <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                    <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
-                    <button @click="removeImage(index)"
-                      class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
+                    <img :src="preview" class="w-32 h-32 object-cover rounded-lg mx-5" />
+                    <button
+                      @click="removeImage(index)"
+                      class="absolute top-0 right-5 bg-red-500 h-8 w-8 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2"
+                    >
                       <i class="fa-solid fa-times"></i>
                     </button>
                   </div>
@@ -97,7 +100,6 @@
         </div>
       </div>
     </div>
-    {{ props.services }}
   </AuthenticatedLayout>
 </template>
 <script setup>
@@ -111,51 +113,55 @@ const toast = useToast();
 const props = defineProps({
   services: {
     type: Object,
-    required: true
+    required: true,
   },
   categories: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const form = useForm({
-  title: '', // Corrected typo from 'tile' to 'title'
+  title: '', 
   category_id: '',
   content: '',
   system_size: '',
   monthly_saving: '',
-  img_path: []
+  image: [], // Holds new files for upload
 });
+
+const imagePreviews = ref([]);
 
 function addProject() {
   form.post(route('admin.projects.store'), {
     preserveScroll: true,
     onSuccess: () => {
-      toast.success('Project added   successfully!');
+      toast.success('Project added successfully!');
       form.reset();
       imagePreviews.value = [];
-    }
+    },
   });
 }
 
-const imagePreviews = ref([]);
 function handleFiles(event) {
-  const files = event.target.files;
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
+  const files = Array.from(event.target.files);
+  files.forEach((file) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      imagePreviews.value.push(e.target.result);
-      form.img_path.push(file);
+      // Check if there are already 3 images, if so, replace the last one
+      if (imagePreviews.value.length === 3) {
+        removeImage(2); // Remove the last image (index 2)
+      }
+      imagePreviews.value.push(e.target.result); // Add new image preview
+      form.image.push(file); // Add file to form data
     };
     reader.readAsDataURL(file);
-  }
+  });
 }
 
 function removeImage(index) {
-  imagePreviews.value.splice(index, 1);
-  form.img_path.splice(index, 1);
+  imagePreviews.value.splice(index, 1); // Remove preview at the given index
+  form.image.splice(index, 1); // Remove corresponding file from form data
 }
 
 onMounted(() => {

@@ -7,6 +7,7 @@ use App\Models\Projects;
 use App\Models\Services;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
@@ -37,8 +38,8 @@ class ProjectAdminController extends Controller
             'content' => 'required',
             'system_size' => 'required|numeric',
             'monthly_saving' => 'required|string',
-            'img_path' => 'array|max:3', // Assuming a maximum of 1 images can be uploaded
-            'img_path.*' => 'image|mimes:jpeg,png,jpg|max:2048', // Individual image validation
+            'image' => 'required|array|max:3', 
+            'image.*' => 'image|mimes:jpeg,png,jpg|max:2048', // Individual image validation
         ]);
         $projects = Projects::create([
             'title' => $request->input('title'),
@@ -47,11 +48,11 @@ class ProjectAdminController extends Controller
             'system_size' => $request->input('system_size'),
             'monthly_saving' => $request->input('monthly_saving'),
         ]);
-       
-        if($request->img_path) {
-            foreach($request->file('img_path') as $img_path) {
-                $filename = Str::uuid() . '.' . $img_path->getClientOriginalExtension();
-                $path = $img_path->storeAs('product-images', $filename, 'public');
+
+        if($request->image) {
+            foreach($request->file('image') as $image) {
+                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $path = $image->storeAs('product-images', $filename, 'public');
                 $projects->images()->create([
                     'images' => $path,
                 ]);
@@ -61,21 +62,20 @@ class ProjectAdminController extends Controller
     }
     public function edit(string $id){
         $categories = ProjectCategory::all();
-        $project = Projects::with(['images', 'category:id,name'])
-                            ->where('id', $id)
-                            ->firstOrFail();
-        
-        // Map image URLs
-        // $project->images = $project->images->map(function ($image) {
-        //     return $image->url; // Assuming your images have a 'url' attribute
-        // });
+        $project = Projects::with('images')
+            ->where('id', $id)
+            ->firstOrFail();
 
         return Inertia::render('Admin/Projects/Edit', [
             'categories' => $categories,
             'project' => $project
         ]);
     }
-    public function update(Request $request, int $id){
+
+    // 
+    
+    public function update(Request $request, int $id)
+    {
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
@@ -83,6 +83,7 @@ class ProjectAdminController extends Controller
             'monthly_saving' => 'required',
             'content' => 'required'
         ]);
+
         $project = Projects::findOrFail($id);
         $project->update([
             'title' => $request->title,
@@ -92,8 +93,39 @@ class ProjectAdminController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('admin.projects.index');
+        // Calculate potential remaining images after deletion
+        $currentImageIds = $project->images()->pluck('id')->toArray();
+        $imagesToDelete = $request->input('images_to_delete', []);
+        $potentialRemainingCount = count($currentImageIds) - count($imagesToDelete);
+
+        // Ensure at least one image would remain after deletion
+        if ($potentialRemainingCount < 1 && !$request->hasFile('image')) {
+            return redirect()->back()->withErrors(['image' => 'At least one image is required.']);
+        }
+
+        // Handle file uploads
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
+                $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('product-images', $filename, 'public');
+                $project->images()->create([
+                    'images' => $path,
+                ]);
+            }
+        }
+
+        // Proceed with deletion of existing images only if it will not result in zero images
+        foreach ($imagesToDelete as $imageId) {
+            $image = $project->images()->find($imageId);
+            if ($image) {
+                Storage::disk('public')->delete($image->images); // Delete the image file from storage
+                $image->delete(); // Delete the image record from the database
+            }
+        }
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully!');
     }
+
 
     public function destroy(int $id){
         Projects::destroy($id);

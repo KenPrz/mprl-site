@@ -50,8 +50,11 @@
                     </div>
                   </div>
                   <div class="col-span-1">
-                    <div class="flex justify-between">
-                      <label for="file-upload" class="block text-lg font-medium text-gray-700 p-3">Image/s <sup>(max 1 image upload)</sup></label>
+                    <div class="flex justify-between items-center">
+                      <label for="file-upload" class="block text-lg font-medium text-gray-700 p-3">
+                        Image/s <span class="text-sm">(3 images max)</span>
+                      </label>
+                      <InputError class="" :message="form.errors.image" />
                       <div class="flex justify-between items-center mt-2">
                         <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
                           <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
@@ -64,9 +67,19 @@
                     </div>
                     <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
                       <div class="flex space-x-2">
-                        <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                          <img :src="preview.images" class="w-24 h-24 object-cover rounded-lg" />
-                          <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
+                        <div
+                          v-for="(preview, index) in imagePreviews"
+                          :key="index"
+                          class="relative"
+                        >
+                          <img
+                            :src="typeof preview === 'string' ? preview : `/storage/${preview.images}`"
+                            class="w-32 h-32 object-cover rounded-lg mx-5"
+                          />
+                          <button
+                            @click="removeImage(index)"
+                            class="absolute top-0 right-5 h-8 w-8 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2"
+                          >
                             <i class="fa-solid fa-times"></i>
                           </button>
                         </div>
@@ -85,33 +98,34 @@
     </AuthenticatedLayout>
   </template>
   
-  <script setup>
-  import { ref, onMounted } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
-import Editor from '@/Components/Editor.vue';
 import { useToast } from 'vue-toastification';
 
 const toast = useToast();
+
 const props = defineProps({
   project: {
     type: Object,
-    required: true
+    required: true,
   },
   categories: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const form = useForm({
-  title: props.project.title,
-  category_id: props.project.category_id,
-  system_size: props.project.system_size,
-  monthly_saving: props.project.monthly_saving,
-  content: props.project.content,
-  img_path: []
+  title: props.project.title || '',
+  category_id: props.project.category_id || '',
+  system_size: props.project.system_size || '',
+  monthly_saving: props.project.monthly_saving || '',
+  content: props.project.content || '',
+  image: [], // Holds new files for upload
+  images_to_delete: [], // Holds IDs of images to delete
 });
 
 const imagePreviews = ref([]);
@@ -119,39 +133,51 @@ const imagePreviews = ref([]);
 // Load existing images into imagePreviews
 onMounted(() => {
   if (props.project.images && props.project.images.length > 0) {
-    imagePreviews.value = props.project.images;
+    imagePreviews.value = props.project.images.map((img) => ({
+      images: img.images, // Image path from server
+      id: img.id, // Image ID for deletion
+    }));
   }
   form.clearErrors();
 });
 
-function updateProject(){
-    form.patch(route('admin.projects.update', props.project.id)), {
-      preserveScroll: true,
-      onSuccess: () => {
-        toast.success('Project updated successfully!'); 
-      }
-    };
+function updateProject() {
+  form.post(route('admin.projects.update', props.project.id), {
+    preserveScroll: true,
+    onSuccess: () => {
+      toast.success('Project updated successfully!');
+    },
+    onError: (errors) => {
+      toast.error('There was an error updating the project.');
+    },
+  });
 }
 
 function handleFiles(event) {
-  const files = event.target.files;
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
+  const files = Array.from(event.target.files);
+  files.forEach((file) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      imagePreviews.value.push(e.target.result);
-      form.img_path.push(file);
+      if (imagePreviews.value.length === 3) {
+        // Remove the last image if there are already 3 images
+        removeImage(2);
+      }
+      imagePreviews.value.push(e.target.result); // Preview as base64 data
+      form.image.push(file); // Push file object to the form
     };
     reader.readAsDataURL(file);
-  }
+  });
 }
 
 function removeImage(index) {
+  const image = imagePreviews.value[index];
+  if (image.id) {
+    form.images_to_delete.push(image.id); // Mark image for deletion
+  }
   imagePreviews.value.splice(index, 1);
-  form.img_path.splice(index, 1);
 }
 
-  </script>
+</script>
   
   <style scoped>
   textarea {

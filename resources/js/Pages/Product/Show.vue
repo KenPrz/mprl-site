@@ -122,7 +122,7 @@
               <h4 class="bg-gray-200 mt-2 align-middle p-1">OTHER DETAILS</h4>
               <div class="flex border gap-2">
                 <div class="w-1/3 border-r-2">Warranty</div>
-                <div class="ml-2">{{ products.warranty }} years</div>
+                <div class="ml-2">{{ products.warranty }}</div>
               </div>
               <div class="flex border gap-2">
                 <div class="w-1/3 border-r-2">Certifications</div>
@@ -130,7 +130,14 @@
               </div>
               <div class="flex border gap-2">
                 <div class="w-1/3 border-r-2">Data Sheet</div>
-                <div class="ml-2">{{ products.datasheet }}</div>
+                <div class="ml-2">
+                    <a v-if="products.datasheet" :href="`//${products.datasheet}`" target="_blank" rel="noopener noreferrer">
+                        see datasheet
+                    </a>
+                    <span v-else>
+                        no datasheet available
+                    </span>
+                </div>
               </div>
               <div class="mt-5">
                 <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
@@ -182,7 +189,7 @@
   <!-- Modal -->
   <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
     <div class="bg-white p-4 rounded-lg shadow-lg w-full max-w-md">
-      <h2 class="text-xl font-bold mb-4">Inquire Now</h2>
+      <h2 class="text-xl font-bold mb-4">Great! Please fill out the form to inquire </h2>
       <form @submit.prevent="submitInquiry">
         <div class="mb-4">
           <label class="block text-gray-700">Name</label>

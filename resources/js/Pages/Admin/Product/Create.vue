@@ -157,7 +157,7 @@ onMounted(() => {
                                     <InputError class="mt-1" :message="form.errors.stock_level" />
                                 </div>
                                 <div>
-                                    <label for="form-supplier" class="block text-sm font-medium text-gray-700 mb-1">DataSheet</label>
+                                    <label for="form-supplier" class="block text-sm font-medium text-gray-700 mb-1">DataSheet(url)</label>
                                     <input id="form-supplier" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" v-model="form.datasheet" type="text">
                                     <InputError class="mt-1" :message="form.errors.datasheet" />
                                 </div>

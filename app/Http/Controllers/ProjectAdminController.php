@@ -18,6 +18,7 @@ class ProjectAdminController extends Controller
         $projects = Projects::select('projects.id', 'projects.title', 'project_categories.name as category_id', 'projects.content')
             ->join('project_categories', 'project_categories.id', '=', 'projects.category_id')
             ->with('category:id,name')
+            ->orderBy('projects.created_at', 'desc')
             ->paginate(10);
         return Inertia::render('Admin/Projects/Index', [
             'projects' => $projects

@@ -165,7 +165,7 @@ class ProductsAdminController extends Controller
             'description' => 'required|string',
             'is_displayed' => 'required|boolean',
             'img_path.*' => 'nullable|file|image|max:2048', 
-            'datasheet' => 'nullable|string|max:255',
+            'datasheet' => 'nullable|url|max:255',
         ]);
 
         $product = Product::findOrFail($id);

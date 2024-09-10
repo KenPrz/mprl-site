@@ -86,7 +86,7 @@ export default {
             <tr v-for="faq in props.faqs" :key="faq.id">
                 <td>{{ faq.id }}</td>
                 <td>{{ faq.question }}</td>
-                <td>{{ faq.catergory_id }}</td> <!-- Use category_name instead of category_id -->
+                <td>{{ faq.category_id }}</td> <!-- Use category_name instead of category_id -->
                 <td>{{ faq.answer }}</td>
                 <td>
                     <span class="flex items-center space-x-2">

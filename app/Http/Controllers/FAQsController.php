@@ -18,6 +18,10 @@ class FAQsController extends Controller
         ->with('category:id,name')
         ->orderBy('faqs.created_at', 'desc')
         ->paginate(5);
+
+        foreach ($faqs as $faq) {
+            $faq->answer = strip_tags(substr($faq->answer, 0, 50));
+        }
         return Inertia::render('Admin/Faqs/Index', [
             'faqs' => $faqs
         ]);

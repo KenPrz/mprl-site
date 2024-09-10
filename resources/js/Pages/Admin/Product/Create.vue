@@ -50,16 +50,19 @@ function addProduct() {
 }
 
 function handleFiles(event) {
-    const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreviews.value.push(e.target.result);
-            form.img_path.push(file);
-        };
-        reader.readAsDataURL(file);
-    }
+  const files = Array.from(event.target.files);
+  files.forEach((file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // Check if there are already 3 images, if so, replace the last one
+      if (imagePreviews.value.length === 3) {
+        removeImage(2); // Remove the last image (index 2)
+      }
+      imagePreviews.value.push(e.target.result); // Add new image preview
+      form.image.push(file); // Add file to form data
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function removeImage(index) {
@@ -111,7 +114,7 @@ onMounted(() => {
                             <div class="flex justify-between items-center mb-2">
                                 <label class="block text-sm font-medium text-gray-700">Product Image/s <span class="text-xs">(3 images max)</span></label>
                                 <InputError class="mt-2" :message="form.errors.img_path" />
-                                <div class="bg-green-500 px-3 py-1 rounded-lg text-white">
+                                <div class="bg-main-400 hover:bg-main-600 px-3 py-1 rounded-lg text-white">
                                     <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                                     <label for="file-upload" class="flex items-center cursor-pointer">
                                         <i class="fa-solid fa-plus text-xl mr-1"></i>
@@ -119,11 +122,11 @@ onMounted(() => {
                                     </label>
                                 </div>
                             </div>
-                            <div class="bg-gray-100 rounded-lg w-full h-40 flex items-center justify-center overflow-hidden">
+                            <div class="bg-gray-100 rounded-lg w-full h-48 flex items-center justify-center overflow-hidden">
                                 <div class="flex space-x-2">
                                     <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                                        <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
-                                        <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
+                                        <img :src="preview" class="w-32 h-32 object-cover rounded-lg mx-5" />
+                                        <button @click="removeImage(index)" class="absolute top-0 right-5 bg-red-500 h-8 w-8 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
                                             <i class="fa-solid fa-times"></i>
                                         </button>
                                     </div>
@@ -220,7 +223,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-green-500 px-4 py-2 text-white rounded-lg hover:bg-green-600" @click="addProduct">
+                        <button type="submit" class="bg-main-500 px-4 py-2 text-white rounded-lg hover:bg-main-600" @click="addProduct">
                             Submit
                         </button>
                     </div>

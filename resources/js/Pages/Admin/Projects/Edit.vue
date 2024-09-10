@@ -5,10 +5,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Update Project</h2>
       </template>
       <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5">
           <div class="flex justify-start">
-            <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.projects.index')">
-              <i class="fa-solid fa-arrow-left px-4"></i><span>Go Back</span>
+            <Link class="bg-main-400 px-4 py-2 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.projects.index')">
+              <i class="fa-solid fa-arrow-left mr-2"></i><span>Go Back</span>
             </Link>
           </div>
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col">
@@ -56,7 +56,7 @@
                       </label>
                       <InputError class="" :message="form.errors.image" />
                       <div class="flex justify-between items-center mt-2">
-                        <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
+                        <div class="bg-main-500 hover:bg-main-600 px-2 py-1 rounded-lg text-white">
                           <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                           <label for="file-upload" class="flex cursor-pointer">
                             <i class="fa-solid fa-plus text-xl"></i>
@@ -88,7 +88,7 @@
                   </div>
                 </div>
                 <div class="flex justify-end mt-5">
-                  <button type="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="updateProject">Update</button>
+                  <button type="" class="bg-main-500 hover:bg-main-600 p-3 text-white rounded-lg" @click="updateProject">Update</button>
                 </div>
               </div>
             </div>

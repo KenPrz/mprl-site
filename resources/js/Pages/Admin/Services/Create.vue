@@ -5,10 +5,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Services</h2>
       </template>
       <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5">
             <div class="flex justify-start">
-                <Link class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500 mb-2" :href="route('admin.services.index')">
-                    <i class="fa-solid fa-arrow-left px-4"></i><span>Go Back</span>
+                <Link class="bg-main-500 px-4 py-2 rounded-md text-white hover:bg-main-600" :href="route('admin.services.index')">
+                    <i class="fa-solid fa-arrow-left mr-2"></i><span>Go Back</span>
                 </Link>
             </div>
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col">
@@ -44,7 +44,7 @@
                             <div class="flex justify-between">
                                 <label for="prod-name" class="block text-lg font-medium text-gray-700 p-3">Service Image <span class="text-xs">(1 image max)</span></label>
                                 <div class="flex justify-between items-center mt-2">
-                                    <div class="bg-green-500 px-2 py-1 rounded-lg text-white">
+                                    <div class="bg-main-500 px-2 py-2 rounded-lg text-white hover:bg-main-600">
                                         <input type="file" multiple @change="handleFiles" class="hidden" id="file-upload" />
                                         <label for="file-upload" class="flex cursor-pointer">
                                             <i class="fa-solid fa-plus text-xl"></i>
@@ -65,8 +65,8 @@
                             </div>
                         </div>
                     </div>   
-                    <div class="flex justify-end mt-5">
-                        <input type="submit" placeholder="" class="bg-green-500 px-3 py-1 text-white rounded-lg" @click="addService">
+                    <div class="flex justify-end">
+                        <button type="submit" placeholder="" class="bg-main-500 p-3 text-white rounded-lg hover:bg-main-600" @click="addService">Create</button>
                     </div>
                 </div>
             </div>

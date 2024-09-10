@@ -44,16 +44,17 @@
               <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
                 <p class="ml-5 font-bold">NEW PRODUCTS</p>
               </div>
-              <div class="mt-3 border rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-md" v-for="newproduct in newproducts" :key="newproduct.id">
+              <div class="mt-3 border rounded-lg w-3/4 hover:scale-105 transition-transform duration-300 hover:shadow-md" v-for="newproduct in newproducts" :key="newproduct.id">
                 <div class="">
+                <a :href="`/product/${newproduct.id}`">
                   <div class="flex gap-5 p-2 pl-3">
                     <img class="w-1/4" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
                     <div>
                       <p class="ml-3 font-bold">{{ newproduct.name }}</p>
                       <p class="ml-3 text-sm flex mt-1">{{ newproduct.power_out }}Watts|{{newproduct.voltage }}Volts</p>
-                      <a :href="`/product/${newproduct.id}`" class="text-sm bg-green-500 rounded-md text-white px-2 ml-3">View</a>
                     </div>
                   </div>
+                </a>
                 </div>
               </div>
             </div>
@@ -73,7 +74,6 @@
                 </div>
                 <div class="relative w-full sm:w-auto mt-2">
                   <input type="text" v-model="searchQuery" class="border rounded-2xl px-3 py-1 m-1 sm:m-0 w-full sm:w-auto" placeholder="Search Product">
-                  <!-- <button @click="searchProducts" class="bg-green-600 text-white rounded-3xl px-5 py-1 absolute top-1/2 right-0 transform -translate-y-1/2 sm:translate-x-1/2"><i class="fa-solid fa-magnifying-glass"></i><span> search</span></button> -->
                 </div>
               </div>
 

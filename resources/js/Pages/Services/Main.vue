@@ -287,7 +287,7 @@ watch(() => scroll.value, () => {
                 <div v-for="service in services" :key="service.id" class="w-full sm:w-1/2 lg:w-1/3 p-2">
                   <div v-if="service.category_id === 2 || service.category_id === '2'" class="flex flex-col h-full border rounded-lg shadow-md p-5 bg-white bg-opacity-90">
                     <div class="flex justify-center">
-                      <img :src="`/storage/${service.image}`" :alt="service.name" class="rounded-t-lg">
+                      <img :src="`/storage/${service.image}`" :alt="service.name" class="rounded-t-lg max-h-48 w-auto object-fit">
                     </div>
                     <h3 class="font-bold text-lg mt-4 mb-5 text-center text-blue-500 leading-5">{{ service.name }}</h3>
                     <div

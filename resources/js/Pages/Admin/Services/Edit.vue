@@ -8,7 +8,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5">
           <div class="flex justify-start">
               <Link class="bg-main-500 px-4 py-2 rounded-md text-white hover:bg-main-600" :href="route('admin.services.index')">
-                  <i class="fa-solid fa-arrow-left px-4"></i><span>Go Back</span>
+                  <i class="fa-solid fa-arrow-left mr-2"></i><span>Go Back</span>
               </Link>
           </div>
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col">

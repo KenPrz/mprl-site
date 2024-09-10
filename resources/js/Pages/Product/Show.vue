@@ -25,20 +25,21 @@
   </section>
   <section class="w-full mt-5">
     <div class="flex flex-col md:flex-row justify-center md:px-32 gap-4">
-      <div class="flex flex-col md:flex-row items-center md:items-start">
-        <div class="mt-10 hidden sm:block w-full">
-          <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
-            <p class="ml-5 font-bold">NEW PRODUCTS</p>
+      <div class="flex flex-col md:flex-row items-center md:items-start hidden md:block">
+        <div class="mt-10">
+          <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4 p-3">
+            <p class="font-bold">NEW PRODUCTS</p>
           </div>
-          <div class="mt-3">
-            <div class="border rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-md p-2" v-for="newproduct in newproducts" :key="newproduct.id">
-              <div class="flex gap-1 items-start mt-2">
-                <img class="w-1/3 h-20 object-cover" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
-                <div class="flex flex-col justify-between">
-                  <p class="text-sm font-bold">{{ newproduct.name }}</p>
-                  <p class="text-xs">{{ newproduct.power_out }} Watts | {{ newproduct.voltage }} Volts</p>
-                  <a :href="`/product/${newproduct.id}`" class="text-xs  rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
-                </div>
+          <div class="mt-3 space-y-3">
+            <div class="border rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-md p-3" v-for="newproduct in newproducts" :key="newproduct.id">
+              <div class="flex gap-1 justify-center mt-2">
+                <a :href="`/product/${newproduct.id}`">
+                  <img class="w-1/3 w-auto max-h-40 object-cover" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
+                  <div class="flex flex-col justify-between mt-2">
+                    <p class="text-sm font-bold">{{ newproduct.name }}</p>
+                    <p class="text-xs">{{ newproduct.power_out }} Watts | {{ newproduct.voltage }} Volts</p>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -49,18 +50,18 @@
       </div>
       <div class="container mx-auto w-full md:w-3/4 bg-white shadow-lg rounded border p-4">
         <!-- Product Details -->
-        <div class="flex flex-col md:flex-row">
-          <div class="w-full md:w-2/5">
+        <div class="flex flex-col lg:flex-row">
+          <div class="w-full lg:w-2/5">
             <h2 class="text-xl font-bold">{{ products.name }}</h2>
             <div>
               <div class="border mt-2 p-3 flex justify-center align-middle rounded-md">
-                <img class="w-full md:w-1/2" :src="mainImage" alt="Main Image">
+                <img class="w-full lg:w-1/2" :src="mainImage" alt="Main Image">
               </div>
               <div class="flex gap-1 justify-center mt-2">
                 <div
                   v-for="(image, index) in products.images"
                   :key="index"
-                  class="w-20 border p-1 flex justify-center rounded-md shadow-md"
+                  class="w-auto max-h-40 border p-1 flex justify-center rounded-md shadow-md"
                   @click="changeImage(`/storage/${image.images}`)"
                 >
                   <img class="w-full" :src="`/storage/${image.images}`" alt="Thumbnail Image">
@@ -68,7 +69,7 @@
               </div>
             </div>
           </div>
-          <div class="w-full md:w-3/5 mt-4 md:mt-0 md:ml-10">
+          <div class="w-full lg:w-3/5 mt-4 lg:mt-0 lg:ml-10">
             <div>
               <h4 class="bg-gray-200 mt-2 align-middle p-1">PRODUCT SPECIFICATIONS</h4>
               <div class="flex border gap-2">
@@ -140,7 +141,7 @@
                 </div>
               </div>
               <div class="mt-5">
-                <button @click="showModal = true" class="bg-green-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
+                <button @click="showModal = true" class="bg-main-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
               </div>
             </div>
           </div>
@@ -157,13 +158,13 @@
           <div class="mt-2">
             <p class="text-xl">Similar Product Listing</p>
           </div>
-          <div class="flex flex-wrap gap-5 justify-center">
+          <div class="flex flex-wrap gap-2 lg:gap-5 justify-center">
             <div class="w-full sm:w-1/2 lg:w-1/4 mt-5" v-for="similarproduct in similarproducts" :key="similarproduct.id">
               <div class="hover:bg-slate-200 rounded-lg hover:shadow-lg p-4 h-full border">
                 <img :src="similarproduct.first_image ? `/storage/${similarproduct.first_image.images}` : '/images/products-images/solarpanel.png'" class="w-full h-40 object-cover rounded-lg" alt="Similar Product Image">
                 <p class="text-sm font-bold mt-2">{{ similarproduct.name }}</p>
                 <p class="text-xs">{{ similarproduct.power_out }} Watts | {{ similarproduct.voltage }} Volts</p>
-                <a :href="`/product/${similarproduct.id}`" class="text-xs bg-green-500 rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
+                <a :href="`/product/${similarproduct.id}`" class="text-xs bg-main-500 rounded-md text-white px-2 py-1 mt-1 inline-block">View</a>
               </div>
             </div>
           </div>
@@ -209,7 +210,7 @@
         </div>
         <div class="flex justify-end">
           <button type="button" @click="showModal = false" class="bg-gray-300 px-4 py-2 rounded-lg mr-2">Cancel</button>
-          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Send Inquiry</button>
+          <button :disabled="form.processing" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Send Inquiry</button>
         </div>
       </form>
     </div>

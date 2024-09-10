@@ -177,7 +177,7 @@ const emit = defineEmits(['openLogin']);
                             </span>
                         </div>
                         <h5 class="text-l font-semibold mb-2 text-center">SEND US AN EMAIL</h5>
-                        <p class="text-neutral-600 text-center text-sm">mprsunpower104@gmail.com</p>
+                        <p class="text-neutral-600 text-center text-sm">mprlsolar@gmail.com</p>
                     </div>                        
                     <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="500" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-full md:w-2/3 min-h-48 hover:shadow-xl hover:text-main-500">
                         <div class="row my-3">
@@ -186,7 +186,7 @@ const emit = defineEmits(['openLogin']);
                             </span>
                         </div>
                         <h5 class="text-l font-semibold mb-2 text-center">VISIT US AT OUR OFFICE</h5>
-                        <p class="text-neutral-600 text-center text-sm">6620 Purok 1, San Antonio, Los Baños, Laguna</p>
+                        <p class="text-neutral-600 text-center text-sm">Blk 9 Lot 87 Seville St., La Vecina Camella Dos Rios, Cabuyao, Laguna 4025 Cabuyao, Philippines</p>
                     </div>
                     <div data-aos="fade-right" data-aos-delay="150" data-aos-duration="700" class="card border rounded-lg shadow p-10 py-5 mb-4 flex flex-col items-center w-full md:w-2/3 min-h-48 hover:shadow-xl hover:text-main-500">
                         <div class="row my-3">
@@ -195,9 +195,8 @@ const emit = defineEmits(['openLogin']);
                             </span>
                         </div>
                         <h5 class="text-l font-semibold mb-2 text-center">GET IN TOUCH</h5>
-                        <p class="text-neutral-600 text-center text-sm">Globe: 0956-769-3494</p>
-                        <p class="text-neutral-600 text-center text-sm">TM: 0953-039-8460</p>
-                        <p class="text-neutral-600 text-center text-sm">Smart: 0932-921-1767</p>
+                        <p class="text-neutral-600 text-center text-sm">0916-830-5551</p>
+                        <p class="text-neutral-600 text-center text-sm">0967-362-0733</p>
                     </div>
                 </div>                                            
             </div>

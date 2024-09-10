@@ -32,7 +32,9 @@ onUnmounted(() => {
         <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
             <div class="flex items-center space-x-2">
                 <i class="pi pi-map-marker"></i>
-                <span>6620 Purok 1, San Antonio, Los Baños, Laguna</span>
+                <span>Blk 9 Lot 87 Seville St., La Vecina Camella
+                    Dos Rios, Cabuyao, Laguna 4025 Cabuyao,
+                    Philippines</span>
             </div>
             <a href="mailto:mprlsolar@gmail.com" class="hidden md:flex items-center space-x-2">
                 <i class="pi pi-envelope"></i>
@@ -165,9 +167,8 @@ onUnmounted(() => {
         <div class="flex flex-col items-center space-y-4 p-8 bg-gray-100 rounded-lg shadow-md">
             <span class="text-2xl font-bold text-gray-800">Contact Us</span>
             <div class="text-center">
-                <span class="block text-sm text-gray-600">Globe: <span class="font-medium text-gray-800">0956-769-3494</span></span>
-                <span class="block text-sm text-gray-600">TM: <span class="font-medium text-gray-800">0953-039-8460</span></span>
-                <span class="block text-sm text-gray-600">Smart: <span class="font-medium text-gray-800">0932-921-1767</span></span>
+                <span class="block text-sm text-gray-800">0916-830-5551</span>
+                <span class="block text-sm text-gray-800">0967-362-0733</span>
             </div>
         </div>        
     </Modal>

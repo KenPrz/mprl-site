@@ -142,7 +142,6 @@ function addProject() {
     },
     onError: (errors) => {
       toast.error('Failed to add project!');
-      console.log(errors);
     },
   });
 }

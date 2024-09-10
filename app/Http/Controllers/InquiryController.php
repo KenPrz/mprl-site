@@ -24,7 +24,7 @@ class InquiryController extends Controller
             'message' => 'required|string',
         ]);
         try {
-            Mail::to('pampamylinda@gmail.com')->send(new ProductInquiryMail($data));
+            Mail::to('mprlsolarpanel@gmail.com')->send(new ProductInquiryMail($data));
 
             return back()->with('success', 'Your message has been sent successfully!');
         } catch (\Exception $e) {

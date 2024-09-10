@@ -6,7 +6,11 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
+
 const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5); // 1.5 MB limit
+
 const props = defineProps({
     categories: {
         type: Array,
@@ -38,6 +42,7 @@ const form = useForm({
 });
 
 const imagePreviews = ref([]);
+
 function addProduct() {
     form.post(route('admin.products.store'), {
         preserveScroll: true,
@@ -45,29 +50,38 @@ function addProduct() {
             toast.success('Product added successfully!');
             form.reset();
             imagePreviews.value = [];
+        },
+        onError: (errors) => {
+            toast.error('Failed to add product. Please check the form and try again.');
+            console.error(errors);
         }
     });
 }
 
 function handleFiles(event) {
-  const files = Array.from(event.target.files);
-  files.forEach((file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // Check if there are already 3 images, if so, replace the last one
-      if (imagePreviews.value.length === 3) {
-        removeImage(2); // Remove the last image (index 2)
-      }
-      imagePreviews.value.push(e.target.result); // Add new image preview
-      form.image.push(file); // Add file to form data
-    };
-    reader.readAsDataURL(file);
-  });
+    const files = Array.from(event.target.files);
+    files.forEach((file) => {
+        if (checkFileSize(file)) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Check if there are already 3 images, if so, replace the last one
+                if (imagePreviews.value.length === 3) {
+                    removeImage(2); // Remove the last image (index 2)
+                }
+                imagePreviews.value.push(e.target.result); // Add new image preview
+                form.img_path.push(file); // Add file to form data (corrected from form.image to form.img_path)
+            };
+            reader.readAsDataURL(file);
+        } else {
+            toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
+        }
+    });
 }
 
 function removeImage(index) {
     imagePreviews.value.splice(index, 1);
     form.img_path.splice(index, 1);
+    toast.info('Image removed. Save changes to confirm deletion.');
 }
 
 onMounted(() => {

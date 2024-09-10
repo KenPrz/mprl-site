@@ -6,8 +6,11 @@ import Toggle from '@/Components/Toggle.vue';
 import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
 
 const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5); // 1.5 MB limit
+
 const props = defineProps({
     categories: {
         type: Array,
@@ -42,7 +45,6 @@ const form = useForm({
     is_displayed: props.product.is_displayed,
 });
 
-
 const imagePreviews = ref(
     props.product.images.map(image => ({
         id: image.id,
@@ -54,12 +56,16 @@ function handleFiles(event) {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreviews.value.push({ id: i, url: e.target.result });
-        };
-        reader.readAsDataURL(file);
-        form.img_path.push(file); // Ensure img_path is properly initialized as an array
+        if (checkFileSize(file)) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreviews.value.push({ id: null, url: e.target.result });
+            };
+            reader.readAsDataURL(file);
+            form.img_path.push(file);
+        } else {
+            toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
+        }
     }
 }
 
@@ -68,21 +74,34 @@ function removeImage(index) {
 
     if (imageToDelete.id) {
         form.delete(route('admin.products.deleteImage', { imageId: imageToDelete.id }), {
+            preserveState: true,
+            preserveScroll: true,
             onSuccess: () => {
                 imagePreviews.value.splice(index, 1);
+                toast.success('Image deleted successfully.');
+            },
+            onError: () => {
+                toast.error('Failed to delete image. Please try again.');
             }
         });
     } else {
         imagePreviews.value.splice(index, 1);
         form.img_path.splice(index, 1);
+        toast.info('New image removed.');
     }
 }
 
 function updateProduct() {
     form.post(route('admin.products.update', props.product.id), {
+        preserveState: true,
+        preserveScroll: true,
         onSuccess: () => {
             toast.success('Product updated successfully!');
             form.clearErrors();
+        },
+        onError: (errors) => {
+            toast.error('Failed to update product. Please check the form and try again.');
+            console.error(errors);
         }
     });
 }

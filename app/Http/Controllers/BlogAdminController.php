@@ -146,9 +146,8 @@ class BlogAdminController extends Controller
                 ];
             }),
         ];
-    
+        
         $categories = BlogCategory::select('id', 'name')->get();
-    
         return Inertia::render('Admin/Blog/Edit', [
             'blog' => $blog,
             'categories' => $categories

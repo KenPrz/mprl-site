@@ -97,86 +97,96 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-  import { Link, useForm } from '@inertiajs/vue3';
-  import InputError from '@/Components/InputError.vue';
-  import { useToast } from 'vue-toastification';
-  
-  const props = defineProps({
-    service: {
-      type: Object,
-      required: true
-    },
-    categories: {
-      type: Array,
-      required: true
-    }
-  });
-  
-  const toast = useToast();
-  const imagePreviews = ref([]);
-  
-  const form = useForm({
-    name: props.service.name || '',
-    category_id: props.service.category_id || '',
-    description: props.service.description || '',
-    image: [] // Form images handled separately
-  });
-  
-  // Handle file uploads and update image previews
-  function handleFiles(event) {
-    const files = event.target.files;
-  
-    // Ensure only one file is handled
-    if (files.length > 0) {
-      const file = files[0]; // Take the first file
-  
+import { ref, onMounted } from 'vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Link, useForm } from '@inertiajs/vue3';
+import InputError from '@/Components/InputError.vue';
+import { useToast } from 'vue-toastification';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
+
+const props = defineProps({
+  service: {
+    type: Object,
+    required: true
+  },
+  categories: {
+    type: Array,
+    required: true
+  }
+});
+
+const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5); // 1.5 MB limit
+
+const imagePreviews = ref([]);
+
+const form = useForm({
+  name: props.service.name || '',
+  category_id: props.service.category_id || '',
+  description: props.service.description || '',
+  image: [] // Form images handled separately
+});
+
+// Handle file uploads and update image previews
+function handleFiles(event) {
+  const files = event.target.files;
+
+  // Ensure only one file is handled
+  if (files.length > 0) {
+    const file = files[0]; // Take the first file
+
+    if (checkFileSize(file)) {
       // Clear previous previews and form image data
       imagePreviews.value = [];
       form.image = [];
-  
+
       const reader = new FileReader();
       reader.onload = (e) => {
         imagePreviews.value.push(e.target.result); // Add the preview for the selected image
         form.image.push(file); // Add the file object to form data
       };
       reader.readAsDataURL(file);
+    } else {
+      toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
     }
   }
-  
-  // Remove selected image preview and associated file
-  function removeImage() {
-    imagePreviews.value = [];
-    form.image = [];
-    // Clear file input
-    document.getElementById('file-upload').value = '';
-  }
-  
-  // Update service data on form submission
-  function updateService() {
-    // Make the request using Inertia
-    form.post(route('admin.services.update', props.service.id), {
-      onSuccess: () => {
-        toast.success('Service Updated successfully!');
-        // Reset form and previews on success
-        form.reset();
-        imagePreviews.value = [];
-      },
-      onError: (errors) => {
-        console.log(errors); // Debug validation errors if needed
-        toast.error('Failed to update service!');
-      }
-    });
-  }
-  
-  // Load existing image preview on component mount
-  onMounted(() => {
-    if (props.service.image) {
-      imagePreviews.value.push(`/storage/${props.service.image}`);
+}
+
+// Remove selected image preview and associated file
+function removeImage() {
+  imagePreviews.value = [];
+  form.image = [];
+  // Clear file input
+  document.getElementById('file-upload').value = '';
+  toast.info('Image removed. Save changes to confirm deletion.');
+}
+
+// Update service data on form submission
+function updateService() {
+  // Make the request using Inertia
+  form.post(route('admin.services.update', props.service.id), {
+    preserveScroll: true,
+    onSuccess: () => {
+      toast.success('Service updated successfully!');
+      // Reset form and previews on success
+      form.reset();
+      imagePreviews.value = [];
+    },
+    onError: (errors) => {
+      console.error(errors); // Debug validation errors if needed
+      toast.error('Failed to update service. Please check the form and try again.');
     }
   });
-  </script>
+}
+
+// Load existing image preview on component mount
+onMounted(() => {
+  if (props.service.image) {
+    imagePreviews.value.push(`/storage/${props.service.image}`);
+  }
+  form.clearErrors();
+});
+</script>
 
   <style scoped>
   </style>

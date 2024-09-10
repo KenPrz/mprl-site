@@ -8,8 +8,10 @@ import { Link, useForm } from '@inertiajs/vue3';
 import { VueDraggableNext } from 'vue-draggable-next';
 import Editor from '@/Components/Editor.vue';
 import Multiselect from 'vue-multiselect'
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
+import { useToast } from 'vue-toastification';
 
-
+const toast = useToast();
 const props = defineProps({
     categories: {
         type: Array,
@@ -28,6 +30,7 @@ const form = useForm({
 
 const blogContent = ref('Write your blog content here...');
 const imagePreviews = ref([]);
+const { checkFileSize } = useFileSizeCheck(1.5);
 
 function handleImageChange(event) {
     const files = event.target.files;
@@ -35,16 +38,20 @@ function handleImageChange(event) {
     const newPreviews = [];
 
     Array.from(files).forEach(file => {
-        newImages.push(file);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            newPreviews.push(e.target.result);
-            if (newPreviews.length === files.length) {
-                form.images.push(...newImages);
-                imagePreviews.value.push(...newPreviews);
-            }
-        };
-        reader.readAsDataURL(file);
+        if (checkFileSize(file)) {
+            newImages.push(file);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                newPreviews.push(e.target.result);
+                if (newPreviews.length === newImages.length) {
+                    form.images.push(...newImages);
+                    imagePreviews.value.push(...newPreviews);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
+        }
     });
 }
 
@@ -55,18 +62,22 @@ function submitBlog() {
         {
             preserveScroll: true,
             onSuccess: () => {
+                toast.success('Blog post created successfully!');
                 form.reset();
                 imagePreviews.value = [];
+            },
+            onError: (errors) => {
+                toast.error('There was an error creating the blog post. Please check the form and try again.');
             }
         });
 }
+
 onMounted(() => {
     form.clearErrors();
 });
 </script>
 
 <template>
-
     <Head title="Create Blog" />
 
     <AuthenticatedLayout>
@@ -127,7 +138,7 @@ onMounted(() => {
                     </div>
                     <div v-show="imagePreviews.length < 1" class="mb-4">
                         <label for="images" class="block text-lg font-medium text-gray-700 mb-2">
-                            Images
+                            Images (max 1.5 MB each)
                         </label>
                         <div class="relative">
                             <input :disabled="form.processing" id="images" type="file" multiple
@@ -184,6 +195,7 @@ onMounted(() => {
         </div>
     </AuthenticatedLayout>
 </template>
+
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 <style scoped>
 #form-title {

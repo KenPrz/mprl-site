@@ -77,69 +77,78 @@
   </template>
   
   <script setup>
-  import { ref, watch, onMounted } from 'vue';
-  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-  import { Head, useForm, Link } from '@inertiajs/vue3';
-  import InputError from '@/Components/InputError.vue';
-  import { useToast } from 'vue-toastification';
-  
-  const toast = useToast();
-  const props = defineProps({
-    services: {
-      type: Object,
+import { ref, watch, onMounted } from 'vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head, useForm, Link } from '@inertiajs/vue3';
+import InputError from '@/Components/InputError.vue';
+import { useToast } from 'vue-toastification';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
+
+const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5); // 1.5 MB limit
+
+const props = defineProps({
+  services: {
+    type: Object,
+  },
+  categories: {
+    type: Array,
+    required: true
+  }
+});
+
+const form = useForm({
+  name: '',
+  category_id: '',
+  description: '',
+  image: []
+});
+
+function addService() {
+  form.post(route('admin.services.store'), {
+    preserveScroll: true,
+    onSuccess: () => {
+      toast.success('Service added successfully!');
+      form.reset();
+      imagePreviews.value = [];
     },
-    categories: {
-        type: Array,
-        required: true
+    onError: (errors) => {
+      toast.error('Failed to add service. Please check the form and try again.');
+      console.error(errors);
     }
   });
-  
-  const form = useForm({
-    name: '',
-    category_id: '',
-    description: '',
-    image: []
-
-   
-  });
-  function addService() {
-    form.post(route('admin.services.store'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            toast.success('Service added successfully!');
-            form.reset();
-            imagePreviews.value = [];
-        },
-        onError: () => {
-            toast.error('An error occurred. Please try again.');
-            console.log(form.errors);
-        }
-    });
 }
-  const imagePreviews = ref([]);
-  function handleFiles(event) {
-    const files = event.target.files;
-  
-    // Ensure only one file is handled
-    if (files.length > 0) {
-      const file = files[0]; // Take the first file
-  
+
+const imagePreviews = ref([]);
+
+function handleFiles(event) {
+  const files = event.target.files;
+
+  // Ensure only one file is handled
+  if (files.length > 0) {
+    const file = files[0]; // Take the first file
+
+    if (checkFileSize(file)) {
       // Clear previous previews and form image data
       imagePreviews.value = [];
       form.image = [];
-  
+
       const reader = new FileReader();
       reader.onload = (e) => {
         imagePreviews.value.push(e.target.result); // Add the preview for the selected image
         form.image.push(file); // Add the file object to form data
       };
       reader.readAsDataURL(file);
+    } else {
+      toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
     }
   }
+}
 
 function removeImage(index) {
-    imagePreviews.value.splice(index, 1);
-    form.image.splice(index, 1);
+  imagePreviews.value.splice(index, 1);
+  form.image.splice(index, 1);
+  toast.info('Image removed.');
 }
 
 // Function to handle input and add bullets
@@ -159,7 +168,6 @@ function handleInput() {
 }
 
 onMounted(() => {
-    form.clearErrors();
+  form.clearErrors();
 });
-
 </script>

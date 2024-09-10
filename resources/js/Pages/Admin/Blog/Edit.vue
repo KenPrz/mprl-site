@@ -8,6 +8,11 @@ import { ref, onMounted } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { VueDraggableNext } from 'vue-draggable-next';
 import Editor from '@/Components/Editor.vue';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5);
 
 const props = defineProps({
     categories: {
@@ -33,12 +38,12 @@ const form = useForm({
 
 const blogContent = ref(props.blog.body);
 
-    const imagePreviews = ref(
-        props.blog.images.map(image => ({
-            id: image.id,
-            url: `/storage/${image.image}`
-        }))
-    );
+const imagePreviews = ref(
+    props.blog.images.map(image => ({
+        id: image.id,
+        url: `/storage/${image.image}`
+    }))
+);
 
 function handleImageChange(event) {
     const files = event.target.files;
@@ -46,19 +51,23 @@ function handleImageChange(event) {
     const newPreviews = [];
     
     Array.from(files).forEach(file => {
-        newImages.push(file);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            newPreviews.push({
-                id: null,
-                url: e.target.result
-            });
-            if (newPreviews.length === files.length) {
-                newUploads.value.push(...newImages);
-                imagePreviews.value.push(...newPreviews);
-            }
-        };
-        reader.readAsDataURL(file);
+        if (checkFileSize(file)) {
+            newImages.push(file);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                newPreviews.push({
+                    id: null,
+                    url: e.target.result
+                });
+                if (newPreviews.length === newImages.length) {
+                    newUploads.value.push(...newImages);
+                    imagePreviews.value.push(...newPreviews);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
+        }
     });
 }
 
@@ -69,6 +78,7 @@ function handleDeleteImage(id) {
         form.deleted_images.push(image.id);
     }
     imagePreviews.value.splice(imageIndex, 1);
+    toast.info('Image removed. Save changes to confirm deletion.');
 }
 
 function updateBlog() {
@@ -80,7 +90,15 @@ function updateBlog() {
     form.content = blogContent.value;
     // Extract just the IDs from the category objects
     form.categories = form.categories.map(cat => cat.id);
-    form.post(route('admin.blog.update', props.blog.id));
+    form.post(route('admin.blog.update', props.blog.id), {
+        onSuccess: () => {
+            toast.success('Blog post updated successfully!');
+            newUploads.value = [];
+        },
+        onError: () => {
+            toast.error('There was an error updating the blog post. Please try again.');
+        }
+    });
 }
 
 onMounted(() => {
@@ -153,7 +171,7 @@ onMounted(() => {
                         <InputError class="mt-2" :message="form.errors.images" />
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500" @click="$refs.moreImages.click()">Add More Images</button>
+                        <button class="bg-main-400 px-2 py-1 rounded-md text-white hover:bg-main-500" @click="$refs.moreImages.click()">Add More Images (max 1.5 MB each)</button>
                         <input id="more-images" ref="moreImages" class="hidden" type="file" multiple @change="handleImageChange">
                     </div>
                 </div>

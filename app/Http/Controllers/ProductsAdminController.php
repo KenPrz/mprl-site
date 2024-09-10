@@ -56,7 +56,6 @@ class ProductsAdminController extends Controller
     public function store(Request $request)
     {
         // $products = $request->all();
-        // dd($products);
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|integer|exists:product_categories,id',
@@ -80,6 +79,7 @@ class ProductsAdminController extends Controller
             'datasheet' => 'nullable|string|max:255',
             'is_displayed' => 'nullable|boolean',
         ]);
+        
         $products = Product::create([
             'name' => $request->input('name'),
             'category_id' => $request->input('category_id'),

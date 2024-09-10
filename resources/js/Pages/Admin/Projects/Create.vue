@@ -108,8 +108,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, Link } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import { useToast } from 'vue-toastification';
+import { useFileSizeCheck } from '@/composables/useFileSizeCheck';
 
 const toast = useToast();
+const { checkFileSize } = useFileSizeCheck(1.5); // 1.5 MB limit
+
 const props = defineProps({
   services: {
     type: Object,
@@ -141,8 +144,8 @@ function addProject() {
       imagePreviews.value = [];
     },
     onError: (errors) => {
-      toast.error('Failed to add project!');
-      console.log(errors);
+      toast.error('Failed to add project. Please check the form and try again.');
+      console.error(errors);
     },
   });
 }
@@ -150,22 +153,27 @@ function addProject() {
 function handleFiles(event) {
   const files = Array.from(event.target.files);
   files.forEach((file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // Check if there are already 3 images, if so, replace the last one
-      if (imagePreviews.value.length === 3) {
-        removeImage(2); // Remove the last image (index 2)
-      }
-      imagePreviews.value.push(e.target.result); // Add new image preview
-      form.image.push(file); // Add file to form data
-    };
-    reader.readAsDataURL(file);
+    if (checkFileSize(file)) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        // Check if there are already 3 images, if so, replace the last one
+        if (imagePreviews.value.length === 3) {
+          removeImage(2); // Remove the last image (index 2)
+        }
+        imagePreviews.value.push(e.target.result); // Add new image preview
+        form.image.push(file); // Add file to form data
+      };
+      reader.readAsDataURL(file);
+    } else {
+      toast.error(`File "${file.name}" exceeds the 1.5 MB size limit.`);
+    }
   });
 }
 
 function removeImage(index) {
   imagePreviews.value.splice(index, 1); // Remove preview at the given index
   form.image.splice(index, 1); // Remove corresponding file from form data
+  toast.info('Image removed.');
 }
 
 onMounted(() => {

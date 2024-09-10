@@ -75,14 +75,13 @@ import { Link } from '@inertiajs/vue3';
                 </div>
                 <div class="flex flex-col justify-center items-center px-6 border-x">
                     <i style="font-size: 1.2rem"  class="pi pi-map-marker"></i>
-                    <span class="hidden md:block">6620 Purok 1, San Antonio, Los Baños, Laguna</span>
+                    <span class="hidden md:block">Blk 9 Lot 87 Seville St., La Vecina Camella Dos Rios, Cabuyao, Laguna 4025 Cabuyao, Philippines</span>
                 </div>
                 <div class="flex flex-col justify-around items-center ps-4 space-y-2">
                     <i style="font-size: 1.2rem"  class="pi pi-phone"></i>
                     <div class="flex flex-col">
-                        <span>Globe: 0956-769-3494</span>
-                        <span>TM: 0953-039-8460</span>
-                        <span>Smart: 0932-921-1767</span>
+                        0916-830-5551
+                        0967-362-0733
                     </div>
                 </div>
             </section>

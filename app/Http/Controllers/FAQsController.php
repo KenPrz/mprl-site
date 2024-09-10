@@ -16,6 +16,7 @@ class FAQsController extends Controller
         $faqs = Faqs::select('faqs.id', 'faqs.question', 'project_categories.name as category_id', 'faqs.answer')
         ->join('project_categories', 'project_categories.id', '=', 'faqs.category_id')
         ->with('category:id,name')
+        ->orderBy('faqs.created_at', 'desc')
         ->paginate(5);
         return Inertia::render('Admin/Faqs/Index', [
             'faqs' => $faqs
@@ -34,9 +35,9 @@ class FAQsController extends Controller
             'answer' => 'required'
         ]);
         $faqs = Faqs::create([
-            'question' => $request->input('question'),
-            'category_id' =>  $request->input('category_id'),
-            'answer' =>  $request->input('answer'),
+            'question' => $request->question,
+            'category_id' =>  $request->category_id,
+            'answer' =>  $request->answer,
         ]);
         return to_route('admin.faqs.index');
     }

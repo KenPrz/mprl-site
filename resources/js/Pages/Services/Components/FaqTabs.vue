@@ -1,3 +1,6 @@
+<script setup>
+import BlogContent from '@/Pages/Blog/Components/BlogContent.vue';
+</script>
 <template>
   <div>
     <!-- Category Selection -->
@@ -20,7 +23,7 @@
           <i :class="activeFaq === index ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down'" class="text-xl"></i>
         </div>
         <div v-if="activeFaq === index" class="text-blue-600 text-sm mt-2">
-          <span  v-html="faq.answer"></span>
+          <BlogContent :body="faq.answer" />
         </div>
       </div>
     </div>

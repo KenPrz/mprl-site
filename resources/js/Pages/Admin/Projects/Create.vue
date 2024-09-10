@@ -140,6 +140,10 @@ function addProject() {
       form.reset();
       imagePreviews.value = [];
     },
+    onError: (errors) => {
+      toast.error('Failed to add project!');
+      console.log(errors);
+    },
   });
 }
 

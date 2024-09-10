@@ -109,6 +109,10 @@
             toast.success('Service added successfully!');
             form.reset();
             imagePreviews.value = [];
+        },
+        onError: () => {
+            toast.error('An error occurred. Please try again.');
+            console.log(form.errors);
         }
     });
 }

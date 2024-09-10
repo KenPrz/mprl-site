@@ -16,10 +16,9 @@ const selectedCategory = ref('all'); // Ensure 'all' is the initial default
 const fetchFilteredProduct = async (category) => {
   try {
     const response = await axios.get('/product', { params: { category } });
-    console.log('Fetched products:', response.data.products);
     emit('update-products', response.data.products);
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error(error);
   }
 };
 

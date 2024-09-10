@@ -63,7 +63,6 @@ function handleFiles(event) {
     }
 }
 
-
 function removeImage(index) {
     const imageToDelete = imagePreviews.value[index];
 
@@ -79,7 +78,6 @@ function removeImage(index) {
     }
 }
 
-
 function updateProduct() {
     form.post(route('admin.products.update', props.product.id), {
         onSuccess: () => {
@@ -88,9 +86,6 @@ function updateProduct() {
         }
     });
 }
-
-
-
 
 onMounted(() => {
     form.clearErrors();

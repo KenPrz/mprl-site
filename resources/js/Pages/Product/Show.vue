@@ -288,7 +288,6 @@ function submitInquiry() {
     form.post(route('productInquiry.send'), {
         onError: (errors) => {
           showModal.value = false;
-          console.log(errors);
             if (errors.loginRequired) {
                 openLogin(); // Show the login modal
             }
@@ -300,33 +299,6 @@ function submitInquiry() {
         },
     });
 }
-
-// const inquirySuccess = ref(false);
-// const submitInquiry = () => {
-//   axios.post('/inquire-product', {
-//     name: inquiry.value.name,
-//     email: inquiry.value.email,
-//     phone: inquiry.value.phone,
-//     product: props.products.name,
-//     message: inquiry.value.message
-//   })
-//   .then(response => {
-//     showModal.value = false;
-//     inquirySuccess.value = true; 
-//     inquiry.value = {
-//       name: '',
-//       email: '',
-//       phone: '',
-//       message: '',
-//     };
-//     setTimeout(() => {
-//       inquirySuccess.value = false;
-//     }, 5000);
-//   })
-//   .catch(error => {
-//     console.error('Error submitting inquiry:', error);
-//   });
-// };
 
 onMounted(() => {
   if (props.products.images.length > 0) {

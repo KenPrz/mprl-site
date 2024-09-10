@@ -56,8 +56,8 @@
                             <div class="bg-gray-300 rounded-lg w-full h-56 mt-2 flex items-center justify-center overflow-hidden">
                                 <div class="flex space-x-2">
                                     <div v-for="(preview, index) in imagePreviews" :key="index" class="relative">
-                                        <img :src="preview" class="w-24 h-24 object-cover rounded-lg" />
-                                        <button @click="removeImage(index)" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
+                                        <img :src="preview" class="w-32 h-32 object-cover rounded-lg" />
+                                        <button @click="removeImage(index)" class="absolute top-0 right-0 h-8 w-8 bg-red-500 text-white rounded-full p-1 transform translate-x-1/2 -translate-y-1/2">
                                             <i class="fa-solid fa-times"></i>
                                         </button>
                                     </div>
@@ -115,16 +115,23 @@
   const imagePreviews = ref([]);
   function handleFiles(event) {
     const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            imagePreviews.value.push(e.target.result);
-            form.image.push(file);
-        };
-        reader.readAsDataURL(file);
+  
+    // Ensure only one file is handled
+    if (files.length > 0) {
+      const file = files[0]; // Take the first file
+  
+      // Clear previous previews and form image data
+      imagePreviews.value = [];
+      form.image = [];
+  
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreviews.value.push(e.target.result); // Add the preview for the selected image
+        form.image.push(file); // Add the file object to form data
+      };
+      reader.readAsDataURL(file);
     }
-}
+  }
 
 function removeImage(index) {
     imagePreviews.value.splice(index, 1);

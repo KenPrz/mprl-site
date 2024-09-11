@@ -17,7 +17,7 @@ class ServicesController extends Controller
         $projectCategory = ProjectCategory::select('id', 'name')->get();
         $projects = Projects::with(['firstImage','images'])
                         ->orderBy('created_at', 'desc')
-                        ->take(5)->get();
+                        ->get();
         $faqs = Faqs::orderBy('created_at', 'desc')->get();
         $services = Services::all();
 

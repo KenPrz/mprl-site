@@ -26,7 +26,7 @@
     @inertiaHead
 </head>
 
-<body class="font-poppins antialiased">
+<body class="font-montserrat antialiased">
     @inertia
 </body>
 <style>

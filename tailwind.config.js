@@ -47,7 +47,7 @@ module.exports = {
         '2xs': '1px',
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        poppins: ["Poppins", "sans-serif", "montserrat"],
       },
       colors: {
         main: {

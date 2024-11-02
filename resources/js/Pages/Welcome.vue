@@ -34,33 +34,46 @@ onUnmounted(() => {
             style="background-image:url('/images/mprl-projects/solar-roof.jpeg');">
             <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center">
                 <div class="container mx-auto px-4">
-                    <div class="flex flex-col items-center justify-center space-y-6 mb-10">
-                        <h1 data-aos="fade-right" data-aos-delay="300" data-aos-duration="600" data-aos-once="true"
-                            class="text-3xl md:text-5xl font-semibold">
-                            <span class="text-main-500">Renewable</span> <span class="text-offset-400">Energy</span>
-                        </h1>
-                        <h2 data-aos="fade-left" data-aos-delay="300" data-aos-duration="600" data-aos-once="true"
-                            class="text-4xl md:text-6xl font-semibold text-white">
-                            Shine Brighter, Live lighter
-                        </h2>
+                    <div class="flex flex-col space-y-6 mb-10">
+                        <div class="font-bold text-8xl text-white-500 text-start">
+                            <h1>Providing Solar Solutions</h1>
+                            <h1>For Your Every Need</h1>
+                        </div>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
-                        class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-5">
+                        class="flex flex-col sm:flex-row items-center justify-start space-y-4 sm:space-y-0 sm:space-x-5">
                         <a :href="route('contact.index')"
-                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border-main-600 bg-main-500 text-white hover:bg-main-600 transition-colors duration-200">
+                            class="w-[200px] rounded-sm px-6 py-5 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
                             Contact us
                         </a>
                         <a :href="route('brochure.download')"
-                            class="rounded-md w-full sm:w-1/5 px-6 py-3 text-sm md:text-base font-medium border border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
+                            class="w-[200px] rounded-sm px-6 py-5 text-sm md:text-base font-medium border-2 border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
                             Download Brochure
                         </a>
                     </div>
+                    <div class="flex items-center justify-between mt-20">
+                        <div class="flex items-center justified-center text-white space-x-2">
+                            <span class="font-semibold text-6xl">130+</span>
+                            <div class="mt-2 flex flex-col justified-center text-white text-start text-lg font-normal">
+                                <span>Satisfied</span>
+                                <span>Clients</span>
+                            </div>
+                            <span class="font-semibold text-6xl">11+</span>
+                            <div class="mt-2 flex flex-col justified-center text-white text-start text-lg font-normal">
+                                <span>Years of Experience</span>
+                                <span>in Solar Installation Service</span>
+                            </div>
+                        </div>
+                        <div class="text-white text-start">
+                            <p class="text-lg">Switch to solar energy and watch as your energy <br> costs drop down.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent opacity-70">
-            </div>
-            <div class="w-full absolute bottom-0 py-[3px] bg-main-400"></div>
         </section>
+        <div class="flex flex-col bg-white-500 py-10">
+            <span class="w-full text-center">Our trusted brands and partner distributors</span>
+        </div>
         <div class="mt-10 flex flex-col items-center justify-center bg-white-500 mx-10 md:mx-24 md:space-y-10">
             <section class="flex-row md:flex items-center justify-center my-5 space-y-5">
                 <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true"
@@ -354,7 +367,7 @@ export default {
                     content: 'The installation timeline for a residential solar system varies depending on the system size, complexity, and local regulations. Our team can provide an estimated timeline for your specific project.',
                 }
             ],
-            hoveredImage: '/images/solar-icons/solar-panel.png'
+            hoveredImage: '/images/solar-icons/solar-panel.png',
         };
     },
     methods: {

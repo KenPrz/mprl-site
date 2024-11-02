@@ -15,49 +15,10 @@ const props = defineProps({
 // Scroll-related logic
 const scroll = ref(0);
 const isFixedTop = ref(false);
-const isActive = ref(null);
 
 const handleScroll = () => {
   scroll.value = Math.round(window.scrollY);
   updateActiveSection();
-};
-
-const updateActiveSection = () => {
-  const sections = [
-    'about-solar',
-    'solar',
-    'solar-types',
-    'solar-benefits',
-    'company-profile',
-    'history',
-    'vision-mission',
-    'core-values',
-    'team',
-    'certificates',
-    'shareholders',
-    'org-chart'
-  ];
-  let currentSection = '';
-
-  sections.forEach((sectionId) => {
-    const sectionElement = document.getElementById(sectionId);
-    if (sectionElement) {
-      const { top, bottom } = sectionElement.getBoundingClientRect();
-      if (top <= window.innerHeight / 2 && bottom >= window.innerHeight / 2) {
-        currentSection = sectionId;
-      }
-    }
-  });
-
-  isActive.value = currentSection;
-  if (isActive.value === 'solar') {
-    toggleSolarMenu();
-  } else if (isActive.value === 'company-profile') {
-    toggleCompanyProfileMenu();
-  } else if (isActive.value === 'certificates' || isActive.value === 'shareholders' || isActive.value === 'org-chart') {
-    isSolarMenuOpen.value = false;
-    isComProfOpn.value = false;
-  }
 };
 
 onMounted(async () => {
@@ -93,57 +54,7 @@ watch(() => scroll.value, () => {
   } else {
     isFixedTop.value = false;
   }
-
-  // Update active section based on scroll position
-  updateActiveSection();
 });
-
-// Menu and Sidebar logic
-const isSolarMenuOpen = ref(false);
-const isComProfOpn = ref(false);
-const activeMenuItem = ref(null);
-const isSidebarOpen = ref(false);
-const selectedSection = ref(null);
-
-const toggleSolarMenu = () => {
-  if (!isSolarMenuOpen.value) {
-    isSolarMenuOpen.value = true;
-    isComProfOpn.value = false; // Close Company Profile menu
-    activeMenuItem.value = 'solar';
-  } else {
-    isSolarMenuOpen.value = false;
-    activeMenuItem.value = null;
-  }
-};
-
-const toggleCompanyProfileMenu = () => {
-  if (!isComProfOpn.value) {
-    isComProfOpn.value = true;
-    isSolarMenuOpen.value = false; // Close Solar Power menu
-    activeMenuItem.value = 'companyProfile';
-  } else {
-    isComProfOpn.value = false;
-    activeMenuItem.value = null;
-  }
-};
-
-const toggleSidebar = () => {
-  isSidebarOpen.value = !isSidebarOpen.value;
-};
-
-const scrollToSection = (targetId) => {
-  selectedSection.value = targetId;
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    const offset = 150; // Adjust based on your fixed header height
-    const elementPosition = targetElement.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.scrollY - offset;
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  }
-};
 
 // Image preview logic
 const images = ref([
@@ -202,8 +113,8 @@ const closePreview = () => {
       <div class="self-center my-24 w-full max-w-[1346px] max-md:mt-10">
         <!-- 1st Section -->
         <section>
-          <div class="flex flex-col md:flex-row gap-28 max-md:gap-0">
-            <div data-aos-once="true" data-aos="fade-left" data-aos-duration="500" data-aos-delay="500" class="flex flex-col w-full md:w-1/2 max-md:ml-0">
+          <div class="flex flex-col md:flex-row gap-24 max-md:gap-0">
+            <div data-aos-once="true" data-aos="fade-left" data-aos-duration="500" data-aos-delay="500" class="flex flex-col w-full md:w-6/12 max-md:ml-0">
               <p class="text-sm text-main-500">OUR STORY</p>
               <h1 class="text-2xl font-semibold text-blue-500">Dedicated to Delivering Solar Solutions with Cutting-Edge Technology.</h1>
               <div class="mt-12 leading-relaxed text-sm text-blue-500 text-justify max-md:mt-5 max-md:max-w-full gap-y-6 flex flex-col">
@@ -218,7 +129,7 @@ const closePreview = () => {
                 </div>
               </div> 
             </div>          
-            <div data-aos-once="true" data-aos="fade-right" data-aos-duration="500" data-aos-delay="500" class="my-5 w-full md:w-1/2 mt-14 md:mt-0 max-md:ml-0 flex flex-col items-center text-start">
+            <div data-aos-once="true" data-aos="fade-right" data-aos-duration="500" data-aos-delay="500" class="w-full md:w-7/12 md:mt-0 max-md:ml-0 flex flex-col items-center text-start">
               <img 
                 src="/images/mprl-projects/received_418454461188399.jpeg" alt="our-story"
                 class="mt-5 w-full h-auto object-cover rounded"
@@ -343,7 +254,7 @@ const closePreview = () => {
                 <!-- 2015 Section -->
                 <div class="flex-1 text-sm flex flex-col">
                   <div data-aos="fade-up" data-aos-once="true" class="flex flex-col h-full">
-                    <div class="flex flex-col md:flex-row gap-2 md:gap-5 px-2 items-center py-4">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-5 px-2 items-center">
                       <h1 class="text-4xl text-main-500 font-bold">2015</h1>
                       <h2 class="text-xl text-blue-500 font-semibold text-center md:text-start">
                         RAPID EXPANSION INTO <br> NCR AND CALABARZON

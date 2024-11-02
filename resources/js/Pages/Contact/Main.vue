@@ -100,9 +100,9 @@ const emit = defineEmits(['openLogin']);
                 <div class="flex flex-col items-center justify-center space-y-6">
                     <h2 class="text-4xl md:text-5xl font-semibold text-white">CONTACT US</h2>
                     <div class="text-md md:tracking-wide space-x-4 flex text-white">
-                        <a class="hover:underline" :href="route('welcome')">HOME</a>
+                        <a class="hover:underline" :href="route('welcome')">Home</a>
                         <span class="mx-2">/</span>
-                        <a class="hover:underline" :href="route('contact.index')">CONTACT US</a>
+                        <a class="hover:underline" :href="route('contact.index')">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -201,14 +201,14 @@ const emit = defineEmits(['openLogin']);
                                 <label for="message" class="absolute text-sm text-gray-800 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-2 z-10 origin-[0] bg-transparent px-3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-8 peer-focus:font-bold peer-valid:-translate-y-8">Message</label>
                                 <InputError class="mt-2" :message="form.errors.message" />
                             </div>
-                            <button :disabled="form.processing" type="submit" class="text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
+                            <button :disabled="form.processing" type="submit" class="px-6 text-white bg-main-500 hover:bg-main-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm w-full sm:w-auto py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                         </form>
                     </div>
                 </div>
                 <!-- Show on Small screens: Follow Us Section and Map Section -->
                 <div class="block md:hidden">
                     <FollowUs />
-                    <iframe class="mt-16 max-md:ml-0 w-full h-60 border-2 border-inherit rounded-lg" 
+                    <iframe class="mt-16 max-md:ml-0 w-full h-60 border-2 border-inherit rounded-[25px]" 
                         loading="lazy" allowfullscreen 
                         src="https://www.google.com/maps/embed/v1/view?zoom=15&center=14.1757%2C121.2482&key=AIzaSyCoYUwKxuWHK_QlAe2vJuApe_SbGirZ-fM">
                     </iframe>
@@ -216,7 +216,7 @@ const emit = defineEmits(['openLogin']);
 
                 <!-- Contact Cards -->
                 <div class="p-5 flex flex-col md:flex-row justify-center gap-6 mt-28 h-full w-full">
-                    <div data-aos-once="true" data-aos="fade-right" data-aos-delay="50" data-aos-duration="500" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-2/3 min-h-48 hover:shadow-xl hover:text-main-500">
+                    <div data-aos-once="true" data-aos="fade-right" data-aos-delay="50" data-aos-duration="500" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-1/3 min-h-48 hover:shadow-xl hover:text-main-500">
                         <div class="row my-3">
                             <span class="w-10 h-10 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-envelope" style="font-size: 20px"></i>
@@ -225,16 +225,16 @@ const emit = defineEmits(['openLogin']);
                         <h5 class="font-semibold mb-2 text-center">SEND US AN EMAIL</h5>
                         <p class="text-neutral-600 text-center text-xs">mprlsolar@gmail.com</p>
                     </div>                        
-                    <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="500" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-2/3 min-h-48 hover:shadow-xl hover:text-main-500">
+                    <div data-aos-once="true" data-aos="fade-right" data-aos-delay="100" data-aos-duration="500" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-1/3 min-h-48 hover:shadow-xl hover:text-main-500">
                         <div class="row my-3">
                             <span class="w-10 h-10 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-location-dot" style="font-size: 20px"></i>
                             </span>
                         </div>
                         <h5 class="font-semibold mb-2 text-center">VISIT US AT OUR OFFICE</h5>
-                        <p class="text-neutral-600 text-center text-xs">Blk 9 Lot 87 Seville St., La Vecina Camella Dos Rios, Cabuyao, Laguna 4025 Cabuyao, Philippines</p>
+                        <p class="text-neutral-600 text-center text-xs px-5">Blk 9 Lot 87 Seville St., La Vecina Camella Dos Rios, Cabuyao, Laguna 4025 Cabuyao, Philippines</p>
                     </div>
-                    <div data-aos="fade-right" data-aos-delay="150" data-aos-duration="700" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-2/3 min-h-48 hover:shadow-xl hover:text-main-500">
+                    <div data-aos-once="true" data-aos="fade-right" data-aos-delay="150" data-aos-duration="700" class="card border rounded-lg shadow py-2 mb-4 flex flex-col items-center w-full md:w-1/3 min-h-48 hover:shadow-xl hover:text-main-500">
                         <div class="row my-3">
                             <span class="w-10 h-10 bg-main-500 rounded-full flex items-center justify-center mb-2 text-white">
                                 <i class="fa-solid fa-phone" style="font-size: 20px"></i>

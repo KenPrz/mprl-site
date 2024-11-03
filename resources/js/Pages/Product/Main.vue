@@ -9,7 +9,7 @@
   <section>
         <div class="relative py-44 bg-cover bg-center h-auto"
             style="background-image: url('/images/blog-header-bg.png');">
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
+            <div class="absolute inset-0 bg-blue-500 bg-opacity-70 flex flex-col justify-center items-center text-center">
                 <div class="flex flex-col items-center justify-center space-y-6">
                     <h2 class="text-4xl md:text-5xl font-semibold text-white">Products</h2>
                     <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">
@@ -33,18 +33,22 @@
             <div class="mt-2 sm:mt-0 lg:mt-2 w-full">
               <ProductFilter :categories="categories" @update-products="updateProducts" />
             </div>
-            <div class="relative w-3/4 mt-10 hidden sm:block">
+            <Link :href="route('contact.index')">
+            <div class="relative ml-8 mt-10 hidden sm:block shadow-lg" data-aos="fade-right">
               <img src="images/products-images/contact.png" class="w-full h-auto" alt="Product Image">
-              <div class="absolute inset-0 flex items-end justify-start mb-2 pl-3">
-                <p class="text-white text-sm bg-orange-300 p-2 rounded-lg">CONTACT US</p>
+              <div class="absolute inset-0 flex items-end justify-start mb-2 pl-3" >
+                
+                  <p class="text-white text-sm bg-green-500 p-2 rounded-lg">CONTACT US</p>
+              
               </div>
             </div>
+              </Link>
             <div>
             <div class="mt-10 hidden sm:block">
               <div class="ml-10 text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4">
                 <p class="ml-5 font-bold">NEW PRODUCTS</p>
               </div>
-              <div class="mt-3 border rounded-lg w-3/4 hover:scale-105 transition-transform duration-300 hover:shadow-md" v-for="newproduct in newproducts" :key="newproduct.id">
+              <div class="mt-3 border rounded-lg w-3/4 hover:scale-105 transition-transform duration-300 hover:shadow-md" v-for="newproduct in newproducts" :key="newproduct.id" data-aos="fade-right">
                 <div class="">
                 <a :href="`/product/${newproduct.id}`">
                   <div class="flex gap-5 p-2 pl-3">
@@ -70,6 +74,7 @@
                     <option value="name">Name</option>
                     <option value="power">Power Out</option>
                     <option value="voltage">Voltage</option>
+                    <option value="voltage">Supplier</option>
                   </select>
                 </div>
                 <div class="relative w-full sm:w-auto mt-2">
@@ -141,6 +146,8 @@
     return [...products.value].sort((a, b) => a.power_out - b.power_out);
   } else if (selectedSortOption.value === 'voltage') {
     return [...products.value].sort((a, b) => a.voltage - b.voltage);
+  } else if(selectedSortOption.value === 'supplier'){
+    return [...products.value].sort((a, b) => a.supplier.localeCompare(b.supplier));
   } else {
     return products.value;
   }

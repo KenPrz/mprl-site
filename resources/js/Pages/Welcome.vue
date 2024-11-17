@@ -32,271 +32,153 @@ onUnmounted(() => {
         <section data-aos="fade-in" data-aos-duration="500" data-aos-once="true"
             class="relative py-24 md:py-48 bg-cover bg-center screen-height h-auto"
             style="background-image:url('/images/mprl-projects/solar-roof.jpeg');">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center">
-                <div class="container mx-auto px-4">
-                    <div class="flex flex-col space-y-6 mb-10">
-                        <div class="font-bold text-8xl text-white-500 text-start">
+            <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex flex-col justify-center">
+                <div class="container mx-auto px-6 md:px-8 lg:px-14 mt-20">
+                    <!-- Heading Section -->
+                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-once="true"
+                        class="flex flex-col items-center md:items-start space-y-4 md:space-y-6 mb-8 md:mb-10 text-center md:text-left">
+                        <div class="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight">
                             <h1>Providing Solar Solutions</h1>
                             <h1>For Your Every Need</h1>
                         </div>
                     </div>
+
+                    <!-- Button Section -->
                     <div data-aos="fade-up" data-aos-delay="600" data-aos-duration="600" data-aos-once="true"
-                        class="flex flex-col sm:flex-row items-center justify-start space-y-4 sm:space-y-0 sm:space-x-5">
+                        class="mt-10 flex flex-col sm:flex-row items-center sm:items-start sm:justify-start space-y-4 sm:space-y-0 sm:space-x-5">
                         <a :href="route('contact.index')"
-                            class="w-[200px] rounded-sm px-6 py-5 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
+                            class="text-center w-[200px] rounded-sm px-3 py-4 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
                             Contact us
                         </a>
                         <a :href="route('brochure.download')"
-                            class="w-[200px] rounded-sm px-6 py-5 text-sm md:text-base font-medium border-2 border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
+                            class="text-center w-[200px] rounded-sm px-3 py-4 text-sm md:text-base font-medium border-2 border-white text-white hover:bg-white hover:text-black transition-colors duration-200">
                             Download Brochure
                         </a>
                     </div>
-                    <div class="flex items-center justify-between mt-20">
-                        <div class="flex items-center justified-center text-white space-x-2">
-                            <span class="font-semibold text-6xl">130+</span>
-                            <div class="mt-2 flex flex-col justified-center text-white text-start text-lg font-normal">
-                                <span>Satisfied</span>
-                                <span>Clients</span>
+
+                    <!-- Stats Section -->
+                    <div data-aos="fade-up" data-aos-delay="800" data-aos-duration="600" data-aos-once="true"
+                        class="flex flex-col lg:flex-row justify-center lg:justify-between items-center mt-16 lg:mt-24 space-y-8 lg:space-y-0 lg:space-x-10">
+                        <div data-aos="zoom-in" data-aos-delay="500" data-aos-duration="700" data-aos-once="true"
+                            class="w-full lg:w-1/2 flex flex-col md:flex-row items-center md:items-start justify-start space-y-6 md:space-y-0 md:space-x-8">
+                            <div class="flex items-center text-white space-x-4">
+                                <span class="font-semibold text-4xl sm:text-5xl md:text-6xl">580+</span>
+                                <div class="flex flex-col text-start text-base sm:text-lg font-normal">
+                                    <span>Satisfied</span>
+                                    <span>Clients</span>
+                                </div>
                             </div>
-                            <span class="font-semibold text-6xl">11+</span>
-                            <div class="mt-2 flex flex-col justified-center text-white text-start text-lg font-normal">
-                                <span>Years of Experience</span>
-                                <span>in Solar Installation Service</span>
+                            <div class="flex items-center text-white space-x-4">
+                                <span class="font-semibold text-4xl sm:text-5xl md:text-6xl">11+</span>
+                                <div class="flex flex-col text-start text-base sm:text-lg font-normal">
+                                    <span>Years of Experience</span>
+                                    <span>in Solar Installation Service</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-white text-start">
-                            <p class="text-lg">Switch to solar energy and watch as your energy <br> costs drop down.</p>
+                        <div data-aos="fade-left" data-aos-delay="1200" data-aos-duration="700" data-aos-once="true"
+                            class="text-white text-center lg:text-start px-4 lg:px-0">
+                            <p class="text-base sm:text-lg">Switch to solar energy and watch as your energy <br
+                                    class="hidden lg:block"> costs drop down.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="flex flex-col bg-white-500 py-10">
-            <span class="w-full text-center">Our trusted brands and partner distributors</span>
-        </div>
         <div class="mt-10 flex flex-col items-center justify-center bg-white-500 mx-10 md:mx-24 md:space-y-10">
-            <section class="flex-row md:flex items-center justify-center my-5 space-y-5">
+            <section class="flex flex-col lg:flex-row items-center justify-center mx-auto px-4">
                 <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true"
                     class="w-full md:w-1/2 flex items-center justify-end me-10">
                     <img src="/images/mprl-projects/who-are-we.jpeg" alt="House"
-                        class="w-full md:w-3/4 h-full object-cover rounded-lg">
+                        class="w-full md:w-full h-full object-cover ps-1">
                 </div>
-                <div class="w-full md:w-1/2 flex flex-col">
-                    <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
-                        class="text-2xl font-bold">Who are we?</h1>
+                <div class="w-full md:w-1/2 flex flex-col space-y-6 md:mx-10 md:px-14">
+                    <div class="flex flex-col mt-10 md:mb-14">
+                        <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
+                            class="text-md text-main-500 font-semibold">ABOUT US</h2>
+                        <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                            class="text-5xl font-bold text-blue-500">WHO ARE WE?</h1>
+                    </div>
                     <div class="flex flex-col space-y-2">
-                        <p data-aos="fade-left" data-aos-delay="300" data-aos-duration="400" data-aos-once="true">
-                            <span class="font-semibold">ONE MPRL <span class="text-offset-500">Solar</span> Power
-                                Corporation</span> is a leading provider of solar energy solutions in the
-                            Philippines, with a strong foundation in the Bicol Region since 2013. We are a company on
-                            the move, with a vision to expand our expertise and quality service to NCR, CALABARZON, and
-                            neighboring provinces.
-                        </p>
-                        <p data-aos="fade-left" data-aos-delay="350" data-aos-duration="400" data-aos-once="true">
-                            Our core mission is to empower our customers to harness the sun's clean and sustainable
-                            power. We achieve this by designing, installing, and maintaining customized solar power
-                            systems for residential, and commercial clients. Our dedicated team prioritizes exceptional
-                            customer service, ensuring a smooth experience from initial consultation to
-                            post-installation maintenance.
+                        <p class="text-blue-500 md:pe-10 md:text-justify" data-aos="fade-left" data-aos-delay="300"
+                            data-aos-duration="400" data-aos-once="true">
+                            <b>ONE MPRL Solar Power Corporation</b>
+                            has been a trusted provider of solar energy solutions in the Bicol Region since 2013.
+                            We're proud of our expertise and are excited to share it with more Filipinos.
+                            We're expanding our services to NCR, CALABARZON, and neighbouring provinces,
+                            bringing clean energy and reliable service to new communities.
                         </p>
                     </div>
-                </div>
-            </section>
-            <section class="flex flex-col items-center my-10 px-4 md:px-8 border-b-2 pb-5 sm:pb-10">
-                <!-- Pulsating H1 -->
-                <h1 class="text-xl md:text-2xl font-semibold mb-5 p-4 md:p-5 bg-offset-400 text-white rounded-xl relative z-10 animate-pulse"
-                    data-aos="fade-down" data-aos-once="true">
-                    How Does Solar Power Work?
-                </h1>
-
-                <div class="relative flex flex-col items-center w-full max-w-xl md:max-w-4xl">
-                    <!-- Timeline Line with Multiple Traveling Circles -->
-                    <div class="absolute w-1 bg-gray-300 h-full top-0 left-1/2 transform -translate-x-1/2 z-0">
-                        <div class="circle-traveling" style="animation-delay: 0s;"></div>
-                        <div class="circle-traveling" style="animation-delay: 2s;"></div>
-                        <div class="circle-traveling" style="animation-delay: 4s;"></div>
-                    </div>
-
-                    <!-- Timeline Item 1 -->
-                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
-                        data-aos-once="true">
-                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5 z-10 md:z-0">
-                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg">
-                                Step 1: Sunlight Hits Panels - Solar panels capture sunlight with photovoltaic (PV)
-                                cells.
-                            </div>
-                        </div>
-                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
-                        <div class="w-0 md:w-1/2"></div>
-                    </div>
-
-                    <!-- Timeline Item 2 -->
-                    <div class="flex w-full flex-col md:flex-row justify-end items-center mb-8" data-aos="fade-left"
-                        data-aos-once="true">
-                        <div class="w-0 md:w-1/2"></div>
-                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
-                        <div class="w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
-                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
-                                Step 2: Electricity Generation - PV cells convert sunlight into direct current (DC)
-                                electricity.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 3 -->
-                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
-                        data-aos-once="true">
-                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5">
-                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
-                                Step 3: Inverter Conversion - An inverter transforms DC into alternating current (AC)
-                                for home use.
-                            </div>
-                        </div>
-                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
-                        <div class="w-0 md:w-1/2"></div>
-                    </div>
-
-                    <!-- Timeline Item 4 -->
-                    <div class="flex w-full flex-col md:flex-row justify-end items-center mb-8" data-aos="fade-left"
-                        data-aos-once="true">
-                        <div class="w-0 md:w-1/2"></div>
-                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
-                        <div class="w-full md:w-1/2 flex justify-start pl-0 md:pl-5">
-                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
-                                Step 4: Powering Your Space - The AC electricity powers your appliances and devices.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline Item 5 -->
-                    <div class="flex w-full flex-col md:flex-row justify-start items-center mb-8" data-aos="fade-right"
-                        data-aos-once="true">
-                        <div class="w-full md:w-1/2 flex justify-end pr-0 md:pr-5">
-                            <div class="bg-main-500 text-white py-3 px-4 rounded-lg shadow-lg z-10 md:z-0">
-                                Step 5: Storing Energy - Excess energy is stored in batteries for later use or fed back
-                                into the grid.
-                            </div>
-                        </div>
-                        <div class="bg-main-500 w-6 h-6 rounded-full shadow-lg z-10 green-circle hidden md:block"></div>
-                        <div class="w-0 md:w-1/2"></div>
-                    </div>
-
-                    <!-- Battery Section with Blinking Light -->
-                    <div class="flex w-full md:w-1/2 justify-center items-center mt-5 md:mt-10 z-30" data-aos="fade-up"
-                        data-aos-once="true">
-                        <div class="bg-gray-700 text-white py-4 px-6 rounded-lg shadow-lg flex items-center space-x-4">
-                            <div class="w-5 h-5 bg-yellow-500 rounded-full blink"></div>
-                            <div>
-                                <p class="font-semibold">Battery Storage</p>
-                                <p>Stored energy is ready for use when the sun isn't shining or as backup power.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Call-to-Action Section -->
-                <div class="flex flex-col items-center mt-12" data-aos="fade-up" data-aos-once="true">
-                    <p class="text-lg font-semibold mb-3">Want to Learn More?</p>
-                    <p class="text-gray-700 mb-5 text-center">Interested in how solar power works?</p>
-                    <a :href="route('about.index')"
-                        class="py-2 px-5 bg-main-500 text-white text-sm rounded-full hover:bg-main-600 transition-colors duration-200">
-                        Yes, I'm Interested!
-                    </a>
-                </div>
-            </section>
-
-            <section class="flex flex-col items-center justify-center max-w-6xl mx-auto">
-                <div class="flex flex-col text-center mb-8 text-blue-500">
-                    <h1 class="text-xl">Our Products</h1>
-                    <h2 class="text-2xl font-semibold">Illuminate with the power of the <span
-                            class="text-offset-500">sun</span></h2>
-                </div>
-                <div class="flex w-full justify-center items-center">
-                    <!-- Left Image Display Area -->
-                    <div class="hidden lg:flex items-center justify-center w-1/3 h-auto">
-                        <img :src="hoveredImage" alt="Product Image" class="w-full h-auto object-contain"
-                            v-if="hoveredImage">
-                    </div>
-                    <!-- Grid Layout -->
-                    <div class="w-full lg:w-2/3">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
-                            <template v-for="(product, index) in products" :key="index">
-                                <div @mouseover="showImage(product.image)"
-                                    class="hover-card bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
-                                    data-aos="fade-up" data-aos-once="true">
-                                    <img :src="product.image" :alt="product.name" class="w-24 h-24 object-contain">
-                                    <h3 class="text-lg font-semibold mt-3">{{ product.name }}</h3>
-                                    <p class="text-sm text-center">{{ product.description }}</p>
-                                </div>
-                            </template>
-                        </div>
+                    <div class="w-full flex justify-center md:justify-start mt-4">
+                        <a :href="route('about.index')"
+                            class="text-center w-full md:w-[170px] px-6 py-2 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
+                            Learn more
+                        </a>
                     </div>
                 </div>
             </section>
-            <section class="flex flex-col md:max-w-5xl border-t-2 border-blue-400 pt-5 md:pt-10 mx-auto">
-                <h1 data-aos="fade-up" data-aos-once="true" class="text-2xl md:text-3xl font-semibold text-blue-500 text-center mb-5">Types of Solar Systems
-                </h1>
+            <section class="flex flex-col lg:flex-row items-center justify-center mx-auto px-4 mt-14">
+                <!-- Title Section - Stays at the top on mobile, moves to the left on large screens -->
                 <div
-                    class="flex flex-col md:flex-row w-full items-center justify-center space-y-5 md:space-y-0 md:space-x-5">
-                    <!-- Card 1 -->
-                    <div
-                        data-aos="fade-right" data-aos-once="true"
-                        class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
-                        <div class="w-3/4 flex justify-center">
-                            <img class="h-auto w-full object-contain" src="/images/solar-icons/house.png"
-                                alt="atial Solar System">
-                        </div>
-                        <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
-                            <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Residential Solar System</h2>
-                            <p class="text-sm md:text-base my-4">Empower your home with clean, renewable energy through
-                                our
-                                customized residential solar
-                                solutions. Save on electricity bills and contribute to a sustainable future.</p>
-                        </div>
-                        <a
-                            :href="route('about.index',{
-                                sectionName: 'residential-type'
-                            })"
-                            class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
-                            Learn more
-                        </a>
-                    </div>
-                    <!-- Card 2 -->
-                    <div
-                        data-aos="fade-left" data-aos-once="true"
-                        class="w-full md:w-2/6 hover-card border bg-white rounded-lg shadow-lg p-5 flex flex-col items-center justify-between">
-                        <div class="w-3/4 flex justify-center">
-                            <img class="h-auto w-full object-contain" src="/images/solar-icons/industrial.png"
-                                alt="Commercial & Industrial Solar System">
-                        </div>
-                        <div class="flex flex-col items-center justify-center text-center px-5 mt-5 flex-grow">
-                            <h2 class="text-blue-500 text-lg md:text-xl font-semibold">Commercial & Industrial (CNI)
-                                Solar System
-                            </h2>
-                            <p class="text-sm md:text-base my-2">Optimize your business operations with our robust solar
-                                power
-                                systems. Reduce energy costs and enhance your company's sustainability footprint.</p>
-                        </div>
-                        <a :href="route('about.index',{
-                                sectionName: 'commercial-type'
-                            })"
-                            class="mt-5 px-10 py-2 bg-main-500 hover:bg-main-600 text-white rounded-full text-sm md:text-base font-semibold">
-                            Learn more
-                        </a>
+                    class="w-full lg:w-1/3 lg:h-auto flex flex-col items-center lg:items-start mb-10 lg:mb-0 lg:pr-8 space-y-2 text-center lg:text-left">
+                    <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
+                        class="text-md text-main-500 font-semibold">OUR PRODUCTS</h2>
+                    <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                        class="text-3xl font-semibold text-blue-500">Premium Solar Products, Expert Installation</h1>
+                    <p data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                        class="text-lg font-light text-blue-500">Here are the products that we offer</p>
+                </div>
+
+                <!-- Grid Layout -->
+                <div class="w-full lg:w-2/3">
+                    <!-- Responsive grid for 2 rows and 3 columns -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:mt-0">
+                        <template v-for="(product, index) in products" :key="index">
+                            <div class="hover-card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
+                                data-aos="fade-up" data-aos-once="true">
+                                <img :src="product.image" :alt="product.name" class="w-20 h-20 object-contain mb-2">
+                                <h3 class="text-md font-semibold mt-2">{{ product.name }}</h3>
+                                <p class="text-xs text-center">{{ product.description }}</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
+            </section>
+            <section class="flex flex-col lg:flex-row items-center mx-auto px-4 mt-14 w-full">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex flex-col">
+                        <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
+                            class="text-md text-main-500 font-semibold">OUR SERVICES</h2>
+                        <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                            class="text-5xl font-bold text-blue-500">We Cater To Your Needs</h1>
+                    </div>
+                    <div class="flex flex-col justify-center items-end space-y-2">
+                        <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
+                            class="text-md text-blue-500 font-semibold">Here are the services that we offer</h2>
+                        <div>
+                            <a :href="route('contact.index')"
+                                class="text-center w-[200px] rounded-sm px-5 py-1 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
+                                Contact us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </section>
             <section class="flex flex-col items-center justify-center w-full min-h-screen p-5">
                 <div class="flex flex-col md:flex-row w-full max-w-6xl items-center justify-center">
                     <!-- Accordion Section -->
                     <div class="w-full md:w-1/2 p-5">
-                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 md:text-left text-center">Frequently Asked Questions</h1>
+                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 md:text-left text-center">Frequently Asked
+                            Questions
+                        </h1>
                         <Accordion :items="faq" />
                     </div>
                     <!-- Image Section -->
                     <div class="w-full md:w-1/2 p-5 flex justify-center mt-8 md:mt-0">
                         <div class="h-64 w-64 flex items-center justify-center">
-                            <img src="/images/solar-icons/faq.png" alt="Solar Panels" class="w-full h-auto object-cover">
+                            <img src="/images/solar-icons/faq.png" alt="Solar Panels"
+                                class="w-full h-auto object-cover">
                         </div>
                     </div>
                 </div>
@@ -367,17 +249,9 @@ export default {
                     content: 'The installation timeline for a residential solar system varies depending on the system size, complexity, and local regulations. Our team can provide an estimated timeline for your specific project.',
                 }
             ],
-            hoveredImage: '/images/solar-icons/solar-panel.png',
+            hoveredImage: '/images/solar-icons/solar-panel.png'
         };
     },
-    methods: {
-        showImage(image) {
-            this.hoveredImage = image;
-        },
-        hideImage() {
-            this.hoveredImage = null;
-        }
-    }
 };
 </script>
 <style scoped>

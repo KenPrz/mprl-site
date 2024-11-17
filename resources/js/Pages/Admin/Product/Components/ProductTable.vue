@@ -16,6 +16,7 @@ const sortOrder = reactive({
     name: 'asc',
     category_name: 'asc',
     price: 'asc',
+    supplier: 'asc',
     is_displayed: 'asc'
 });
 

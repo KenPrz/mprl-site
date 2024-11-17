@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class ProductController extends Controller
@@ -47,7 +48,7 @@ class ProductController extends Controller
                                 ->orderBy('created_at', 'desc')->take(5)->get();
         $similarproducts = Product::with('category', 'firstImage')
                                         ->orderBy('created_at', 'desc')->take(3)->get();
-
+        $user = User::find($id);
         // Add the categories to the product object
         $product->categories = $categories;
 
@@ -55,6 +56,7 @@ class ProductController extends Controller
             'products' => $product,
             'similarproducts' => $similarproducts,
             'newproducts' => $newProducts,
+            'isAuthenticated' => auth()->check(),
         ]);
     }
 

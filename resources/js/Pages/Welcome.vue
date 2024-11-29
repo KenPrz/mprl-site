@@ -179,11 +179,10 @@ onUnmounted(() => {
                         </div>
                     </div>
                 </div>
-
                 <!-- Grid Section -->
                 <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 p-4 justify-items-center">
                     <!-- Column 1 -->
-                    <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true">
                         <img
                             src="/images/cater-your-needs/solar-panel-installation.png"
                             alt="solar-panel-installation"
@@ -200,7 +199,7 @@ onUnmounted(() => {
                     </div>
 
                     <!-- Column 2 -->
-                    <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true" data-aos-delay="150">
                         <img
                             src="/images/cater-your-needs/construction-services.png"
                             alt="construction-services"
@@ -217,7 +216,7 @@ onUnmounted(() => {
                     </div>
 
                     <!-- Column 3 -->
-                    <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true" data-aos-delay="300">
                         <img
                             src="/images/cater-your-needs/consultation-services.png"
                             alt="consultation-services"

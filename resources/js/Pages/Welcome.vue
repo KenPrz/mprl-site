@@ -92,7 +92,7 @@ onUnmounted(() => {
                     <img src="/images/mprl-projects/who-are-we.jpeg" alt="House"
                         class="w-full md:w-full h-full object-cover ps-1">
                 </div>
-                <div class="w-full md:w-1/2 flex flex-col space-y-6 md:mx-10 md:px-14">
+                <div class="w-full lg:w-1/2 flex flex-col space-y-6 lg:mx-10 lg:px-14">
                     <div class="flex flex-col mt-10 md:mb-14">
                         <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
                             class="text-md text-main-500 font-semibold">ABOUT US</h2>
@@ -117,68 +117,138 @@ onUnmounted(() => {
                     </div>
                 </div>
             </section>
-            <section class="flex flex-col lg:flex-row items-center justify-center mx-auto px-4 mt-14">
-                <!-- Title Section - Stays at the top on mobile, moves to the left on large screens -->
-                <div
-                    class="w-full lg:w-1/3 lg:h-auto flex flex-col items-center lg:items-start mb-10 lg:mb-0 lg:pr-8 space-y-2 text-center lg:text-left">
-                    <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
-                        class="text-md text-main-500 font-semibold">OUR PRODUCTS</h2>
-                    <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
-                        class="text-3xl font-semibold text-blue-500">Premium Solar Products, Expert Installation</h1>
-                    <p data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
-                        class="text-lg font-light text-blue-500">Here are the products that we offer</p>
-                </div>
-
-                <!-- Grid Layout -->
-                <div class="w-full lg:w-2/3">
-                    <!-- Responsive grid for 2 rows and 3 columns -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:mt-0">
-                        <template v-for="(product, index) in products" :key="index">
-                            <div class="hover-card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
-                                data-aos="fade-up" data-aos-once="true">
-                                <img :src="product.image" :alt="product.name" class="w-20 h-20 object-contain mb-2">
-                                <h3 class="text-md font-semibold mt-2">{{ product.name }}</h3>
-                                <p class="text-xs text-center">{{ product.description }}</p>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </section>
-            <section class="flex flex-col lg:flex-row items-center mx-auto px-4 mt-14 w-full">
-                <div class="flex items-center justify-between w-full">
-                    <div class="flex flex-col">
+        </div>
+        <div class="bg-blue-500">
+            <div class="mt-10 flex flex-col items-center justify-center mx-10 md:mx-24 md:space-y-10">
+                <section class="flex flex-col lg:flex-row items-center justify-center mx-auto mt-14 mb-14">
+                    <!-- Title Section - Stays at the top on mobile, moves to the left on large screens -->
+                    <div
+                        class="w-full lg:w-1/3 lg:h-auto flex flex-col items-center lg:items-start mb-10 lg:mb-0 lg:pr-8 space-y-2 text-center lg:text-left">
                         <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
-                            class="text-md text-main-500 font-semibold">OUR SERVICES</h2>
+                            class="text-md text-main-500 font-semibold">OUR PRODUCTS</h2>
                         <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
-                            class="text-5xl font-bold text-blue-500">We Cater To Your Needs</h1>
+                            class="text-3xl font-semibold text-white-500">Premium Solar Products, Expert Installation</h1>
+                        <p data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                            class="text-lg font-light text-white-500">Here are the products that we offer</p>
                     </div>
-                    <div class="flex flex-col justify-center items-end space-y-2">
+
+                    <!-- Grid Layout -->
+                    <div class="w-full lg:w-2/3">
+                        <!-- Responsive grid for 2 rows and 3 columns -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:mt-0">
+                            <template v-for="(product, index) in products" :key="index">
+                                <div class="hover-card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
+                                    data-aos="fade-up" data-aos-once="true">
+                                    <img :src="product.image" :alt="product.name" class="w-20 h-20 object-contain mb-2">
+                                    <h3 class="text-md font-semibold mt-2">{{ product.name }}</h3>
+                                    <p class="text-xs text-center">{{ product.description }}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="mt-10 flex flex-col items-center justify-center mx-4 md:mx-24 md:space-y-10">
+            <section class="flex flex-col items-center mx-auto px-4 mt-14 w-full space-y-10">
+                <!-- Header Section -->
+                <div class="flex flex-col md:flex-row items-center md:items-start justify-between w-full space-y-6 md:space-y-0">
+                    <!-- Left Side -->
+                    <div class="flex flex-col text-center md:text-left">
                         <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
-                            class="text-md text-blue-500 font-semibold">Here are the services that we offer</h2>
+                            class="text-sm md:text-md text-main-500 font-semibold">
+                            OUR SERVICES
+                        </h2>
+                        <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
+                            class="text-3xl md:text-5xl font-bold text-blue-500 leading-tight">
+                            We Cater To Your Needs
+                        </h1>
+                    </div>
+
+                    <!-- Right Side -->
+                    <div class="flex flex-col items-center md:items-end space-y-4">
+                        <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
+                            class="text-sm md:text-md text-blue-500 font-semibold text-center md:text-right">
+                            Here are the services that we offer
+                        </h2>
                         <div>
                             <a :href="route('contact.index')"
-                                class="text-center w-[200px] rounded-sm px-5 py-1 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
+                                class="text-center w-[150px] md:w-[200px] rounded-sm px-4 py-2 text-sm md:text-base font-medium border-2 border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600 transition-colors duration-200">
                                 Contact us
                             </a>
                         </div>
                     </div>
                 </div>
 
-            </section>
-            <section class="flex flex-col items-center justify-center w-full min-h-screen p-5">
-                <div class="flex flex-col md:flex-row w-full max-w-6xl items-center justify-center">
-                    <!-- Accordion Section -->
-                    <div class="w-full md:w-1/2 p-5">
-                        <h1 class="text-2xl font-semibold text-blue-500 mb-8 md:text-left text-center">Frequently Asked
-                            Questions
-                        </h1>
-                        <Accordion :items="faq" />
+                <!-- Grid Section -->
+                <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 p-4 justify-items-center">
+                    <!-- Column 1 -->
+                    <div class="w-full flex flex-col">
+                        <img
+                            src="/images/cater-your-needs/solar-panel-installation.png"
+                            alt="solar-panel-installation"
+                            class="w-full max-w-sm h-auto object-cover rounded-lg"
+                        >
+                        <div class="mt-6 text-blue-500">
+                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                                Solar Panel Installation
+                            </h1>
+                            <p>
+                                We offer a hassle-free solar panel installation from start to finish.
+                            </p>
+                        </div>
                     </div>
-                    <!-- Image Section -->
-                    <div class="w-full md:w-1/2 p-5 flex justify-center mt-8 md:mt-0">
-                        <div class="h-64 w-64 flex items-center justify-center">
-                            <img src="/images/solar-icons/faq.png" alt="Solar Panels"
-                                class="w-full h-auto object-cover">
+
+                    <!-- Column 2 -->
+                    <div class="w-full flex flex-col">
+                        <img
+                            src="/images/cater-your-needs/construction-services.png"
+                            alt="construction-services"
+                            class="w-full max-w-sm h-auto object-cover rounded-lg"
+                        >
+                        <div class="mt-6 text-blue-500">
+                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                                Construction Services
+                            </h1>
+                            <p>
+                                We deliver high-quality, eco-friendly construction projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="w-full flex flex-col">
+                        <img
+                            src="/images/cater-your-needs/consultation-services.png"
+                            alt="consultation-services"
+                            class="w-full max-w-sm h-auto object-cover rounded-lg"
+                        >
+                        <div class="mt-6 text-blue-500">
+                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                                Consultation Services
+                            </h1>
+                            <p>
+                                We provide expert energy and construction consulting for personalized solutions that meet your sustainability goals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="flex flex-col items-center justify-center mx-4 md:mx-24 md:space-y-10 my-14">
+            <section class="flex flex-col items-center justify-center w-full p-">
+                <div class="w-full flex flex-col md:flex-row items-center justify-center">
+                    <!-- Accordion Section -->
+                    <div class="w-full p-5">
+                        <h1 class="text-2xl md:text-3xl font-bold text-blue-500 mb-8 text-center">
+                            Frequently Asked Questions
+                        </h1>
+                        <div class="w-full">
+                            <!-- Accordion Component -->
+                            <Accordion
+                                class="md:mx-28"
+                                :items="faq" 
+                            />
                         </div>
                     </div>
                 </div>

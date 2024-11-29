@@ -11,7 +11,7 @@
   </nav>
   <section>
     <div class="relative py-44 bg-cover bg-center h-auto" style="background-image: url('/images/blog-header-bg.png');">
-      <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center">
+      <div class="absolute inset-0 bg-blue-500 bg-opacity-70 flex flex-col justify-center items-center text-center">
         <div class="flex flex-col items-center justify-center space-y-6">
           <h2 class="text-4xl md:text-5xl font-semibold text-white">Products</h2>
           <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">
@@ -25,7 +25,7 @@
   </section>
   <section class="w-full mt-5">
     <div class="flex flex-col md:flex-row justify-center md:px-32 gap-4">
-      <div class="flex flex-col md:flex-row items-center md:items-start hidden md:block">
+      <div class="flex-col md:flex-row items-center md:items-start hidden md:block">
         <div class="mt-10">
           <div class="text-xl font-medium text-blue-600 lg:ml-0 border-blue-600 border-l-4 p-3">
             <p class="font-bold">NEW PRODUCTS</p>
@@ -34,7 +34,7 @@
             <div class="border rounded-lg hover:scale-105 transition-transform duration-300 hover:shadow-md p-3" v-for="newproduct in newproducts" :key="newproduct.id">
               <div class="flex gap-1 justify-center mt-2">
                 <a :href="`/product/${newproduct.id}`">
-                  <img class="w-1/3 w-auto max-h-40 object-cover" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
+                  <img class="w-auto max-h-40 object-cover" alt="" :src="newproduct.first_image ? `/storage/${newproduct.first_image.images}` : '/images/products-images/solarpanel.png'">
                   <div class="flex flex-col justify-between mt-2">
                     <p class="text-sm font-bold">{{ newproduct.name }}</p>
                     <p class="text-xs">{{ newproduct.power_out }} Watts | {{ newproduct.voltage }} Volts</p>
@@ -48,13 +48,12 @@
           <p class="w-full text-start rounded-lg shadow-md px-4 py-2 m-1 bg-lime-500 text-white mt-10 lg:hidden">{{ products.category.name }}</p>
         </div>
       </div>
-      <div class="container mx-auto w-full md:w-3/4 bg-white shadow-lg rounded border p-4">
+      <div class="container w-full md:w-3/4 bg-white shadow-lg rounded border p-4">
         <!-- Product Details -->
-        <div class="flex flex-col lg:flex-row">
+        <div class="flex flex-col lg:flex-row gap-10">
           <div class="w-full lg:w-2/5">
-            <h2 class="text-xl font-bold">{{ products.name }}</h2>
             <div>
-              <div class="border mt-2 p-3 flex justify-center align-middle rounded-md">
+              <div class=" mt-2 p-3 flex justify-center align-middle ">
                 <img class="w-full lg:w-1/2" :src="mainImage" alt="Main Image">
               </div>
               <div class="flex gap-1 justify-center mt-2">
@@ -69,68 +68,80 @@
               </div>
             </div>
           </div>
-          <div class="w-full lg:w-3/5 mt-4 lg:mt-0 lg:ml-10">
+          <div class="mt-5">
+            <h2 class="text-3xl font-bold text-blue-500">{{ products.name }}</h2>
+            <div class="mt-3">
+                <div class="mt-2">
+                  <p class="text-xl font-bold text-blue-500">Product Description*</p>
+                </div>
+              <div>
+                <p class="text-sm mt-2 tracking-widest" v-html="products.description"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full mt-4 lg:mt-10">
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">PRODUCT SPECIFICATIONS</h4>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Brand</div>
+              <h4 class="font-bold mt-2 align-middle p-1 text-2xl text-blue-500 opacity-80">PRODUCT SPECIFICATIONS</h4>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Brand</div>
                 <div class="ml-2">{{ products.name }}</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Supplier</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4  pt-3">
+                <div class="w-1/3">Supplier</div>
                 <div class="ml-2">{{ products.supplier }}</div>
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">TECHNICAL SPECIFICATIONS</h4>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Power Output</div>
+              <h4 class="font-bold mt-2 align-middle p-1 text-2xl text-blue-500 opacity-80">TECHNICAL SPECIFICATIONS</h4>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Power Output</div>
                 <div class="ml-2">{{ products.power_out }} Watts</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Efficiency</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Efficiency</div>
                 <div class="ml-2">{{ products.efficiency }} %</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Voltage</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Voltage</div>
                 <div class="ml-2">{{ products.voltage }} Volts</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Current</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Current</div>
                 <div class="ml-2">{{ products.current }}A</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Type</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Type</div>
                 <div class="ml-2">{{ products.type }}</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Temperature Coefficient</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Temperature Coefficient</div>
                 <div class="ml-2">{{ products.temp_coeff }}%/°C</div>
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">PHYSICAL CHARACTERISTIC</h4>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Dimensions</div>
+              <h4 class="font-bold mt-2 align-middle p-1 text-2xl text-blue-500 opacity-80">PHYSICAL CHARACTERISTIC</h4>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Dimensions</div>
                 <div class="ml-2">{{ products.dimension }}</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Weight</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Weight</div>
                 <div class="ml-2">{{ products.weight }}kg</div>
               </div>
             </div>
             <div>
-              <h4 class="bg-gray-200 mt-2 align-middle p-1">OTHER DETAILS</h4>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Warranty</div>
+              <h4 class="font-bold mt-2 align-middle p-1 text-2xl text-blue-500 opacity-80">OTHER DETAILS</h4>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Warranty</div>
                 <div class="ml-2">{{ products.warranty }}</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Certifications</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Certifications</div>
                 <div class="ml-2">{{ products.certification }}</div>
               </div>
-              <div class="flex border gap-2">
-                <div class="w-1/3 border-r-2">Data Sheet</div>
+              <div class="flex border-t-2 gap-24 text-xl tracking-wide mt-4 pt-3">
+                <div class="w-1/3 -r-2">Data Sheet</div>
                 <div class="ml-2">
                     <a v-if="products.datasheet" :href="`//${products.datasheet}`" target="_blank" rel="noopener noreferrer">
                         see datasheet
@@ -141,19 +152,19 @@
                 </div>
               </div>
               <div class="mt-5">
-                <button @click="showModal = true" class="bg-main-500 p-2 rounded-lg text-white">INQUIRE NOW</button>
+                <button
+                  @click="isAuthenticated ? (showModal = true) : (showLoginModal = true)"
+                  :class="{
+                    'bg-main-500 cursor-pointer': isAuthenticated,
+                    'bg-gray-500 cursor-not-allowed': !isAuthenticated
+                  }"
+                  class="px-4 py-2 rounded-lg text-white text-xl"
+                >
+                  INQUIRE NOW
+                </button>
               </div>
             </div>
           </div>
-        </div>
-        <div class="mt-3">
-          <div class="mt-2">
-            <p class="text-xl">Product Description*</p>
-          </div>
-          <div>
-            <p class="text-sm mt-2 tracking-widest" v-html="products.description"></p>
-          </div>
-        </div>
         <div class="border-t-4 mt-6">
           <div class="mt-2">
             <p class="text-xl">Similar Product Listing</p>
@@ -235,6 +246,8 @@ const toast = useToast();
 
 const scroll = ref(0);
 const showModal = ref(false);
+const showLoginModal = ref(false);
+
 
 const props = defineProps({
   products: {
@@ -248,7 +261,8 @@ const props = defineProps({
   newproducts: {
     type: Array,
     required: true
-  }
+  },
+  isAuthenticated: Boolean
 });
 
 const form = useForm({
@@ -263,7 +277,6 @@ const openLogin = () => {
     showLoginModal.value = true;
 }
 
-const showLoginModal = ref(false);
 const showRegisterModal = ref(false);
 
 // Function to open the login modal and close the register modal

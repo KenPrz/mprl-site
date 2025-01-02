@@ -3,25 +3,28 @@ import { ref, watch, defineEmits } from 'vue';
 import NavLink from './NavLink.vue';
 import ApplicationLogo from './ApplicationLogo.vue';
 
-
 const isOpen = ref(false);
 
 const props = defineProps({
-    is_black: {
+    isWhite: {
         type: Boolean,
         default: false,
     },
 });
 
-const baseColor = ref(props.is_black);
+const emits = defineEmits(['update:isWhite']);
+
+const baseColor = ref(props.isWhite);
 
 // Watch for changes in the prop and update baseColor accordingly
-watch(() => props.is_black, (newValue) => {
+watch(() => props.isWhite, (newValue) => {
     baseColor.value = newValue;
 });
 
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;
+    const newColor = !baseColor.value;
+    emits('update:isWhite', newColor);
 };
 </script>
 
@@ -70,32 +73,32 @@ const toggleMenu = () => {
         }" class="md:hidden text-black-500 space-y-2 px-4 py-2 transform transition-all duration-300">
             <li>
                 <NavLink :href="route('welcome')" :active="route().current('welcome')">
-                    <span class="text-main-500">Home</span>
+                    <span class="text-black-500">Home</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink :href="route('about.index')" :active="route().current('about.index')">
-                    <span class="text-main-500">About Us</span>
+                    <span class="text-black-500">About Us</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink :href="route('products')" :active="route().current('products')">
-                    <span class="text-main-500">Products</span>
+                    <span class="text-black-500">Products</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink :href="route('services.index')" :active="route().current('services.index')">
-                    <span class="text-main-500">Services</span>
+                    <span class="text-black-500">Services</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink :href="route('blog.index')" :active="route().current('blog.index')">
-                    <span class="text-main-500">Blog</span>
+                    <span class="text-black-500">Blog</span>
                 </NavLink>
             </li>
             <li>
                 <NavLink :href="route('contact.index')" :active="route().current('contact.index')">
-                    <span class="text-main-500">Contact Us</span>
+                    <span class="text-black-500">Contact Us</span>
                 </NavLink>
             </li>
         </ul>

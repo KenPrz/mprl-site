@@ -10,7 +10,7 @@ const props = defineProps({
     active: {
         type: Boolean,
     },
-    is_black: {
+    isWhite: {
         type: Boolean,
     },
 });
@@ -18,7 +18,7 @@ const props = defineProps({
 const classes = computed(() =>
     props.active
         ? 'text-offset-500 hover:text-offset-700'
-        : (props.is_black ? 'text-black hover:text-black' : 'text-white hover:text-offset-500')
+        : (props.isWhite ? 'text-black hover:text-black' : 'text-white hover:text-offset-500')
 );
 </script>
 

@@ -12,49 +12,50 @@ import { Link } from '@inertiajs/vue3';
 
 const scrollY = ref(window.scrollY);
 const isWhite = ref(scrollY.value > 0);
+const isBurgerOpen = ref(false);
+const autoAlign = ref('right');
+
+// Function to update `isWhite` state based on `scrollY` or `isBurgerOpen`
+const updateIsWhite = () => {
+  if (isBurgerOpen.value) {
+    isWhite.value = true; // Force `isWhite` to true if the hamburger is open
+  } else {
+    isWhite.value = scrollY.value > 0; // Update based on scroll position
+  }
+};
 
 const handleScroll = () => {
   scrollY.value = window.scrollY;
+  updateIsWhite();
 };
 
-// Update `isWhite` based on `scrollY`
-watch(scrollY, (newValue) => {
-  isWhite.value = newValue > 0;
-});
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
-
-const autoAlign = ref('right');
+// Function to handle screen resize for alignment
 const updateAutoAlign = () => {
   autoAlign.value = window.innerWidth < 1200 ? 'right' : 'left';
 };
 
+// Watch scrollY changes to update `isWhite`
+watch(scrollY, updateIsWhite);
+
+// Watch isBurgerOpen changes to enforce `isWhite` logic
+watch(isBurgerOpen, updateIsWhite);
+
 onMounted(() => {
-  updateAutoAlign();
+  updateAutoAlign(); // Initial check on mount
   window.addEventListener('resize', updateAutoAlign);
+  window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', updateAutoAlign);
+  window.removeEventListener('scroll', handleScroll);
 });
 
-const handleHamburgerColorSwitch = (newColor) => {
-
-  if (scrollY.value === 0 && !isWhite.value) {
-    switchColor(newColor);
-  }
+// Function to handle hamburger open/close events
+const handleHamburgerOpen = (isOpen) => {
+  isBurgerOpen.value = isOpen;
 };
 
-const switchColor = (newColor) => {
-  console.log(newColor);
-  isWhite.value = newColor;
-}
 </script>
 
 <template>
@@ -210,8 +211,8 @@ const switchColor = (newColor) => {
       </div>
     </div>
     <div class="block md:hidden">
-      <Hamburger 
-        @update:isWhite="handleHamburgerColorSwitch" 
+      <Hamburger
+        @update:isHamburgerOpen="handleHamburgerOpen"
         :isWhite="isWhite" 
       />
     </div>

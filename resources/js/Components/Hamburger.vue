@@ -12,7 +12,10 @@ const props = defineProps({
     },
 });
 
-const emits = defineEmits(['update:isWhite']);
+const emits = defineEmits([
+  'update:isWhite',
+  'update:is-hamburger-open',
+]);
 
 const baseColor = ref(props.isWhite);
 
@@ -24,7 +27,7 @@ watch(() => props.isWhite, (newValue) => {
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;
     const newColor = !baseColor.value;
-    emits('update:isWhite', newColor);
+    emits('update:is-hamburger-open', isOpen.value);
 };
 </script>
 

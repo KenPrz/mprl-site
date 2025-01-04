@@ -67,7 +67,7 @@ const handleHamburgerOpen = (isOpen) => {
     <div class="hidden md:block">
       <!-- Hide this section when scrolling -->
       <div
-        class="md:px-10 lg:px-20 flex sm:px-10 justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
+        class="md:px-10 lg:px-28 flex sm:px-10 justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
         <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
           <div class="flex items-center space-x-2">
             <i class="pi pi-map-marker"></i>
@@ -90,7 +90,7 @@ const handleHamburgerOpen = (isOpen) => {
         </div>
       </div>
       <!-- Make this section sticky when scrolling -->
-      <div class="flex justify-between py-1 items-center h-30 md:px-10 lg:px-20 sm:px-10 ">
+      <div class="flex justify-between py-1 items-center h-30 md:px-10 lg:px-28 sm:px-10 ">
         <div>
           <NavLink :href="route('welcome')" :isWhite="isWhite">
             <ApplicationLogo :isDark="isWhite" />

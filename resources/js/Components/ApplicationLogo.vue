@@ -1,39 +1,23 @@
 <template>
-  <div class="hidden sm:block">
+  <div class="py-4">
     <img
       v-if="isDark"
-      class="h-20 svg-scale"
-      :src="logoHorizontalDark"
+      class="h-8 svg-scale"
+      :src="logoDark"
       alt="Dark Logo"
     >
     <img
       v-else
-      class="h-20 svg-scale"
-      :src="logoHorizontalLight"
+      class="h-8 svg-scale"
+      :src="logoLight"
       alt="Light Logo"  
-    >
-  </div>
-  <div class="block sm:hidden">
-    <img
-      v-if="isDark"
-      class="h-12 mobile-svg-scale"
-      :src="logoMarkDark"
-      alt="Dark Logo"
-    >
-    <img
-      v-else
-      class="h-12 mobile-svg-scale"
-      :src="logoMarkLight"
-      alt="Light Logo"
     >
   </div>
 </template>
 
 <script setup>
-import logoHorizontalDark from '@/../../public/images/svg/logo/Horizontal/Horizontal-Logo-Black-01.svg';
-import logoHorizontalLight from '@/../../public/images/svg/logo/Horizontal/Horizontal-Logo-01.svg';
-import logoMarkDark from '@/../../public/images/svg/logo/Logomrak/Logomark-Black-01.svg';
-import logoMarkLight from '@/../../public/images/svg/logo/Logomrak/Logomark-01.svg';
+import logoDark from '@/../../public/images/svg/logo/Full-Colour.svg';
+import logoLight from '@/../../public/images/svg/logo/Inverse.svg';
 
 const props = defineProps({
   isDark: {

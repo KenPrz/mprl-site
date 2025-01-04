@@ -10,6 +10,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  isAuthenticated: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const emits = defineEmits([

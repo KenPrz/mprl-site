@@ -88,12 +88,7 @@ const closePreview = () => {
 <template>
 
   <Head title="About" />
-  <nav :class="{
-    'bg-white shadow-md fixed': scroll > 0,
-    'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
-  }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
-    <NavBar :is_black="scroll > 0" />
-  </nav>
+  <NavBar/>
 
   <div class="relative py-44 bg-cover bg-bottom h-auto" style="background-image: url('/images/about-us-bg.jpg');">
     <div class="absolute inset-0 bg-blue-500 bg-opacity-80 flex flex-col justify-center items-center text-center">
@@ -230,7 +225,7 @@ const closePreview = () => {
                       <h2 class="text-xl text-blue-500 font-semibold text-center md:text-start">VISIONARY <br> BEGINNINGS</h2>
                     </div>
                     <p class="py-16 px-8 bg-blue-500 text-white font-light mt-8 text-justify rounded">
-                      ONE MPRL Solar Power Corporation's journey began in 2011 as MPRL Solar Panel Trading and Construction Services. 
+                      ONE MPRL Solar Power Corporation's journey began in 2011 as ONEMPRL Solar Power Corporation and Construction Services. 
                       With a bold vision to transform solar energy in the Bicol Region, the company was dedicated to delivering 
                       innovative solutions from the start.
                     </p>
@@ -243,7 +238,7 @@ const closePreview = () => {
                       <h2 class="text-xl text-blue-500 font-semibold text-center md:text-start">ESTABLISHMENT <br>IN BICOL REGION</h2>
                     </div>
                     <p class="py-16 px-8 bg-blue-500 text-white font-light mt-8 text-justify rounded">
-                      ONE MPRL Solar Power Corporation's journey began in 2011 as MPRL Solar Panel Trading and Construction Services. 
+                      ONE MPRL Solar Power Corporation's journey began in 2011 as ONEMPRL Solar Power Corporation and Construction Services. 
                       With a bold vision to transform solar energy in the Bicol Region, the company was dedicated to delivering 
                       innovative solutions from the start.
                     </p>

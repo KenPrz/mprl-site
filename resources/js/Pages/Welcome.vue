@@ -1,33 +1,14 @@
 <script setup>
-import { Link, Head, router } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { Head } from '@inertiajs/vue3';
 import NavBar from '@/Components/NavBar.vue'
 import Accordion from '@/Components/Accordion.vue'
 import Footer from '@/Components/Footer.vue';
-const scroll = ref(0);
-
-const handleScroll = () => {
-    scroll.value = Math.round(window.scrollY);
-};
-
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
 
 </script>
 <template>
 
     <Head title="Home" />
-    <nav :class="{
-        'bg-white shadow-md fixed': scroll > 0,
-        'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
-    }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
-        <NavBar :is_black="scroll > 0" />
-    </nav>
+        <NavBar/>
     <main>
         <section data-aos="fade-in" data-aos-duration="500" data-aos-once="true"
             class="relative py-24 md:py-48 bg-cover bg-center screen-height h-auto"

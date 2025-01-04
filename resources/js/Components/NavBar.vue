@@ -215,6 +215,7 @@ const handleHamburgerOpen = (isOpen) => {
         @update:isHamburgerOpen="handleHamburgerOpen"
         @show-login-modal="showLoginModal = true"
         @show-register-modal="showRegisterModal = true"
+        :is-authenticated="isAuthenticated"
         :isWhite="isWhite" 
       />
     </div>

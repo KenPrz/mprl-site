@@ -55,7 +55,7 @@ const showRegisterModal = () => {
       </NavLink>
 
       <!-- Hamburger Icon -->
-      <button @click="toggleMenu" class="flex flex-col space-y-1 w-6 h-6 md:hidden z-50 me-2">
+      <button @click="toggleMenu" class="flex flex-col space-y-1 w-6 h-6 md:hidden z-50">
         <span class="block w-full h-1 rounded transition-transform duration-300" :class="{
           'bg-black-500': baseColor,
           'bg-white': !baseColor,
@@ -109,15 +109,15 @@ const showRegisterModal = () => {
           <span class="text-black-500">Contact Us</span>
         </NavLink>
       </li>
-      <li>
-        <button 
-          class="text-main-500 font-semibold"
-          @click="showLoginModal">Login</button>
+      <li v-if="isAuthenticated" class="flex flex-col items-start space-y-1">
+        <NavLink :href="route('profile.edit')">
+          <span class="text-main-500">Account</span>
+        </NavLink>
+        <button class="text-red-500 font-semibold" @click="logout">Logout</button>
       </li>
-      <li>
-        <button 
-          class="text-blue-500 font-semibold"
-          @click="showRegisterModal">Register</button>
+      <li v-else class="flex flex-col items-start space-y-1">
+        <button class="text-main-500 font-semibold" @click="showLoginModal">Login</button>
+        <button class="text-blue-500 font-semibold" @click="showRegisterModal">Register</button>
       </li>
     </ul>
   </nav>

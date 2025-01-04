@@ -213,6 +213,8 @@ const handleHamburgerOpen = (isOpen) => {
     <div class="block md:hidden">
       <Hamburger
         @update:isHamburgerOpen="handleHamburgerOpen"
+        @show-login-modal="showLoginModal = true"
+        @show-register-modal="showRegisterModal = true"
         :isWhite="isWhite" 
       />
     </div>
@@ -230,11 +232,6 @@ const handleHamburgerOpen = (isOpen) => {
     </Modal>
     <Modal maxWidth="md" v-model:show="showRegisterModal" @close="showRegisterModal = false">
       <Register @openLogin="handleLoginSwitch" @closeRegister="showRegisterModal = false" />
-    </Modal>
-    <Modal maxWidth="md" v-model:show="showQuoteModal" @close="showQuoteModal = false">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit id necessitatibus quos architecto repellendus
-      deleniti, cum obcaecati aperiam facere sunt mollitia qui eaque quo earum doloribus similique sed minus
-      reprehenderit.
     </Modal>
     <div class="absolute -right-7 hover:right-0 sm:right-0 h-screen transition-all duration-200">
       <section id="icon-handler" class="flex flex-col h-full justify-center space-y-3">

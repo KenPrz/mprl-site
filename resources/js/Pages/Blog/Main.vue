@@ -23,16 +23,11 @@ onUnmounted(() => {
 </script>
 <template>
     <Head title="Blog" />
-    <nav :class="{
-        'bg-white shadow-md fixed': scroll > 0,
-        'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0
-    }" class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out">
-        <NavBar :is_black="scroll > 0" />
-    </nav>
+    <NavBar />
     <section>
         <div class="relative py-44 bg-cover bg-center h-auto"
             style="background-image: url('/images/blog-header-bg.png');">
-            <div class="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-center items-center text-center">
+            <div class="absolute inset-0 bg-blue-500 bg-opacity-80 flex flex-col justify-center items-center text-center">
                 <div class="flex flex-col items-center justify-center space-y-6">
                     <h2 class="text-4xl md:text-5xl font-semibold text-white">Blog</h2>
                     <div class="text-md md:text-lg tracking-wide space-x-4 flex text-white">

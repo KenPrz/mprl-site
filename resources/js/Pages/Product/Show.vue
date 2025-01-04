@@ -1,14 +1,6 @@
 <template>
   <Head :title="products.name" />
-  <nav
-    :class="{
-      'bg-white shadow-md fixed': scroll > 0,
-      'bg-none text-white absolute bg-black bg-opacity-10': scroll === 0,
-    }"
-    class="flex flex-col top-0 w-full bg-none z-50 h-30 transition-all duration-500 ease-in-out"
-  >
-    <NavBar :is_black="scroll > 0" />
-  </nav>
+  <NavBar/>
   <section>
     <div class="relative py-44 bg-cover bg-center h-auto" style="background-image: url('/images/blog-header-bg.png');">
       <div class="absolute inset-0 bg-blue-500 bg-opacity-70 flex flex-col justify-center items-center text-center">

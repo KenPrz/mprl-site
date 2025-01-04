@@ -5,8 +5,11 @@ import { Link } from '@inertiajs/vue3';
     <footer>
         <div class="flex flex-col pt-4 space-y-2 bg-white-200">
             <section class="text-center px-8 md:px-16 ">
-                <h1 class="text-xl font-semibold text-main-500 text-pretty">ONE MPRL Solar Power Corporation</h1>
-                <p class="font-light text-sm text-blue-500">Trusted partner in providing solar solutions for your every need.</p>
+                <h1 class="text-xl font-semibold text-main-500 text-pretty">ONEMPRL Solar Power Corporation</h1>
+                <p class="font-light text-sm">ONEMPRL Solar Power Corporation specializes in supplying efficient and eco-friendly solar-powered LED
+                    lights. Our lights offer easy installation and come in a variety of types, styles, sizes, and
+                    colors. Say goodbye to electrical wiring - our lights run on solar power, making them both
+                    convenient and environmentally friendly.</p>
             </section>
             <section class="py-3">
                 <ul class="flex items-center justify-center space-x-5 sm:text-sm md:text-nm lg:text-md text-blue-500">
@@ -52,8 +55,25 @@ import { Link } from '@inertiajs/vue3';
                     </li>
                 </ul>
             </section>
-           <section class="text-center bg-main-500 text-white text-sm py-1 font-semibold tracking-wide">
-                <h2>MPRL Solar Panel Trading © {{ new Date().getFullYear() }}. All Rights Reserved.</h2>
+            <section class="flex justify-center text-sm h-full">
+                <div class="flex flex-col justify-center items-center pe-4">
+                    <i style="font-size: 1.2rem"  class="pi pi-envelope"></i>
+                    <span class="hidden md:block">mprlsolar@gmail.com</span>
+                </div>
+                <div class="flex flex-col justify-center items-center px-6 border-x">
+                    <i style="font-size: 1.2rem"  class="pi pi-map-marker"></i>
+                    <span class="hidden md:block">Blk 9 Lot 87 Seville St., La Vecina Camella Dos Rios, Cabuyao, Laguna 4025 Cabuyao, Philippines</span>
+                </div>
+                <div class="flex flex-col justify-around items-center ps-4 space-y-2">
+                    <i style="font-size: 1.2rem"  class="pi pi-phone"></i>
+                    <div class="flex flex-col">
+                        0916-830-5551
+                        0967-362-0733
+                    </div>
+                </div>
+            </section>
+           <section class="text-center bg-main-500 text-white text-sm py-1">
+                <h2>ONEMPRL Solar Power Corporation © 2024. All Rights Reserved.</h2>
            </section> 
         </div>
     </footer>

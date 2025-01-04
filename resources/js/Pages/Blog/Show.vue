@@ -38,6 +38,14 @@ const props = defineProps({
     default: null
   }
 });
+
+const hasFeatured = () => {
+  return props.featured.length > 0;
+}
+
+const hasMore = () => {
+  return props.more.length > 0;
+}
 </script>
 
 <template>
@@ -96,9 +104,12 @@ const props = defineProps({
             <BlogContent :body="props.blog.body" />
           </div>
         </div>
-        <div class="hidden md:flex md:w-1/4 flex-col">
+        <div
+          class="hidden md:flex md:w-1/4 flex-col">
           <section class="mb-6">
-              <Card>
+              <Card
+                v-if="hasFeatured()"
+              >
                 <div class="px-5">
                   <h1 class="font-semibold text-xl text-center mt-2 pb-2">Featured</h1> 
                 </div>
@@ -125,7 +136,7 @@ const props = defineProps({
                 </Carousel>
               </Card>
           </section>
-          <section>
+          <section v-if="hasMore()">
             <Card class="p-2 shadow-md">
               <h1 class="font-semibold text-xl text-center mt-2 border-b-2 pb-4">More News</h1>
               <Link :href="route('blog.show', blog.id)" v-for="blog in more" :key="blog.id">

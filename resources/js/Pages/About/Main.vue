@@ -225,7 +225,7 @@ const closePreview = () => {
                       <h2 class="text-xl text-blue-500 font-semibold text-center md:text-start">VISIONARY <br> BEGINNINGS</h2>
                     </div>
                     <p class="py-16 px-8 bg-blue-500 text-white font-light mt-8 text-justify rounded">
-                      ONE MPRL Solar Power Corporation's journey began in 2011 as MPRL Solar Panel Trading and Construction Services. 
+                      ONE MPRL Solar Power Corporation's journey began in 2011 as ONEMPRL Solar Power Corporation and Construction Services. 
                       With a bold vision to transform solar energy in the Bicol Region, the company was dedicated to delivering 
                       innovative solutions from the start.
                     </p>
@@ -238,7 +238,7 @@ const closePreview = () => {
                       <h2 class="text-xl text-blue-500 font-semibold text-center md:text-start">ESTABLISHMENT <br>IN BICOL REGION</h2>
                     </div>
                     <p class="py-16 px-8 bg-blue-500 text-white font-light mt-8 text-justify rounded">
-                      ONE MPRL Solar Power Corporation's journey began in 2011 as MPRL Solar Panel Trading and Construction Services. 
+                      ONE MPRL Solar Power Corporation's journey began in 2011 as ONEMPRL Solar Power Corporation and Construction Services. 
                       With a bold vision to transform solar energy in the Bicol Region, the company was dedicated to delivering 
                       innovative solutions from the start.
                     </p>

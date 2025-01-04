@@ -5,8 +5,8 @@ import { Link } from '@inertiajs/vue3';
     <footer>
         <div class="flex flex-col pt-4 space-y-2 bg-white-200">
             <section class="text-center px-8 md:px-16 ">
-                <h1 class="text-xl font-semibold text-main-500 text-pretty">MPRL Solar Panel Trading</h1>
-                <p class="font-light text-sm">MPRL Solar Panel Trading specializes in supplying efficient and eco-friendly solar-powered LED
+                <h1 class="text-xl font-semibold text-main-500 text-pretty">ONEMPRL Solar Power Corporation</h1>
+                <p class="font-light text-sm">ONEMPRL Solar Power Corporation specializes in supplying efficient and eco-friendly solar-powered LED
                     lights. Our lights offer easy installation and come in a variety of types, styles, sizes, and
                     colors. Say goodbye to electrical wiring - our lights run on solar power, making them both
                     convenient and environmentally friendly.</p>
@@ -86,7 +86,7 @@ import { Link } from '@inertiajs/vue3';
                 </div>
             </section>
            <section class="text-center bg-main-500 text-white text-sm py-1">
-                <h2>MPRL Solar Panel Trading © 2024. All Rights Reserved.</h2>
+                <h2>ONEMPRL Solar Power Corporation © 2024. All Rights Reserved.</h2>
            </section> 
         </div>
     </footer>

@@ -62,12 +62,12 @@ const handleHamburgerOpen = (isOpen) => {
   <nav :class="{
     'bg-white shadow-md fixed': isWhite,
     'bg-none text-white absolute bg-black bg-opacity-10': !isWhite
-  }" 
+  }"
   class="flex flex-col top-0 w-full z-50 h-30 transition-all duration-500 ease-in-out">
     <div class="hidden md:block">
       <!-- Hide this section when scrolling -->
       <div
-        class="ps-2 md:px-10 lg:px-20 flex sm:px-10 justify-start md:justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
+        class="md:px-10 lg:px-20 flex sm:px-10 justify-between bg-black text-white w-full text-sm font-light py-1 space-x-2">
         <div class="flex md:justify-start items-center space-x-1 md:space-x-4">
           <div class="flex items-center space-x-2">
             <i class="pi pi-map-marker"></i>
@@ -90,8 +90,8 @@ const handleHamburgerOpen = (isOpen) => {
         </div>
       </div>
       <!-- Make this section sticky when scrolling -->
-      <div class="flex justify-between md:justify-around py-1 items-center h-30">
-        <div class="flex flex-col px-4 md:px-2">
+      <div class="flex justify-between py-1 items-center h-30 md:px-10 lg:px-20 sm:px-10 ">
+        <div>
           <NavLink :href="route('welcome')" :isWhite="isWhite">
             <ApplicationLogo :isDark="isWhite" />
           </NavLink>

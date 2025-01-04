@@ -70,7 +70,7 @@ import Footer from '@/Components/Footer.vue';
             <section class="flex flex-col lg:flex-row items-center justify-center mx-auto px-4">
                 <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true"
                     class="w-full md:w-1/2 flex items-center justify-end me-10">
-                    <img src="/images/mprl-projects/who-are-we.jpeg" alt="House"
+                    <img src="/images/mprl-projects/who-are-we-2.png" alt="House"
                         class="w-full md:w-full h-full object-cover ps-1">
                 </div>
                 <div class="w-full lg:w-1/2 flex flex-col space-y-6 lg:mx-10 lg:px-14">

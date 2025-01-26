@@ -11,21 +11,8 @@ import { Link } from '@inertiajs/vue3';
                     colors. Say goodbye to electrical wiring - our lights run on solar power, making them both
                     convenient and environmentally friendly.</p>
             </section>
-            <section class="flex items-center justify-center space-x-4">
-                <a href="https://www.facebook.com/onemprl/" class="flex items-center">
-                    <i style="font-size: 1.2rem"  class="pi pi-facebook"></i>
-                </a>
-                <span>|</span>
-                <a href="https://www.m.me/onemprl?" class="flex items-center">
-                    <i style="font-size: 1.2rem"  class="pi pi-comment"></i>
-                </a>
-                <span>|</span>
-                <a href="#" class="flex items-center">
-                    <i style="font-size: 1.2rem"  class="pi pi-instagram"></i>
-                </a>
-            </section>
-            <section class="border py-4">
-                <ul class="flex items-center justify-center space-x-10 sm:text-sm md:text-nm lg:text-md">
+            <section class="py-3">
+                <ul class="flex items-center justify-center space-x-5 sm:text-sm md:text-nm lg:text-md text-blue-500">
                     <li>
                         <Link :href="route('welcome')">
                             <span class="hidden md:block">Home</span>

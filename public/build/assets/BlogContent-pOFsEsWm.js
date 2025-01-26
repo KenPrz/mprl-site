@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{d as n,e as r}from"./app-D7Jmbt7w.js";const c=["innerHTML"],s={__name:"BlogContent",props:{body:{required:!0}},setup(e){const o=e;return(a,p)=>(n(),r("div",{class:"content-wrapper",innerHTML:o.body},null,8,c))}},l=t(s,[["__scopeId","data-v-fcc49e5f"]]);export{l as default};

@@ -37,7 +37,7 @@ const props = defineProps({
 }
 @media screen and (min-width: 768px){
   .svg-scale {
-    transform: scale(1.5);
+    transform: scale(1.0);
   }
   .mobile-svg-scale {
     display: none;

@@ -48,7 +48,7 @@ const showRegisterModal = () => {
 <template>
   <nav>
     <!-- Main Navbar -->
-    <div class="flex justify-between items-center px-4 py-3 md:px-10 lg:px-20">
+    <div class="flex justify-between items-center px-8 py-3 md:px-10 lg:px-20">
       <!-- Logo -->
       <NavLink :href="route('welcome')">
         <ApplicationLogo :isDark="baseColor" />

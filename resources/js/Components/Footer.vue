@@ -6,10 +6,7 @@ import { Link } from '@inertiajs/vue3';
         <div class="flex flex-col pt-4 space-y-2 bg-white-200">
             <section class="text-center px-8 md:px-16 ">
                 <h1 class="text-xl font-semibold text-main-500 text-pretty">ONEMPRL Solar Power Corporation</h1>
-                <p class="font-light text-sm">ONEMPRL Solar Power Corporation specializes in supplying efficient and eco-friendly solar-powered LED
-                    lights. Our lights offer easy installation and come in a variety of types, styles, sizes, and
-                    colors. Say goodbye to electrical wiring - our lights run on solar power, making them both
-                    convenient and environmentally friendly.</p>
+                <p class="font-normal text-sm">Trusted partner in providing solar solutions for your every need.</p>
             </section>
             <section class="py-3">
                 <ul class="flex items-center justify-center space-x-5 sm:text-sm md:text-nm lg:text-md text-blue-500">

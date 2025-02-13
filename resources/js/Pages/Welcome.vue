@@ -6,15 +6,15 @@ import Footer from '@/Components/Footer.vue';
 
 </script>
 <template>
-
     <Head title="Home" />
-        <NavBar/>
+    <NavBar/>
     <main>
+        <!-- Hero Section -->
         <section data-aos="fade-in" data-aos-duration="500" data-aos-once="true"
             class="relative py-24 md:py-48 bg-cover bg-center screen-height h-auto"
             style="background-image:url('/images/mprl-projects/solar-roof.jpeg');">
             <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex flex-col justify-center">
-                <div class="container mx-auto px-6 md:px-8 lg:px-14 mt-20">
+                <div class="container mx-auto px-4 md:px-8 lg:px-14 mt-20">
                     <!-- Heading Section -->
                     <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" data-aos-once="true"
                         class="flex flex-col items-center md:items-start space-y-4 md:space-y-6 mb-8 md:mb-10 text-center md:text-left">
@@ -58,7 +58,7 @@ import Footer from '@/Components/Footer.vue';
                             </div>
                         </div>
                         <div data-aos="fade-left" data-aos-delay="1200" data-aos-duration="700" data-aos-once="true"
-                            class="text-white text-center lg:text-start px-4 lg:px-0">
+                            class="text-white text-center lg:text-start">
                             <p class="text-base sm:text-lg">Switch to solar energy and watch as your energy <br
                                     class="hidden lg:block"> costs drop down.</p>
                         </div>
@@ -66,14 +66,16 @@ import Footer from '@/Components/Footer.vue';
                 </div>
             </div>
         </section>
-        <div class="mt-10 flex flex-col items-center justify-center bg-white-500 mx-10 md:mx-24 md:space-y-10">
-            <section class="flex flex-col lg:flex-row items-center justify-center mx-auto px-4">
+
+        <!-- About Section -->
+        <div class="container mx-auto px-4 md:px-8 lg:px-14 py-10">
+            <section class="flex flex-col lg:flex-row items-center justify-center">
                 <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-aos-once="true"
-                    class="w-full md:w-1/2 flex items-center justify-end me-10">
+                    class="w-full md:w-1/2 flex items-center justify-end md:me-10">
                     <img src="/images/mprl-projects/who-are-we-2.png" alt="House"
                         class="w-full md:w-full h-full object-cover ps-1">
                 </div>
-                <div class="w-full lg:w-1/2 flex flex-col space-y-6 lg:mx-10 lg:px-14">
+                <div class="w-full lg:w-1/2 flex flex-col space-y-6 lg:mx-10">
                     <div class="flex flex-col mt-10 md:mb-14">
                         <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
                             class="text-md text-main-500 font-semibold">ABOUT US</h2>
@@ -81,7 +83,7 @@ import Footer from '@/Components/Footer.vue';
                             class="text-5xl font-bold text-blue-500">WHO ARE WE?</h1>
                     </div>
                     <div class="flex flex-col space-y-2">
-                        <p class="text-blue-500 md:pe-10 md:text-justify" data-aos="fade-left" data-aos-delay="300"
+                        <p class="text-blue-500 md:text-justify" data-aos="fade-left" data-aos-delay="300"
                             data-aos-duration="400" data-aos-once="true">
                             <b>ONE MPRL Solar Power Corporation</b>
                             has been a trusted provider of solar energy solutions in the Bicol Region since 2013.
@@ -99,12 +101,12 @@ import Footer from '@/Components/Footer.vue';
                 </div>
             </section>
         </div>
+        <!-- Products Section -->
         <div class="bg-blue-500">
-            <div class="mt-10 flex flex-col items-center justify-center mx-10 md:mx-24 md:space-y-10">
-                <section class="flex flex-col lg:flex-row items-center justify-center mx-auto mt-14 mb-14">
-                    <!-- Title Section - Stays at the top on mobile, moves to the left on large screens -->
-                    <div
-                        class="w-full lg:w-1/3 lg:h-auto flex flex-col items-center lg:items-start mb-10 lg:mb-0 lg:pr-8 space-y-2 text-center lg:text-left">
+            <div class="container mx-auto px-4 md:px-8 lg:px-14 py-14">
+                <section class="flex flex-col lg:flex-row items-center justify-center">
+                    <!-- Title Section -->
+                    <div class="w-full lg:w-1/3 lg:h-auto flex flex-col items-center lg:items-start mb-10 lg:mb-0 lg:pr-8 space-y-2 text-center lg:text-left">
                         <h2 data-aos="fade-left" data-aos-delay="150" data-aos-duration="300" data-aos-once="true"
                             class="text-md text-main-500 font-semibold">OUR PRODUCTS</h2>
                         <h1 data-aos="fade-left" data-aos-delay="250" data-aos-duration="300" data-aos-once="true"
@@ -115,7 +117,6 @@ import Footer from '@/Components/Footer.vue';
 
                     <!-- Grid Layout -->
                     <div class="w-full lg:w-2/3">
-                        <!-- Responsive grid for 2 rows and 3 columns -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:mt-0">
                             <template v-for="(product, index) in products" :key="index">
                                 <div class="hover-card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center justify-center transition-transform transform hover:scale-105"
@@ -130,8 +131,9 @@ import Footer from '@/Components/Footer.vue';
                 </section>
             </div>
         </div>
-        <div class="mt-10 flex flex-col items-center justify-center mx-4 md:mx-24 md:space-y-10">
-            <section class="flex flex-col items-center mx-auto px-4 mt-14 w-full space-y-10">
+        <!-- Services Section -->
+        <div class="container mx-auto px-4 md:px-8 lg:px-14 py-14">
+            <section class="flex flex-col items-center w-full space-y-10">
                 <!-- Header Section -->
                 <div class="flex flex-col md:flex-row items-center md:items-start justify-between w-full space-y-6 md:space-y-0">
                     <!-- Left Side -->
@@ -160,54 +162,55 @@ import Footer from '@/Components/Footer.vue';
                         </div>
                     </div>
                 </div>
+
                 <!-- Grid Section -->
-                <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 p-4 justify-items-center">
+                <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 justify-items-center px-2 sm:px-4">
                     <!-- Column 1 -->
-                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true">
-                        <img
-                            src="/images/cater-your-needs/solar-panel-installation.png"
-                            alt="solar-panel-installation"
-                            class="w-full max-w-sm h-auto object-cover rounded-lg"
-                        >
-                        <div class="mt-6 text-blue-500">
-                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                    <div class="w-full max-w-md flex flex-col items-center sm:items-start" data-aos="fade-up" data-aos-once="true">
+                        <div class="w-full aspect-video">
+                            <img src="/images/cater-your-needs/solar-panel-installation.png"
+                                alt="solar-panel-installation"
+                                class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        </div>
+                        <div class="mt-4 sm:mt-6 text-blue-500 text-center sm:text-left w-full">
+                            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">
                                 Solar Panel Installation
                             </h1>
-                            <p>
+                            <p class="text-sm sm:text-base lg:text-lg">
                                 We offer a hassle-free solar panel installation from start to finish.
                             </p>
                         </div>
                     </div>
 
                     <!-- Column 2 -->
-                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true" data-aos-delay="150">
-                        <img
-                            src="/images/cater-your-needs/construction-services.png"
-                            alt="construction-services"
-                            class="w-full max-w-sm h-auto object-cover rounded-lg"
-                        >
-                        <div class="mt-6 text-blue-500">
-                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                    <div class="w-full max-w-md flex flex-col items-center sm:items-start" data-aos="fade-up" data-aos-once="true" data-aos-delay="150">
+                        <div class="w-full aspect-video">
+                            <img src="/images/cater-your-needs/construction-services.png"
+                                alt="construction-services"
+                                class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        </div>
+                        <div class="mt-4 sm:mt-6 text-blue-500 text-center sm:text-left w-full">
+                            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">
                                 Construction Services
                             </h1>
-                            <p>
+                            <p class="text-sm sm:text-base lg:text-lg">
                                 We deliver high-quality, eco-friendly construction projects.
                             </p>
                         </div>
                     </div>
 
                     <!-- Column 3 -->
-                    <div class="w-full flex flex-col" data-aos="fade-up" data-aos-once="true" data-aos-delay="300">
-                        <img
-                            src="/images/cater-your-needs/consultation-services.png"
-                            alt="consultation-services"
-                            class="w-full max-w-sm h-auto object-cover rounded-lg"
-                        >
-                        <div class="mt-6 text-blue-500">
-                            <h1 class="text-lg md:text-2xl font-bold mb-2">
+                    <div class="w-full max-w-md flex flex-col items-center sm:items-start" data-aos="fade-up" data-aos-once="true" data-aos-delay="300">
+                        <div class="w-full aspect-video">
+                            <img src="/images/cater-your-needs/consultation-services.png"
+                                alt="consultation-services"
+                                class="w-full h-full object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        </div>
+                        <div class="mt-4 sm:mt-6 text-blue-500 text-center sm:text-left w-full">
+                            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">
                                 Consultation Services
                             </h1>
-                            <p>
+                            <p class="text-sm sm:text-base lg:text-lg">
                                 We provide expert energy and construction consulting for personalized solutions that meet your sustainability goals.
                             </p>
                         </div>
@@ -215,18 +218,17 @@ import Footer from '@/Components/Footer.vue';
                 </div>
             </section>
         </div>
-        <div class="flex flex-col items-center justify-center mx-4 md:mx-24 md:space-y-10 my-14">
-            <section class="flex flex-col items-center justify-center w-full p-">
-                <div class="w-full flex flex-col md:flex-row items-center justify-center">
-                    <!-- Accordion Section -->
-                    <div class="w-full p-5">
+        <!-- FAQ Section will go here -->
+        <div class="container mx-auto px-4 md:px-8 lg:px-14 pt-10 pb-14">
+            <section class="flex flex-col items-center justify-center w-full">
+                <div class="w-full flex flex-col items-center justify-center">
+                    <div class="w-full">
                         <h1 class="text-2xl md:text-3xl font-bold text-blue-500 mb-8 text-center">
                             Frequently Asked Questions
                         </h1>
-                        <div class="w-full">
-                            <!-- Accordion Component -->
+                        <div class="w-full md:max-w-4xl mx-auto">
                             <Accordion
-                                class="md:mx-28"
+                                class="md:mx-16"
                                 :items="faq" 
                             />
                         </div>

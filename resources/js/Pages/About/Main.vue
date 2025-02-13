@@ -159,7 +159,7 @@ const closePreview = () => {
           <div class="flex flex-col md:flex-row gap-8 md:gap-16">
             <!-- Vision Section -->
             <div data-aos-once="true" data-aos="fade-up" data-aos-duration="500" 
-                class="flex-1 p-6 rounded-lg bg-gradient-to-br from-blue-50 to-white border border-blue-100 shadow-lg">
+                class="flex-1 p-6 rounded-lg border border-blue-100 shadow-lg">
               <div class="flex items-center gap-3 mb-4">
                 <svg class="w-8 h-8 text-main-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -174,7 +174,7 @@ const closePreview = () => {
           
             <!-- Mission Section -->
             <div data-aos-once="true" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100"
-                class="flex-1 p-6 rounded-lg bg-gradient-to-br from-blue-50 to-white border border-blue-100 shadow-lg">
+                class="flex-1 p-6 rounded-lg border border-blue-100 shadow-lg">
               <div class="flex items-center gap-3 mb-4">
                 <svg class="w-8 h-8 text-main-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>

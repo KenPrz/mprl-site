@@ -1,1 +1,0 @@
-import{_ as r}from"./Pagination-gyLN5jba.js";import{b as t,c as n,e as s,t as l,d as o,F as c}from"./app-CnlmfPpy.js";const m={__name:"Index",props:{users:{type:Array,default:[]}},setup(a){const e=a;return(u,i)=>(t(),n(c,null,[s("div",null,l(e.users),1),s("div",null,[o(r,{data:e.users,links:e.users.links},null,8,["data","links"])])],64))}};export{m as default};

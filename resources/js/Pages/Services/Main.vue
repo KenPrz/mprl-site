@@ -117,13 +117,13 @@ watch(() => scroll.value, () => {
     </div>
   </div>
   <main>
-    <div class="flex flex-col lg:ml-20 mt-10">
-      <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start lg:mr-20">
+    <div class="container mx-auto px-4 md:px-8 lg:px-14 py-10">
+      <div class="grid grid-cols-1 gap-4 p-4 lg:flex lg:gap-0 lg:items-start">
         <!-- services -->
-        <div class="lg:full space-y-10">
+        <div class="lg:full space-y-5">
             <div>
-              <div class="flex justify-start font-blue-400">
-                <p v-if="secondCategory" class="text-3xl font-blue-400 font-bold font-poppins">
+              <div class="flex justify-start text-blue-500">
+                <p v-if="secondCategory" class="text-3xl text-blue-500 font-bold font-poppins">
                   {{ secondCategory.service_category }}
                 </p>
               </div>
@@ -132,7 +132,7 @@ watch(() => scroll.value, () => {
               <div class="flex flex-col lg:flex-row lg:justify-between lg:space-x-10">
                 <div data-aos="fade-right">
                   <img src="images/services-images/solar_panel_installation.png" alt="" class="w-full">
-                  <div class="px-10 text-blue-400 space-y-5">
+                  <div class="px-10 text-blue-500 space-y-5">
                     <p class="text-xl font-bold">Solar Panel Services</p>
                     <p>
                       We offer a wide range of solar panel services including installation, maintenance, and repair services.
@@ -156,7 +156,7 @@ watch(() => scroll.value, () => {
                 </div>
                 <div data-aos="fade-right">
                   <img src="images/services-images/construction_services.png" alt="" clas="w-full">
-                  <div class="px-10 text-blue-400 space-y-5">
+                  <div class="px-10 text-blue-500 space-y-5">
                     <p class="text-xl font-bold">Construction Services</p>
                     <p>
                       We deliver high-quality and eco-friendly construction projects
@@ -176,7 +176,7 @@ watch(() => scroll.value, () => {
                 </div>
                 <div data-aos="fade-right">
                   <img src="images/services-images/consultation_services.png" alt="" clas="w-full">
-                  <div class="px-10 text-blue-400 space-y-5">
+                  <div class="px-10 text-blue-500 space-y-5">
                     <p class="text-xl font-bold">Consultation Services</p>
                     <p>
                       We provide expert energy and construction consulting for personalized solutions that meet your sustainability goals.
@@ -198,16 +198,16 @@ watch(() => scroll.value, () => {
             </div>
           <section :id="thirdCategory.service_category">
             <div class="mt-20 space-y-10">
-              <p v-if="thirdCategory" class="text-3xl font-bold font-poppins">
+              <p v-if="thirdCategory" class="text-3xl text-blue-500 font-bold font-poppins">
                 {{ thirdCategory.service_category }}
               </p>
-              <p class="text-lg lg:w-1/2 font-poppins">Explore a currated selection of our successful projects, highlighting our expertise and commitment to delivering top-notch solutions.</p>
+              <p class="text-lg lg:w-1/2 font-poppins text-blue-500">Explore a currated selection of our successful projects, highlighting our expertise and commitment to delivering top-notch solutions.</p>
             </div>
             <div class="mt-10" data-aos="fade-left">
               <ProjectTabs :projectCategory="projectCategory" :services="services" :projects="projects"/>
             </div>
           </section>
-          <section class="mt-10" :id="fourthCategory.service_category">
+          <section class="mt-10 text-blue-500" :id="fourthCategory.service_category">
               <div class="flex justify-center">
                 <p v-if="fourthCategory" class="text-3xl font-bold">
                   {{ fourthCategory.service_category }}
